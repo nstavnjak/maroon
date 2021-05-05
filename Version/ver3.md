@@ -1,11 +1,11 @@
 ## Version 3
 
-# Funktionaliteter
+##### Funktionaliteter
 
-# Sidor
+##### Sidor
 
-# Funktioner
+##### Funktioner
 
-# Globala Variabler
+##### Globala Variabler
 
-# Css-filer
+##### Css-filer

@@ -1,6 +1,0 @@
-Här placeras bilder, i rätt storlek och format.
-
-Regler kring bilder
-- Hur vi namnger dem?
-- Hur stora de får vara?
-- Vart vi väljer att placera dem, html eller css?

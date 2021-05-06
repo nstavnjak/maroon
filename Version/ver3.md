@@ -21,6 +21,9 @@ Faq - En sida som ger dig svar på olika frågor som du möjligtvis kan stöta p
 - createBack (cityOBJECT) :: return DOM, ger oss all information om staden när vi flippar kortet. (common)
     - createStudentComments (cityOBJECT) :: return DOM, ger oss en pratbubbla om studenternas recensioner (kommer vara en funktion i createBack)
 
+- getQuestion(array) :: return DOM, ger oss en fråga från arrayen.
+    - getAnswer(array)  :: return DOM, returnerar ett div element som innehåller svar till frågan.
+
 ##### Globala Variabler
 
 ##### Css-filer

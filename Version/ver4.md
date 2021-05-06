@@ -26,4 +26,4 @@ Test - varpå nya divar skapas vid varje steg i svaren och tillslut en resultatd
 
 ##### Css-filer
 
-en test - inkluderar all styling för att vidare divar i quizet
+test - inkluderar all styling för att vidare divar i quizet

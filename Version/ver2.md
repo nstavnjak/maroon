@@ -1,8 +1,7 @@
 ## Version 2
 
 ##### Funktionaliteter
-
-I denna version får:
+I denna version:
 
 - Användaren ska kunna söka på utbildningar via programnamn, stad eller land.
 
@@ -10,15 +9,14 @@ I denna version får:
 
 - Användaren ska kunna ladda mer programcards på utbildning sida. 
 
-
 ##### Sidor
 
 
 ##### Funktioner
 
-loadMore() :: returnnone, den förlänger forloopen som skapar kort
+- loadMore() :: returnnone, den förlänger forloopen som skapar kort
 
-createFront(programOBJECT) :: return DOM, ger oss all information när vi vecklar ner kortet.
+- createFront(programOBJECT) :: return DOM, ger oss all information när vi vecklar ner kortet.
 
 ##### Globala Variabler
 

@@ -11,6 +11,8 @@ Utbildning - Den primära sidan för att söka utbildningar på.
 ##### Funktioner
 createOPT (object) :: return optionDOM, returnerar ett alternativ till select (utbildningar)
 
+createSearchForm :: retun DOM-element, returnerar ett DOM-element som innehåller inputfält, stad, land och sökknapp. 
+
 ##### Globala Variabler
 
 

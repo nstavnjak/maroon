@@ -51,7 +51,8 @@ function createOPT(){
     });
     
     document.querySelector("#select1").addEventListener("onchange", function() {
-        if (document.querySelector("select1").value === true){
+        if (document.querySelector("#select1").value === true){
+            console.log("hej");
     });
     
 }

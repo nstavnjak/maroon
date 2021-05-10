@@ -1,7 +1,7 @@
 "use strict";
 
 // Head
-
+appendLink("stylesheets/education.css");
 
 // Meny
 

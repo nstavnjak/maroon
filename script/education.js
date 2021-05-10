@@ -39,8 +39,8 @@ function createSearchForm(){
 function createOPT(){
     let emptyOPT = document.createElement("option");
     emptyOPT.textContent = "Be";
-    document.querySelector("#select1").append(emptyOPT);
     document.querySelector("#select2").append(emptyOPT);
+    document.getElementById("select1").append(emptyOPT)
     
     COUNTRIES.forEach(e => {
         let option = document.createElement("option");

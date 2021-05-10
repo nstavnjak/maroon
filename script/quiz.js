@@ -10,6 +10,6 @@
 
 
 // Footer 
-
+createFooter();
 
 // Functions

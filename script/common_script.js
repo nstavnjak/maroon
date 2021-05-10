@@ -10,7 +10,18 @@
 
 
 // Footer 
+function createFooter() {
+    let footerElement = document.createElement("footer");
+    footerElement.classList.add("footer");
 
+    footerElement.innerHTML = `
+        <div>Hem</div>
+        <div>Utbildning</div>
+        <div>Test</div>
+        <div>faq</div>
+    `;
+    document.body.append(footerElement);
+}
 
 // Functions
 

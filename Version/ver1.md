@@ -8,8 +8,6 @@ Hem - En guide som sträcker sig ner på längden, inkluderar knappar på vägen
 
 Utbildning - Den primära sidan för att söka utbildningar på. 
 
-Hej
-
 ##### Funktioner
 createOPT (object) :: return optionDOM, returnerar ett alternativ till select (utbildningar)
 

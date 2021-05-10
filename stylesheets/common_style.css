@@ -1,10 +1,10 @@
 :root {
     /* COLOR */
-    --primary: #8D99AE;
-    --secondary: #22BFAC;
+    --primary: #0091FF;
+    --secondary: #ff9900;
 
-    --light: #DCE0D9;
-    --dark: #31081F ;
+    --light: #ffffff;
+    --dark: #26282C;
 
     /* FONTS */
     --title: ;

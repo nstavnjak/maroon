@@ -37,7 +37,7 @@ function createSearchForm(){
 
 
 function createOPT(){
-    for(let i = 1; i > 3; i++){
+    for(let i = 1; i < 3; i++){
         let emptyOPT = document.createElement("option");
         emptyOPT.textContent = "";
         document.querySelector(`select${i}`).append(emptyOPT);

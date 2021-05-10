@@ -53,7 +53,9 @@ function createOPT(){
     document.querySelector("#select1").addEventListener("onchange", () => {
         if (document.querySelector("select1").value === true){
             let countrySerch = document.querySelector("#select1").value;
-            console.log(COUNTRIES.find(e => {e.name === document.querySelector("select1").value}););
+            console.log(COUNTRIES.find(e => {
+                e.name === document.querySelector("select1").value
+            }););
         }
     });
     

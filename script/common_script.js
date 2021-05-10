@@ -15,10 +15,10 @@ function createFooter() {
     footerElement.classList.add("footer");
 
     footerElement.innerHTML = `
-        <div>Hem</div>
-        <div>Utbildning</div>
-        <div>Test</div>
-        <div>faq</div>
+        <div id="footerHem" class="footerText">Hem</div>
+        <div id="footerUtbildining" class="footerText">Utbildning</div>
+        <div id="footerTest" class="footerText">Test</div>
+        <div id="footerFaq" class="footerText">faq</div>
     `;
     document.body.append(footerElement);
 }

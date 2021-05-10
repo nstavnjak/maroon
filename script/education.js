@@ -37,7 +37,7 @@ function createSearchForm(){
 
 
 function createOPT(){
-    DB.COUNTRIES.forEach(e => {
+    COUNTRIES.forEach(e => {
         let option = document.createElement("option");
         option.innerHTML = e.name;
         document.querySelector("select1").append(option);
@@ -45,7 +45,7 @@ function createOPT(){
     
     if (document.querySelector("select1").value === true){
         let countrySerch = document.querySelector("select1").value;
-        DB.COUNTRIES.find(e => {
+        COUNTRIES.find(e => {
             e.name === document.querySelector("select1").value;
         });
     }

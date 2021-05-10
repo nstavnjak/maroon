@@ -38,7 +38,7 @@ function createSearchForm(){
 
 function createOPT(){
     let emptyOPT = document.createElement("option");
-    emptyOPT.textContent = "";
+    emptyOPT.textContent = "Be";
     document.querySelector("#select1").append(emptyOPT);
     document.querySelector("#select2").append(emptyOPT);
     

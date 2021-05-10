@@ -50,11 +50,6 @@ function createOPT(){
         document.querySelector("#select1").append(option);
     });
     
-    document.querySelector("#select1").addEventListener("change", function(){
-        if (document.querySelector("#select1").value === true){
-            console.log("hej");
-    });
-    
 }
 
 function updateCityByCountry(){

@@ -50,8 +50,8 @@ function createOPT(){
     });
     
     document.querySelector("#select1").addEventListener("change", function(){
-        console.log(document.querySelector("#select1").innerHTML);
-        if(document.querySelector("#select1").value = true){
+        console.log(document.querySelector("#select1").value);
+        if(document.querySelector("#select1").value != false){
             console.log("hej");
         }
         else {

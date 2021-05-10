@@ -1,6 +1,6 @@
 // Head
-appendLink("../stylesheets/index.css");
-appendLink("../stylesheets/common_style.css");
+appendLink("stylesheets/common_style.css");
+appendLink("stylesheets/index.css")
 
 // Meny
 

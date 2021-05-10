@@ -15,7 +15,10 @@
 // Functions
 
 function appendLink(link){
-
+    let headElement = document.createElement("link");
+    headElement.setAttribute("href", link);
+    headElement.setAttribute("rel", "stylesheet");
+    document.head.append(headElement);
 }
 
 function meny(){

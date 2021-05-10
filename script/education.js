@@ -50,6 +50,7 @@ function createOPT(){
     });
     
     document.querySelector("#select1").addEventListener("click", function(){
+        console.log("hej1")
         if(document.querySelector("#select1").innerHTML == true){
             console.log("hej");
         }

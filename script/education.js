@@ -37,10 +37,10 @@ function createSearchForm(){
 
 
 function createOPT(){
-    COUNTRIES.forEach(e => {
-        let option = document.createElement("option");
-        option.innerHTML = e.name;
-        document.querySelector("select1").append(option);
+    COUNTRIES.forEach(element => {
+        let option1 = document.createElement("option");
+        option1.textContent = element.name;
+        document.querySelector("select1").append(option1);
     });
     
     if (document.querySelector("select1").value === true){

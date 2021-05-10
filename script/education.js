@@ -2,6 +2,7 @@
 
 // Head
 appendLink("stylesheets/education.css");
+appendLink("stylesheets/commonstyle.css");
 
 // Meny
 

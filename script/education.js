@@ -38,9 +38,15 @@ function createSearchForm(){
 
 function createOPT(){
     let emptyOPT = document.createElement("option");
+    emptyOPT.textContent = "";
     document.querySelector("#select1").append(emptyOPT);
     document.querySelector("#select2").append(emptyOPT);
     
+    COUNTRIES.forEach(e => {
+        let option = document.createElement("option");
+        option.textContent = e.name;
+        document.querySelector("#select1").append(option);
+    });
     
     if (document.querySelector("select1").value === true){
         let countrySerch = document.querySelector("select1").value;

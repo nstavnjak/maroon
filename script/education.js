@@ -15,54 +15,56 @@
 // Functions
 console.log("hej");
 
-function createSearchForm(){
-    let searchForm = document.createElement("div");
-    searchForm.setAttribute(‘id’, searchForm’);
 
-    let inputField = document.createElement("input");
-    inputField.setAttribute(‘id’, inputField);
+// function createSearchForm(){
+//     let searchForm = document.createElement("div");
+//     searchForm.setAttribute(‘id’, searchForm’);
 
-    let select1 = document.createElement("select");
-    select1.setAttribute(‘id’, select1);
+//     let inputField = document.createElement("input");
+//     inputField.setAttribute(‘id’, inputField);
 
-    let select2 = document.createElement("select");
-    select2.setAttribute(‘id’, select2);
+//     let select1 = document.createElement("select");
+//     select1.setAttribute(‘id’, select1);
 
-    let search = document.createElement("button");
-    search.setAttribute(‘id’, search);
-}
+//     let select2 = document.createElement("select");
+//     select2.setAttribute(‘id’, select2);
 
-function createOPT(){
+//     let search = document.createElement("button");
+//     search.setAttribute(‘id’, search);
+// }
 
-}
+// function createOPT(){
 
-function updateCityByCountry(){
+// }
 
-}
+// function updateCityByCountry(){
 
-function createSortAlternative(){
+// }
 
-}
+// function createSortAlternative(){
 
-function sortProgram(){
+// }
 
-}
+// function sortProgram(){
 
-function createCard(){
+// }
+
+// function createCard(){
     
 
-    function createFront(){
+//     function createFront(){
 
-        function getProgrameSeats(){
+//         function getProgrameSeats(){
 
-        }
+//         }
 
-        function getProgrameGraduating(){
+//         function getProgrameGraduating(){
 
-        }
+//         }
 
-        function getProgrameEntrypoints(){
+//         function getProgrameEntrypoints(){
 
-        }
-    }
-}
+//         }
+//     }
+// }
+// */

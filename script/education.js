@@ -30,7 +30,7 @@ function createSearchForm(){
     let search = document.createElement("button");
     search.setAttribute("id", "search");
 
-    document.querySelector("body").append(searchForm inputField select1 select2 search);
+    document.querySelector("body").append(searchForm);
 }
 
 function createOPT(){

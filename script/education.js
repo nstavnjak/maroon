@@ -50,7 +50,7 @@ function createOPT(){
         document.querySelector("#select1").append(option);
     });
     
-    document.querySelector("#select1").addEventListener("onchange", () => {
+    document.querySelector("#select1").addEventListener("onchange", function() {
         if (document.querySelector("select1").value === true){
     });
     

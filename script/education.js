@@ -49,7 +49,7 @@ function createOPT(){
         document.querySelector("#select1").append(option);
     });
     
-    document.querySelector("#select1").addEventListener("click", function(){
+    document.querySelector("#select1").addEventListener("change", function(){
         console.log("hej1");
         console.log(document.querySelector("#select1").value);
         if(document.querySelector("#select1").value == true){

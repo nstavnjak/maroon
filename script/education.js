@@ -51,7 +51,7 @@ function createOPT(){
     
     document.querySelector("#select1").addEventListener("change", function(){
         console.log(document.querySelector("#select1").innerHTML);
-        if(document.querySelector("#select1").innerHTML === true){
+        if(document.querySelector("#select1").value = true){
             console.log("hej");
         }
         else {

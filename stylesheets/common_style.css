@@ -1,0 +1,16 @@
+:root {
+    /* COLOR */
+    --primary: #8D99AE;
+    --secondary: #22BFAC;
+
+    --light: #DCE0D9;
+    --dark: #31081F ;
+
+    /* FONTS */
+    --title: ;
+    --bodyText: ;
+
+    /* SIZES */
+    font-size: 62.5%;
+}
+

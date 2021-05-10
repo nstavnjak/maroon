@@ -14,6 +14,7 @@
 
 // Functions
 createSearchForm();
+createOPT();
 
 function createSearchForm(){
     let searchForm = document.createElement("div");

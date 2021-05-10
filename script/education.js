@@ -13,6 +13,7 @@
 
 
 // Functions
+createSearchForm();
 
 function createSearchForm(){
     let searchForm = document.createElement("div");
@@ -32,10 +33,21 @@ function createSearchForm(){
 
     document.querySelector("body").append(searchForm, inputField, select1, select2, search);
 }
-createSearchForm();
+
 
 function createOPT(){
-
+    DB.COUNTRIES.forEach(e => {
+        let option = document.createElement("option");
+        option.innerHTML = e.name;
+        document.querySelector("select1").append(option);
+    });
+    
+    if (document.querySelector("select1").value === true){
+        let countrySerch = document.querySelector("select1").value;
+        DB.COUNTRIES.find(e => {
+            e.name === document.querySelector("select1").value;
+        });
+    }
 }
 
 function updateCityByCountry(){

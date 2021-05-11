@@ -28,7 +28,6 @@ function createFooter() {
         </div>
     `;
     document.body.append(footerElement);
-    createArrowUp()
 }
 
 function createArrowUp(){
@@ -37,10 +36,11 @@ function createArrowUp(){
 
     document.body.append(arrowButton);
 
-    document.querySelector(".arrowUp").addEventListener("click", () => {
+    arrowButton.addEventListener("click", () => {
         window.scrollTo(0, 0);
     });
 }
+
 
 
 // Functions

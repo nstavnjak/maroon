@@ -12,19 +12,38 @@
 
     /* SIZES */
     font-size: 62.5%;
+
+    --sizeL: 75%;
+    --sizeM: 62.5%;
+    --sizeS: 50%;
+    --sizeXs: 35%;
+
 }
 
 .footer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
 
-    width: 10vw;
+    height: 20em;
+    width: 100%;
     background-color: var(--dark);
     color: var(--light);
+
+}
+
+#footerLinks {
+    display: flex;
+    flex-direction: column;
 }
 
 .footerText {
     text-decoration: none;
+    height: 2em;
+    padding: 0.5em;
+    margin-left: 1em;
+}
+
+#copyright {
+    margin: auto;
 }

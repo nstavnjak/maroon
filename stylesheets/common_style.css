@@ -12,5 +12,64 @@
 
     /* SIZES */
     font-size: 62.5%;
+
+    --sizeL: 75%;
+    --sizeM: 62.5%;
+    --sizeS: 50%;
+    --sizeXs: 35%;
+
 }
 
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    position: relative;
+    height: 20em;
+    width: 100%;
+    background-color: var(--dark);
+    color: var(--light);
+
+}
+
+#footerLinks {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3em;
+}
+
+.footerText {
+    text-decoration: none;
+    height: 2em;
+    font-size: 1.3em;
+   
+    margin-left: 3em;
+}
+
+#copyright {
+    margin: auto;
+    text-align: center;
+}
+
+.arrowUp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    top: 5%;
+	left: 85%;
+
+    height: 1.5em;
+    width: 1.5em;
+    font-size: 3em;
+
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.arrowUp:hover {
+    background-color: var(--secondary);
+    color: var(--light);
+}

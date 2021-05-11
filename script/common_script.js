@@ -15,13 +15,34 @@ function createFooter() {
     footerElement.classList.add("footer");
 
     footerElement.innerHTML = `
-        <div id="footerHem" class="footerText">Hem</div>
-        <div id="footerUtbildining" class="footerText">Utbildning</div>
-        <div id="footerTest" class="footerText">Test</div>
-        <div id="footerFaq" class="footerText">faq</div>
+         <div id="footerLinks">
+            <a id="footerHem" class="footerText">Hem</a>
+            <a id="footerUtbildining" class="footerText">Utbildning</a>
+            <a id="footerTest" class="footerText">Test</a>
+            <a id="footerFaq" class="footerText">faq</a>
+        </div>
+        <div id="copyright">
+            <p>Copyright © 2021 exchanger</p> 
+            <p>all rights reserved</p>
+            <p>site by Maroon 3</p>
+        </div>
     `;
     document.body.append(footerElement);
 }
+
+function createArrowUp(){
+    let arrowButton = document.createElement("div");
+    arrowButton.classList.add("arrowUp");
+
+    arrowButton.innerHTML = `<span>&#8593;</span>`;
+    
+    document.querySelector(".footer").append(arrowButton);
+    arrowButton.addEventListener("click", () => {
+        window.scrollTo(0, 0);
+    });
+}
+
+
 
 // Functions
 
@@ -79,12 +100,13 @@ function createBack(cityObj){
         landCountryParent.append(countryTitle, cityTitle);
         cityInfo.append(visum, landCountryParent);
 
+        /*
         let cityPicture = document.createElement("img");
         cityPicture.setAttribute("src", `${hej}`);
         cityPicture.setAttribute("alt", "city");
 
         div.append(cityPicture, cityInfo);
-
+        */
         return div;
     }
 

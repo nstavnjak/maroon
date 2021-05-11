@@ -42,13 +42,10 @@ function createCard(program){
 
     // get university
     let university = DB.UNIVERSITIES.find(e => e.id === program.universityID);
-
     // get city
     let city = DB.CITIES.find(e => e.id === university.cityID);
-
     // get country 
     let country = DB.COUNTRIES.find(e => e.id === city.countryID);
-
     // get language 
     let language = DB.LANGUAGES.find(e => e.id === country.languageID);
     
@@ -177,31 +174,65 @@ function createBack(cityObj){
         return div;
     }
 
+    // done
     function getRatings(cityObj){
         let ratings = document.createElement("div");
 
-        ratings.append(circleRating(cityObj, out), circleRating(cityObj, food), circleRating(cityObj, accomodation));
+        let comments = DB.COMMENTS_CITY.filter(comment => comment.cityID === cityObj.id);
+
+        ratings.append(circleRating(comments, out, "Nattliv"), circleRating(comments, food, "Matkultur"), circleRating(comments, accomodation, "Boende"));
         
         return ratings;
     }
 
-    circleRating(cityObj, theme){
+    // done
+    circleRating(array, theme, title){
+        
         let counter = 0;
-        let comments = DB.COMMENTS_CITY.filter(comment => comment.cityID === cityObj.id);
-            
-        comments.forEach(element => {
+        array.forEach(element => {
             element.stars[`${theme}`] += counter;
         });   
         
+        let rating = document.createElement("div");
+        rating.classList.add("rating");
+        let titleElement = document.createElement("h2");
         let circleRating = document.createElement("div");
         circleRating.classList.add("circleRating");
+        circleRating.textContent = `${counter/array.length} / 5`;
 
-
+        rating.append(circleRating, titleElement);
         return circleRating;
     }
     
+    // done
     function createStudentsComments(cityObj){
-    
+        let comments = DB.COMMENTS_CITY.filter(comment => comment.cityID === cityObj.id);
+        let commentParent = document.createElement("div");
+
+        comments.forEach(comment => {
+            let commentDiv = document.createElement.length("div");
+            commentDiv.classList.add("comment");
+
+            let sum = comment.stars.out + comment.stars.food + comment.stars.housing;
+            commentDiv.innerHTML = `
+                <div>
+                    <div>
+                        <h1>${comment.alias}</h1>
+                        <h3>${comment.date.year}.${comment.date.month}.${comment.date.day}</h3>
+                    </div>
+                    <div>
+                        <h2>${sum/comment.stars.length}/5</2>
+                        <div class="bar">
+                            <div class="visible bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <p>"${comment.text}"</p>`;
+            
+            
+            
+            commentParent.append(commentDiv);
+        });
     }
     
 }

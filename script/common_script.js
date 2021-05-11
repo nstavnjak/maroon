@@ -95,7 +95,7 @@ function createBack(cityObj){
         landCountryParent.append(countryTitle, cityTitle);
         cityInfo.append(visum, landCountryParent);
 
-        /* 
+        /*
         let cityPicture = document.createElement("img");
         cityPicture.setAttribute("src", `${}`);
         cityPicture.setAttribute("alt", "city");

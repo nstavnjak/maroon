@@ -35,8 +35,8 @@ function createArrowUp(){
     arrowButton.classList.add("arrowUp");
 
     arrowButton.innerHTML = `<span>&#8593;</span>`;
+    
     document.querySelector(".footer").append(arrowButton);
-
     arrowButton.addEventListener("click", () => {
         window.scrollTo(0, 0);
     });

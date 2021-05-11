@@ -14,3 +14,16 @@
     font-size: 62.5%;
 }
 
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 10vw;
+    background-color: var(--dark);
+}
+
+.footerText {
+    text-decoration: none;
+}

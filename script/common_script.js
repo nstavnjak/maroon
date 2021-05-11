@@ -34,12 +34,12 @@ function createFooter() {
 
 arrowTop.addEventListener("click", scrollToTop());
 
+
+}
+
 function scrollToTop(){
     window.scrollToTop(0, 0);
 }
-}
-
-
 
 // Functions
 

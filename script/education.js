@@ -1,7 +1,8 @@
 "use strict";
 
 // Head
-
+appendLink("stylesheets/education.css");
+appendLink("stylesheets/common_style.css");
 
 // Meny
 
@@ -10,7 +11,7 @@
 
 
 // Footer 
-
+createFooter();
 
 // Functions
 

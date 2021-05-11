@@ -9,6 +9,6 @@ appendLink("stylesheets/faq.css");
 
 
 // Footer 
-createFooter();
+
 
 // Functions

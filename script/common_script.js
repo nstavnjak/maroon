@@ -4,22 +4,40 @@
 appendLink("../stylesheets/common_style.css");
 
 // Meny
+document.body.append(createMeny());
+let menyButton = document.querySelector("#menyButton");
+
+menyButton.addEventListener("click", e => {
+    if (menyButton.textContent === "meny"){
+        menyButton.textContent = "close";
+    } else {
+        menyButton.innerText = "meny";
+    }
+
+    document.querySelector("#menyLinks").classList.toggle("out");
+    menyButton.classList.toggle("close");
+    document.body.classList.toggle("position-fixed");
+})
 
 
 // Main
 
 
 // Footer 
+createFooter();
+createArrowUp();
+
+// Functions
 function createFooter() {
     let footerElement = document.createElement("footer");
     footerElement.classList.add("footer");
 
     footerElement.innerHTML = `
          <div id="footerLinks">
-            <a id="footerHem" class="footerText">Hem</a>
-            <a id="footerUtbildining" class="footerText">Utbildning</a>
-            <a id="footerTest" class="footerText">Test</a>
-            <a id="footerFaq" class="footerText">faq</a>
+            <a href="../html/index.html" id="footerHem" class="footerText">Hem</a>
+            <a href="../html/education.html" id="footerUtbildining" class="footerText">Utbildning</a>
+            <a href="../html/quiz.html" id="footerTest" class="footerText">Test</a>
+            <a href="../html/faq.html" id="footerFaq" class="footerText">faq</a>
         </div>
         <div id="copyright">
             <p>Copyright © 2021 exchanger</p> 
@@ -42,10 +60,6 @@ function createArrowUp(){
     });
 }
 
-
-
-// Functions
-
 function appendLink(link){
     let headElement = document.createElement("link");
     headElement.setAttribute("href", link);
@@ -53,8 +67,32 @@ function appendLink(link){
     document.querySelector("head").append(headElement);
 }
 
-function meny(){
+function createMeny(){
+    let nav = document.createElement("nav");
+    nav.classList.add("menyWrapper");
 
+    // The visible
+    let logo = document.createElement("div");
+    logo.setAttribute("id", "logo");
+    logo.textContent = `Exchanger`;
+    let menyButton = document.createElement("button");
+    menyButton.setAttribute("id", "menyButton");
+    menyButton.textContent = `meny`;
+
+    let menyLinks = document.createElement("div");
+    menyLinks.setAttribute("id", "menyLinks")
+    menyLinks.innerHTML = `
+        <a href="../html/index.html">HEM</a>
+        <a href="../html/education.html">UTBILDNINGAR</a>
+        <a href="../html/quiz.html">TEST</a>
+        <a href="..//html/faq.html">FAQ</a>
+        <div id="navcopyright">Copyright © 2021 exchanger | all rights reserved</div>`;
+
+    
+    // The invisible
+
+    nav.append(logo, menyButton, menyLinks);
+    return nav;
 }
 
 function filter(){

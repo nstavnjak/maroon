@@ -10,6 +10,5 @@ appendLink("stylesheets/quiz.css");
 
 
 // Footer 
-createFooter();
 
 // Functions

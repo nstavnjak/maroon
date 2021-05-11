@@ -26,6 +26,89 @@
     box-sizing: border-box;
 }
 
+body{
+    overflow-x: hidden;
+}
+
+/* MENY */
+nav{
+    background-color: var(--dark);
+    z-index:30;
+    width: 100%;
+    height:80px;
+    position: relative;
+    top:0;
+    display: flex;
+    justify-content: space-between;
+    /* ifall vi ska ha en levande meny som rullar fram vid scroll */
+    transition: top 1s;
+}
+
+#logo{
+    flex-basis: 100px;
+
+    display: flex;
+    align-items:center;
+    font-size: 2rem;
+    color: var(--light);
+    padding: 4rem;
+    z-index: 20;
+}
+  
+#menyButton{
+    color:var(--light);
+    background-color: var(--dark);
+    border: none;
+    
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding:2rem;
+    margin-right: 2rem;
+    z-index: 20;
+    transition: color 1s;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+/* Den gömda menyn  */
+#menyLinks {
+    position: absolute;
+    height:100vh;
+    width:100vw;
+    transform: translateX(-100vw);
+    background-color: var(--dark);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 1s;
+}
+  
+#menyLinks.out{
+    transform: translateX(0vw);
+}
+  
+#menyButton.close{
+    color:white;
+}
+  
+#menyLinks a{
+    text-decoration: none;
+    color: white;
+    padding: 3rem 4rem;
+}
+  
+#navcopyright{
+    color: white;
+    font-size: 13px;
+    position: absolute;
+    bottom:0;
+    padding:15px 10px;
+}
+
+/* FOOTER  */
+
 .footer {
     display: flex;
     flex-direction: column;

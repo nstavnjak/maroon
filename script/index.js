@@ -9,6 +9,5 @@ appendLink("../stylesheets/index.css")
 
 
 // Footer 
-createFooter();
-createArrowUp();
+
 // Functions

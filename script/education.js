@@ -9,9 +9,6 @@ appendLink("../stylesheets/education.css");
 // Main
 
 
-// Footer 
-createFooter();
-
 // Functions
 
 // function createSearchForm(){

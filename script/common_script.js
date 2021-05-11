@@ -15,12 +15,28 @@ function createFooter() {
     footerElement.classList.add("footer");
 
     footerElement.innerHTML = `
-        <div id="footerHem" class="footerText">Hem</div>
-        <div id="footerUtbildining" class="footerText">Utbildning</div>
-        <div id="footerTest" class="footerText">Test</div>
-        <div id="footerFaq" class="footerText">faq</div>
+         <div id="footerLinks">
+            <a id="footerHem" class="footerText">Hem</a>
+            <a id="footerUtbildining" class="footerText">Utbildning</a>
+            <a id="footerTest" class="footerText">Test</a>
+            <a id="footerFaq" class="footerText">faq</a>
+        </div>
+        <button id="arrowUp"></button>
+        <div id="copyright">
+            <p>Copyright © 2021 exchanger</p> 
+            <p>all rights reserved</p>
+            <p>site by Maroon 3</p>
+        </div>
     `;
     document.body.append(footerElement);
+}
+
+let arrowTop = document.getElementById("arrowUp");
+
+arrowTop.addEventListener("click", scrollToTop());
+
+function scrollToTop(){
+    window.scrollToTop(0, 0);
 }
 
 // Functions

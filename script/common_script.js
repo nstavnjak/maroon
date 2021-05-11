@@ -21,7 +21,6 @@ function createFooter() {
             <a id="footerTest" class="footerText">Test</a>
             <a id="footerFaq" class="footerText">faq</a>
         </div>
-        <button id="arrowUp"></button>
         <div id="copyright">
             <p>Copyright © 2021 exchanger</p> 
             <p>all rights reserved</p>
@@ -29,13 +28,19 @@ function createFooter() {
         </div>
     `;
     document.body.append(footerElement);
-
-    document.getElementById("arrowUp").addEventListener("click", () => {
-        window.scrollTo(0, 0);
-    });
-
+    createArrowUp()
 }
 
+function createArrowUp(){
+    let arrowButton = document.createElement("button");
+    arrowButton.classList.add("arrowUp");
+
+    document.body.append(arrowButton);
+
+    document.querySelector(".arrowUp").addEventListener("click", () => {
+        window.scrollTo(0, 0);
+    });
+}
 
 
 // Functions

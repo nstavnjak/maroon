@@ -30,16 +30,13 @@ function createFooter() {
     `;
     document.body.append(footerElement);
 
-    let arrowTop = document.getElementById("arrowUp");
-
-arrowTop.addEventListener("click", scrollToTop());
-
+    document.getElementById("arrowUp").addEventListener("click", ()=> {
+        window.scrollToTop(0, 0);
+    });
 
 }
 
-function scrollToTop(){
-    window.scrollToTop(0, 0);
-}
+
 
 // Functions
 

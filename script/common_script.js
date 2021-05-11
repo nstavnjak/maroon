@@ -31,10 +31,11 @@ function createFooter() {
 }
 
 function createArrowUp(){
-    let arrowButton = document.createElement("button");
+    let arrowButton = document.createElement("div");
     arrowButton.classList.add("arrowUp");
 
-    document.body.append(arrowButton);
+    arrowButton.innerHTML = `<span>&#8593;</span>`;
+    document.querySelector(".footer").append(arrowButton);
 
     arrowButton.addEventListener("click", () => {
         window.scrollTo(0, 0);

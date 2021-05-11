@@ -25,6 +25,7 @@
     flex-direction: column;
     justify-content: center;
 
+    position: relative;
     height: 20em;
     width: 100%;
     background-color: var(--dark);
@@ -40,10 +41,34 @@
 .footerText {
     text-decoration: none;
     height: 2em;
-    padding: 0.5em;
+    font-size: 1.3em;
+   
     margin-left: 1em;
+    margin-top: 0.5em;
 }
 
 #copyright {
     margin: auto;
+}
+
+.arrowUp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    top: 5%;
+	left: 85%;
+
+    height: 1.5em;
+    width: 1.5em;
+    font-size: 3em;
+
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.arrowUp:hover {
+    background-color: var(--secondary);
+    color: var(--light);
 }

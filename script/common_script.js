@@ -117,7 +117,7 @@ function createBack(cityObj){
     }
 
     // done
-    circleRating(array, theme, title){
+    function circleRating(array, theme, title){
         
         let counter = 0;
         array.forEach(element => {

@@ -29,15 +29,17 @@ function createFooter() {
         </div>
     `;
     document.body.append(footerElement);
-}
 
-let arrowTop = document.getElementById("arrowUp");
+    let arrowTop = document.getElementById("arrowUp");
 
 arrowTop.addEventListener("click", scrollToTop());
 
 function scrollToTop(){
     window.scrollToTop(0, 0);
 }
+}
+
+
 
 // Functions
 

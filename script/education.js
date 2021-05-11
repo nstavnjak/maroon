@@ -1,8 +1,7 @@
 "use strict";
 
 // Head
-appendLink("stylesheets/education.css");
-appendLink("stylesheets/common_style.css");
+appendLink("../stylesheets/education.css");
 
 // Meny
 
@@ -155,7 +154,7 @@ function createCirlePoints(grade, year){
     gradeCircle.textContent = grade;
 
     gradeBox.append(gradeCircle);
-    gradeBox.append(gradeYear):
+    gradeBox.append(gradeYear);
 
     return gradeBox;
 }

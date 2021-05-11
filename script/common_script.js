@@ -1,7 +1,7 @@
 "use strict";
 
 // Head
-
+appendLink("../stylesheets/common_style.css");
 
 // Meny
 
@@ -80,7 +80,7 @@ function createBack(cityObj){
         cityInfo.append(visum, landCountryParent);
 
         let cityPicture = document.createElement("img");
-        cityPicture.setAttribute("src", `${}`);
+        cityPicture.setAttribute("src", `${hej}`);
         cityPicture.setAttribute("alt", "city");
 
         div.append(cityPicture, cityInfo);
@@ -100,7 +100,7 @@ function createBack(cityObj){
     }
 
     // done
-    circleRating(array, theme, title){
+    function circleRating(array, theme, title){
         
         let counter = 0;
         array.forEach(element => {
@@ -110,6 +110,7 @@ function createBack(cityObj){
         let rating = document.createElement("div");
         rating.classList.add("rating");
         let titleElement = document.createElement("h2");
+        titleElement.textContent = title;
         let circleRating = document.createElement("div");
         circleRating.classList.add("circleRating");
         circleRating.textContent = `${counter/array.length} / 5`;

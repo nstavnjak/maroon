@@ -36,6 +36,7 @@
 #footerLinks {
     display: flex;
     flex-direction: column;
+    margin-top: 3em;
 }
 
 .footerText {
@@ -43,12 +44,12 @@
     height: 2em;
     font-size: 1.3em;
    
-    margin-left: 1em;
-    margin-top: 0.5em;
+    margin-left: 3em;
 }
 
 #copyright {
     margin: auto;
+    text-align: center;
 }
 
 .arrowUp {

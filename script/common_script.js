@@ -98,8 +98,9 @@ function createMeny(){
     return nav;
 }
 
-function filter(){
-
+function filter(array){
+    let finishedArray2 = array.slice();
+    //Språk
 }
 
 function loadMore(){

@@ -620,17 +620,19 @@ createStartButton();
 let startButton = document.querySelector("#startButton");
 let quizContainer = document.querySelector("#quiz");
 
-startButton.addEventListener("click", ()=> {
+startButton.addEventListener("click", startQuiz);
+
+function startQuiz() {
 
     startButton.classList.add("hide");
     quizContainer.prepend(createProgressBar());
     
-    questions.forEach( e => {
+        questions.forEach( e => {
 
-        quizContainer.append(quizQuestionsDOM(e));
+            quizContainer.append(quizQuestionsDOM(e));
 
-    });
-});
+        });
+}
 
 // Footer 
 

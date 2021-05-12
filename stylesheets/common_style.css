@@ -7,16 +7,18 @@
     --dark: #26282C;
 
     /* FONTS */
-    --title: ;
-    --bodyText: ;
+    --title: 'Raleway', sans-serif;
+    --bodyText: 'Open Sans', sans-serif;
 
     /* SIZES */
     font-size: 62.5%;
 
-    --sizeL: 75%;
-    --sizeM: 62.5%;
-    --sizeS: 50%;
-    --sizeXs: 35%;
+    --marginLR: 2rem;
+    --paddingSZ: 2rem;
+    --sizeL: 2.7rem;
+    --sizeM: 2.2rem;
+    --sizeS: 1.5rem;
+    --sizeXs: 1.2rem;
 
 }
 
@@ -35,7 +37,7 @@ nav{
     background-color: var(--dark);
     z-index:30;
     width: 100%;
-    height:80px;
+    height:8rem;
     position: relative;
     top:0;
     display: flex;
@@ -45,43 +47,54 @@ nav{
 }
 
 #logo{
+    z-index: 20;
     flex-basis: 100px;
-
     display: flex;
-    align-items:center;
+    align-items:flex-end;
+
+    padding: 2rem;
+    margin-left: var(--marginLR);
+    
+    font-family: var(--title);
+    font-weight: bold;
     font-size: 2rem;
     color: var(--light);
-    padding: 4rem;
-    z-index: 20;
 }
   
 #menyButton{
-    color:var(--light);
+    z-index: 20;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+
     background-color: var(--dark);
+    
+    padding:2rem;
+    margin-right: var(--marginLR);
     border: none;
     
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding:2rem;
-    margin-right: 2rem;
-    z-index: 20;
-    transition: color 1s;
+    font-family: var(--title);
+    font-weight: lighter;
+    font-size: var(--sizeS);
     text-transform: uppercase;
+    color:var(--light);
     cursor: pointer;
+    transition: color 1s;
 }
 
 /* Den gömda menyn  */
 #menyLinks {
-    position: absolute;
-    height:100vh;
-    width:100vw;
-    transform: translateX(-100vw);
-    background-color: var(--dark);
     z-index: 10;
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    position: absolute;
+    height:100vh;
+    width:100vw;
+
+    transform: translateX(-100vw);
+    background-color: var(--dark);
     transition: transform 1s;
 }
   
@@ -89,19 +102,21 @@ nav{
     transform: translateX(0vw);
 }
   
-#menyButton.close{
-    color:white;
-}
-  
 #menyLinks a{
+    padding: var(--paddingSZ);
+    margin-left: var(--marginLR);
+    
+    font-family: var(--title);
+    font-weight: normal;
     text-decoration: none;
-    color: white;
-    padding: 3rem 4rem;
+    color: var(--light);
+    font-size: var(--sizeS);
 }
   
 #navcopyright{
     color: white;
-    font-size: 13px;
+    font-family: var(--bodyText);
+    font-size: var(--sizeXs);
     position: absolute;
     bottom:0;
     padding:15px 10px;
@@ -115,30 +130,36 @@ nav{
     justify-content: center;
 
     position: relative;
-    height: 20em;
+    height: auto;
     width: 100%;
+
     background-color: var(--dark);
     color: var(--light);
-
 }
 
 #footerLinks {
     display: flex;
     flex-direction: column;
-    margin-top: 3em;
+    margin-top: 3rem;
 }
 
 .footerText {
+    height: 4rem;
+    padding: 0rem var(--paddingSZ);
+    margin-left: var(--marginLR);
+
+    font-family: var(--title);
+    font-size: var(--sizeS);
+    color: var(--light);
     text-decoration: none;
-    height: 2em;
-    font-size: 1.3em;
-   
-    margin-left: 3em;
 }
 
 #copyright {
     margin: auto;
     text-align: center;
+    font-family: var(--bodyText);
+    font-size: var(--sizeXs);
+    margin-bottom: var(--marginLR);
 }
 
 .arrowUp {
@@ -147,18 +168,27 @@ nav{
     justify-content: center;
 
     position: absolute;
-    top: 5%;
-	left: 85%;
-
-    height: 1.5em;
-    width: 1.5em;
-    font-size: 3em;
-
+    top: var(--marginLR);
+	right: var(--marginLR);
+    padding: var(--paddingSZ);
+    
+   
+    font-size: var(--sizeL);
     transition: 0.5s;
     cursor: pointer;
+
+    animation-name: bounceUpAndDown;
+    animation-timing-function: ease;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
 }
 
 .arrowUp:hover {
-    background-color: var(--secondary);
-    color: var(--light);
+    color: var(--secondary);
 }
+
+@keyframes bounceUpAndDown {
+    0%   { transform: translateY(0);   }
+    50%  { transform: translateY(-20px)  }
+    100%  { transform: translateY(0px);}
+

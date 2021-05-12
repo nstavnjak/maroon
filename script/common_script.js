@@ -2,6 +2,8 @@
 
 // Head
 appendLink("../stylesheets/common_style.css");
+appendLink("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap");
+appendLink("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
 
 // Meny
 document.body.append(createMeny());
@@ -41,8 +43,7 @@ function createFooter() {
         </div>
         <div id="copyright">
             <p>Copyright © 2021 exchanger</p> 
-            <p>all rights reserved</p>
-            <p>site by Maroon 3</p>
+            <p>all rights reserved | site by Maroon 3</p>
         </div>
     `;
     document.body.append(footerElement);

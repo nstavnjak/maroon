@@ -7,7 +7,7 @@ appendLink("../stylesheets/education.css");
 
 
 // Main
-
+document.body.append(createSortAlternative());
 
 // Functions
 
@@ -23,9 +23,20 @@ appendLink("../stylesheets/education.css");
 
 // }
 
-// function createSortAlternative(){
+function createSortAlternative(){
+    let sortAlt = document.createElement("select");
+    sortAlt.classList.add("sortAlt");
+    sortAlt.setAttribute("value", "Sortera");
 
-// }
+    sortAlt.innerHTML = `
+        <option value ="sortera">Sortera</option>
+        <option value ="aTillö">Sortera program a - ö</option>
+        <option value ="öTilla">Sortera program ö - a</option>
+        <option value ="stigande">Antagningspoäng, stigande</option>
+        <option value ="fallande">Antagningspoäng, fallande</option>
+    `;
+    return sortAlt;
+}
 
 // function sortProgram(){
 

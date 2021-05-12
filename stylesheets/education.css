@@ -86,25 +86,29 @@
     opacity: 0.7;
 }
 
-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
 /* SORTERA & FILTRERA */
+
+#sortFilterParent{
+    display: flex;
+    margin: 0rem var(--marginLR);
+}
 
 #sortera, #filter {
     appearance: none;
     border: none;
-    padding: var(--paddingSZ);
+    padding: var(--paddingSZ) 1rem;
     background-color: var(--light);
     color:var(--dark);
-    font-size: var(--bodyText);
-    font-weight: lighter;
+    font-family: var(--bodyText);
+    font-weight: normal;
     font-size: var(--sizeXs);
     text-transform: uppercase;
     position: relative;
+    flex-grow: 1;
+}
+
+#filter{
+    text-align: right;
 }
 
 #expandFilter{

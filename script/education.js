@@ -9,18 +9,15 @@ appendLink("../stylesheets/education.css");
 
 // Main
 document.querySelector("main").append(createSearchForm());
+createOPT();
+createSort()
+createFilterButton()
 
 // Functions
-createOPT();
 
 let sortAlternatives = ["Program, A-Ö", "Program, Ö-A", "Antagningspoäng, stigande", "Antagningpoäng, fallande"]
-// function createSearchForm(){
 
-// }
 
-// function createOPT(){
-
-// }
 function createSearchForm(){
     let searchForm = document.createElement("div");
     searchForm.setAttribute("id", "searchForm");
@@ -55,7 +52,6 @@ function createSearchForm(){
 
     return searchForm;
 }
-
 
 function createOPT(){
     for(let i = 1; i < 3; i++){
@@ -117,13 +113,12 @@ function createOPT(){
     });
     
 }
+// lägga in i en funktion kanske? gjorde detta föra att kunna designa knapparna rätt i vyn
+let sortAndFilterParent = document.createElement("div");
+sortAndFilterParent.setAttribute("id", "sortFilterParent");
+sortAndFilterParent.append(createSort(), createFilterButton());
+document.querySelector("main").append(sortAndFilterParent);
 
-// function updateCityByCountry(){
-
-// }
-
-createSort()
-createFilterButton()
 function createSort(){
     //skapar och returnerar en select till createSort som sen kan appendas
     let sortDiv = document.createElement("select");
@@ -135,14 +130,13 @@ function createSort(){
         sortAlternative.textContent = e;
         sortDiv.append(sortAlternative);
     });
-    document.querySelector("main").append(sortDiv);
+    return sortDiv;
 }
 
 function createFilterButton(){
     let filterButton = document.createElement("button");
     filterButton.setAttribute("id", "filter")
     filterButton.textContent = "filtrera +"
-    document.querySelector("main").append(filterButton);
     
     filterButton.addEventListener("click", e => {
         if (once == 0){
@@ -151,7 +145,7 @@ function createFilterButton(){
         once = once + 1;
         document.querySelector("body").classList.add("no-scroll");
     });
-    
+    return filterButton;
 }
 
 function createFilter(){

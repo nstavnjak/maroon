@@ -67,4 +67,3 @@ function createProgressBar(){
     return progress;
 }
 
-console.log(questions);

@@ -1,10 +1,52 @@
-.progress {
+main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    background-color: var(--dark);
+    height: 500px;
+}
+
+#quiz {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    height: 500px;
+    width: 400px;
+    background-color: black;
+}
+
+.questionsDiv {
+    height: 350px;
+	background: black;
+	margin: auto;
+}
+
+.progress {
+        width: 80%;
+        background-color: #26282C;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 40px;
 }
 
 .bar {
-    width: 1%;
+    width: 10%;
     height: 30px;
-    background-color: var(--secondary);
+    background-color: #ff9900;
+    text-align: center;
+    line-height: 30px;
+    color: #26282C;
+}
+
+.hide {
+    display: none;
+}
+
+.startButton {
+    color: white;
+    background-color: black;
+    
+    font-size: 15px;
+    margin: auto;
 }

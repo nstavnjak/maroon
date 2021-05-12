@@ -18,6 +18,7 @@ const questions = [
             d: "Option",
         }, 
     },
+    /*
     {
         id:2,
         question: "Vad tycker du om te?",
@@ -108,6 +109,7 @@ const questions = [
             d: "Option",
         }, 
     },
+    */
  ];
 
 let cities = [
@@ -616,20 +618,19 @@ let cities = [
 createStartButton();
 
 let startButton = document.querySelector("#startButton");
+let quizContainer = document.querySelector("#quiz");
 
 startButton.addEventListener("click", ()=> {
 
     startButton.classList.add("hide");
-    document.querySelector("#quiz").prepend(createProgressBar());
+    quizContainer.prepend(createProgressBar());
     
     questions.forEach( e => {
 
-        document.querySelector("#quiz").append(quizQuestionsDOM(e));
+        quizContainer.append(quizQuestionsDOM(e));
 
     });
 });
-
-
 
 // Footer 
 
@@ -672,7 +673,7 @@ function movingBar(questinsId){
 function createStartButton(){
     let startButton = document.createElement("button");
     startButton.setAttribute("id","startButton");
-    startButton.innerText = "Start the test"
+    startButton.innerText = "Start the test";
     document.getElementById("quiz").append(startButton);
 }
 
@@ -695,15 +696,15 @@ function quizQuestionsDOM(obj){
     let navigateButtons = document.createElement("div");
     navigateButtons.setAttribute("id","navigateButtons");
 
-    let rightButton = document.createElement("button");
-    rightButton.setAttribute("id", "right");
-    rightButton.innerHTML = `&#8680;`;
+    let rightArrow = document.createElement("div");
+    rightArrow.setAttribute("id", "right");
+    rightArrow.innerHTML = `&#8680;`;
 
-    let leftButton = document.createElement("button");
-    leftButton.setAttribute("id", "left");
-    leftButton.innerHTML = `&#8678;`;
+    let leftArrow = document.createElement("div");
+    leftArrow.setAttribute("id", "left");
+    leftArrow.innerHTML = `&#8678;`;
 
-    navigateButtons.append(leftButton,rightButton);
+    navigateButtons.append(leftArrow,rightArrow);
 
     questionsContainer.append(navigateButtons);
 

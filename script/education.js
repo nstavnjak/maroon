@@ -24,9 +24,44 @@ let sortAlternatives = ["Program, A-Ö", "Program, Ö-A", "Antagningspoäng, sti
 
 // }
 
-// function createSortAndFilterButton{
+createSort()
+function createSort(){
+    //skapar och returnerar en select till createSort som sen kan appendas
+    let sortDiv = document.createElement("select");
+    let sortAlternatives = ["Program, A-Ö", "Program, Ö-A", "Antagningspoäng, stigande", "Antagningpoäng, fallande"];
+    sortAlternatives.forEach(e => {
+        //skapar alla alternativ baserat på sortAlternatives arrayen
+        let sortAlternative = document.createElement("option");
+        sortAlternative.textContent = e;
+        sortDiv.append(sortAlternative);
+    });
+    document.querySelector("main").append(sortDiv);
+}
+
+function creatFilterButton(){
+    //filterDiv innehåller allt och returneras i slutet
+    let filterDiv = document.createElement("div");
+
+    let filterH1 = document.createElement("h1")
+    filterH1.textContent = "filtrera"
+
+    let studieInriktningDiv = document.createElement("div");
+    
+    let studieInriktningH2 = document.createElement("h2");
+    studieInriktningH2.textContent = "studie inriktning";
+
+    FIELDS.forEach(e => {
+        let field = document.createElement("input");
+        fields.setAttribute("type", "checkbox");
+        filterDiv.append(field);
+        console.log(field)
+    });
+    document.querySelector("main").append(filterDiv);
+}
 
 // }
+
+// 
 
 // function createSortAlternative(){
 //     let sortDiv = document.createElement("div");

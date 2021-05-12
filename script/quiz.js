@@ -11,93 +11,94 @@ const questions = [
     {
         id:1,
         question: "Vilket klimat trivs du bäst i?",
-        options: {
-            a: "Option",
-            b: "Option",
-            c: "Option",
-            d: "Option",
-        }, 
+        options: [
+            {option: "Option A", optValue:""},
+            {option: "Option B", optValue:""},
+            {option: "Option C", optValue:""},
+            {option: "Option D", optValue:""}
+        ]           
     },
-    /*
+       /*
     {
         id:2,
         question: "Vad tycker du om te?",
-        options: {
-            a: "Option",
-            b: "Option",
-            c: "Option",
-            d: "Option",
-        }, 
+         options: [
+            {option: "optionA", optValue:""},
+            {option: "optionB", optValue:""},
+            {option: "optionC", optValue:""},
+            {option: "optionC", optValue:""}
+        ]  
     },
+ 
     {
         id:3,
         question: "Är kusten ett måste?",
-        options: {
-            a: "Option",
-            b: "Option",
-            c: "Option",
-            d: "Option",
-        }, 
+        options: [
+            {option: "optionA", optValue:""},
+            {option: "optionB", optValue:""},
+            {option: "optionC", optValue:""},
+            {option: "optionC", optValue:""}
+        ] 
     },
     {
         id:4,
         question: "4) ",
-        options: {
-            a: "Option",
-            b: "Option",
-            c: "Option",
-            d: "Option",
-        }, 
+        options: [
+            {option: "optionA", optValue:""},
+            {option: "optionB", optValue:""},
+            {option: "optionC", optValue:""},
+            {option: "optionC", optValue:""}
+        ]        
     },
     {
         id:5,
         question: "5) ",
-        options: {
-            a: "Option",
-            b: "Option",
-            c: "Option",
-            d: "Option",
-        }, 
+        options: [
+            {option: "optionA", optValue:""},
+            {option: "optionB", optValue:""},
+            {option: "optionC", optValue:""},
+            {option: "optionC", optValue:""}
+        ]        
     },
     {
         id:6,
         question: "6) ",
-        options: {
-            a: "Option",
-            b: "Option",
-            c: "Option",
-            d: "Option",
-        }, 
+        options: [
+            {option: "optionA", optValue:""},
+            {option: "optionB", optValue:""},
+            {option: "optionC", optValue:""},
+            {option: "optionC", optValue:""}
+        ]        
     },
     {
         id:7,
         question: "7) ",
-        options: {
-            a: "Option",
-            b: "Option",
-            c: "Option",
-            d: "Option",
-        }, 
+        options: [
+            {option: "optionA", optValue:""},
+            {option: "optionB", optValue:""},
+            {option: "optionC", optValue:""},
+            {option: "optionC", optValue:""}
+        ]        
     },
     {
         id:8,
         question: "8) ",
-        options: {
-            a: "Option",
-            b: "Option",
-            c: "Option",
-            d: "Option",
-        }, 
+        options: [
+            {option: "optionA", optValue:""},
+            {option: "optionB", optValue:""},
+            {option: "optionC", optValue:""},
+            {option: "optionC", optValue:""}
+        ]        
     },
     {
         id:9,
         question: "9) ",
-        options: {
-            a: "Option",
-            b: "Option",
-            c: "Option",
-            d: "Option",
-        }, 
+        options:[
+            {option: "optionA", optValue:""},
+            {option: "optionB", optValue:""},
+            {option: "optionC", optValue:""},
+            {option: "optionC", optValue:""}
+        ]        
     },
     {
         id:10,
@@ -626,11 +627,9 @@ function startQuiz() {
 
     startButton.classList.add("hide");
     quizContainer.prepend(createProgressBar());
-    
+
         questions.forEach( e => {
-
             quizContainer.append(quizQuestionsDOM(e));
-
         });
 }
 
@@ -638,6 +637,7 @@ function startQuiz() {
 
 // Functions
 
+//done
 function createProgressBar(){
     let progress = document.createElement("div");
     progress.classList.add("progress");
@@ -650,7 +650,7 @@ function createProgressBar(){
     return progress;
 };
 
-
+//not done (yet)
 let i = 0;
 function movingBar(questinsId){
     if(i== 0){
@@ -672,6 +672,7 @@ function movingBar(questinsId){
     }
 }
 
+//done
 function createStartButton(){
     let startButton = document.createElement("button");
     startButton.setAttribute("id","startButton");
@@ -679,21 +680,14 @@ function createStartButton(){
     document.getElementById("quiz").append(startButton);
 }
 
-
+//Not done (yet)
 function quizQuestionsDOM(obj){
     let questionsContainer = document.createElement("div");
     questionsContainer.classList.add("questionsContainer");
 
-    questionsContainer.innerHTML = `
-        <div id = "question"> ${obj.question}</div>
-        <div id= "option-buttons"> 
-            <button class="option">${obj.options.a}</button>
-            <button class="option">${obj.options.b}</button>
-            <button class="option">${obj.options.c}</button>
-            <button class="option">${obj.options.d}</button>
-        </div>
-    `;
-
+    let question = document.createElement("div");
+    question.setAttribute("id","question");
+    question.innerText = obj.question;
 
     let navigateButtons = document.createElement("div");
     navigateButtons.setAttribute("id","navigateButtons");
@@ -708,11 +702,20 @@ function quizQuestionsDOM(obj){
 
     navigateButtons.append(leftArrow,rightArrow);
 
-    questionsContainer.append(navigateButtons);
+    questionsContainer.append(navigateButtons,question);
+
+    for(let i=0; i<4; i++){
+
+        let button = document.createElement("button");
+        button.classList.add("option");
+        button.innerText = obj.options[i].option;
+
+        button.addEventListener("click", ()=>{
+            button.classList.toggle("selectedOpt");
+        });
+
+        questionsContainer.append(button);
+    }    
 
     return questionsContainer;
-}
-
-function setNewQuestion(){
-
 }

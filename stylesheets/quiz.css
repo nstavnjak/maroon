@@ -5,6 +5,7 @@
     align-items: center;
     height: 60vh;
     background-color: #0091FF;
+    overflow: scroll;
 }
 
 .questionsContainer {   
@@ -40,11 +41,14 @@
 
 .selectedOpt {
     background-color: #ff9900;
+    font-weight: bold;
+    color: #26282C;
 }
 
 #navigateButtons{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 #navigateButtons div {
@@ -87,5 +91,3 @@
     width: 100px;
     border-radius: 90%;
 }
-
-

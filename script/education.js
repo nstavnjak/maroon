@@ -24,9 +24,16 @@ let sortAlternatives = ["Program, A-Ö", "Program, Ö-A", "Antagningspoäng, sti
 function createSearchForm(){
     let searchForm = document.createElement("div");
     searchForm.setAttribute("id", "searchForm");
+    
+    let innerWrapper = document.createElement("div");
+    innerWrapper.setAttribute("id", "innerWrapper");
+
+    let title = document.createElement("h2");
+    title.textContent = `utbildning`;
 
     let inputField = document.createElement("input");
     inputField.setAttribute("id", "inputField");
+    inputField.setAttribute("placeholder", "Sök efter programnamn")
 
     let selectParent = document.createElement("div");
     let select1 = document.createElement("select");
@@ -37,8 +44,11 @@ function createSearchForm(){
 
     let searchButton = document.createElement("button");
     searchButton.setAttribute("id", "search");
+    searchButton.textContent = `sök utbildningar`;
+
     selectParent.append(select1, select2);
-    searchForm.append(inputField, selectParent, searchButton)
+    innerWrapper.append(title, inputField, selectParent, searchButton);
+    searchForm.append(innerWrapper);
 
     return searchForm;
 }

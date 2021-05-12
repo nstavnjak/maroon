@@ -30,11 +30,14 @@ function createSearchForm(){
 
     let selectParent = document.createElement("div");
     let select1 = document.createElement("select");
-    select1.setAttribute("id", "select1 land");
+    select1.setAttribute("id", "select1");
+    select1.classList.add("land")
 
     let select2 = document.createElement("select");
-    select2.setAttribute("id", "select2 city");
+    select2.setAttribute("id", "select2");
+    select2.classList.add("city")
 
+    
     let searchButton = document.createElement("button");
     searchButton.setAttribute("id", "search");
     selectParent.append(select1, select2);

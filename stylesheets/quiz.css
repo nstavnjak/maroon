@@ -4,6 +4,7 @@
     align-items: center;
     height: calc(100vh - 8rem);
     background-color: black;
+    overflow: scroll;
 }
 
 .questionsDiv {
@@ -28,15 +29,17 @@
     margin: auto;
     margin-top: 10px;
     margin-bottom: 40px;
+    
 }
 
 .bar {
     width: 10%;
-    height: 30px;
+    height: 10px;
     background-color: #ff9900;
     text-align: center;
     line-height: 30px;
     color: #26282C;
+    
 }
 
 .hide {
@@ -44,11 +47,13 @@
 }
 
 .startButton {
-    color: white;
-    background-color: black;
-    
+    color: #ffffff;
+    background-color: #ff9900;
     font-size: 15px;
     margin: auto;
+    height: 60px;
+    width: 100px;
+    border-radius: 90%;
 }
 
 .question{

@@ -5,25 +5,7 @@ appendLink("../stylesheets/quiz.css");
 
 // Meny
 
-
-// Main
-
-startTestButton();
-
-let startButton = document.querySelector(".startButton");
-
-startButton.addEventListener("click", ()=> {
-
-    startButton.style = "display: none;"
-    document.querySelector("#quiz").prepend(createProgressBar());
-    
-    questions.forEach( e => {
-
-        document.querySelector("#quiz").append(quizQuestionsDOM(e));
-
-    });
-});
-
+//Arrays
 
 const questions = [
     {
@@ -128,6 +110,29 @@ const questions = [
     },
  ];
 
+
+// Main
+
+startTestButton();
+
+let startButton = document.querySelector(".startButton");
+
+startButton.addEventListener("click", ()=> {
+
+    startButton.style = "display: none;"
+    document.querySelector("#quiz").prepend(createProgressBar());
+    
+
+
+    questions.forEach( e => {
+
+        document.querySelector("#quiz").append(quizQuestionsDOM(e));
+
+    });
+});
+
+
+
 // Footer 
 
 // Functions
@@ -138,7 +143,6 @@ function createProgressBar(){
 
     let bar = document.createElement("div");
     bar.classList.add("bar");
-    bar.innerText = "10%";
 
     progress.append(bar);
 

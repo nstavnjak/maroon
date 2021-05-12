@@ -7,7 +7,7 @@
 
 
 // Main
-
+document.querySelector("main").append(createSearchForm());
 
 // Footer 
 
@@ -23,16 +23,19 @@ function createSearchForm(){
     let inputField = document.createElement("input");
     inputField.setAttribute("id", "inputField");
 
+    let selectParent = document.createElement("div");
     let select1 = document.createElement("select");
-    select1.setAttribute("id", "select1");
+    select1.setAttribute("id", "select1 land");
 
     let select2 = document.createElement("select");
-    select2.setAttribute("id", "select2");
+    select2.setAttribute("id", "select2 city");
 
-    let search = document.createElement("button");
-    search.setAttribute("id", "search");
+    let searchButton = document.createElement("button");
+    searchButton.setAttribute("id", "search");
+    selectParent.append(select1, select2);
+    searchForm.append(inputField, selectParent, searchButton)
 
-    document.querySelector("body").append(searchForm, inputField, select1, select2, search);
+    return searchForm;
 }
 
 

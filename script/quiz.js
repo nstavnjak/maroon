@@ -19,19 +19,19 @@ startButton.addEventListener("click", ()=> {
     
     questions.forEach( e => {
 
-        document.querySelector("#quiz").append(getQuestion(e));
+        document.querySelector("#quiz").append(quizQuestionsDOM(e));
     
         if (e.id == 1){
-            document.querySelector("#quiz").append(createRightArrow());
+            document.querySelector(".questionsDiv").append(createRightArrow());
         } 
         
         else if(e.id == 10){
-            document.querySelector("#quiz").append(createLeftArrow());
+            document.querySelector(".questionsDiv").append(createLeftArrow());
         } 
         
         else {
-            document.querySelector("#quiz").append(createLeftArrow());
-            document.querySelector("#quiz").append(createRightArrow());
+            document.querySelector(".questionsDiv").append(createLeftArrow());
+            document.querySelector(".questionsDiv").append(createRightArrow());
         }
        
     });
@@ -188,7 +188,7 @@ function startTestButton(){
 }
 
 
-function getQuestion(obj){
+function quizQuestionsDOM(obj){
     let questionsDiv = document.createElement("div");
     questionsDiv.classList.add("questionsDiv");
 

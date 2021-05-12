@@ -6,7 +6,7 @@ appendLink("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&di
 appendLink("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
 
 // Meny
-document.body.append(createMeny());
+document.querySelector("nav").append(createMeny());
 let menyButton = document.querySelector("#menyButton");
 
 menyButton.addEventListener("click", e => {
@@ -18,7 +18,7 @@ menyButton.addEventListener("click", e => {
 
     document.querySelector("#menyLinks").classList.toggle("out");
     menyButton.classList.toggle("close");
-    document.body.classList.toggle("position-fixed");
+    document.body.classList.toggle("no-scroll");
 })
 
 
@@ -26,12 +26,12 @@ menyButton.addEventListener("click", e => {
 
 
 // Footer 
-createFooter();
-createArrowUp();
+document.querySelector("footer").append(createFooter());
+document.querySelector(".footer").append(createArrowUp());
 
 // Functions
 function createFooter() {
-    let footerElement = document.createElement("footer");
+    let footerElement = document.createElement("div");
     footerElement.classList.add("footer");
 
     footerElement.innerHTML = `
@@ -46,7 +46,8 @@ function createFooter() {
             <p>all rights reserved | site by Maroon 3</p>
         </div>
     `;
-    document.body.append(footerElement);
+
+    return footerElement;
 }
 
 function createArrowUp(){
@@ -59,6 +60,8 @@ function createArrowUp(){
     arrowButton.addEventListener("click", () => {
         window.scrollTo(0, 0);
     });
+
+    return arrowButton;
 }
 
 function appendLink(link){
@@ -69,7 +72,7 @@ function appendLink(link){
 }
 
 function createMeny(){
-    let nav = document.createElement("nav");
+    let nav = document.createElement("div");
     nav.classList.add("menyWrapper");
 
     // The visible
@@ -79,7 +82,8 @@ function createMeny(){
     let menyButton = document.createElement("button");
     menyButton.setAttribute("id", "menyButton");
     menyButton.textContent = `meny`;
-
+    
+    // The invisible
     let menyLinks = document.createElement("div");
     menyLinks.setAttribute("id", "menyLinks")
     menyLinks.innerHTML = `
@@ -90,8 +94,6 @@ function createMeny(){
         <div id="navcopyright">Copyright © 2021 exchanger | all rights reserved</div>`;
 
     
-    // The invisible
-
     nav.append(logo, menyButton, menyLinks);
     return nav;
 }

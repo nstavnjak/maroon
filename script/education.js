@@ -11,6 +11,7 @@ appendLink("../stylesheets/education.css");
 
 // Functions
 
+let sortAlternatives = ["Program, A-Ö", "Program, Ö-A", "Antagningspoäng, stigande", "Antagningpoäng, fallande"]
 // function createSearchForm(){
 
 // }
@@ -23,10 +24,29 @@ appendLink("../stylesheets/education.css");
 
 // }
 
-// function createSortAlternative(){
+// function createSortAndFilterButton{
 
 // }
 
+// function createSortAlternative(){
+//     let sortDiv = document.createElement("div");
+//     sortDiv.setAttribute("id", "sortWrapper")
+
+//     let sortButton = document.createElement("div");
+//     sortButton.textContent = `sortera &#748;`;
+//     sortButton.classList.add("sortButton")
+
+//     let sortAlt = document.createElement("div");
+//     sortAlternatives.forEach( element => {
+//         let sortAlternative = document.createElement("p");
+//         sortAlternative.textContent = element;
+//         sortAlt.append(sortAlternative);
+//     })
+
+//     return sortDiv
+// }
+
+// document.querySelector("main").append(createSortAlternative());
 // function sortProgram(){
 
 // }

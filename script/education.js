@@ -66,6 +66,7 @@ function createFilter(){
     filterExit.innerText = "X";
     filterExit.addEventListener("click", e => {
         once = 0;
+        //funderar på om vi ska skriva filterDiv.remove(); istället så den raderas?
         filterDiv.innerHTML = "";
     });
 

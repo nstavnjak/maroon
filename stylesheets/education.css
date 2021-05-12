@@ -1,0 +1,108 @@
+main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+#sortera, #filter {
+    appearance: none;
+    border: none;
+    padding: var(--paddingSZ);
+    background-color: var(--light);
+    color:var(--dark);
+    font-size: var(--bodyText);
+    font-weight: lighter;
+    font-size: var(--sizeXs);
+    text-transform: uppercase;
+    position: relative;
+}
+
+#expandFilter{
+    position: absolute;
+    height:100vh;
+    width:100vw;
+    background-color: var(--dark);
+    z-index: 1000;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-family: var(--title);
+    font-size: var(--sizeXs);
+    text-transform: uppercase;
+    padding: 0rem var(--paddingSZ);
+    color: var(--light);
+}
+
+#expandFilter > h1 {
+    padding: var(--paddingSZ);
+}
+#expandFilter > button {
+    background-color: var(--dark);
+    position: absolute;
+    top:calc(5rem/2);
+    right: var(--paddingSZ);
+    border:none;
+    background-color: var(--light);
+    font-size: var(--sizeM);
+}
+
+#expandFilter > div {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#expandFilter div h2 {
+    grid-area:1/1/2/3;
+    border-bottom: 1px solid var(--light);
+    padding: var(--paddingSZ) 0rem;
+    display: flex;
+    align-items: center;
+}
+
+.fieldWrapper, .languageWrapper, .levelsWrapper, .visumWrapper{
+    display: flex;
+    align-items: center;
+    height:4rem;
+    position: relative;
+    height: 4rem;
+    width: calc(calc(100vw-4rem)/2);
+}
+.fieldWrapper div, 
+.languageWrapper div, 
+.levelsWrapper div, 
+.visumWrapper div {
+    margin-left: 4rem;
+}
+
+.fieldWrapper input, 
+.languageWrapper input, 
+.levelsWrapper input, 
+.visumWrapper input {
+    position: absolute;
+    margin-right: 3rem;
+    height:100%;
+    width:100%;
+    opacity: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    height: 2rem;
+    width: 2rem;
+    background-color: var(--light);
+}
+
+#expandFilter input:checked ~ .checkmark{
+    background-color: var(--secondary);
+}
+
+
+
+
+
+

@@ -43,6 +43,7 @@ function createSort(){
 
 function createFilterButton(){
     let filterButton = document.createElement("button");
+    filterButton.setAttribute("id", "filter")
     filterButton.textContent = "filtrera +"
     document.querySelector("main").append(filterButton);
     
@@ -51,6 +52,7 @@ function createFilterButton(){
         createFilter();
         }
         once = once + 1;
+        document.querySelector("body").classList.add("no-scroll");
     });
     
 }
@@ -58,16 +60,19 @@ function createFilterButton(){
 function createFilter(){
     //filterDiv innehåller allt och returneras i slutet
     let filterDiv = document.createElement("div");
+    filterDiv.setAttribute("id", "expandFilter")
     //H1 Filtrera
     let filterH1 = document.createElement("h1")
     filterH1.textContent = "filtrera"
     
     let filterExit = document.createElement("button");
-    filterExit.innerText = "X";
+    filterExit.innerHTML = "&#x2716;";
     filterExit.addEventListener("click", e => {
         once = 0;
         //funderar på om vi ska skriva filterDiv.remove(); istället så den raderas?
-        filterDiv.innerHTML = "";
+        // filterDiv.innerHTML = "";
+        filterDiv.remove();
+        document.querySelector("body").classList.remove("no-scroll");
     });
 
     filterDiv.append(filterH1, filterExit);
@@ -81,15 +86,18 @@ function createFilter(){
 
     FIELDS.forEach(e => {
         let fieldWrapper = document.createElement("div")
-        fieldWrapper.setAttribute("id", "fieldWrapper");
+        fieldWrapper.classList.add("fieldWrapper");
 
         let field = document.createElement("div");
         field.textContent = `${e.name}`;
 
+        let span = document.createElement("span");
+        span.classList.add("checkmark");
+
         let fieldCheck = document.createElement("input");
         fieldCheck.setAttribute("type", "checkbox");
         fieldCheck.setAttribute("id", `${e.name}`);
-        fieldWrapper.append(fieldCheck, field);
+        fieldWrapper.append(fieldCheck, span, field);
         
         studieInriktningDiv.append(fieldWrapper);
     });
@@ -106,15 +114,18 @@ function createFilter(){
 
     LANGUAGES.forEach(e => {
         let languageWrapper = document.createElement("div")
-        languageWrapper.setAttribute("id", "languageWrapper");
-
+        languageWrapper.classList.add("languageWrapper");
+        
         let language = document.createElement("div");
         language.textContent = `${e.name}`;
+
+        let span = document.createElement("span");
+        span.classList.add("checkmark");
 
         let languageCheck = document.createElement("input");
         languageCheck.setAttribute("type", "checkbox");
         languageCheck.setAttribute("id", `${e.name}`);
-        languageWrapper.append(languageCheck, language);
+        languageWrapper.append(languageCheck, span, language);
         
         sprakDiv.append(languageWrapper);
     });
@@ -133,15 +144,18 @@ function createFilter(){
 
     LEVELS.forEach(e => {
         let levelsWrapper = document.createElement("div")
-        levelsWrapper.setAttribute("id", "levelsWrapper");
+        levelsWrapper.classList.add("levelsWrapper");
 
         let levels = document.createElement("div");
         levels.textContent = `${e}`;
 
+        let span = document.createElement("span");
+        span.classList.add("checkmark");
+
         let levelsCheck = document.createElement("input");
         levelsCheck.setAttribute("type", "checkbox");
         levelsCheck.setAttribute("id", `${e}`);
-        levelsWrapper.append(levelsCheck, levels);
+        levelsWrapper.append(levelsCheck, span, levels);
         
         utbildningsnivaDiv.append(levelsWrapper);
     });
@@ -158,39 +172,45 @@ function createFilter(){
     visumDiv.append(visumH2);
 
     // Visum Ja ----------------------------------------------------------------------------------------------------------
-    let visumWrapperYes = document.createElement("div")
+    let visumWrapperYes = document.createElement("div");
+    visumWrapperYes.classList.add("visumWrapper");
 
     let visumYesCheck = document.createElement("input");
     visumYesCheck.setAttribute("type", "checkbox");
     visumYesCheck.setAttribute("id", "Yes");
+
+    let spanYes = document.createElement("span");
+    spanYes.classList.add("checkmark");
     
     let visumYes = document.createElement("div");
     visumYes.textContent = "Ja";
 
-    visumWrapperYes.append(visumYesCheck);
-    visumWrapperYes.append(visumYes);
+
+    visumWrapperYes.append(visumYesCheck, spanYes, visumYes);
     
     
     // Visum Nej -------------------------------------------------------------------------
-    let visumWrapperNo = document.createElement("div")
+    let visumWrapperNo = document.createElement("div");
+    visumWrapperNo.classList.add("visumWrapper");
 
     let visumNo = document.createElement("div");
     visumNo.textContent = "Nej";
+
+    let spanNo = document.createElement("span");
+    spanNo.classList.add("checkmark");
 
     let visumNoCheck = document.createElement("input");
     visumNoCheck.setAttribute("type", "checkbox");
     visumNoCheck.setAttribute("id", "No");
 
-    visumWrapperNo.append(visumNoCheck);
-    visumWrapperNo.append(visumNo);
-
-
+    visumWrapperNo.append(visumNoCheck, spanNo, visumNo);
 
     // append båda visum yes och no
     visumDiv.append(visumWrapperYes, visumWrapperNo)
     filterDiv.append(visumDiv);
 
-    document.querySelector("main").append(filterDiv);
+    
+    document.querySelector("body").prepend(filterDiv);
 
 }
 

@@ -10,7 +10,6 @@ appendLink("../stylesheets/education.css");
 document.querySelector("main").append(createSearchForm());
 
 // Functions
-createSearchForm();
 createOPT();
 
 let sortAlternatives = ["Program, A-Ö", "Program, Ö-A", "Antagningspoäng, stigande", "Antagningpoäng, fallande"]

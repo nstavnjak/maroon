@@ -57,13 +57,15 @@ const questions = [
 
 function createProgressBar(){
     let progress = document.createElement("div");
-    progress.setAttribute("id", "Progress");
+    progress.classList.add("progress");
 
     let bar = document.createElement("div");
-    bar.setAttribute("id", "bar");
+    bar.classList.add("bar");
 
     progress.append(bar);
 
     return progress;
-}
+};
+
+
 

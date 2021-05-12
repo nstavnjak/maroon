@@ -20,20 +20,7 @@ startButton.addEventListener("click", ()=> {
     questions.forEach( e => {
 
         document.querySelector("#quiz").append(quizQuestionsDOM(e));
-    
-        if (e.id == 1){
-            document.querySelector(".questionsDiv").append(createRightArrow());
-        } 
-        
-        else if(e.id == 10){
-            document.querySelector(".questionsDiv").append(createLeftArrow());
-        } 
-        
-        else {
-            document.querySelector(".questionsDiv").append(createLeftArrow());
-            document.querySelector(".questionsDiv").append(createRightArrow());
-        }
-       
+
     });
 });
 
@@ -41,102 +28,102 @@ startButton.addEventListener("click", ()=> {
 const questions = [
     {
         id:1,
-        question: "1) ",
+        question: "Vilket klimat trivs du bäst i?",
         options: {
-            a: "",
-            b: "",
-            c: "",
-            d: "",
+            a: "Option",
+            b: "Option",
+            c: "Option",
+            d: "Option",
         }, 
     },
     {
         id:2,
-        question: "2) ",
+        question: "Vad tycker du om te?",
         options: {
-            a: "",
-            b: "",
-            c: "",
-            d: "",
+            a: "Option",
+            b: "Option",
+            c: "Option",
+            d: "Option",
         }, 
     },
     {
         id:3,
-        question: "3) ",
+        question: "Är kusten ett måste?",
         options: {
-            a: "",
-            b: "",
-            c: "",
-            d: "",
+            a: "Option",
+            b: "Option",
+            c: "Option",
+            d: "Option",
         }, 
     },
     {
         id:4,
         question: "4) ",
         options: {
-            a: "",
-            b: "",
-            c: "",
-            d: "",
+            a: "Option",
+            b: "Option",
+            c: "Option",
+            d: "Option",
         }, 
     },
     {
         id:5,
         question: "5) ",
         options: {
-            a: "",
-            b: "",
-            c: "",
-            d: "",
+            a: "Option",
+            b: "Option",
+            c: "Option",
+            d: "Option",
         }, 
     },
     {
         id:6,
         question: "6) ",
         options: {
-            a: "",
-            b: "",
-            c: "",
-            d: "",
+            a: "Option",
+            b: "Option",
+            c: "Option",
+            d: "Option",
         }, 
     },
     {
         id:7,
         question: "7) ",
         options: {
-            a: "",
-            b: "",
-            c: "",
-            d: "",
+            a: "Option",
+            b: "Option",
+            c: "Option",
+            d: "Option",
         }, 
     },
     {
         id:8,
         question: "8) ",
         options: {
-            a: "",
-            b: "",
-            c: "",
-            d: "",
+            a: "Option",
+            b: "Option",
+            c: "Option",
+            d: "Option",
         }, 
     },
     {
         id:9,
         question: "9) ",
         options: {
-            a: "",
-            b: "",
-            c: "",
-            d: "",
+            a: "Option",
+            b: "Option",
+            c: "Option",
+            d: "Option",
         }, 
     },
     {
         id:10,
         question: "10) ",
         options: {
-            a: "",
-            b: "",
-            c: "",
-            d: "",
+            a: "Option",
+            b: "Option",
+            c: "Option",
+            d: "Option",
         }, 
     },
  ];
@@ -206,21 +193,15 @@ function quizQuestionsDOM(obj){
         <button class="option">${obj.options.d}</button>
     `;
 
-    return questionsDiv;
-}
-
-function createRightArrow (){
     let rightButton = document.createElement("button");
     rightButton.setAttribute("id", "right");
     rightButton.innerHTML = `&#8680;`;
 
-    return rightButton;
-}
-
-function createLeftArrow (){
     let leftButton = document.createElement("button");
     leftButton.setAttribute("id", "left");
     leftButton.innerHTML = `&#8678;`;
 
-    return leftButton;
+    questionsDiv.append(answersDiv, leftButton,rightButton);
+
+    return questionsDiv;
 }

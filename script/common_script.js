@@ -113,8 +113,10 @@ function createBack(cityObj){
     cardBack.classList.add("programCardFace");
     cardBack.classList.add("back");
 
-    cardBack.append(getCityInfo(cityObj), getRatings(cityObj), createStudentsComments(cityObj));
-
+    let scrollDiv = document.createElement("div");
+    scrollDiv.classList.add("scroll");
+    scrollDiv.append(getCityInfo(cityObj), getRatings(cityObj), createStudentsComments(cityObj));
+    cardBack.append(scrollDiv);
     // NOT done, kanske ändra med bilderna? Slider?
     function getCityInfo(cityObj){
         let div = document.createElement("div");
@@ -125,7 +127,7 @@ function createBack(cityObj){
 
         let landCountryParent = document.createElement("div");
         let cityTitle = document.createElement("h1");
-        let countryTitle = document.createElement("h1");
+        let countryTitle = document.createElement("h2");
         
         cityTitle.textContent = cityObj.name;
         countryTitle.textContent = country.name;
@@ -138,17 +140,21 @@ function createBack(cityObj){
         } else {
             visum.classList.add("red");
         }
+        
+        landCountryParent.append(cityTitle, countryTitle);
+        cityInfo.append(landCountryParent, visum);
 
-        landCountryParent.append(countryTitle, cityTitle);
-        cityInfo.append(visum, landCountryParent);
-
-        /*
-        let cityPicture = document.createElement("img");
-        cityPicture.setAttribute("src", `${hej}`);
-        cityPicture.setAttribute("alt", "city");
-
-        div.append(cityPicture, cityInfo);
-        */
+        let cityPictureWrapper = document.createElement("div");
+        cityPictureWrapper.classList.add("cityPictureWrapper");
+        
+        cityObj.imagesNormal.forEach( image => {
+            let img = document.createElement("img");
+            // img.style.backgroundImage = `url(../image/${image})`;
+            img.setAttribute("src", `../Images/${image}`);
+            cityPictureWrapper.append(img);
+        })
+        div.append(cityInfo, cityPictureWrapper);
+        
         return div;
     }
 
@@ -173,20 +179,22 @@ function createBack(cityObj){
         
         let rating = document.createElement("div");
         rating.classList.add("rating");
-        let titleElement = document.createElement("h2");
+        let titleElement = document.createElement("h1");
         titleElement.textContent = title;
         let circleRating = document.createElement("div");
         circleRating.classList.add("circleRating");
         circleRating.textContent = `${counter/array.length} / 5`;
 
-        rating.append(circleRating, titleElement);
-        return circleRating;
+        rating.append(titleElement, circleRating);
+        return rating;
     }
     
     // done
     function createStudentsComments(cityObj){
         let comments = COMMENTS_CITY.filter(comment => comment.cityID === cityObj.id);
         let commentParent = document.createElement("div");
+        
+        comments.sort((a, b) => b.date.year - a.date.year);
         console.log(comments)
         comments.forEach(comment => {
             let commentDiv = document.createElement("div");
@@ -199,7 +207,7 @@ function createBack(cityObj){
                 <div>
                     <div>
                         <h1>${comment.alias}</h1>
-                        <h3>${comment.date.year}.${comment.date.month}.${comment.date.day}</h3>
+                        <h2>${comment.date.year}.${comment.date.month}.${comment.date.day}</h2>
                     </div>
                     <div>
                         <h2>${sum/comment.stars.length}/5</2>

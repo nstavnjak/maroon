@@ -22,17 +22,17 @@ document.querySelector("main").append(programlist);
 
 //Load More
 //inte klar
-function LoadMore() {
-    let loadMore = document.createElement("button");
+// function LoadMore() {
+//     let loadMore = document.createElement("button");
     
-    loadMore.addEventListener("click", () => {
-        for(load; load > loaded ; load++){
-            PROGRAMMES.forEach(element => {
-                document.querySelector(".programList").append(createCard(element));
-            });
-        }
-    });
-}
+//     loadMore.addEventListener("click", () => {
+//         for(load; load > loaded ; load++){
+//             PROGRAMMES.forEach(element => {
+//                 document.querySelector(".programList").append(createCard(element));
+//             });
+//         }
+//     });
+// }
 
 // CARD
 const card = document.querySelectorAll(".programCard");

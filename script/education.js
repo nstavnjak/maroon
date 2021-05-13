@@ -1,6 +1,8 @@
 "use strict";
 // Varibel som används av två funktioner (createFilter och createButtonFilter) för att stoppa filter från att kunnas öppnas fler gånger.
 let once = 0;
+let load = 0;
+let loaded = 5;
 let sortAlternatives = ["Program, A-Ö", "Program, Ö-A", "Antagningspoäng, stigande", "Antagningpoäng, fallande"]
 
 // Head
@@ -16,9 +18,21 @@ document.querySelector("main").append(sortAndFilterParent());
 let programlist = document.createElement("div");
 programlist.classList.add("programList");
 document.querySelector("main").append(programlist);
-PROGRAMMES.forEach(element => {
-    document.querySelector(".programList").append(createCard(element));
-})
+
+
+//Load More
+//inte klar
+function LoadMore() {
+    let loadMore = document.createElement("button");
+    
+    loadMore.addEventListener("click", () => {
+        for(load; load > loaded ; load++){
+            PROGRAMMES.forEach(element => {
+                document.querySelector(".programList").append(createCard(element));
+            });
+        }
+    });
+}
 
 // CARD
 const card = document.querySelectorAll(".programCard");

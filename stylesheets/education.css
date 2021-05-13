@@ -191,3 +191,176 @@
     background-color: var(--secondary);
 }
 
+/* PROGRAMKORTEN  */
+
+
+.programList {
+    width:100%;
+    height:auto;
+}
+  
+.programCard {
+    transform-style: preserve-3d;
+    position: relative; 
+    width: 100%;
+    height:15rem;
+    
+    transition: height 1s, transform 1s;
+    margin-bottom: var(--marginLR);
+
+    background-color: var(--primary);
+}
+  
+  
+.programCard.longer {
+    height: 60rem;
+}
+  
+.programCard.longer.flipped {
+    transform: rotateY(180deg);
+}
+  
+/* gemensam för front and back */
+.programCardFace {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    overflow: hidden;
+
+    padding: var(--paddingSZ);
+    box-sizing: border-box;
+    background-color: var(--secondary);
+    display: flex;
+    flex-direction: column;
+}
+  
+/* programecard front */
+.programCardFace.front {
+    
+    
+    padding: var(--paddingSZ);
+    box-sizing: border-box;
+    background-color: var(--secondary);
+}
+  
+.programCardFace.front > div:first-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-basis:12rem;
+    margin-bottom: var(--marginLR);
+}
+
+.programCardFace.front > div:first-child > div:last-child{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: var(--marginLR)
+}
+
+.programCardFace.front button {
+    background-color: transparent;
+    height: 2rem;
+    width:2rem;
+    appearance: none;
+    border:none;
+    border-right: 0.1rem solid var(--dark);
+    border-bottom: 0.1rem solid var(--dark);
+    transform: rotate(45deg);
+    transition: transform 1s ease;
+}
+
+.programCardFace.front button.expand.rotated {
+    transform: rotate(-135deg);
+    transition: transform 1s ease;
+}
+
+.programCardFace.front > div:first-child > h1,
+.programCardFace.front > div:first-child h2 {
+    font-family: var(--title);
+    padding-bottom: 0.5rem;
+}
+
+.programSeats{
+    flex-basis:10%;
+    margin: var(--marginLR) 0rem;
+
+    font-size: var(--sizeS);
+    font-family: var(--bodyText);
+    line-height: 1.5rem;
+}
+
+.graduation {
+    flex-basis:10%;
+    display: flex;
+    align-items: center;
+    margin: var(--marginLR) 0rem;
+    
+
+    font-size: var(--sizeS);
+    font-family: var(--bodyText);
+}
+
+.circle{
+    height: 5rem;
+    width: 5rem;
+    border-radius: 200px;
+    background-color: var(--light);
+    margin: 0.8rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+  
+.entryPoints {
+    height: 30%;
+}
+
+.entryPoints > div:last-child{
+    display: flex;
+    font-size: var(--sizeS);
+    font-family: var(--bodyText);
+}
+
+.entryPointsTitle {
+    font-size: var(--sizeM);
+    font-family: var(--title);
+    margin-bottom: var(--marginLR);
+}
+
+.gradeYear {
+    margin-bottom: 1rem;
+}
+
+.gradeCircle {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 200px;
+    background-color: var(--light);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.programCardFace.front h2 {
+    color:var(--dark);
+    font-size: 16px;
+}
+
+.gradeBox{
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+}
+  
+/* Programecard back */
+  .programCardFace.back {
+    transform: rotateY(180deg);
+}

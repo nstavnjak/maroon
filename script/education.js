@@ -1,6 +1,8 @@
 "use strict";
 // Varibel som används av två funktioner (createFilter och createButtonFilter) för att stoppa filter från att kunnas öppnas fler gånger.
 let once = 0;
+let sortAlternatives = ["Program, A-Ö", "Program, Ö-A", "Antagningspoäng, stigande", "Antagningpoäng, fallande"]
+
 // Head
 appendLink("../stylesheets/education.css");
 
@@ -10,13 +12,38 @@ appendLink("../stylesheets/education.css");
 // Main
 document.querySelector("main").append(createSearchForm());
 createOPT();
-createSort()
-createFilterButton()
+document.querySelector("main").append(sortAndFilterParent());
+let programlist = document.createElement("div");
+programlist.classList.add("programList");
+document.querySelector("main").append(programlist);
+PROGRAMMES.forEach(element => {
+    document.querySelector(".programList").append(createCard(element));
+})
+
+// CARD
+const card = document.querySelectorAll(".programCard");
+const expandButton = document.querySelectorAll(".expand");
+
+card.forEach(element => {
+  element.addEventListener("click", e => {
+    console.log(element);
+    if (element.classList.contains("longer")){
+      element.classList.toggle("flipped");
+    }
+  });
+})
+
+expandButton.forEach(element => {
+  element.addEventListener("click", e => {
+    e.stopPropagation()
+    console.log(e.target);
+    console.log(e.target.parentElement)
+    e.target.parentElement.parentElement.parentElement.parentElement.classList.toggle("longer");
+    e.target.classList.toggle("rotated");
+  })
+})
 
 // Functions
-
-let sortAlternatives = ["Program, A-Ö", "Program, Ö-A", "Antagningspoäng, stigande", "Antagningpoäng, fallande"]
-
 
 function createSearchForm(){
     let searchForm = document.createElement("div");
@@ -111,41 +138,43 @@ function createOPT(){
             });
         }
     });
-    
-}
-// lägga in i en funktion kanske? gjorde detta föra att kunna designa knapparna rätt i vyn
-let sortAndFilterParent = document.createElement("div");
-sortAndFilterParent.setAttribute("id", "sortFilterParent");
-sortAndFilterParent.append(createSort(), createFilterButton());
-document.querySelector("main").append(sortAndFilterParent);
-
-function createSort(){
-    //skapar och returnerar en select till createSort som sen kan appendas
-    let sortDiv = document.createElement("select");
-    sortDiv.setAttribute("id", "sortera")
-    let sortAlternatives = ["Program, A-Ö", "Program, Ö-A", "Antagningspoäng, stigande", "Antagningpoäng, fallande"];
-    sortAlternatives.forEach(e => {
-        //skapar alla alternativ baserat på sortAlternatives arrayen
-        let sortAlternative = document.createElement("option");
-        sortAlternative.textContent = e;
-        sortDiv.append(sortAlternative);
-    });
-    return sortDiv;
 }
 
-function createFilterButton(){
-    let filterButton = document.createElement("button");
-    filterButton.setAttribute("id", "filter")
-    filterButton.textContent = "filtrera +"
-    
-    filterButton.addEventListener("click", e => {
-        if (once == 0){
-        createFilter();
-        }
-        once = once + 1;
-        document.querySelector("body").classList.add("no-scroll");
-    });
-    return filterButton;
+function sortAndFilterParent(){
+
+    let sortAndFilterParent = document.createElement("div");
+    sortAndFilterParent.setAttribute("id", "sortFilterParent");
+    sortAndFilterParent.append(createSort(), createFilterButton());
+
+    function createSort(){
+        //skapar och returnerar en select till createSort som sen kan appendas
+        let sortDiv = document.createElement("select");
+        sortDiv.setAttribute("id", "sortera")
+        let sortAlternatives = ["Program, A-Ö", "Program, Ö-A", "Antagningspoäng, stigande", "Antagningpoäng, fallande"];
+        sortAlternatives.forEach(e => {
+            //skapar alla alternativ baserat på sortAlternatives arrayen
+            let sortAlternative = document.createElement("option");
+            sortAlternative.textContent = e;
+            sortDiv.append(sortAlternative);
+        });
+        return sortDiv;
+    }
+
+    function createFilterButton(){
+        let filterButton = document.createElement("button");
+        filterButton.setAttribute("id", "filter")
+        filterButton.textContent = "filtrera +"
+        
+        filterButton.addEventListener("click", e => {
+            if (once == 0){
+            createFilter();
+            }
+            once = once + 1;
+            document.querySelector("body").classList.add("no-scroll");
+        });
+        return filterButton;
+    }
+    return sortAndFilterParent;
 }
 
 function createFilter(){
@@ -305,60 +334,31 @@ function createFilter(){
 
 }
 
-// }
-
-// 
-
-// function createSortAlternative(){
-//     let sortDiv = document.createElement("div");
-//     sortDiv.setAttribute("id", "sortWrapper")
-
-//     let sortButton = document.createElement("div");
-//     sortButton.textContent = `sortera &#748;`;
-//     sortButton.classList.add("sortButton")
-
-//     let sortAlt = document.createElement("div");
-//     sortAlternatives.forEach( element => {
-//         let sortAlternative = document.createElement("p");
-//         sortAlternative.textContent = element;
-//         sortAlt.append(sortAlternative);
-//     })
-
-//     return sortDiv
-// }
-
-// document.querySelector("main").append(createSortAlternative());
-// function sortProgram(){
-
-// }
-
 
 function createCard(program){
     
     let card = document.createElement("div");
-    card.classList.add("programeCard");
+    card.classList.add("programCard");
 
     // get university
-    let university = DB.UNIVERSITIES.find(e => e.id === program.universityID);
+    let university = UNIVERSITIES.find(e => e.id === program.universityID);
     // get city
-    let city = DB.CITIES.find(e => e.id === university.cityID);
+    let city = CITIES.find(e => e.id === university.cityID);
     // get country 
-    let country = DB.COUNTRIES.find(e => e.id === city.countryID);
+    let country = COUNTRIES.find(e => e.id === city.countryID);
     // get language 
-    let language = DB.LANGUAGES.find(e => e.id === country.languageID);
+    let language = LANGUAGES.find(e => e.id === country.languageID);
     
-    card.prepend(createFront(program));
-
-    card.prepend(createBack(city));
+    card.append(createFront(program), createBack(city));
 
     // done
     function createFront(program){
 
         let cardFront = document.createElement("div");
-        cardFront.classList.add("programeCardFace");
+        cardFront.classList.add("programCardFace");
         cardFront.classList.add("front");
 
-        cardFront.append(getProgramEntrypoints(program.entryGrades), getProgramGraduating(program.successRate), getProgramSeats(program), getMainInformation(program));
+        cardFront.append(getMainInformation(program), getProgramSeats(program), getProgramGraduating(program.successRate), getProgramEntrypoints(program.entryGrades));
 
         // done
         function getMainInformation(program){
@@ -367,10 +367,10 @@ function createCard(program){
             mainInformation.innerHTML = `
                 <h1 class="">${program.name}</h1>
                 <h2 class="">${university.name}</h2>
-                <h2 class="">${city.name, country.name}</h2>
+                <h2 class="">${city.name}, ${country.name}</h2>
                 <div>
                     <h2 class="">${language.name}</h2>
-                    <button class="deleteButton">X</div>
+                    <button class="expand"></div>
                 </div>`;
 
             return mainInformation;
@@ -378,25 +378,28 @@ function createCard(program){
 
         // NOT done
         function getProgramSeats(program){
-            let programeSeats = document.createElement("div");
-            programeSeats.classList.add("programeSeats circle");
+            let programSeats = document.createElement("div");
+            programSeats.classList.add("programSeats");
             
             let seats = program.exchangeStudents + program.localStudents;
-            console.log(seats);
+            let circle = document.createElement("div");
+            circle.classList.add("circle");
+            circle.innerHTML = `${seats}<br>seats`;
 
+            programSeats.append(circle)
 
-            return programeSeats;
+            return programSeats;
         }
 
         // done
         function getProgramGraduating(SuccessRateArray){
             let graduation = document.createElement("div");
-            graduation.classList.add("graduation circle");
+            graduation.classList.add("graduation",);
 
 
             graduation.innerHTML = `
-                <div> </div>
-                <div>${successAverage(SuccessRateArray)}% TAR EXAMEN</div>`;
+                <div class="circle">${successAverage(SuccessRateArray)}% </div>
+                <div> TAR EXAMEN</div>`;
 
             return graduation;
         }
@@ -414,25 +417,25 @@ function createCard(program){
             
             for (let i = 0; i < entryGradesArray.length; i++) {
                 let grade = program.entryGrades[i];
-                let year = 2020 - i;
+                let year = 2021 - i;
                 points.append(createCirlePoints(grade, year));
             }
 
-            entryPoints.append(points);
-            entryPoints.append(title)
+            entryPoints.append(title, points);
 
             return entryPoints;
         }
 
         return cardFront;
     }
+    return card;
 }
 
 function successAverage(successArray){
 
     let x = 0;
-    successArray.forEach(element => {
-        element += x;
+    successArray.forEach( e => {
+        x = x + e;
     });
 
     let result = x / successArray.length;
@@ -451,8 +454,7 @@ function createCirlePoints(grade, year){
     gradeCircle.classList.add("gradeCircle");
     gradeCircle.textContent = grade;
 
-    gradeBox.append(gradeCircle);
-    gradeBox.append(gradeYear);
+    gradeBox.append(gradeYear, gradeCircle);
 
     return gradeBox;
 }

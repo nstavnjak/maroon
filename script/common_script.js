@@ -110,15 +110,15 @@ function loadMore(){
 function createBack(cityObj){
 
     let cardBack = document.createElement("div");
-    cardBack.classList.add("programeCardBack");
-    cardBack.classList.add("front");
+    cardBack.classList.add("programCardFace");
+    cardBack.classList.add("back");
 
-    cardBack.prepend(getCityInfo(cityObj), getRatings(cityObj), createStudentsComments(cityObj));
+    cardBack.append(getCityInfo(cityObj), getRatings(cityObj), createStudentsComments(cityObj));
 
     // NOT done, kanske ändra med bilderna? Slider?
     function getCityInfo(cityObj){
         let div = document.createElement("div");
-        let country = DB.COUNTRIES.find(c => c.id === cityObj.countryID);
+        let country = COUNTRIES.find(c => c.id === cityObj.countryID);
 
         let cityInfo = document.createElement("div");
         cityInfo.classList.add("cityInfo");
@@ -156,9 +156,9 @@ function createBack(cityObj){
     function getRatings(cityObj){
         let ratings = document.createElement("div");
 
-        let comments = DB.COMMENTS_CITY.filter(comment => comment.cityID === cityObj.id);
+        let comments = COMMENTS_CITY.filter(comment => comment.cityID === cityObj.id);
 
-        ratings.append(circleRating(comments, out, "Nattliv"), circleRating(comments, food, "Matkultur"), circleRating(comments, accomodation, "Boende"));
+        ratings.append(circleRating(comments, "out", "Nattliv"), circleRating(comments, "food", "Matkultur"), circleRating(comments, "accomodation", "Boende"));
         
         return ratings;
     }
@@ -185,14 +185,16 @@ function createBack(cityObj){
     
     // done
     function createStudentsComments(cityObj){
-        let comments = DB.COMMENTS_CITY.filter(comment => comment.cityID === cityObj.id);
+        let comments = COMMENTS_CITY.filter(comment => comment.cityID === cityObj.id);
         let commentParent = document.createElement("div");
-
+        console.log(comments)
         comments.forEach(comment => {
-            let commentDiv = document.createElement.length("div");
+            let commentDiv = document.createElement("div");
             commentDiv.classList.add("comment");
 
+            console.log(comment.stars.out)
             let sum = comment.stars.out + comment.stars.food + comment.stars.housing;
+            console.log(parseInt(sum));
             commentDiv.innerHTML = `
                 <div>
                     <div>
@@ -211,7 +213,10 @@ function createBack(cityObj){
             
             
             commentParent.append(commentDiv);
+           
         });
+        return commentParent;
     }
+    return cardBack;
     
 }

@@ -11,18 +11,17 @@ const questions = [
     {
         id:1,
         question: "Vilket klimat trivs du bäst i?",
-        options: [
-            {option: "Option A", optValue:""},
-            {option: "Option B", optValue:""},
-            {option: "Option C", optValue:""},
-            {option: "Option D", optValue:""}
+        answers: [
+            {option: "Soligt", optValue:"sol"},
+            {option: "Kallt", optValue:"kall"},
+            {option: "Blåsigt", optValue:"vind"},
+            {option: "Regnigt", optValue:"regn"}
         ]           
     },
-       /*
     {
         id:2,
         question: "Vad tycker du om te?",
-         options: [
+        answers: [
             {option: "optionA", optValue:""},
             {option: "optionB", optValue:""},
             {option: "optionC", optValue:""},
@@ -33,7 +32,7 @@ const questions = [
     {
         id:3,
         question: "Är kusten ett måste?",
-        options: [
+        answers: [
             {option: "optionA", optValue:""},
             {option: "optionB", optValue:""},
             {option: "optionC", optValue:""},
@@ -110,11 +109,11 @@ const questions = [
             d: "Option",
         }, 
     },
-    */
  ];
 
 let cities = [
     {
+        "key":"varmt",
         "id": 0,
         "name": "Madrid",
         "countryID": 0,
@@ -132,6 +131,7 @@ let cities = [
         ]
     },
     {
+        "key":"varmt",
         "id": 1,
         "name": "Sevilla",
         "countryID": 0,
@@ -149,6 +149,7 @@ let cities = [
         ]
     },
     {
+        "key":"varmt",
         "id": 2,
         "name": "Salamanca",
         "countryID": 0,
@@ -166,6 +167,7 @@ let cities = [
         ]
     },
     {
+        "key":"kallt",
         "id": 3,
         "name": "Paris",
         "countryID": 1,
@@ -614,28 +616,129 @@ let cities = [
     }
 ];
 
+let updatedCitiesByAnswers = [];
+
 // Main
 
+createQuizContainer();
 createStartButton();
 
 let startButton = document.querySelector("#startButton");
-let quizContainer = document.querySelector("#quiz");
+let quizContainer = document.querySelector(".container");
+let questionField = document.getElementById("question");
+let answersField = document.getElementById("answersButtons");
+let nextButton = document.getElementById("right");
+let finishButton = document.getElementById("finish");
+
+let shuffliedQuestions, currentQuestionIndex;
+
+//EventListener
 
 startButton.addEventListener("click", startQuiz);
 
-function startQuiz() {
-
-    startButton.classList.add("hide");
-    quizContainer.prepend(createProgressBar());
-
-        questions.forEach( e => {
-            quizContainer.append(quizQuestionsDOM(e));
-        });
-}
+nextButton.addEventListener("click", ()=>{
+    currentQuestionIndex++;
+    setNextQuestion();
+});
 
 // Footer 
 
 // Functions
+
+function startQuiz() {
+
+    startButton.classList.add("hide");
+    quizContainer.classList.toggle("hide");
+
+    shuffliedQuestions = questions.sort(()=> Math.random - .5);
+    currentQuestionIndex = 0;
+   
+    quizContainer.prepend(createProgressBar());
+
+    setNextQuestion();
+}
+
+function setNextQuestion(){
+    clearTheQuestionAndAnswerfield();
+    showQuestion(shuffliedQuestions[currentQuestionIndex]);
+}
+
+function clearTheQuestionAndAnswerfield(){
+   document.querySelector(".navigateButtons").classList.add("hide");
+
+    while(answersField.firstChild){
+        answersField.removeChild(answersField.firstChild);
+    }
+}
+
+function showQuestion(question){
+
+    questionField.innerText = question.question;
+
+    question.answers.forEach(answers => {
+
+        let button = document.createElement("button");
+        button.classList.add("option");
+        button.innerText = answers.option;
+
+        button.addEventListener("click", ()=>{
+            button.classList.toggle("selectedOpt");
+            document.querySelector(".navigateButtons").classList.toggle("hide");
+            filterCitiesByAnswer(button);
+        });
+        movingBar(answers.id)
+        answersField.append(button);
+    });
+}
+
+
+function filterCitiesByAnswer(key){
+    //let answer = e.target.innerText;
+    let updatedCities = cities.filter(city => city.key === key.innerText);
+    updatedCitiesByAnswers.push(updatedCities);
+}
+
+//done
+function createQuizContainer(){
+    let quizcontainer = document.createElement("div");
+    quizcontainer.classList.add("container","hide");
+
+    let questionsContainer = document.createElement("div");
+    questionsContainer.classList.add("questionsContainer");
+
+    let question = document.createElement("div");
+    question.setAttribute("id","question");
+    
+    let answersButtons = document.createElement("div");
+    answersButtons.setAttribute("id","answersButtons")
+   
+    let navigateButtons = document.createElement("div");
+    navigateButtons.classList.add("navigateButtons","hide");
+
+
+    let rightArrow = document.createElement("button");
+    rightArrow.setAttribute("id", "right");
+    rightArrow.innerHTML = `&#8680;`;
+
+    let finish = document.createElement("button");
+    finish.setAttribute("id", "finish");
+    finish.innerHTML = `Finish`;
+
+    navigateButtons.append(finish,rightArrow);
+
+    questionsContainer.append(question,answersButtons,navigateButtons)
+
+    quizcontainer.append(questionsContainer);
+    document.querySelector("main").append(quizcontainer);
+};
+
+//done
+function createStartButton(){
+    let startButton = document.createElement("button");
+    startButton.setAttribute("id","startButton");
+    startButton.innerText = "Start the test";
+    document.querySelector("main").append(startButton);
+}
 
 //done
 function createProgressBar(){
@@ -672,50 +775,4 @@ function movingBar(questinsId){
     }
 }
 
-//done
-function createStartButton(){
-    let startButton = document.createElement("button");
-    startButton.setAttribute("id","startButton");
-    startButton.innerText = "Start the test";
-    document.getElementById("quiz").append(startButton);
-}
 
-//Not done (yet)
-function quizQuestionsDOM(obj){
-    let questionsContainer = document.createElement("div");
-    questionsContainer.classList.add("questionsContainer");
-
-    let question = document.createElement("div");
-    question.setAttribute("id","question");
-    question.innerText = obj.question;
-
-    let navigateButtons = document.createElement("div");
-    navigateButtons.setAttribute("id","navigateButtons");
-
-    let rightArrow = document.createElement("div");
-    rightArrow.setAttribute("id", "right");
-    rightArrow.innerHTML = `&#8680;`;
-
-    let leftArrow = document.createElement("div");
-    leftArrow.setAttribute("id", "left");
-    leftArrow.innerHTML = `&#8678;`;
-
-    navigateButtons.append(leftArrow,rightArrow);
-
-    questionsContainer.append(navigateButtons,question);
-
-    for(let i=0; i<4; i++){
-
-        let button = document.createElement("button");
-        button.classList.add("option");
-        button.innerText = obj.options[i].option;
-
-        button.addEventListener("click", ()=>{
-            button.classList.toggle("selectedOpt");
-        });
-
-        questionsContainer.append(button);
-    }    
-
-    return questionsContainer;
-}

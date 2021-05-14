@@ -1,5 +1,6 @@
 "use strict";
 // Varibel som används av två funktioner (createFilter och createButtonFilter) för att stoppa filter från att kunnas öppnas fler gånger.
+// Kanske inte kommer behövas
 let once = 0;
 let sortAlternatives = ["Program, A-Ö", "Program, Ö-A", "Antagningspoäng, stigande", "Antagningpoäng, fallande"];
 let finishArray = [];
@@ -234,6 +235,94 @@ function sortAndFilterParent(){
     return sortAndFilterParent;
 }
 
+document.addEventListener("click", filter);
+
+
+
+
+function filter(array){
+    //Skapa en tom array som kommer fyllas med saker
+    let finishedArray2 = [];
+    let checked = document.querySelectorAll("input[type=checkbox]:checked");
+    if (checked != null){
+        //Kolla först vad som ska filtreras
+        checked.forEach(e => {
+            // Visum ------------------------------------------------------------------
+            if (e.parentElement.parentElement.className === "visum"){
+                let array = [];
+                if (e.value === "Yes"){
+                    array = PROGRAMMES.filter(element => {
+                        let cityFilterID = UNIVERSITIES.find(e => e.id === element.universityID).cityID;
+                        let countryFilterID = CITIES.find(e => e.id === cityFilterID).countryID;
+                        let visum = COUNTRIES.find(e => e.id === countryFilterID).visa;
+                        return visum;
+                    });
+                    array.forEach(e => finishedArray2.push(e));
+                }
+                if(e.value === "No") {
+                    array = PROGRAMMES.filter(element => {
+                        let cityFilterID = UNIVERSITIES.find(e => e.id === element.universityID).cityID;
+                        let countryFilterID = CITIES.find(e => e.id === cityFilterID).countryID;
+                        let visum = COUNTRIES.find(e => e.id === countryFilterID).visa;
+                        return !visum;
+                    });
+                    array.forEach(e => finishedArray2.push(e));
+                }
+                console.log(finishedArray2);
+            }
+            // Språk ----------------------------------------------------------------------------
+            else if (e.parentElement.parentElement.className === "sprak"){
+                let array = [];
+                if (e.value === "Swedish"){
+                    array = PROGRAMMES.filter(element => element.language === 3);
+                    array.forEach(e => finishedArray2.push(e));
+                }
+                if (e.value === "English"){
+                    array = PROGRAMMES.filter(element => element.language == 1);
+                    array.forEach(e => finishedArray2.push(e));
+                }
+                if (e.value === "French"){
+                    array = PROGRAMMES.filter(element => element.language == 2);
+                    array.forEach(e => finishedArray2.push(e));
+                }
+                if (e.value === "Spanish"){
+                    array = PROGRAMMES.filter(element => element.language == 0); 
+                    array.forEach(e => finishedArray2.push(e));   
+                }
+            }
+            // Utbildningsnivå ----------------------------------------------------------------------------
+            else if (e.parentElement.parentElement.className === "utbildningsniva"){
+                let array = [];
+                if (e.value === "Bachelor"){
+                    array = PROGRAMMES.filter(element => element.level == 0);
+                    array.forEach(e => finishedArray2.push(e));
+                }
+                if (e.value === "Master"){
+                    array = PROGRAMMES.filter(element => element.level == 1);
+                    array.forEach(e => finishedArray2.push(e));
+                }
+                if (e.value === "Doctorate"){
+                    array = PROGRAMMES.filter(element => element.level == 2);
+                    array.forEach(e => finishedArray2.push(e));
+                }
+            }
+            // Studie Inriktning -------------------------------------------------------------------------------------
+            else if (e.parentElement.parentElement.className === "studieinriktning"){
+                let array = [];
+                for (let i = 0; i < FIELDS.length; i++){
+                    if (e.value === FIELDS[i].name) {
+                        array = PROGRAMMES.filter(element => FIELDS[i].id === element.subjectID);
+                        array.forEach(e => finishedArray2.push(e));
+                    }
+                }
+                
+            }
+        });
+    }
+   
+
+}
+
 function createFilter(){
     //filterDiv innehåller allt och returneras i slutet
     let filterDiv = document.createElement("div");
@@ -256,6 +345,7 @@ function createFilter(){
 
     //Studie Inriktning --------------------------------------------------------------------------------------------------------
     let studieInriktningDiv = document.createElement("div");
+    studieInriktningDiv.classList.add("studieinriktning");
     
     let studieInriktningH2 = document.createElement("h2");
     studieInriktningH2.textContent = "studie inriktning";
@@ -273,7 +363,8 @@ function createFilter(){
 
         let fieldCheck = document.createElement("input");
         fieldCheck.setAttribute("type", "checkbox");
-        fieldCheck.setAttribute("id", `${e.name}`);
+        fieldCheck.setAttribute("value", `${e.name}`);
+        fieldCheck.setAttribute("class", `FIELDS`);
         fieldWrapper.append(fieldCheck, span, field);
         
         studieInriktningDiv.append(fieldWrapper);
@@ -284,6 +375,7 @@ function createFilter(){
     //Språk --------------------------------------------------------------------------------------------------------
 
     let sprakDiv = document.createElement("div");
+    sprakDiv.classList.add("sprak");
     
     let sprakH2 = document.createElement("h2");
     sprakH2.textContent = "språk";
@@ -301,7 +393,8 @@ function createFilter(){
 
         let languageCheck = document.createElement("input");
         languageCheck.setAttribute("type", "checkbox");
-        languageCheck.setAttribute("id", `${e.name}`);
+        languageCheck.setAttribute("value", `${e.name}`);
+        languageCheck.setAttribute("class", `LANGUAGES`);
         languageWrapper.append(languageCheck, span, language);
         
         sprakDiv.append(languageWrapper);
@@ -314,6 +407,7 @@ function createFilter(){
     //Levels --------------------------------------------------------------------------------------------------------
 
     let utbildningsnivaDiv = document.createElement("div");
+    utbildningsnivaDiv.classList.add("utbildningsniva");
     
     let utbildningsnivaH2 = document.createElement("h2");
     utbildningsnivaH2.textContent = "utbildnings nivå";
@@ -331,7 +425,8 @@ function createFilter(){
 
         let levelsCheck = document.createElement("input");
         levelsCheck.setAttribute("type", "checkbox");
-        levelsCheck.setAttribute("id", `${e}`);
+        levelsCheck.setAttribute("value", `${e}`);
+        levelsCheck.setAttribute("class", `LEVELS`);
         levelsWrapper.append(levelsCheck, span, levels);
         
         utbildningsnivaDiv.append(levelsWrapper);
@@ -343,6 +438,7 @@ function createFilter(){
     
     // Denna är till båda
     let visumDiv = document.createElement("div");
+    visumDiv.classList.add("visum");
 
     let visumH2 = document.createElement("h2");
     visumH2.textContent = "visum";
@@ -354,7 +450,8 @@ function createFilter(){
 
     let visumYesCheck = document.createElement("input");
     visumYesCheck.setAttribute("type", "checkbox");
-    visumYesCheck.setAttribute("id", "Yes");
+    visumYesCheck.setAttribute("value", "Yes");
+    visumYesCheck.setAttribute("class", `COUNTRIES`);
 
     let spanYes = document.createElement("span");
     spanYes.classList.add("checkmark");
@@ -378,7 +475,8 @@ function createFilter(){
 
     let visumNoCheck = document.createElement("input");
     visumNoCheck.setAttribute("type", "checkbox");
-    visumNoCheck.setAttribute("id", "No");
+    visumNoCheck.setAttribute("value", "No");
+    visumNoCheck.setAttribute("class", `COUNTRIES`);
 
     visumWrapperNo.append(visumNoCheck, spanNo, visumNo);
 

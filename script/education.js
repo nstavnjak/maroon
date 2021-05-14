@@ -2,6 +2,8 @@
 // Varibel som används av två funktioner (createFilter och createButtonFilter) för att stoppa filter från att kunnas öppnas fler gånger.
 // Kanske inte kommer behövas
 let once = 0;
+let load = 0;
+let loaded = 5;
 let sortAlternatives = ["Program, A-Ö", "Program, Ö-A", "Antagningspoäng, stigande", "Antagningpoäng, fallande"];
 let finishArray = [];
 
@@ -18,6 +20,30 @@ document.querySelector("main").append(sortAndFilterParent());
 let programlist = document.createElement("div");
 programlist.classList.add("programList");
 document.querySelector("main").append(programlist);
+
+LoadMoreFunction();
+//Load More
+//Klar
+function LoadMoreFunction() {
+    
+    if(document.querySelector("#loadMore") == null){
+        let loadMore = document.createElement("button");
+        loadMore.innerHTML = "Load More";
+        loadMore.setAttribute("id", "loadMore");
+        console.log("hej")
+        document.querySelector("main").append(loadMore);
+    }
+    
+    for(load; load < loaded ; load++){
+            document.querySelector(".programList").append(createCard(PROGRAMMES[load])); 
+    }
+    load = loaded;
+    loaded = loaded + 5;
+    console.log(document.querySelector("#loadMore"));
+    
+
+    loadMore.addEventListener("click", LoadMoreFunction);
+}
 
 document.querySelector(".programList").append(createCard(PROGRAMMES[0]));
 

@@ -44,7 +44,6 @@ function LoadMoreFunction() {
     loadMore.addEventListener("click", LoadMoreFunction);
 }
 
-document.querySelector(".programList").append(createCard(PROGRAMMES[0]));
 
 // EVENT 
 const card = document.querySelectorAll(".programCard");

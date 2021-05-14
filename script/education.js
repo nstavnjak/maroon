@@ -19,20 +19,28 @@ let programlist = document.createElement("div");
 programlist.classList.add("programList");
 document.querySelector("main").append(programlist);
 
-
+LoadMoreFunction();
 //Load More
-//inte klar
-// function LoadMore() {
-//     let loadMore = document.createElement("button");
+//Klar
+function LoadMoreFunction() {
     
-//     loadMore.addEventListener("click", () => {
-//         for(load; load > loaded ; load++){
-//             PROGRAMMES.forEach(element => {
-//                 document.querySelector(".programList").append(createCard(element));
-//             });
-//         }
-//     });
-// }
+    let loadMore = document.createElement("button");
+    loadMore.innerHTML = "Load More";
+    loadMore.setAttribute("id", "loadMore");
+
+    for(load; load < loaded ; load++){
+            document.querySelector(".programList").append(createCard(PROGRAMMES[load])); 
+    }
+    load = loaded;
+    loaded = loaded + 5;
+    console.log(document.querySelector("#loadMore"));
+    if(document.querySelector("#loadMore") == null){
+        console.log("hej")
+        document.querySelector("main").append(loadMore);
+    }
+
+    loadMore.addEventListener("click", LoadMoreFunction);
+}
 
 // CARD
 const card = document.querySelectorAll(".programCard");

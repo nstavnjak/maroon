@@ -25,9 +25,8 @@ LoadMoreFunction();
 //Load More
 //Klar
 function LoadMoreFunction() {
-    
+    let loadMore = document.createElement("button");
     if(document.querySelector("#loadMore") == null){
-        let loadMore = document.createElement("button");
         loadMore.innerHTML = "Load More";
         loadMore.setAttribute("id", "loadMore");
         console.log("hej")

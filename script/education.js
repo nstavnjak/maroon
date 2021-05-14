@@ -24,20 +24,21 @@ LoadMoreFunction();
 //Klar
 function LoadMoreFunction() {
     
-    let loadMore = document.createElement("button");
-    loadMore.innerHTML = "Load More";
-    loadMore.setAttribute("id", "loadMore");
-
+    if(document.querySelector("#loadMore") == null){
+        let loadMore = document.createElement("button");
+        loadMore.innerHTML = "Load More";
+        loadMore.setAttribute("id", "loadMore");
+        console.log("hej")
+        document.querySelector("main").append(loadMore);
+    }
+    
     for(load; load < loaded ; load++){
             document.querySelector(".programList").append(createCard(PROGRAMMES[load])); 
     }
     load = loaded;
     loaded = loaded + 5;
     console.log(document.querySelector("#loadMore"));
-    if(document.querySelector("#loadMore") == null){
-        console.log("hej")
-        document.querySelector("main").append(loadMore);
-    }
+    
 
     loadMore.addEventListener("click", LoadMoreFunction);
 }

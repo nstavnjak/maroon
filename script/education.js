@@ -1,7 +1,8 @@
 "use strict";
 // Varibel som används av två funktioner (createFilter och createButtonFilter) för att stoppa filter från att kunnas öppnas fler gånger.
 let once = 0;
-let sortAlternatives = ["Program, A-Ö", "Program, Ö-A", "Antagningspoäng, stigande", "Antagningpoäng, fallande"]
+let sortAlternatives = ["Program, A-Ö", "Program, Ö-A", "Antagningspoäng, stigande", "Antagningpoäng, fallande"];
+let finishArray = [];
 
 // Head
 appendLink("../stylesheets/education.css");
@@ -16,13 +17,13 @@ document.querySelector("main").append(sortAndFilterParent());
 let programlist = document.createElement("div");
 programlist.classList.add("programList");
 document.querySelector("main").append(programlist);
-PROGRAMMES.forEach(element => {
-    document.querySelector(".programList").append(createCard(element));
-})
 
-// CARD
+document.querySelector(".programList").append(createCard(PROGRAMMES[0]));
+
+// EVENT 
 const card = document.querySelectorAll(".programCard");
 const expandButton = document.querySelectorAll(".expand");
+const searchButton = document.querySelector("#search");
 
 card.forEach(element => {
   element.addEventListener("click", e => {
@@ -43,7 +44,63 @@ expandButton.forEach(element => {
   })
 })
 
+searchButton.addEventListener("click", e => {
+    let inputValue = document.querySelector("#inputField").value;
+    let countryValue = document.querySelector("#select1").value;
+    let cityValue = document.querySelector("#select2").value;
+
+    console.log(inputValue);
+    console.log(countryValue);
+    console.log(cityValue);
+    searchProgram(inputValue, countryValue, cityValue);
+})
+
 // Functions
+
+// function searchProgram(textValue, country, city){
+
+//     finishArray = PROGRAMMES;
+//     console.log(finishArray);
+//     // Om allt är tomt så ska vi visa alla program i bokstavsordning från A-Ö
+//     if (textValue.length === 0 && country.length === 0 && city.length === 0){
+        
+//         finishArray.sort((a, b) => a.name > b.name) ? -1 : 1;
+//         finishArray.forEach(program => {
+//             document.querySelector(".programList").append(createCard(program));
+//         })
+//     }
+//     // Om bara land är valt  
+//     else if (textValue.length === 0 && country.length > 0 && city.length === 0){
+//         let countryObj = COUNTRIES.find(c => c.name.includes(country));
+//         let citys = CITIES.filter(ci => ci.id === countryObj.)
+//     } 
+//     // Om bara stad är valt
+//     else if (textValue.length === 0 && country.length === 0 && city.length > 0){
+//         console.log("stad");
+//     } 
+//     // Om bara sökfältet är är ifyllt
+//     else if (textValue.length > 0 && country.length === 0 && city.length === 0){
+//         console.log("input");
+//     }
+//     // Om stad och land är ifyllt
+//     else if (textValue.length === 0 && country.length > 0 && city.length > 0){
+//         console.log("stad+land");
+//     }
+//     // Om stad och input är ifyllt
+//     else if (textValue.length > 0 && country.length === 0 && city.length > 0){
+//         console.log("stad+input");
+//     }
+//     // Om land och input är ifyllt
+//     else if (textValue.length > 0 && country.length > 0 && city.length === 0){
+//         console.log("land+input");
+//     }
+//     // Om alla är ifyllda 
+//     else if (textValue.length > 0 && country.length > 0 && city.length > 0){
+//         console.log("alla ifyllda");
+//     }
+//     return finishArray;
+// }
+
 
 function createSearchForm(){
     let searchForm = document.createElement("div");

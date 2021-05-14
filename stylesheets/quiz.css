@@ -18,6 +18,8 @@ main {
     border-radius: 5px;
     padding: 20px;
     box-shadow: 0 0 10px 2px;
+
+    width: 300px;
 }
 
 #question{
@@ -34,7 +36,7 @@ main {
 }
 
 .option{
-    width: 150px;
+    width: 200px;
     height: 30px;
     margin-bottom: 5px;
     background-color: #26282C;
@@ -78,6 +80,7 @@ main {
     text-align: center;
     line-height: 30px;
     color: #26282C;
+    transition: 1s;
 }
 
 .hide {

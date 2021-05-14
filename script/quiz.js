@@ -41,38 +41,38 @@ const questions = [
     },
     {
         id:4,
-        question: "4) ",
-        options: [
+        question: "Är kusten ett måste?",
+        answers: [
             {option: "optionA", optValue:""},
             {option: "optionB", optValue:""},
             {option: "optionC", optValue:""},
             {option: "optionC", optValue:""}
-        ]        
+        ]      
     },
     {
         id:5,
-        question: "5) ",
-        options: [
+        question: "Är kusten ett måste?",
+        answers: [
             {option: "optionA", optValue:""},
             {option: "optionB", optValue:""},
             {option: "optionC", optValue:""},
             {option: "optionC", optValue:""}
-        ]        
+        ]       
     },
     {
         id:6,
-        question: "6) ",
-        options: [
+        question: "Är kusten ett måste?",
+        answers: [
             {option: "optionA", optValue:""},
             {option: "optionB", optValue:""},
             {option: "optionC", optValue:""},
             {option: "optionC", optValue:""}
-        ]        
+        ]      
     },
     {
         id:7,
-        question: "7) ",
-        options: [
+        question: "Är kusten ett måste?",
+        answers: [
             {option: "optionA", optValue:""},
             {option: "optionB", optValue:""},
             {option: "optionC", optValue:""},
@@ -81,33 +81,33 @@ const questions = [
     },
     {
         id:8,
-        question: "8) ",
-        options: [
+        question: "Är kusten ett måste?",
+        answers: [
             {option: "optionA", optValue:""},
             {option: "optionB", optValue:""},
             {option: "optionC", optValue:""},
             {option: "optionC", optValue:""}
-        ]        
+        ]         
     },
     {
         id:9,
-        question: "9) ",
-        options:[
+        question: "Är kusten ett måste?",
+        answers: [
             {option: "optionA", optValue:""},
             {option: "optionB", optValue:""},
             {option: "optionC", optValue:""},
             {option: "optionC", optValue:""}
-        ]        
+        ]       
     },
     {
         id:10,
-        question: "10) ",
-        options: {
-            a: "Option",
-            b: "Option",
-            c: "Option",
-            d: "Option",
-        }, 
+        question: "10?",
+        answers: [
+            {option: "optionA", optValue:""},
+            {option: "optionB", optValue:""},
+            {option: "optionC", optValue:""},
+            {option: "optionC", optValue:""}
+        ] 
     },
  ];
 
@@ -639,6 +639,7 @@ startButton.addEventListener("click", startQuiz);
 nextButton.addEventListener("click", ()=>{
     currentQuestionIndex++;
     setNextQuestion();
+    updateBar(currentQuestionIndex);
 });
 
 // Footer 
@@ -686,9 +687,10 @@ function showQuestion(question){
             document.querySelector(".navigateButtons").classList.toggle("hide");
             filterCitiesByAnswer(button);
         });
-        movingBar(answers.id)
+      
         answersField.append(button);
     });
+    
 }
 
 
@@ -747,32 +749,15 @@ function createProgressBar(){
 
     let bar = document.createElement("div");
     bar.classList.add("bar");
-
+   
+    bar.style.width = `0%`;
     progress.append(bar);
 
     return progress;
 };
 
-//not done (yet)
-let i = 0;
-function movingBar(questinsId){
-    if(i== 0){
-        i = 1;
-        let elem = document.getElementsByClassName("bar");
-        let width = 10;
-        let id = setInterval (frame(questinsId), 10);
-
-        function frame(questinsId){
-            if (width >= questinsId){
-                clearInterval(id);
-                i = 0;
-            } else {
-                width++;
-                elem.style.width = width + "%";
-                elem.innerHTML = width + "%";
-            }
-        }
-    }
+function updateBar(questionNumber){
+    let lastProgress = document.querySelector(".bar");
+    let level = questionNumber*10;
+    lastProgress.style.width = level + "%";
 }
-
-

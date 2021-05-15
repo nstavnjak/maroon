@@ -113,7 +113,7 @@ const questions = [
 
 let cities = [
     {
-        "key":"varmt",
+        "key":["varmt", "Spain"],
         "id": 0,
         "name": "Madrid",
         "countryID": 0,
@@ -131,7 +131,7 @@ let cities = [
         ]
     },
     {
-        "key":"varmt",
+        "key":["varmt", "Spain"],
         "id": 1,
         "name": "Sevilla",
         "countryID": 0,
@@ -149,7 +149,7 @@ let cities = [
         ]
     },
     {
-        "key":"varmt",
+        "key":["kallt", ""],
         "id": 2,
         "name": "Salamanca",
         "countryID": 0,
@@ -167,7 +167,7 @@ let cities = [
         ]
     },
     {
-        "key":"kallt",
+        "key":["kallt", "PSG"],
         "id": 3,
         "name": "Paris",
         "countryID": 1,
@@ -185,6 +185,7 @@ let cities = [
         ]
     },
     {
+        "key":["kallt", "PSG"],
         "id": 4,
         "name": "Lyon",
         "countryID": 1,
@@ -202,6 +203,7 @@ let cities = [
         ]
     },
     {
+        "key":["kallt", "PSG"],
         "id": 5,
         "name": "Toulouse",
         "countryID": 1,
@@ -219,6 +221,7 @@ let cities = [
         ]
     },
     {
+        "key":["kallt", "PSG"],
         "id": 6,
         "name": "Nice",
         "countryID": 1,
@@ -233,6 +236,7 @@ let cities = [
         ]
     },
     {
+        "key":["kallt", ""],
         "id": 7,
         "name": "Melbourne",
         "countryID": 2,
@@ -247,6 +251,7 @@ let cities = [
         ]
     },
     {
+        "key":["kallt", ""],
         "id": 8,
         "name": "Sidney",
         "countryID": 2,
@@ -278,6 +283,7 @@ let cities = [
         ]
     },
     {
+        "key":["regnigt", "Machester"],
         "id": 10,
         "name": "London",
         "countryID": 3,
@@ -295,6 +301,7 @@ let cities = [
         ]
     },
     {
+        "key":["regnigt", "Machester"],
         "id": 11,
         "name": "Manchester",
         "countryID": 3,
@@ -312,6 +319,7 @@ let cities = [
         ]
     },
     {
+        "key":["vind", ""],
         "id": 12,
         "name": "York",
         "countryID": 3,
@@ -642,6 +650,26 @@ nextButton.addEventListener("click", ()=>{
     updateBar(currentQuestionIndex);
 });
 
+finishButton.addEventListener("click", ()=>{
+
+    quizContainer.innerHTML = "";
+    quizContainer.classList.add("questionsContainer");
+    quizContainer.innerHTML= `<div class="resultatText">${cities.length} cities found</div>`;
+    
+    let showButton = document.createElement("button");
+    showButton.classList.add("showButton");
+    showButton.innerText = "show";
+
+    quizContainer.append(showButton);
+
+    showButton.addEventListener("click",()=>{
+        document.querySelector("main").innerHTML= "";
+        document.querySelector("main").append(getResult(cities));
+    })
+
+  
+});
+
 // Footer 
 
 // Functions
@@ -649,9 +677,8 @@ nextButton.addEventListener("click", ()=>{
 function startQuiz() {
 
     startButton.classList.add("hide");
-    quizContainer.classList.toggle("hide");
 
-    shuffliedQuestions = questions.sort(()=> Math.random - .5);
+    shuffliedQuestions = questions.sort(()=> Math.random - 0.5);
     currentQuestionIndex = 0;
    
     quizContainer.prepend(createProgressBar());
@@ -693,7 +720,6 @@ function showQuestion(question){
     
 }
 
-
 function filterCitiesByAnswer(key){
     //let answer = e.target.innerText;
     let updatedCities = cities.filter(city => city.key === key.innerText);
@@ -703,7 +729,7 @@ function filterCitiesByAnswer(key){
 //done
 function createQuizContainer(){
     let quizcontainer = document.createElement("div");
-    quizcontainer.classList.add("container","hide");
+    quizcontainer.classList.add("container");
 
     let questionsContainer = document.createElement("div");
     questionsContainer.classList.add("questionsContainer");
@@ -736,10 +762,11 @@ function createQuizContainer(){
 
 //done
 function createStartButton(){
+
     let startButton = document.createElement("button");
     startButton.setAttribute("id","startButton");
     startButton.innerText = "Start the test";
-    document.querySelector("main").append(startButton);
+    document.querySelector(".questionsContainer").append(startButton);
 }
 
 //done
@@ -760,4 +787,22 @@ function updateBar(questionNumber){
     let lastProgress = document.querySelector(".bar");
     let level = questionNumber*10;
     lastProgress.style.width = level + "%";
+}
+
+function getResult (updatedArray){
+
+    let resultContainer = document.createElement("div");
+    resultContainer.setAttribute("id","resultContainer");
+
+    updatedArray.forEach(city => {
+        let countryCityDiv = document.createElement("div");
+        countryCityDiv.classList.add("country-city");
+
+        countryCityDiv.innerHTML = `
+            ${city.name}
+        `;
+
+        resultContainer.append(countryCityDiv);
+    });
+       return resultContainer;
 }

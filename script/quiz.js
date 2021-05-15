@@ -665,7 +665,7 @@ finishButton.addEventListener("click", ()=>{
     showButton.addEventListener("click",()=>{
         document.querySelector("main").innerHTML= "";
         document.querySelector("main").append(getResult(cities));
-    })
+    });
 
   
 });
@@ -706,7 +706,7 @@ function showQuestion(question){
     question.answers.forEach(answers => {
 
         let button = document.createElement("button");
-        button.classList.add("option");
+        button.classList.add("answer");
         button.innerText = answers.option;
 
         button.addEventListener("click", ()=>{
@@ -803,6 +803,12 @@ function getResult (updatedArray){
         `;
 
         resultContainer.append(countryCityDiv);
+
+        countryCityDiv.addEventListener("click" ,()=>{
+            countryCityDiv.classList.toggle("detailsBox");
+        })
     });
+
+
        return resultContainer;
 }

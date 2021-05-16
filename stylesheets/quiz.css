@@ -114,6 +114,8 @@ main {
         display: flex;
         flex-direction: column;
         height: 400px;
+
+        position: relative;
 }
 
 .country-city{   
@@ -132,13 +134,21 @@ main {
     
 }
 
-.country-city > button {
+.expandArrow {
     
     border:none;
     background-color: var(--light);
     font-size: var(--sizeM);
 
     transform: rotate(180deg);
+}
+
+.shrinkArrow {
+    border:none;
+    background-color: var(--light);
+    font-size: var(--sizeM);
+
+    transform: rotate(0deg);
 }
 
 .longer {
@@ -149,4 +159,14 @@ main {
     text-align: center;
     text-decoration: underline;
     margin-bottom: 10px;
+}
+
+.detailedCity{
+    width: 100%;
+    height: 100%;
+  
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
 }

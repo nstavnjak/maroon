@@ -654,7 +654,7 @@ finishButton.addEventListener("click", ()=>{
 
     quizContainer.innerHTML = "";
     quizContainer.classList.add("questionsContainer");
-    quizContainer.innerHTML= `<div class="resultatText">${cities.length} städer hittades</div>`;
+    quizContainer.innerHTML= `<div class="resultatText">${cities.length} Städer hittades</div>`;
     
     let showButton = document.createElement("button");
     showButton.classList.add("showButton");
@@ -812,7 +812,6 @@ function createResult(updatedArray){
 
         resultContainer.append(storstMatch,createCityFront(updatedArray),andraRek);
 
-
     function createCityFront(updatedArray){
    
         let cityBoxes = document.createElement("div");
@@ -830,63 +829,69 @@ function createResult(updatedArray){
 
                 countryCityDiv.addEventListener("click", () => {
                     countryCityDiv.classList.toggle("longer");
-                    countryCityDiv.append(createCityBack(updatedArray));
+                    document.querySelector(".detailedCity").classList.toggle("hide");
+                    document.querySelector(".expandArrow").classList.toggle("shrinkArrow");
                 });
                 cityBoxes.append(countryCityDiv);
             });  
 
-            return cityBoxes;
+           
+            function createDetailedCity(array){
+                let detailedCity = document.createElement("div");
+                detailedCity.classList.add("detailedCity");
+               detailedCity.innerText ="hola";
+                //expandButton.classList.add("shrinkArrow");
+            
+                function createStudentsComments(cityObj){
+                let comments = COMMENTS_CITY.filter(comment => comment.cityID === cityObj.id);
+                let commentParent = document.createElement("div");
+                
+                comments.sort((a, b) => b.date.year - a.date.year);
+               
+                comments.forEach(comment => {
+                    let commentDiv = document.createElement("div");
+                    commentDiv.classList.add("comment");
+            
+                    console.log(comment.stars.out)
+                    let sum = comment.stars.out + comment.stars.food + comment.stars.housing;
+                    console.log(parseInt(sum));
+                    commentDiv.innerHTML = `
+                        <div>
+                            <div>
+                                <h1>${comment.alias}</h1>
+                                <h2>${comment.date.year}.${comment.date.month}.${comment.date.day}</h2>
+                            </div>
+                            <div>
+                                <h2>${sum/comment.stars.length}/5</2>
+                                <div class="bar">
+                                    <div class="visible bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"${comment.text}"</p>`;
+                    
+                    
+                    
+                    commentParent.append(commentDiv);
+                   
+                });
+                return commentParent;
+                }
+        
+                detailedCity.append(createStudentsComments(array));
+            
+            return detailedCity;
+            }
 
+            cityBoxes.append(createDetailedCity(updatedArray));
+
+        return cityBoxes;
     }
+
     return resultContainer;
 }
 
-function createCityBack(array){
-    let detailedCity = document.createElement("div");
-    detailedCity.classList.add("detailedCity");
 
-    let expandButton = document.querySelector(".expandArrow");
-    expandButton.classList.replace("expandArrow","shrinkArrow")
-
-    function createStudentsComments(cityObj){
-    let comments = COMMENTS_CITY.filter(comment => comment.cityID === cityObj.id);
-    let commentParent = document.createElement("div");
-    
-    comments.sort((a, b) => b.date.year - a.date.year);
-    console.log(comments)
-    comments.forEach(comment => {
-        let commentDiv = document.createElement("div");
-        commentDiv.classList.add("comment");
-
-        console.log(comment.stars.out)
-        let sum = comment.stars.out + comment.stars.food + comment.stars.housing;
-        console.log(parseInt(sum));
-        commentDiv.innerHTML = `
-            <div>
-                <div>
-                    <h1>${comment.alias}</h1>
-                    <h2>${comment.date.year}.${comment.date.month}.${comment.date.day}</h2>
-                </div>
-                <div>
-                    <h2>${sum/comment.stars.length}/5</2>
-                    <div class="bar">
-                        <div class="visible bar"></div>
-                    </div>
-                </div>
-            </div>
-            <p>"${comment.text}"</p>`;
-        
-        
-        
-        commentParent.append(commentDiv);
-       
-    });
-    return commentParent;
-    }
-    detailedCity.append(createStudentsComments(array));
-
-return detailedCity;
-}
 
 function createBack(cityObj){
 

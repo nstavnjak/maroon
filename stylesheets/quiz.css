@@ -118,6 +118,7 @@ main {
 
 .country-city{   
     display: flex;
+    justify-content: space-between;
     align-items: center;
     background-color: #ffffff;
     margin: auto;
@@ -129,4 +130,23 @@ main {
     border-radius: 5px;
     box-shadow: 0 0 10px 2px;
     
+}
+
+.country-city > button {
+    
+    border:none;
+    background-color: var(--light);
+    font-size: var(--sizeM);
+
+    transform: rotate(180deg);
+}
+
+.longer {
+    height: 600px;
+}
+
+.matched {
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom: 10px;
 }

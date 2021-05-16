@@ -654,20 +654,18 @@ finishButton.addEventListener("click", ()=>{
 
     quizContainer.innerHTML = "";
     quizContainer.classList.add("questionsContainer");
-    quizContainer.innerHTML= `<div class="resultatText">${cities.length} cities found</div>`;
+    quizContainer.innerHTML= `<div class="resultatText">${cities.length} städer hittades</div>`;
     
     let showButton = document.createElement("button");
     showButton.classList.add("showButton");
-    showButton.innerText = "show";
+    showButton.innerText = "Visa";
 
     quizContainer.append(showButton);
 
     showButton.addEventListener("click",()=>{
         document.querySelector("main").innerHTML= "";
-        document.querySelector("main").append(getResult(cities));
+        document.querySelector("main").append(createResult(cities));
     });
-
-  
 });
 
 // Footer 
@@ -704,7 +702,7 @@ function showQuestion(question){
     questionField.innerText = question.question;
 
     question.answers.forEach(answers => {
-
+     
         let button = document.createElement("button");
         button.classList.add("answer");
         button.innerText = answers.option;
@@ -714,7 +712,7 @@ function showQuestion(question){
             document.querySelector(".navigateButtons").classList.toggle("hide");
             filterCitiesByAnswer(button);
         });
-      
+
         answersField.append(button);
     });
     
@@ -750,7 +748,7 @@ function createQuizContainer(){
 
     let finish = document.createElement("button");
     finish.setAttribute("id", "finish");
-    finish.innerHTML = `Finish`;
+    finish.innerHTML = `Sluta`;
 
     navigateButtons.append(finish,rightArrow);
 
@@ -765,7 +763,7 @@ function createStartButton(){
 
     let startButton = document.createElement("button");
     startButton.setAttribute("id","startButton");
-    startButton.innerText = "Start the test";
+    startButton.innerText = "Starta testet";
     document.querySelector(".questionsContainer").append(startButton);
 }
 
@@ -789,26 +787,47 @@ function updateBar(questionNumber){
     lastProgress.style.width = level + "%";
 }
 
-function getResult (updatedArray){
+function createResult(updatedArray){
+        let resultContainer = document.createElement("div");
+        resultContainer.setAttribute("id","resultContainer");
 
-    let resultContainer = document.createElement("div");
-    resultContainer.setAttribute("id","resultContainer");
+        let storstMatch = document.createElement("h1");
+        storstMatch.classList.add("matched");
+        storstMatch.innerText = "Störst Match";
+        
+        let andraRek = document.createElement("h1");
+        andraRek.classList.add("matched");
+        andraRek.innerText = "Andra Rekommendationer";
+        
+        let country = COUNTRIES.find(city => city.id === updatedArray.countryID);
 
-    updatedArray.forEach(city => {
-        let countryCityDiv = document.createElement("div");
-        countryCityDiv.classList.add("country-city");
-
-        countryCityDiv.innerHTML = `
-            ${city.name}
-        `;
-
-        resultContainer.append(countryCityDiv);
-
-        countryCityDiv.addEventListener("click" ,()=>{
-            countryCityDiv.classList.toggle("detailsBox");
-        })
-    });
+        resultContainer.append(storstMatch,createCityFront(updatedArray),andraRek);
 
 
-       return resultContainer;
+    function createCityFront(updatedArray){
+   
+        let cityBoxes = document.createElement("div");
+        cityBoxes.classList.add("cityBoxes");
+
+        updatedArray.forEach(city => {
+
+            let countryCityDiv = document.createElement("div");
+            countryCityDiv.classList.add("country-city");
+
+            countryCityDiv.innerHTML = `
+            <p class="cityName"> ${city.name}</p>
+            <button class="expand">&#8679;</div>
+            `;
+
+                countryCityDiv.addEventListener("click", () => {
+                    countryCityDiv.classList.toggle("longer");
+                    countryCityDiv.append(createBack(updatedArray));
+                });
+                cityBoxes.append(countryCityDiv);
+            });  
+
+            return cityBoxes;
+
+    }
+    return resultContainer;
 }

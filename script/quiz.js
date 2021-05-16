@@ -707,9 +707,18 @@ function showQuestion(question){
         button.classList.add("answer");
         button.innerText = answers.option;
 
-        button.addEventListener("click", ()=>{
-            button.classList.toggle("selectedOpt");
-            document.querySelector(".navigateButtons").classList.toggle("hide");
+     
+
+        button.addEventListener("click", () =>{
+           
+            let allOptions = document.querySelectorAll(".answer");
+            allOptions.forEach(e => {
+                e.classList.remove("selectedOpt");
+            })
+            
+            button.classList.add("selectedOpt");
+            document.querySelector(".navigateButtons").classList.remove("hide");
+            
             filterCitiesByAnswer(button);
         });
 

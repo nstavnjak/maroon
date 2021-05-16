@@ -26,24 +26,10 @@ let programlist = document.createElement("div");
 programlist.classList.add("programList");
 document.querySelector("main").append(programlist);
 
-<<<<<<< HEAD
 
 // EVENT
 
-const searchButton = document.querySelector("#search");
-    
 
-searchButton.addEventListener("click", e => {
-    let inputValue = document.querySelector("#inputField").value.toLowerCase();
-    let countryValue = document.querySelector("#select1").value;
-    let cityValue = document.querySelector("#select2").value;
-    
-    console.log(inputValue);
-    console.log(countryValue);
-    console.log(cityValue);
-    searchProgram(inputValue, countryValue, cityValue);
-})
-=======
 LoadMoreFunction();
 applyExpand();
 //Load More
@@ -120,7 +106,6 @@ function applyExpand(){
             searchProgram(inputValue, countryValue, cityValue);
     });
 }
->>>>>>> 9a71325c7abdb5c3d08ddd31f054511ff5b3d80a
 
 // Functions
 

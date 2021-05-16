@@ -678,7 +678,7 @@ function startQuiz() {
 
     startButton.classList.add("hide");
 
-    shuffliedQuestions = questions.sort(()=> Math.random - 0.5);
+    shuffliedQuestions = questions.sort(() => Math.random() - .5);
     currentQuestionIndex = 0;
    
     quizContainer.prepend(createProgressBar());

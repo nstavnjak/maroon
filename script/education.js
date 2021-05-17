@@ -56,12 +56,11 @@ function sort(){
             finishArray.sort((a,b) => a.name > b.name ? 1 : -1); 
         } else if (e.target.value === "Program, Ö-A"){
             finishArray.sort((a,b) => a.name > b.name ? -1 : 1); 
-        } 
-        // else if (e.target.value === "Antagningspoäng, stigande"){
-        //     finishArray.sort((a,b) => a.)
-        // } else if (e.target.value === "Antagningpoäng, fallande"){
-        //     finishArray.sort((a,b) => a.)
-        // }
+        } else if (e.target.value === "Antagningspoäng, stigande"){
+            finishArray.sort((a,b) => a.entryGrades[0] - b.entryGrades[0]);
+        } else if (e.target.value === "Antagningpoäng, fallande"){
+            finishArray.sort((a,b) => b.entryGrades[0] - a.entryGrades[0]);
+        }
     })
 })
 }
@@ -88,7 +87,6 @@ function LoadMoreFunction() {
     loadMore.addEventListener("click", LoadMoreFunction);
     // loadMore.addEventListener("click", applyExpand);
 }
-
 
 function LoadMoreReset() {
     document.querySelector(".programList").innerHTML = "";

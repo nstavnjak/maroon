@@ -699,6 +699,8 @@ function clearTheQuestionAndAnswerfield(){
 
 function showQuestion(question){
 
+    document.querySelector(".valuationDiv").classList.remove("hide");
+
     questionField.innerText = question.question;
 
     question.answers.forEach(answers => {
@@ -707,14 +709,12 @@ function showQuestion(question){
         button.classList.add("answer");
         button.innerText = answers.option;
 
-     
-
         button.addEventListener("click", () =>{
            
             let allOptions = document.querySelectorAll(".answer");
             allOptions.forEach(e => {
                 e.classList.remove("selectedOpt");
-            })
+            });
             
             button.classList.add("selectedOpt");
             document.querySelector(".navigateButtons").classList.remove("hide");
@@ -743,7 +743,36 @@ function createQuizContainer(){
 
     let question = document.createElement("div");
     question.setAttribute("id","question");
+
+    let valuationDiv = document.createElement("div");
+    valuationDiv.classList.add("valuationDiv");
+    valuationDiv.classList.add("hide");
+    valuationDiv.innerHTML = `
+     
+       <div class="valuationTextDiv">
+       <p class="valuationText">Inte viktigt</p>
+       <p class="valuationText">Mycket viktigt</p>
+       </div>
+    `;
     
+    let valuationInputDiv = document.createElement("div");
+    valuationInputDiv.classList.add("valuationInputDiv");
+
+    let valuationInput = document.createElement("input");
+    valuationInput.classList.add("valuationInput");
+    valuationInput.setAttribute("type","range");
+    valuationInput.setAttribute("min","0");
+    valuationInput.setAttribute("max","10");
+    valuationInput.setAttribute("value","5");
+
+    let numberOfInput = document.createElement("div");
+    numberOfInput.classList.add("numberOfInput");
+    numberOfInput.innerText = valuationInput.value;
+
+    valuationInputDiv.prepend(valuationInput);
+    valuationInputDiv.append(numberOfInput);
+    valuationDiv.append(valuationInputDiv);
+
     let answersButtons = document.createElement("div");
     answersButtons.setAttribute("id","answersButtons")
    
@@ -761,7 +790,7 @@ function createQuizContainer(){
 
     navigateButtons.append(finish,rightArrow);
 
-    questionsContainer.append(question,answersButtons,navigateButtons)
+    questionsContainer.append(question,answersButtons,valuationDiv,navigateButtons)
 
     quizcontainer.append(questionsContainer);
     document.querySelector("main").append(quizcontainer);
@@ -832,6 +861,8 @@ function createResult(updatedArray){
                     document.querySelector(".detailedCity").classList.toggle("hide");
                     document.querySelector(".expandArrow").classList.toggle("shrinkArrow");
                 });
+
+                countryCityDiv.append(createDetailedCity(updatedArray));
                 cityBoxes.append(countryCityDiv);
             });  
 
@@ -839,9 +870,11 @@ function createResult(updatedArray){
             function createDetailedCity(array){
                 let detailedCity = document.createElement("div");
                 detailedCity.classList.add("detailedCity");
-               detailedCity.innerText ="hola";
+                detailedCity.classList.add("hide");
+                
                 //expandButton.classList.add("shrinkArrow");
             
+
                 function createStudentsComments(cityObj){
                 let comments = COMMENTS_CITY.filter(comment => comment.cityID === cityObj.id);
                 let commentParent = document.createElement("div");
@@ -877,13 +910,11 @@ function createResult(updatedArray){
                 });
                 return commentParent;
                 }
-        
+    
                 detailedCity.append(createStudentsComments(array));
             
             return detailedCity;
             }
-
-            cityBoxes.append(createDetailedCity(updatedArray));
 
         return cityBoxes;
     }

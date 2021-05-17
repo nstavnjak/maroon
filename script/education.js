@@ -100,9 +100,6 @@ function applyExpand(){
             let countryValue = document.querySelector("#select1").value;
             let cityValue = document.querySelector("#select2").value;
           
-            console.log(inputValue);
-            console.log(countryValue);
-            console.log(cityValue);
             searchProgram(inputValue, countryValue, cityValue);
     });
 }
@@ -339,6 +336,14 @@ function searchProgram(textValue, country, city){
 
     function appendCards(array){
         array.forEach(program => {
+            
+            searchButton.addEventListener("click", e => {
+                let inputValue = document.querySelector("#inputField").value;
+                let countryValue = document.querySelector("#select1").value;
+                let cityValue = document.querySelector("#select2").value;
+              
+                searchProgram(inputValue, countryValue, cityValue);
+            });
             document.querySelector(".programList").append(createCard(program));
         })
     }

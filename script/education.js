@@ -1,15 +1,15 @@
 "use strict";
 // Varibel som används av två funktioner (createFilter och createButtonFilter) för att stoppa filter från att kunnas öppnas fler gånger.
 // Kanske inte kommer behövas
-let card = document.querySelectorAll(".programCard");
-let expandButton = document.querySelectorAll(".expand");
+// let card = document.querySelectorAll(".programCard");
+// let expandButton = document.querySelectorAll(".expand");
 let searchButton = document.querySelector("#search");
 
 let once = 0;
 let load = 0;
 let loaded = 5;
 let sortAlternatives = ["Program, A-Ö", "Program, Ö-A", "Antagningspoäng, stigande", "Antagningpoäng, fallande"];
-let finishArray = [];
+let finishArray = PROGRAMMES;
 
 // Head
 appendLink("../stylesheets/education.css");
@@ -51,12 +51,12 @@ function LoadMoreFunction() {
     console.log(document.querySelector("#loadMore"));
 
     //Lägger till event listeners på alla kort
-    card = document.querySelectorAll(".programCard");
-    expandButton = document.querySelectorAll(".expand");
+    // card = document.querySelectorAll(".programCard");
+    // expandButton = document.querySelectorAll(".expand");
     searchButton = document.querySelector("#search");
 
     loadMore.addEventListener("click", LoadMoreFunction);
-    loadMore.addEventListener("click", applyExpand);
+    // loadMore.addEventListener("click", applyExpand);
 }
 
 
@@ -67,33 +67,33 @@ function LoadMoreFunction() {
  
 function applyExpand(){
 
-    card.forEach(element => {
-        console.log(element.getAttribute('listener'));
-        if (element.getAttribute('listener') !== 'true'){
-            element.setAttribute('listener', 'true');
-            element.addEventListener("click", e => {
-                console.log(element.getAttribute('listener'));
-                if (element.classList.contains("longer")){
-                  element.classList.toggle("flipped");
-                }
-              });
+    // card.forEach(element => {
+    //     console.log(element.getAttribute('listener'));
+    //     if (element.getAttribute('listener') !== 'true'){
+    //         element.setAttribute('listener', 'true');
+    //         element.addEventListener("click", e => {
+    //             console.log(element.getAttribute('listener'));
+    //             if (element.classList.contains("longer")){
+    //               element.classList.toggle("flipped");
+    //             }
+    //           });
             
-        }
+    //     }
         
-      });
+    //   });
      
-    expandButton.forEach(element => {
-        if (element.getAttribute('listener') !== 'true'){
-            element.setAttribute('listener', 'true')
-            element.addEventListener("click", e => {
-                e.stopPropagation()
-                console.log(e.target);
-                console.log(e.target.parentElement)
-                e.target.parentElement.parentElement.parentElement.parentElement.classList.toggle("longer");
-                e.target.classList.toggle("rotated");
-              });
-        }
-    });
+    // expandButton.forEach(element => {
+    //     if (element.getAttribute('listener') !== 'true'){
+    //         element.setAttribute('listener', 'true')
+    //         element.addEventListener("click", e => {
+    //             e.stopPropagation()
+    //             console.log(e.target);
+    //             console.log(e.target.parentElement)
+    //             e.target.parentElement.parentElement.parentElement.parentElement.classList.toggle("longer");
+    //             e.target.classList.toggle("rotated");
+    //           });
+    //     }
+    // });
       
     searchButton.addEventListener("click", e => {
             let inputValue = document.querySelector("#inputField").value;

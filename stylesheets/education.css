@@ -282,17 +282,38 @@
 .programSeats{
     flex-basis:10%;
     margin: var(--marginLR) 0rem;
-
     font-size: var(--sizeS);
     font-family: var(--bodyText);
     line-height: 1.5rem;
 }
 
+.progressBar {
+    background-color: var(--dark);
+    height: 2rem;
+    width:100%;
+    border-radius: 20rem;
+}
+
+.inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--bodyText);
+    background-color: var(--light);
+    width: 0%;
+}
+
+.widthTran {
+    width: 0%;
+    transition: width 1s ease;
+}
+
 .graduation {
     flex-basis:10%;
     display: flex;
-    align-items: center;
-    margin: var(--marginLR) 0rem;
+    flex-direction: column;
+    margin-bottom: var(--marginLR);
+
     
 
     font-size: var(--sizeS);
@@ -322,10 +343,18 @@
     font-family: var(--bodyText);
 }
 
-.entryPointsTitle {
+.entryPointsTitle, 
+.programSeats > h1,
+.graduation > h1 {
     font-size: var(--sizeM);
     font-family: var(--title);
     margin-bottom: var(--marginLR);
+}
+
+.graduation > p,
+.programSeats > p {
+    font-family: var(--bodyText);
+    padding: 1rem 0rem;
 }
 
 .gradeYear {
@@ -357,7 +386,7 @@
   
 /* Programecard back */
 
-  .programCardFace.back {
+.programCardFace.back {
     transform: rotateY(180deg);
     display: flex;
     overflow-x: scroll;
@@ -429,6 +458,14 @@
     100% { transform: translateX(0vw);}
     /* 1000 { transform: translateX(-300px);} */
 }
+
+.cityText {
+    padding: var(--paddingSZ);
+    font-family: var(--bodyText);
+    font-size: var(--sizeS);
+    line-height: 1.5;
+}
+
 /* ratings  */
 .rating {
     flex-grow:1;

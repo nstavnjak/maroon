@@ -636,6 +636,7 @@ function createCard(program){
             mainInformation.addEventListener("click", e => {
               e.stopPropagation();
               card.classList.toggle("longer");
+              document.querySelector("inner").classList.toggle("widthTran");
               button.classList.toggle("rotated");
             });
 
@@ -644,30 +645,29 @@ function createCard(program){
 
         // NOT done
         function getProgramSeats(program){
-            let programSeats = document.createElement("div");
-            programSeats.classList.add("programSeats");
             
-            let seats = program.exchangeStudents + program.localStudents;
-            let circle = document.createElement("div");
-            circle.classList.add("circle");
-            circle.innerHTML = `${seats}<br>seats`;
+            let seats = program.exchangeStudents + program.localStudents
+            let exchangeStudents = (program.exchangeStudents / seats) * 100;
+            let text = `<b>${program.exchangeStudents}</b> utbytesplatser tillgänliga för detta program`;
             
-            programSeats.append(circle)
-            
-            return programSeats;
+            return createMiddleParts("Antal Platser:", "programSeats", exchangeStudents, text, seats);
         }
         
         // done
-        function getProgramGraduating(SuccessRateArray){
-            let graduation = document.createElement("div");
-            graduation.classList.add("graduation",);
+        function getProgramGraduating(successRateArray){
             
+            let x = 0;
+            successRateArray.forEach( e => {
+                x = x + e;
+            });
+
+            let seats = program.exchangeStudents + program.localStudents
+            let result = x / successRateArray.length;
+
+            let graduatingNumber = (seats/100)*result;
+            let text = `<b>${graduatingNumber.toFixed()}</b>  elever tar examen efter avklarade studier`;
             
-            graduation.innerHTML = `
-            <div class="circle">${successAverage(SuccessRateArray)}% </div>
-            <div> TAR EXAMEN</div>`;
-            
-            return graduation;
+            return createMiddleParts("Success Rate", "graduation", result, text);
         }
 
         // done
@@ -691,21 +691,31 @@ function createCard(program){
             
             return entryPoints;
         }
+
+        function createMiddleParts(title, CL, progressWidth, pText, value = ""){
+            let parentDiv = document.createElement("div");
+            parentDiv.classList.add(CL);
+            parentDiv.innerHTML = `<h1>${title} ${value}</h1>`;
+           
+            let progressBarOuter = document.createElement("div");
+            progressBarOuter.classList.add("progressBar", "outer");
+
+            let progressBarInner = document.createElement("div");
+            progressBarInner.classList.add("progressBar", "inner");
+            progressBarInner.textContent = `${progressWidth.toFixed()}%`;
+            progressBarInner.style.width = `${progressWidth}%`
+
+            let text = document.createElement("p");
+            text.innerHTML = pText;
+            progressBarOuter.append(progressBarInner);
+            parentDiv.append(progressBarOuter, text);
+
+            return parentDiv;
+        }
         
         return cardFront;
     }
     return card;
-}
-
-function successAverage(successArray){
-
-    let x = 0;
-    successArray.forEach( e => {
-        x = x + e;
-    });
-    
-    let result = x / successArray.length;
-    return result; 
 }
 
 function createCirlePoints(grade, year){

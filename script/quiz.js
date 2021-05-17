@@ -12,20 +12,20 @@ const questions = [
         id:1,
         question: "Vilket klimat trivs du bäst i?",
         answers: [
-            {option: "Soligt", optValue:"sol"},
-            {option: "Kallt", optValue:"kall"},
-            {option: "Blåsigt", optValue:"vind"},
-            {option: "Regnigt", optValue:"regn"}
+            {value: 11, option: "Soligt", optValue:"sol"},
+            {value: 12, option: "Kallt", optValue:"kall"},
+            {value: 13, option: "Blåsigt", optValue:"vind"},
+            {value: 14, option: "Regnigt", optValue:"regn"}
         ]           
     },
     {
         id:2,
         question: "Vad tycker du om te?",
         answers: [
-            {option: "optionA", optValue:""},
-            {option: "optionB", optValue:""},
-            {option: "optionC", optValue:""},
-            {option: "optionC", optValue:""}
+            {value: 21, option: "optionA", optValue:""},
+            {value: 22, option: "optionB", optValue:""},
+            {value: 23, option: "optionC", optValue:""},
+            {value: 24, option: "optionC", optValue:""}
         ]  
     },
  
@@ -33,80 +33,80 @@ const questions = [
         id:3,
         question: "Är kusten ett måste?",
         answers: [
-            {option: "optionA", optValue:""},
-            {option: "optionB", optValue:""},
-            {option: "optionC", optValue:""},
-            {option: "optionC", optValue:""}
+            {value: 31, option: "optionA", optValue:""},
+            {value: 32, option: "optionB", optValue:""},
+            {value: 33, option: "optionC", optValue:""},
+            {value: 34, option: "optionC", optValue:""}
         ] 
     },
     {
         id:4,
         question: "Är kusten ett måste?",
         answers: [
-            {option: "optionA", optValue:""},
-            {option: "optionB", optValue:""},
-            {option: "optionC", optValue:""},
-            {option: "optionC", optValue:""}
+            {value: 41, option: "optionA", optValue:""},
+            {value: 42, option: "optionB", optValue:""},
+            {value: 43, option: "optionC", optValue:""},
+            {value: 44, option: "optionC", optValue:""}
         ]      
     },
     {
         id:5,
         question: "Är kusten ett måste?",
         answers: [
-            {option: "optionA", optValue:""},
-            {option: "optionB", optValue:""},
-            {option: "optionC", optValue:""},
-            {option: "optionC", optValue:""}
+            {value: 51, option: "optionA", optValue:""},
+            {value: 52, option: "optionB", optValue:""},
+            {value: 53,option: "optionC", optValue:""},
+            {value: 54, option: "optionC", optValue:""}
         ]       
     },
     {
         id:6,
         question: "Är kusten ett måste?",
         answers: [
-            {option: "optionA", optValue:""},
-            {option: "optionB", optValue:""},
-            {option: "optionC", optValue:""},
-            {option: "optionC", optValue:""}
+            {value: 61, option: "optionA", optValue:""},
+            {value: 62, value: 14, option: "optionB", optValue:""},
+            {value: 63, option: "optionC", optValue:""},
+            {value: 64, option: "optionC", optValue:""}
         ]      
     },
     {
         id:7,
         question: "Är kusten ett måste?",
         answers: [
-            {option: "optionA", optValue:""},
-            {option: "optionB", optValue:""},
-            {option: "optionC", optValue:""},
-            {option: "optionC", optValue:""}
+            {value: 71, option: "optionA", optValue:""},
+            {value: 72, option: "optionB", optValue:""},
+            {value: 73, option: "optionC", optValue:""},
+            {value: 74, option: "optionC", optValue:""}
         ]        
     },
     {
         id:8,
         question: "Är kusten ett måste?",
         answers: [
-            {option: "optionA", optValue:""},
-            {option: "optionB", optValue:""},
-            {option: "optionC", optValue:""},
-            {option: "optionC", optValue:""}
+            {value: 81, option: "optionA", optValue:""},
+            {value: 82, option: "optionB", optValue:""},
+            {value: 83, option: "optionC", optValue:""},
+            {value: 84, option: "optionC", optValue:""}
         ]         
     },
     {
         id:9,
         question: "Är kusten ett måste?",
         answers: [
-            {option: "optionA", optValue:""},
-            {option: "optionB", optValue:""},
-            {option: "optionC", optValue:""},
-            {option: "optionC", optValue:""}
+            {value: 91, option: "optionA", optValue:""},
+            {value: 92, option: "optionB", optValue:""},
+            {value: 93, option: "optionC", optValue:""},
+            {value: 94, option: "optionC", optValue:""}
         ]       
     },
     {
         id:10,
         question: "10?",
         answers: [
-            {option: "optionA", optValue:""},
-            {option: "optionB", optValue:""},
-            {option: "optionC", optValue:""},
-            {option: "optionC", optValue:""}
+            {value: 101, option: "optionA", optValue:""},
+            {value: 102, option: "optionB", optValue:""},
+            {value: 103, option: "optionC", optValue:""},
+            {value: 104, option: "optionC", optValue:""}
         ] 
     },
  ];

@@ -56,11 +56,10 @@
     
 #innerWrapper > div select {
     height: 3.5rem;
-    padding:var(--paddingSZ);
+    padding: 1rem;
     border: none;
     border-radius: 0.3rem;
     background-color: var(--light);
-    appearance: none;
 }
     
 #search {
@@ -190,4 +189,303 @@
 #expandFilter input:checked ~ .checkmark{
     background-color: var(--secondary);
 }
+
+/* PROGRAMKORTEN  */
+
+
+.programList {
+    width:100%;
+    height:auto;
+}
+  
+.programCard {
+    transform-style: preserve-3d;
+    position: relative; 
+    width: 100%;
+    height:15rem;
+    
+    transition: height 1s, transform 1s;
+    margin-bottom: var(--marginLR);
+
+    background-color: var(--primary);
+}
+  
+  
+.programCard.longer {
+    height: 60rem;
+}
+  
+.programCard.longer.flipped {
+    transform: rotateY(180deg);
+}
+  
+/* gemensam för front and back */
+.programCardFace {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    overflow: hidden;
+
+    box-sizing: border-box;
+    background-color: var(--secondary);
+    display: flex;
+    flex-direction: column;
+}
+  
+/* programecard front */
+.programCardFace.front {
+    padding: var(--paddingSZ);
+    box-sizing: border-box;
+    background-color: var(--secondary);
+    padding: var(--paddingSZ);
+}
+  
+.programCardFace.front > div:first-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-basis:12rem;
+    margin-bottom: var(--marginLR);
+}
+
+.programCardFace.front > div:first-child > div:last-child{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: var(--marginLR)
+}
+
+.programCardFace.front button {
+    background-color: transparent;
+    height: 2rem;
+    width:2rem;
+    appearance: none;
+    border:none;
+    border-right: 0.1rem solid var(--dark);
+    border-bottom: 0.1rem solid var(--dark);
+    transform: rotate(45deg);
+    transition: transform 1s ease;
+}
+
+.programCardFace.front button.expand.rotated {
+    transform: rotate(-135deg);
+    transition: transform 1s ease;
+}
+
+.programCardFace.front > div:first-child > h1,
+.programCardFace.front > div:first-child h2 {
+    font-family: var(--title);
+    padding-bottom: 0.5rem;
+}
+
+.programSeats{
+    flex-basis:10%;
+    margin: var(--marginLR) 0rem;
+
+    font-size: var(--sizeS);
+    font-family: var(--bodyText);
+    line-height: 1.5rem;
+}
+
+.graduation {
+    flex-basis:10%;
+    display: flex;
+    align-items: center;
+    margin: var(--marginLR) 0rem;
+    
+
+    font-size: var(--sizeS);
+    font-family: var(--bodyText);
+}
+
+.circle {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 200px;
+    background-color: var(--light);
+    margin: 0.8rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+  
+.entryPoints {
+    height: 30%;
+}
+
+.entryPoints > div:last-child{
+    display: flex;
+    font-size: var(--sizeS);
+    font-family: var(--bodyText);
+}
+
+.entryPointsTitle {
+    font-size: var(--sizeM);
+    font-family: var(--title);
+    margin-bottom: var(--marginLR);
+}
+
+.gradeYear {
+    margin-bottom: 1rem;
+}
+
+.gradeCircle {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 200px;
+    background-color: var(--light);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.programCardFace.front h2 {
+    color:var(--dark);
+    font-size: 16px;
+}
+
+.gradeBox{
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+}
+  
+/* Programecard back */
+
+  .programCardFace.back {
+    transform: rotateY(180deg);
+    display: flex;
+    overflow-x: scroll;
+}
+
+/* CityInfo */
+
+.cityInfo {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--paddingSZ);
+    
+}
+
+.cityInfo > div:first-child {
+    font-family: var(--title);
+}
+
+.cityInfo div:last-child {
+    height:4rem;
+    width: 4rem;
+    border-radius: 20rem;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-right: 1rem;
+
+    font-family: var(--bodyText);
+    font-size:  var(--sizeS);
+}
+
+.cityInfo .red{
+    background-color: red;
+}
+
+.cityInfo .green{
+    background-color: green;
+}
+ /* pictures  */
+
+.cityPictureWrapper {
+    width: 400vw;
+    position: relative;
+
+    animation-name: slider;
+    animation-timing-function: ease;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+}
+
+.cityPictureWrapper img {
+    height:75vw;
+    width:25%;
+}
+
+.programCardFace.back > div > div:nth-child(2) {
+    display: flex;
+    padding: var(--paddingSZ);
+}
+
+@keyframes slider {
+    0%   { transform: translateX(0vw);   }
+    16%  { transform: translateX(-100vw);}
+    32%  { transform: translateX(-200vw);}
+    48%  { transform: translateX(-300vw);}
+    63%  { transform: translateX(-200vw);}
+    82%  { transform: translateX(-100vw);}
+    100% { transform: translateX(0vw);}
+    /* 1000 { transform: translateX(-300px);} */
+}
+/* ratings  */
+.rating {
+    flex-grow:1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.circleRating {
+    height: 8rem;
+    width: 8rem;
+    border-radius: 200px;
+    background-color: var(--light);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: var(--title);
+    font-size: var(--sizeS);
+    font-size: var(--sizeM);
+}
+
+.rating > h1 {
+    margin-bottom: 1rem;
+    font-family: var(--title);
+}
+
+/* COMMETNS */
+
+.programCardFace.back > div > div:nth-child(3) {
+    padding: var(--paddingSZ);
+}
+
+.programCardFace.back > .scroll{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.comment {
+    margin-bottom: var(--marginLR);
+    background-color: var(--light);
+    padding: var(--paddingSZ);
+}
+
+.comment > div {
+    display: flex;
+    justify-content: space-between;
+    
+    font-family: var(--title);
+}
+
+.comment p {
+    font-family: var(--bodyText);
+    font-size: var(--sizeS);
+}
+
+
 

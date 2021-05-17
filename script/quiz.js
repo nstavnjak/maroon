@@ -646,8 +646,10 @@ startButton.addEventListener("click", startQuiz);
 
 nextButton.addEventListener("click", ()=>{
     currentQuestionIndex++;
+    resetTheValuation();
     setNextQuestion();
     updateBar(currentQuestionIndex);
+
 });
 
 finishButton.addEventListener("click", ()=>{
@@ -671,6 +673,12 @@ finishButton.addEventListener("click", ()=>{
 // Footer 
 
 // Functions
+
+function resetTheValuation(){
+    let inputValue = document.querySelector(".valuationInput")
+    inputValue.value = 5;
+    document.querySelector(".numberOfInput").innerText = inputValue.value;
+}
 
 function startQuiz() {
 
@@ -768,6 +776,10 @@ function createQuizContainer(){
     let numberOfInput = document.createElement("div");
     numberOfInput.classList.add("numberOfInput");
     numberOfInput.innerText = valuationInput.value;
+
+    valuationInput.addEventListener("input",()=>{
+        numberOfInput.innerText = valuationInput.value;
+    })
 
     valuationInputDiv.prepend(valuationInput);
     valuationInputDiv.append(numberOfInput);

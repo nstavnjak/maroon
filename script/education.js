@@ -3,7 +3,7 @@
 // Kanske inte kommer behövas
 // let card = document.querySelectorAll(".programCard");
 // let expandButton = document.querySelectorAll(".expand");
-let searchButton = document.querySelector("#search");
+
 
 let once = 0;
 let load = 0;
@@ -27,11 +27,44 @@ programlist.classList.add("programList");
 document.querySelector("main").append(programlist);
 
 
+let searchButton = document.querySelector("#search");
+searchButton.addEventListener("click", e => {
+    let inputValue = document.querySelector("#inputField").value;
+    let countryValue = document.querySelector("#select1").value;
+    let cityValue = document.querySelector("#select2").value;
+    
+    searchProgram(inputValue, countryValue, cityValue);
+});
+
+document.getElementById("search").addEventListener("click", LoadMoreReset);
+document.getElementById("sortera").addEventListener("click", LoadMoreReset);
+
+
+
 // EVENT
 
 
 LoadMoreFunction();
-applyExpand();
+
+
+function sort(){
+    let sorteraButton = document.querySelectorAll("#sortera option");
+    sorteraButton.forEach( element => {
+        element.addEventListener("click", e => {
+        console.log(e.target.value);
+        if(e.target.value === "Program, A-Ö"){
+            finishArray.sort((a,b) => a.name > b.name ? 1 : -1); 
+        } else if (e.target.value === "Program, Ö-A"){
+            finishArray.sort((a,b) => a.name > b.name ? -1 : 1); 
+        } 
+        // else if (e.target.value === "Antagningspoäng, stigande"){
+        //     finishArray.sort((a,b) => a.)
+        // } else if (e.target.value === "Antagningpoäng, fallande"){
+        //     finishArray.sort((a,b) => a.)
+        // }
+    })
+})
+}
 //Load More
 //Klar
 function LoadMoreFunction() {
@@ -44,68 +77,26 @@ function LoadMoreFunction() {
     }
     
     for(load; load < loaded ; load++){
-            document.querySelector(".programList").append(createCard(PROGRAMMES[load])); 
+            document.querySelector(".programList").append(createCard(finishArray[load])); 
     }
     load = loaded;
     loaded = loaded + 5;
     console.log(document.querySelector("#loadMore"));
 
     //Lägger till event listeners på alla kort
-    // card = document.querySelectorAll(".programCard");
-    // expandButton = document.querySelectorAll(".expand");
-    searchButton = document.querySelector("#search");
 
     loadMore.addEventListener("click", LoadMoreFunction);
     // loadMore.addEventListener("click", applyExpand);
 }
 
 
-// EVENT 
-
-//Ser till att card.forEach inte lägger toggles två gånger för då fuckar allt ur
-// VIKTIG KOD!!!!!
- 
-function applyExpand(){
-
-    // card.forEach(element => {
-    //     console.log(element.getAttribute('listener'));
-    //     if (element.getAttribute('listener') !== 'true'){
-    //         element.setAttribute('listener', 'true');
-    //         element.addEventListener("click", e => {
-    //             console.log(element.getAttribute('listener'));
-    //             if (element.classList.contains("longer")){
-    //               element.classList.toggle("flipped");
-    //             }
-    //           });
-            
-    //     }
-        
-    //   });
-     
-    // expandButton.forEach(element => {
-    //     if (element.getAttribute('listener') !== 'true'){
-    //         element.setAttribute('listener', 'true')
-    //         element.addEventListener("click", e => {
-    //             e.stopPropagation()
-    //             console.log(e.target);
-    //             console.log(e.target.parentElement)
-    //             e.target.parentElement.parentElement.parentElement.parentElement.classList.toggle("longer");
-    //             e.target.classList.toggle("rotated");
-    //           });
-    //     }
-    // });
-      
-    searchButton.addEventListener("click", e => {
-            let inputValue = document.querySelector("#inputField").value;
-            let countryValue = document.querySelector("#select1").value;
-            let cityValue = document.querySelector("#select2").value;
-          
-            searchProgram(inputValue, countryValue, cityValue);
-    });
+function LoadMoreReset() {
+    document.querySelector(".programList").innerHTML = "";
+    load = 0; 
+    loaded = 5;
+    sort();
+    LoadMoreFunction();
 }
-
-// Functions
-
 
 function createSearchForm(){
     let searchForm = document.createElement("div");
@@ -219,6 +210,7 @@ function sortAndFilterParent(){
             sortAlternative.textContent = e;
             sortDiv.append(sortAlternative);
         });
+
         return sortDiv;
     }
     
@@ -336,18 +328,11 @@ function searchProgram(textValue, country, city){
 
     function appendCards(array){
         array.forEach(program => {
-            
-            searchButton.addEventListener("click", e => {
-                let inputValue = document.querySelector("#inputField").value;
-                let countryValue = document.querySelector("#select1").value;
-                let cityValue = document.querySelector("#select2").value;
-              
-                searchProgram(inputValue, countryValue, cityValue);
-            });
             document.querySelector(".programList").append(createCard(program));
         })
     }
-    console.log(finishArray);
+
+     console.log(finishArray);
 }
 
 

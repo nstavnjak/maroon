@@ -9,7 +9,6 @@
     background-color: var(--secondary);
     margin-top: 4rem;
     height:30rem;
-    border-radius: 0.3rem;
 }
 
 #innerWrapper {
@@ -21,7 +20,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 0.3rem;
 }
     
 #innerWrapper h2 {
@@ -40,7 +38,6 @@
     height: 3.5rem;
     padding:var(--paddingSZ);
     border:none;
-    border-radius: 0.3rem;
     background-color: var(--light);
     margin-bottom: var(--marginLR);
     appearance: none;
@@ -56,10 +53,15 @@
     
 #innerWrapper > div select {
     height: 3.5rem;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     border: none;
-    border-radius: 0.3rem;
     background-color: var(--light);
+    appearance: none;
+    text-align: center;
+}
+
+#innerWrapper > div > select option {
+    text-align: center;
 }
     
 #search {
@@ -72,7 +74,6 @@
     padding:var(--paddingSZ);
     
     border:none;
-    border-radius: 0.3rem;
     background-color: var(--light); 
     
     font-family: var(--bodyText);
@@ -123,17 +124,25 @@
 }
 
 #expandFilter > h1 {
-    padding: var(--paddingSZ);
+    padding: var(--paddingSZ) 0rem;
+    display: flex;
+    justify-content: center;
 }
 
 #expandFilter > button {
-    background-color: var(--dark);
     position: absolute;
-    top:calc(5rem/2);
+    top:2rem;
     right: var(--paddingSZ);
     border:none;
-    background-color: var(--light);
+    background-color: var(--dark);
+    color: var(--light);
     font-size: var(--sizeM);
+    transition: font-size 100ms ease;
+}
+#expandFilter > button:hover {
+    color: var(--secondary);
+    font-size: var(--sizeL);
+    transition: font-size 100ms ease;
 }
 
 #expandFilter > div {
@@ -175,6 +184,8 @@
     height:100%;
     width:100%;
     opacity: 0;
+    z-index: 10000;
+
 }
 
 .checkmark {
@@ -184,10 +195,12 @@
     height: 2rem;
     width: 2rem;
     background-color: var(--light);
+    transition: background-color 200ms ease;
 }
 
 #expandFilter input:checked ~ .checkmark{
     background-color: var(--secondary);
+    transition: background-color 200ms ease;
 }
 
 /* PROGRAMKORTEN  */
@@ -524,5 +537,20 @@
     font-size: var(--sizeS);
 }
 
+#loadMore {
+    background-color: none;
+    border:none;
+    appearance: none;
+    margin-bottom: var(--marginLR);
+    padding: var(--paddingSZ);
+    font-family: var(--title);
+    font-size: var(--sizeS);
+}
 
+#loadMore:active {
+    background-color: var(--dark);
+    color: var(--light);
+    font-weight: bold;
+    transition: 1s ease;
+}
 

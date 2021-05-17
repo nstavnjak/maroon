@@ -440,7 +440,7 @@ function createFilter(){
     studieInriktningDiv.classList.add("studieinriktning");
     
     let studieInriktningH2 = document.createElement("h2");
-    studieInriktningH2.textContent = "studie inriktning";
+    studieInriktningH2.textContent = "studieinriktning";
     studieInriktningDiv.append(studieInriktningH2);
     
     FIELDS.forEach(e => {
@@ -502,7 +502,7 @@ function createFilter(){
     utbildningsnivaDiv.classList.add("utbildningsniva");
     
     let utbildningsnivaH2 = document.createElement("h2");
-    utbildningsnivaH2.textContent = "utbildnings nivå";
+    utbildningsnivaH2.textContent = "utbildningsnivå";
     utbildningsnivaDiv.append(utbildningsnivaH2);
     
     LEVELS.forEach(e => {

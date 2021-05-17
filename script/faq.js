@@ -196,15 +196,6 @@ function createFaqQuestionField(questions){
 
         topBox.append(downArrow,LongArrow,questionText);
 
-/*
-        faqQuestionBox.innerHTML = `
-            <div class="top">
-                <div class="DownArrowFaq"></div>
-                <div class="LongArrowFaq hide"></div>
-                <h2>${question.question}</h2>
-            </div>
-        `;
-    */
         let answerBox = document.createElement("div");
         answerBox.classList.add("answerBox");
         answerBox.classList.add("hide");

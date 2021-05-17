@@ -25,12 +25,14 @@ document.querySelector("main").append(programlist);
 
 
 // EVENT
+document.getElementById("search").addEventListener("click", LoadMoreReset);
+document.addEventListener("click", filter);
 
-
-LoadMoreFunction(0, 5);
 //Load More
 //Klar
-function LoadMoreFunction(load, loaded) {
+
+LoadMoreFunction();
+function LoadMoreFunction() {
     let loadMore = document.createElement("button");
     if(document.querySelector("#loadMore") == null){
         loadMore.innerHTML = "Load More";
@@ -38,9 +40,8 @@ function LoadMoreFunction(load, loaded) {
         console.log("hej")
         document.querySelector("main").append(loadMore);
     }
-    
     for(load; load < loaded ; load++){
-            document.querySelector(".programList").append(createCard(PROGRAMMES[load])); 
+        document.querySelector(".programList").append(createCard(PROGRAMMES[load])); 
     }
     load = loaded;
     loaded = loaded + 5;
@@ -49,6 +50,12 @@ function LoadMoreFunction(load, loaded) {
     loadMore.addEventListener("click", LoadMoreFunction);
 }
 
+function LoadMoreReset() {
+    document.querySelector(".programList").innerHTML = "";
+    load = 0;
+    loaded = 5;
+    LoadMoreFunction();
+};
 // Functions
 
 
@@ -183,8 +190,6 @@ function sortAndFilterParent(){
     }
     return sortAndFilterParent;
 }
-
-document.addEventListener("click", filter);
 
 function searchProgram(textValue, country, city){
     programlist.innerHTML = "";

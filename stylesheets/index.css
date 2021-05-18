@@ -1,0 +1,104 @@
+/* first */
+.first {
+    height:calc(100vh - 8rem);
+}
+
+/* fact  */
+.factParent {
+    height:auto;
+    width:100%;
+    position: relative;
+}
+
+.rhomb {
+    position: relative;
+    width: 100%;
+    height: 5rem;
+    transform: skewX(45deg);
+}
+
+.rhomb h3, .rhomb p {
+    display: inline-block;
+    height: 100%;
+    transform: skewX(-45deg);
+
+    font-family: var(--title);
+    
+    font-size: var(--sizeM);
+    padding: 1rem;
+    color: var(--dark);
+}
+
+.rhomb p {
+    padding-left: 0rem;
+}
+
+.rhomb h3{
+    padding-left: 2rem;
+}
+
+.rhomb.num0 {
+    left: -12.5rem;
+    background-color: rgba(255, 200, 117, 0.5);
+}
+.num0 h3{
+    margin-left: 12.5rem;
+}
+
+.rhomb.num1{
+    left: -7.6rem;
+    top:-0.06rem;
+    background-color: rgba(255, 185, 79,0.6);
+}
+.num1 h3{
+    margin-left: 9.5rem;
+}
+
+.rhomb.num2{
+    left: -2.7rem;
+    top:-0.2rem;
+    background-color: rgba(255, 153, 0, 0.7);
+}
+.num2 h3{
+    margin-left: 6.5rem;
+}
+
+/* guide  */
+.guidePart {
+    margin-bottom: var(--marginLR);
+}
+.guidePart > div:first-child{
+    padding: var(--paddingSZ);
+}
+
+.title{
+    font-family: var(--title);
+    font-weight: lighter;
+    font-size: var(--sizeL);
+    text-transform: capitalize;
+
+    margin-bottom: var(--marginLR);
+}
+
+.paragraph{
+    font-family: var(--bodyText);
+    font-size: var(--sizeS);
+}
+
+.guidePart > div:last-child{
+    position: relative;
+}
+
+.img{
+    width:100%;
+}
+
+.comment {
+    position: absolute;
+    top:0;
+    height:99%;
+    width:100%;
+    background-color: rgba(255, 153, 0, 0.3);
+    
+}
+

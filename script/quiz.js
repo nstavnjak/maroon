@@ -863,70 +863,33 @@ function createResult(updatedArray){
             let countryCityDiv = document.createElement("div");
             countryCityDiv.classList.add("country-city");
 
-            countryCityDiv.innerHTML = `
-            <p class="cityName"> ${city.name}</p>
-            <button class="expandArrow">&#8679;</div>
-            `;
+            let cityNameAndButtonDiv = document.createElement("div");
+            cityNameAndButtonDiv.classList.add("nameAndButton");
+
+            let cityNameP = document.createElement("p");
+            cityNameP.classList.add("cityName");
+            cityNameP.innerHTML = `${city.name}`;
+
+            let expandPill = document.createElement("button");
+            expandPill.classList.add("expandArrow");
+            expandPill.innerHTML = `&#8679;`;
+
+            let detailedCity = document.createElement("div");
+            detailedCity.classList.add("detailedCity");
+            detailedCity.classList.add("hide");
+
+            cityNameAndButtonDiv.append(cityNameP,expandPill);
+            countryCityDiv.append(cityNameAndButtonDiv,detailedCity);
+            
 
                 countryCityDiv.addEventListener("click", () => {
                     countryCityDiv.classList.toggle("longer");
-                    document.querySelector(".detailedCity").classList.toggle("hide");
-                    document.querySelector(".expandArrow").classList.toggle("shrinkArrow");
+                    detailedCity.classList.toggle("hide");
+                    expandPill.classList.toggle("shrinkArrow");
                 });
 
-                countryCityDiv.append(createDetailedCity(updatedArray));
                 cityBoxes.append(countryCityDiv);
             });  
-
-           
-            function createDetailedCity(array){
-                let detailedCity = document.createElement("div");
-                detailedCity.classList.add("detailedCity");
-                detailedCity.classList.add("hide");
-                
-                //expandButton.classList.add("shrinkArrow");
-            
-
-                function createStudentsComments(cityObj){
-                let comments = COMMENTS_CITY.filter(comment => comment.cityID === cityObj.id);
-                let commentParent = document.createElement("div");
-                
-                comments.sort((a, b) => b.date.year - a.date.year);
-               
-                comments.forEach(comment => {
-                    let commentDiv = document.createElement("div");
-                    commentDiv.classList.add("comment");
-            
-                    console.log(comment.stars.out)
-                    let sum = comment.stars.out + comment.stars.food + comment.stars.housing;
-                    console.log(parseInt(sum));
-                    commentDiv.innerHTML = `
-                        <div>
-                            <div>
-                                <h1>${comment.alias}</h1>
-                                <h2>${comment.date.year}.${comment.date.month}.${comment.date.day}</h2>
-                            </div>
-                            <div>
-                                <h2>${sum/comment.stars.length}/5</2>
-                                <div class="bar">
-                                    <div class="visible bar"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <p>"${comment.text}"</p>`;
-                    
-                    
-                    
-                    commentParent.append(commentDiv);
-                   
-                });
-                return commentParent;
-                }
-    
-                detailedCity.append(createStudentsComments(array));
-            
-            return detailedCity;
-            }
 
         return cityBoxes;
     }

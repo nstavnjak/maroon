@@ -141,29 +141,30 @@ margin-top: 5px;
         position: relative;
 }
 
-.country-city{   
+.country-city {
+	background-color: var(--light);
+	margin-bottom: 15px;
+	padding: 20px;
+	width: 300px;
+	font-size: 15px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px 2px;
+
+    transition: 1s;
+}
+
+.nameAndButton {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    background-color: #ffffff;
-    margin: auto;
-    margin-bottom: 15px;
-    padding: 20px;
-    height: 40px;
-    width: 300px;
-    font-size: 15px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px 2px;
-    
 }
 
 .expandArrow {
-    
     border:none;
     background-color: var(--light);
     font-size: var(--sizeM);
 
     transform: rotate(180deg);
+    transition: 1s;
 }
 
 .shrinkArrow {
@@ -178,6 +179,8 @@ margin-top: 5px;
     height: 600px;
     display: flex;
     flex-direction: column;
+
+    transition: width 3s;
 }
 
 .matched {

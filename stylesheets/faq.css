@@ -1,66 +1,73 @@
-main{
-    background-color: var(--primary);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 div.faqContainer {
     height: auto;
-    width: 90%;
+    width: 100%;
     margin-top: 10px;
+}
+
+.faqTitle {
+    font-family: var(--title);
+    font-weight: normal;
+    font-size: var(--sizeL);
+    padding: var(--paddingSZ);
+
 }
 
 .faqQuestionDiv{
     overflow: scroll;
+    height:auto;
 }
 
 .faqQuestionBox {
 	display: flex;
-    align-items: center;
+    flex-direction: column;
+    overflow:hidden;
+	max-height: 10rem;
 
-	height: 35px;
-	font-size: 9px;
-	padding: 5px;
-	margin: 5px;
-	background-color: var(--light);
-	border: 1px solid var(--dark);
-
+    
     cursor: pointer;	
+	background-color: rgb(245, 245, 245);
+    
+    margin-bottom: var(--marginLR);
+    transition: max-height 1s ease;
 }
 
 .top {
     display: flex;
+    padding: var(--paddingSZ);
+    height:10rem;
+    font-family: var(--title);
+    font-size: var(--sizeS);
 }
 
-.DownArrowFaq {
-    margin-right: 10px;
-    font-size: 12.5px;
-}
-
-.LongArrowFaq {
-	font-size: 15.5px;
-	position: relative;
-	top: 8px;
-}
-
-.faqTitle{
-    padding: 10px;
-    font-size: 25px;
-}
-
-.hide {
-    display: none;
-}
-
-.longer {
+.top > h2 {
+    height:5rem;
     display: flex;
-    flex-direction: column;
-    height: auto;
-    align-items: flex-start;
+    align-items: center;
+}
+
+.DownArrowFaq, .LongArrowFaq {
+    
+    margin-right: 1rem;
+    font-size: var(--sizeS);
 }
 
 .answerBox{
-    font-size: 13px;
-    padding: 5px;
-    margin: auto;
+    padding: var(--paddingSZ);
+    padding-top: 0rem;
+    font-family: var(--bodyText);
+    font-size: var(--sizeS);
+    line-height: 1.5;
+    font-weight: lighter;
+    opacity: 100%;
+    transition: opacity 1s ease;
+}
+
+.hide {
+    opacity: 0;
+    transition: 1s ease;
+}
+
+.longer {
+    max-height: 80rem;
+    transition: max-height 1s ease;
 }

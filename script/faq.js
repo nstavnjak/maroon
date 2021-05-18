@@ -181,20 +181,12 @@ function createFaqQuestionField(questions){
 
         let topBox = document.createElement("div");
         topBox.classList.add("top");
-
-        let downArrow = document.createElement("div");
-        downArrow.classList.add("DownArrowFaq");
-        downArrow.innerHTML = "&#8595;";
         
-        let LongArrow = document.createElement("div");
-        LongArrow.classList.add("LongArrowFaq");
-        LongArrow.classList.add("hide");
-        LongArrow.innerHTML = "&#8627;";
 
         let questionText = document.createElement("h2");
         questionText.innerText = `${question.question}`;
 
-        topBox.append(downArrow,LongArrow,questionText);
+        topBox.append(questionText);
 
         let answerBox = document.createElement("div");
         answerBox.classList.add("answerBox");
@@ -203,14 +195,11 @@ function createFaqQuestionField(questions){
             <p class="faqAnswer">${question.answers}</p>
         `;
 
-       faqQuestionBox.addEventListener("click",()=>{
-           
-            faqQuestionBox.classList.toggle("longer");
-            downArrow.classList.toggle("hide");
-            LongArrow.classList.toggle("hide");
+        faqQuestionBox.addEventListener("click",()=>{
             answerBox.classList.toggle("hide");
-       })
-       faqQuestionBox.append(topBox);
+            faqQuestionBox.classList.toggle("longer");
+        })
+        faqQuestionBox.append(topBox);
         faqQuestionBox.append(answerBox);
         faqQuestionDiv.append(faqQuestionBox);
     });
@@ -218,7 +207,6 @@ function createFaqQuestionField(questions){
     faqContainer.append(faqQuestionDiv);
 
     document.querySelector("main").append(faqContainer);
-    
 }
 
 let questionsBox = document.querySelectorAll(".faqQuestionBox");

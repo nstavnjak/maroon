@@ -193,6 +193,7 @@ margin-top: 5px;
     text-align: center;
     text-decoration: underline;
     margin-bottom: 10px;
+    color: var(--light);
 }
 
 .detailedCity{

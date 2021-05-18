@@ -144,7 +144,7 @@ margin-top: 5px;
 .country-city {
 	background-color: var(--light);
 	margin-bottom: 15px;
-	padding: 20px;
+	padding: 10px;
 	width: 300px;
 	font-size: 15px;
 	border-radius: 5px;
@@ -156,6 +156,12 @@ margin-top: 5px;
 .nameAndButton {
     display: flex;
     justify-content: space-between;
+}
+
+.cityName {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .expandArrow {

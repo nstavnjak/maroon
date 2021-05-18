@@ -78,7 +78,7 @@ function createMeny(){
     // The visible
     let logo = document.createElement("div");
     logo.setAttribute("id", "logo");
-    logo.textContent = `Exchanger`;
+    logo.textContent = `xchanger`;
     let menyButton = document.createElement("button");
     menyButton.setAttribute("id", "menyButton");
     menyButton.textContent = `meny`;

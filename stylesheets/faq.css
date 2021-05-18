@@ -1,0 +1,73 @@
+div.faqContainer {
+    height: auto;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.faqTitle {
+    font-family: var(--title);
+    font-weight: normal;
+    font-size: var(--sizeL);
+    padding: var(--paddingSZ);
+
+}
+
+.faqQuestionDiv{
+    overflow: scroll;
+    height:auto;
+}
+
+.faqQuestionBox {
+	display: flex;
+    flex-direction: column;
+    overflow:hidden;
+	max-height: 10rem;
+
+    
+    cursor: pointer;	
+	background-color: rgb(245, 245, 245);
+    
+    margin-bottom: var(--marginLR);
+    transition: max-height 1s ease;
+}
+
+.top {
+    display: flex;
+    padding: var(--paddingSZ);
+    height:10rem;
+    font-family: var(--title);
+    font-size: var(--sizeS);
+}
+
+.top > h2 {
+    height:5rem;
+    display: flex;
+    align-items: center;
+}
+
+.DownArrowFaq, .LongArrowFaq {
+    
+    margin-right: 1rem;
+    font-size: var(--sizeS);
+}
+
+.answerBox{
+    padding: var(--paddingSZ);
+    padding-top: 0rem;
+    font-family: var(--bodyText);
+    font-size: var(--sizeS);
+    line-height: 1.5;
+    font-weight: lighter;
+    opacity: 100%;
+    transition: opacity 1s ease;
+}
+
+.hide {
+    opacity: 0;
+    transition: 1s ease;
+}
+
+.longer {
+    max-height: 80rem;
+    transition: max-height 1s ease;
+}

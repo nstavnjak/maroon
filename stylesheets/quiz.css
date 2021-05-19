@@ -241,9 +241,10 @@ margin-top: 5px;
     font-size: 15px;
 }
 
-.cityInfo>div:first-child>h1,h2 {
+.cityInfo {
     display: none;
 }
+
 
 .cityInfo .red{
     background-color: red;
@@ -315,4 +316,11 @@ margin-top: 5px;
     font-size: var(--sizeS);
 }
 
+.comment h1 {
+    font-size: 18px;
+}
+
+.comment h2{
+    font-size: 12px;
+}
 

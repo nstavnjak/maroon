@@ -20,6 +20,9 @@ main {
     box-shadow: 0 0 10px 2px;
 
     width: 300px;
+}
+
+.bigger{
     height: 320px;
 }
 

@@ -710,6 +710,8 @@ function startQuiz() {
     //Gömmer start-knappen
     startButton.classList.add("hide");
 
+    document.querySelector(".questionsContainer").classList.toggle("bigger");
+    
     //Sorterar questions arrayen slumpmässig
     shuffliedQuestions = questions.sort(() => Math.random() - .5);
     currentQuestionIndex = 0;

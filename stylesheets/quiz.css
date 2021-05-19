@@ -146,11 +146,13 @@ margin-top: 5px;
 	margin-bottom: 15px;
 	padding: 10px;
 	width: 300px;
+    max-height: 40px;
 	font-size: 15px;
 	border-radius: 5px;
 	box-shadow: 0 0 10px 2px;
 
     transition: 1s;
+    overflow: hidden;
 }
 
 .nameAndButton {
@@ -182,11 +184,10 @@ margin-top: 5px;
 }
 
 .longer {
-    height: 600px;
+    max-height: 400px;
     display: flex;
     flex-direction: column;
-
-    transition: width 3s;
+    overflow-y: scroll;
 }
 
 .matched {
@@ -202,4 +203,58 @@ margin-top: 5px;
   
     display: flex;
     flex-direction: column;
+}
+
+.cityPictureWrapper {
+    width: 400vw;
+    position: relative;
+
+    animation-name: slider;
+    animation-timing-function: ease;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+}
+
+.cityPictureWrapper img {
+    height:75vw;
+    width:25%;
+}
+
+@keyframes slider {
+    0%   { transform: translateX(0vw);   }
+    16%  { transform: translateX(-100vw);}
+    32%  { transform: translateX(-200vw);}
+    48%  { transform: translateX(-300vw);}
+    63%  { transform: translateX(-200vw);}
+    82%  { transform: translateX(-100vw);}
+    100% { transform: translateX(0vw);}
+    /* 1000 { transform: translateX(-300px);} */
+}
+
+.rating {
+    flex-grow:1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.circleRating {
+    height: 8rem;
+    width: 8rem;
+    border-radius: 200px;
+    background-color: var(--light);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: var(--title);
+    font-size: var(--sizeS);
+    font-size: var(--sizeM);
+}
+
+.rating > h1 {
+    margin-bottom: 1rem;
+    font-family: var(--title);
 }

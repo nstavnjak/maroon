@@ -848,8 +848,6 @@ function createResult(updatedArray){
         let andraRek = document.createElement("h1");
         andraRek.classList.add("matched");
         andraRek.innerText = "Andra Rekommendationer";
-        
-        let country = COUNTRIES.find(city => city.id === updatedArray.countryID);
 
         resultContainer.append(storstMatch,createCityFront(updatedArray),andraRek);
 
@@ -877,6 +875,7 @@ function createResult(updatedArray){
             let detailedCity = document.createElement("div");
             detailedCity.classList.add("detailedCity");
             detailedCity.classList.add("hide");
+            detailedCity.append(createBack(city));
 
             cityNameAndButtonDiv.append(cityNameP,expandPill);
             countryCityDiv.append(cityNameAndButtonDiv,detailedCity);
@@ -895,93 +894,4 @@ function createResult(updatedArray){
     }
 
     return resultContainer;
-}
-
-
-
-function createBack(cityObj){
-
-    let cardBack = document.createElement("div");
-    cardBack.classList.add("programCardFace");
-    cardBack.classList.add("back");
-
-    let scrollDiv = document.createElement("div");
-    scrollDiv.classList.add("scroll");
-    scrollDiv.append(getCityInfo(cityObj), getRatings(cityObj), createStudentsComments(cityObj));
-    cardBack.append(scrollDiv);
-    // NOT done, kanske ändra med bilderna? Slider?
-    function getCityInfo(cityObj){
-        let div = document.createElement("div");
-        let country = COUNTRIES.find(c => c.id === cityObj.countryID);
-
-        let cityInfo = document.createElement("div");
-        cityInfo.classList.add("cityInfo");
-
-        let landCountryParent = document.createElement("div");
-        let cityTitle = document.createElement("h1");
-        let countryTitle = document.createElement("h2");
-        
-        cityTitle.textContent = cityObj.name;
-        countryTitle.textContent = country.name;
-        
-
-        let visum = document.createElement("div");
-        visum.textContent = `visum`;
-        if (country.visa){
-            visum.classList.add("green");
-        } else {
-            visum.classList.add("red");
-        }
-        
-        landCountryParent.append(cityTitle, countryTitle);
-        cityInfo.append(landCountryParent, visum);
-
-        let cityPictureWrapper = document.createElement("div");
-        cityPictureWrapper.classList.add("cityPictureWrapper");
-        
-        cityObj.imagesNormal.forEach( image => {
-            let img = document.createElement("img");
-            // img.style.backgroundImage = `url(../image/${image})`;
-            img.setAttribute("src", `../Images/${image}`);
-            cityPictureWrapper.append(img);
-        })
-        div.append(cityInfo, cityPictureWrapper);
-        
-        return div;
-    }
-
-    // done
-    function getRatings(cityObj){
-        let ratings = document.createElement("div");
-
-        let comments = COMMENTS_CITY.filter(comment => comment.cityID === cityObj.id);
-
-        ratings.append(circleRating(comments, "out", "Nattliv"), circleRating(comments, "food", "Matkultur"), circleRating(comments, "accomodation", "Boende"));
-        
-        return ratings;
-    }
-
-    // done
-    function circleRating(array, theme, title){
-        
-        let counter = 0;
-        array.forEach(element => {
-            element.stars[`${theme}`] += counter;
-        });   
-        
-        let rating = document.createElement("div");
-        rating.classList.add("rating");
-        let titleElement = document.createElement("h1");
-        titleElement.textContent = title;
-        let circleRating = document.createElement("div");
-        circleRating.classList.add("circleRating");
-        circleRating.textContent = `${counter/array.length} / 5`;
-
-        rating.append(titleElement, circleRating);
-        return rating;
-    }
-    
-   
-    return cardBack;
-    
 }

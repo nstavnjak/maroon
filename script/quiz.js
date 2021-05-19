@@ -638,12 +638,15 @@ let answersField = document.getElementById("answersButtons");
 let nextButton = document.getElementById("right");
 let finishButton = document.getElementById("finish");
 
+// Global array och variabel
 let shuffliedQuestions, currentQuestionIndex;
 
 //EventListener
 
+//On click på start-knappen kallas på funktionen startQuiz
 startButton.addEventListener("click", startQuiz);
 
+//On click på nästa pillen kallas på funktioner resetTheValuation, setNextQuestion och updateBar.
 nextButton.addEventListener("click", ()=>{
     currentQuestionIndex++;
     resetTheValuation();
@@ -652,18 +655,24 @@ nextButton.addEventListener("click", ()=>{
 
 });
 
-finishButton.addEventListener("click", ()=>{
+//On click på sluta knappen skapas en div (visar antal städer som rekommenderas) med en visa knapp.
+finishButton.addEventListener("click", () =>{
 
+    //Tömmer quiz containern 
     quizContainer.innerHTML = "";
     quizContainer.classList.add("questionsContainer");
+
     quizContainer.innerHTML= `<div class="resultatText">${cities.length} Städer hittades</div>`;
     
+    //Skapar en visa knapp
     let showButton = document.createElement("button");
     showButton.classList.add("showButton");
     showButton.innerText = "Visa";
 
+    //Knappen appendas i quiz containern
     quizContainer.append(showButton);
 
+    //On click på visa knappen skapas resultat fältet()
     showButton.addEventListener("click",()=>{
         document.querySelector("main").innerHTML= "";
         document.querySelector("main").append(createResult(cities));
@@ -674,37 +683,46 @@ finishButton.addEventListener("click", ()=>{
 
 // Functions
 
+// Återställer input värdet 
 function resetTheValuation(){
     let inputValue = document.querySelector(".valuationInput")
     inputValue.value = 5;
     document.querySelector(".numberOfInput").innerText = inputValue.value;
 }
 
+// Startar quizet
 function startQuiz() {
 
+    //Gömmer start-knappen
     startButton.classList.add("hide");
 
+    //Sorterar questions arrayen slumpmässig
     shuffliedQuestions = questions.sort(() => Math.random() - .5);
     currentQuestionIndex = 0;
    
+    //Appendar processbaren
     quizContainer.prepend(createProgressBar());
 
     setNextQuestion();
 }
 
+//Tömmer questions containern och hämtar en fråga från den slumpmässig sorterat arrayen
 function setNextQuestion(){
     clearTheQuestionAndAnswerfield();
     showQuestion(shuffliedQuestions[currentQuestionIndex]);
 }
 
+//Tömmer (tar bort) elementen som ligger i answer fältet 
 function clearTheQuestionAndAnswerfield(){
    document.querySelector(".navigateButtons").classList.add("hide");
 
+   //Tömmer fältet tills den är tom.
     while(answersField.firstChild){
         answersField.removeChild(answersField.firstChild);
     }
 }
 
+//Tar emot questions arrayen och sätter frågor och svar 
 function showQuestion(question){
 
     document.querySelector(".valuationDiv").classList.remove("hide");
@@ -727,7 +745,7 @@ function showQuestion(question){
             button.classList.add("selectedOpt");
             document.querySelector(".navigateButtons").classList.remove("hide");
             
-            filterCitiesByAnswer(button);
+         
         });
 
         answersField.append(button);
@@ -735,23 +753,23 @@ function showQuestion(question){
     
 }
 
-function filterCitiesByAnswer(key){
-    //let answer = e.target.innerText;
-    let updatedCities = cities.filter(city => city.key === key.innerText);
-    updatedCitiesByAnswers.push(updatedCities);
-}
 
-//done
+//Skapar quiz container - Frågor och Svar fältet
 function createQuizContainer(){
+
+    // Skapar quiz container
     let quizcontainer = document.createElement("div");
     quizcontainer.classList.add("container");
 
+    //Skapar frågor container
     let questionsContainer = document.createElement("div");
     questionsContainer.classList.add("questionsContainer");
 
+    //Skapar frågor div
     let question = document.createElement("div");
     question.setAttribute("id","question");
 
+    //Värdering fältet
     let valuationDiv = document.createElement("div");
     valuationDiv.classList.add("valuationDiv");
     valuationDiv.classList.add("hide");
@@ -763,9 +781,11 @@ function createQuizContainer(){
        </div>
     `;
     
+    //Skapar input fältet
     let valuationInputDiv = document.createElement("div");
     valuationInputDiv.classList.add("valuationInputDiv");
 
+    //Skapar input element
     let valuationInput = document.createElement("input");
     valuationInput.classList.add("valuationInput");
     valuationInput.setAttribute("type","range");
@@ -773,6 +793,7 @@ function createQuizContainer(){
     valuationInput.setAttribute("max","10");
     valuationInput.setAttribute("value","5");
 
+    //Skapar diven som visar värden på input elementen
     let numberOfInput = document.createElement("div");
     numberOfInput.classList.add("numberOfInput");
     numberOfInput.innerText = valuationInput.value;
@@ -785,17 +806,20 @@ function createQuizContainer(){
     valuationInputDiv.append(numberOfInput);
     valuationDiv.append(valuationInputDiv);
 
+    //Skapar svar fältet 
     let answersButtons = document.createElement("div");
     answersButtons.setAttribute("id","answersButtons")
    
+    //Skapar navigation fältet 
     let navigateButtons = document.createElement("div");
     navigateButtons.classList.add("navigateButtons","hide");
 
-
+    //Skapar nästa pillen
     let rightArrow = document.createElement("button");
     rightArrow.setAttribute("id", "right");
     rightArrow.innerHTML = `&#8680;`;
 
+    //Skapar sluta-knappen
     let finish = document.createElement("button");
     finish.setAttribute("id", "finish");
     finish.innerHTML = `Sluta`;
@@ -808,7 +832,7 @@ function createQuizContainer(){
     document.querySelector("main").append(quizcontainer);
 };
 
-//done
+//Skapar start-knappen och appendar den i quiz containern
 function createStartButton(){
 
     let startButton = document.createElement("button");
@@ -817,7 +841,7 @@ function createStartButton(){
     document.querySelector(".questionsContainer").append(startButton);
 }
 
-//done
+//Skapar processbaren
 function createProgressBar(){
     let progress = document.createElement("div");
     progress.classList.add("progress");
@@ -831,13 +855,17 @@ function createProgressBar(){
     return progress;
 };
 
+//Tar emot numret av det visade frågan och ändrar på längden av processbaren.
 function updateBar(questionNumber){
     let lastProgress = document.querySelector(".bar");
     let level = questionNumber*10;
     lastProgress.style.width = level + "%";
 }
 
+//Tar emot den uppdaterade array enligt svar och returnerar resultat diven
 function createResult(updatedArray){
+
+        //Skapar resultat containern
         let resultContainer = document.createElement("div");
         resultContainer.setAttribute("id","resultContainer");
 
@@ -851,29 +879,34 @@ function createResult(updatedArray){
 
         resultContainer.append(storstMatch,createCityFront(updatedArray),andraRek);
 
+    //Tar emot en array och returnerar en div element som innehåller all information för varje stad i arrayen
     function createCityFront(updatedArray){
-   
+        //Skapar stad fältet
         let cityBoxes = document.createElement("div");
         cityBoxes.classList.add("cityBoxes");
 
         updatedArray.forEach(city => {
-
+            //skapar en div för varje stad som finns i den uppdaterade array
             let countryCityDiv = document.createElement("div");
             countryCityDiv.classList.add("country-city");
 
+            //Skapar namn och knapp fältet
             let cityNameAndButtonDiv = document.createElement("div");
             cityNameAndButtonDiv.classList.add("nameAndButton");
 
             let country = COUNTRIES.find(c => c.id === city.countryID);
 
+            //Skapar ett p element som innehåller namn på stad och land för varje city objekt i arrayen
             let cityNameP = document.createElement("p");
             cityNameP.classList.add("cityName");
             cityNameP.innerHTML = `${city.name}, ${country.name}`;
 
+            //Skapar ner pillen 
             let expandPill = document.createElement("button");
             expandPill.classList.add("expandArrow");
             expandPill.innerHTML = `&#8679;`;
 
+            //Skapar diven som kommer innehålla infon om staden
             let detailedCity = document.createElement("div");
             detailedCity.classList.add("detailedCity");
             detailedCity.classList.add("hide");
@@ -882,7 +915,7 @@ function createResult(updatedArray){
             cityNameAndButtonDiv.append(cityNameP,expandPill);
             countryCityDiv.append(cityNameAndButtonDiv,detailedCity);
             
-
+                //On click, togglas longer, hide och shrinkArrow classes
                 countryCityDiv.addEventListener("click", () => {
                     countryCityDiv.classList.toggle("longer");
                     detailedCity.classList.toggle("hide");
@@ -890,11 +923,14 @@ function createResult(updatedArray){
                     expandPill.classList.toggle("shrinkArrow");
                 });
 
+                //Alla städer appendas i stad fältet
                 cityBoxes.append(countryCityDiv);
             });  
 
+        // Returnerar stad fältet för att senare appendas i resultat container
         return cityBoxes;
     }
 
+    //Returnerar resultat container för att senare appendas on click på visa knappen
     return resultContainer;
 }

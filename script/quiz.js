@@ -646,8 +646,10 @@ startButton.addEventListener("click", startQuiz);
 
 nextButton.addEventListener("click", ()=>{
     currentQuestionIndex++;
+    resetTheValuation();
     setNextQuestion();
     updateBar(currentQuestionIndex);
+
 });
 
 finishButton.addEventListener("click", ()=>{
@@ -671,6 +673,12 @@ finishButton.addEventListener("click", ()=>{
 // Footer 
 
 // Functions
+
+function resetTheValuation(){
+    let inputValue = document.querySelector(".valuationInput")
+    inputValue.value = 5;
+    document.querySelector(".numberOfInput").innerText = inputValue.value;
+}
 
 function startQuiz() {
 
@@ -699,6 +707,8 @@ function clearTheQuestionAndAnswerfield(){
 
 function showQuestion(question){
 
+    document.querySelector(".valuationDiv").classList.remove("hide");
+
     questionField.innerText = question.question;
 
     question.answers.forEach(answers => {
@@ -707,14 +717,12 @@ function showQuestion(question){
         button.classList.add("answer");
         button.innerText = answers.option;
 
-     
-
         button.addEventListener("click", () =>{
            
             let allOptions = document.querySelectorAll(".answer");
             allOptions.forEach(e => {
                 e.classList.remove("selectedOpt");
-            })
+            });
             
             button.classList.add("selectedOpt");
             document.querySelector(".navigateButtons").classList.remove("hide");
@@ -743,7 +751,40 @@ function createQuizContainer(){
 
     let question = document.createElement("div");
     question.setAttribute("id","question");
+
+    let valuationDiv = document.createElement("div");
+    valuationDiv.classList.add("valuationDiv");
+    valuationDiv.classList.add("hide");
+    valuationDiv.innerHTML = `
+     
+       <div class="valuationTextDiv">
+       <p class="valuationText">Inte viktigt</p>
+       <p class="valuationText">Mycket viktigt</p>
+       </div>
+    `;
     
+    let valuationInputDiv = document.createElement("div");
+    valuationInputDiv.classList.add("valuationInputDiv");
+
+    let valuationInput = document.createElement("input");
+    valuationInput.classList.add("valuationInput");
+    valuationInput.setAttribute("type","range");
+    valuationInput.setAttribute("min","0");
+    valuationInput.setAttribute("max","10");
+    valuationInput.setAttribute("value","5");
+
+    let numberOfInput = document.createElement("div");
+    numberOfInput.classList.add("numberOfInput");
+    numberOfInput.innerText = valuationInput.value;
+
+    valuationInput.addEventListener("input",()=>{
+        numberOfInput.innerText = valuationInput.value;
+    })
+
+    valuationInputDiv.prepend(valuationInput);
+    valuationInputDiv.append(numberOfInput);
+    valuationDiv.append(valuationInputDiv);
+
     let answersButtons = document.createElement("div");
     answersButtons.setAttribute("id","answersButtons")
    
@@ -761,7 +802,7 @@ function createQuizContainer(){
 
     navigateButtons.append(finish,rightArrow);
 
-    questionsContainer.append(question,answersButtons,navigateButtons)
+    questionsContainer.append(question,answersButtons,valuationDiv,navigateButtons)
 
     quizcontainer.append(questionsContainer);
     document.querySelector("main").append(quizcontainer);
@@ -807,8 +848,6 @@ function createResult(updatedArray){
         let andraRek = document.createElement("h1");
         andraRek.classList.add("matched");
         andraRek.innerText = "Andra Rekommendationer";
-        
-        let country = COUNTRIES.find(city => city.id === updatedArray.countryID);
 
         resultContainer.append(storstMatch,createCityFront(updatedArray),andraRek);
 
@@ -822,160 +861,40 @@ function createResult(updatedArray){
             let countryCityDiv = document.createElement("div");
             countryCityDiv.classList.add("country-city");
 
-            countryCityDiv.innerHTML = `
-            <p class="cityName"> ${city.name}</p>
-            <button class="expandArrow">&#8679;</div>
-            `;
+            let cityNameAndButtonDiv = document.createElement("div");
+            cityNameAndButtonDiv.classList.add("nameAndButton");
+
+            let country = COUNTRIES.find(c => c.id === city.countryID);
+
+            let cityNameP = document.createElement("p");
+            cityNameP.classList.add("cityName");
+            cityNameP.innerHTML = `${city.name}, ${country.name}`;
+
+            let expandPill = document.createElement("button");
+            expandPill.classList.add("expandArrow");
+            expandPill.innerHTML = `&#8679;`;
+
+            let detailedCity = document.createElement("div");
+            detailedCity.classList.add("detailedCity");
+            detailedCity.classList.add("hide");
+            detailedCity.append(createBack(city));
+
+            cityNameAndButtonDiv.append(cityNameP,expandPill);
+            countryCityDiv.append(cityNameAndButtonDiv,detailedCity);
+            
 
                 countryCityDiv.addEventListener("click", () => {
                     countryCityDiv.classList.toggle("longer");
-                    document.querySelector(".detailedCity").classList.toggle("hide");
-                    document.querySelector(".expandArrow").classList.toggle("shrinkArrow");
+                    detailedCity.classList.toggle("hide");
+                    cityNameP.classList.toggle("hide");
+                    expandPill.classList.toggle("shrinkArrow");
                 });
+
                 cityBoxes.append(countryCityDiv);
             });  
-
-           
-            function createDetailedCity(array){
-                let detailedCity = document.createElement("div");
-                detailedCity.classList.add("detailedCity");
-               detailedCity.innerText ="hola";
-                //expandButton.classList.add("shrinkArrow");
-            
-                function createStudentsComments(cityObj){
-                let comments = COMMENTS_CITY.filter(comment => comment.cityID === cityObj.id);
-                let commentParent = document.createElement("div");
-                
-                comments.sort((a, b) => b.date.year - a.date.year);
-               
-                comments.forEach(comment => {
-                    let commentDiv = document.createElement("div");
-                    commentDiv.classList.add("comment");
-            
-                    console.log(comment.stars.out)
-                    let sum = comment.stars.out + comment.stars.food + comment.stars.housing;
-                    console.log(parseInt(sum));
-                    commentDiv.innerHTML = `
-                        <div>
-                            <div>
-                                <h1>${comment.alias}</h1>
-                                <h2>${comment.date.year}.${comment.date.month}.${comment.date.day}</h2>
-                            </div>
-                            <div>
-                                <h2>${sum/comment.stars.length}/5</2>
-                                <div class="bar">
-                                    <div class="visible bar"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <p>"${comment.text}"</p>`;
-                    
-                    
-                    
-                    commentParent.append(commentDiv);
-                   
-                });
-                return commentParent;
-                }
-        
-                detailedCity.append(createStudentsComments(array));
-            
-            return detailedCity;
-            }
-
-            cityBoxes.append(createDetailedCity(updatedArray));
 
         return cityBoxes;
     }
 
     return resultContainer;
-}
-
-
-
-function createBack(cityObj){
-
-    let cardBack = document.createElement("div");
-    cardBack.classList.add("programCardFace");
-    cardBack.classList.add("back");
-
-    let scrollDiv = document.createElement("div");
-    scrollDiv.classList.add("scroll");
-    scrollDiv.append(getCityInfo(cityObj), getRatings(cityObj), createStudentsComments(cityObj));
-    cardBack.append(scrollDiv);
-    // NOT done, kanske ändra med bilderna? Slider?
-    function getCityInfo(cityObj){
-        let div = document.createElement("div");
-        let country = COUNTRIES.find(c => c.id === cityObj.countryID);
-
-        let cityInfo = document.createElement("div");
-        cityInfo.classList.add("cityInfo");
-
-        let landCountryParent = document.createElement("div");
-        let cityTitle = document.createElement("h1");
-        let countryTitle = document.createElement("h2");
-        
-        cityTitle.textContent = cityObj.name;
-        countryTitle.textContent = country.name;
-        
-
-        let visum = document.createElement("div");
-        visum.textContent = `visum`;
-        if (country.visa){
-            visum.classList.add("green");
-        } else {
-            visum.classList.add("red");
-        }
-        
-        landCountryParent.append(cityTitle, countryTitle);
-        cityInfo.append(landCountryParent, visum);
-
-        let cityPictureWrapper = document.createElement("div");
-        cityPictureWrapper.classList.add("cityPictureWrapper");
-        
-        cityObj.imagesNormal.forEach( image => {
-            let img = document.createElement("img");
-            // img.style.backgroundImage = `url(../image/${image})`;
-            img.setAttribute("src", `../Images/${image}`);
-            cityPictureWrapper.append(img);
-        })
-        div.append(cityInfo, cityPictureWrapper);
-        
-        return div;
-    }
-
-    // done
-    function getRatings(cityObj){
-        let ratings = document.createElement("div");
-
-        let comments = COMMENTS_CITY.filter(comment => comment.cityID === cityObj.id);
-
-        ratings.append(circleRating(comments, "out", "Nattliv"), circleRating(comments, "food", "Matkultur"), circleRating(comments, "accomodation", "Boende"));
-        
-        return ratings;
-    }
-
-    // done
-    function circleRating(array, theme, title){
-        
-        let counter = 0;
-        array.forEach(element => {
-            element.stars[`${theme}`] += counter;
-        });   
-        
-        let rating = document.createElement("div");
-        rating.classList.add("rating");
-        let titleElement = document.createElement("h1");
-        titleElement.textContent = title;
-        let circleRating = document.createElement("div");
-        circleRating.classList.add("circleRating");
-        circleRating.textContent = `${counter/array.length} / 5`;
-
-        rating.append(titleElement, circleRating);
-        return rating;
-    }
-    
-   
-    return cardBack;
-    
 }

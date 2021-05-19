@@ -20,6 +20,7 @@ main {
     box-shadow: 0 0 10px 2px;
 
     width: 300px;
+    height: 320px;
 }
 
 #question{
@@ -49,11 +50,33 @@ main {
     color: #26282C;
 }
 
+.valuationDiv{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.valuationTextDiv {
+        display: flex;
+        justify-content: space-around;
+}
+
+.valuationText{
+    font-size: 12.5px;
+}
+
+.valuationInputDiv {
+    margin-top: 10px;
+}
+
+.numberOfInput{
+font-size: 12.5px;
+margin-top: 5px;
+}
+
 .navigateButtons{
     display: flex;
     justify-content: space-between;
-
-    margin-top: 20px;
 }
 
 .navigateButtons button {
@@ -118,29 +141,42 @@ main {
         position: relative;
 }
 
-.country-city{   
+.country-city {
+	background-color: var(--light);
+	margin-bottom: 15px;
+	padding: 10px;
+	width: 300px;
+    max-height: 40px;
+	font-size: 15px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px 2px;
+
+    transition: 1s;
+    overflow: hidden;
+}
+
+.nameAndButton {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    background-color: #ffffff;
-    margin: auto;
-    margin-bottom: 15px;
-    padding: 20px;
-    height: 40px;
-    width: 300px;
-    font-size: 15px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px 2px;
-    
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.cityName {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        font-weight: bold;
 }
 
 .expandArrow {
-    
     border:none;
     background-color: var(--light);
     font-size: var(--sizeM);
 
     transform: rotate(180deg);
+    transition: 1s;
 }
 
 .shrinkArrow {
@@ -152,23 +188,139 @@ main {
 }
 
 .longer {
-    height: 600px;
+    max-height: 400px;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
 }
 
 .matched {
     text-align: center;
     text-decoration: underline;
     margin-bottom: 10px;
+    color: var(--light);
 }
 
 .detailedCity{
     width: 100%;
     height: 100%;
   
-  
-
     display: flex;
     flex-direction: column;
 }
+
+.cityPictureWrapper {
+    width: 400vw;
+    position: relative;
+
+    animation-name: slider;
+    animation-timing-function: ease;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+}
+
+.cityPictureWrapper img {
+    height:75vw;
+    width:25%;
+}
+
+@keyframes slider {
+    0%   { transform: translateX(0vw);   }
+    16%  { transform: translateX(-100vw);}
+    32%  { transform: translateX(-200vw);}
+    48%  { transform: translateX(-300vw);}
+    63%  { transform: translateX(-200vw);}
+    82%  { transform: translateX(-100vw);}
+    100% { transform: translateX(0vw);}
+    /* 1000 { transform: translateX(-300px);} */
+}
+
+.rating > h1 {
+    margin-bottom: 1rem;
+    font-family: var(--title);
+    font-size: 15px;
+}
+
+.cityInfo {
+    display: none;
+}
+
+
+.cityInfo .red{
+    background-color: red;
+}
+
+.cityInfo .green{
+    background-color: green;
+}
+
+.programCardFace.back > div > div:nth-child(2) {
+    display: flex;
+    padding: var(--paddingSZ);
+}
+
+.rating {
+    flex-grow:1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.circleRating {
+    height: 8rem;
+    width: 8rem;
+    border-radius: 200px;
+    background-color: var(--light);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: var(--title);
+    font-size: var(--sizeS);
+    font-size: var(--sizeM);
+}
+
+.rating > h1 {
+    margin-bottom: 1rem;
+    font-family: var(--title);
+}
+
+/* COMMETNS */
+
+.programCardFace.back > div > div:nth-child(3) {
+    padding: var(--paddingSZ);
+}
+
+.programCardFace.back > .scroll{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.comment {
+    margin-bottom: var(--marginLR);
+    background-color: var(--light);
+    padding: var(--paddingSZ);
+}
+
+.comment > div {
+    display: flex;
+    justify-content: space-between;
+    
+    font-family: var(--title);
+}
+
+.comment p {
+    font-family: var(--bodyText);
+    font-size: var(--sizeS);
+}
+
+.comment h1 {
+    font-size: 18px;
+}
+
+.comment h2{
+    font-size: 12px;
+}
+

@@ -201,6 +201,19 @@ margin-top: 5px;
     color: var(--light);
 }
 
+.resultatButtonField {
+display: flex;
+}
+
+.restartButton {
+	background-color: #ff9900;
+	font-size: 10px;
+	margin: auto;
+	height: 40px;
+	width: 70px;
+	border-radius: 90%;
+}
+
 .detailedCity{
     width: 100%;
     height: 100%;

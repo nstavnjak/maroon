@@ -629,7 +629,7 @@ let updatedCitiesByAnswers = [];
 // Main
 
 createQuizContainer();
-createStartButton();
+document.querySelector(".questionsContainer").append(createStartButton());
 
 let startButton = document.querySelector("#startButton");
 let quizContainer = document.querySelector(".container");
@@ -648,22 +648,36 @@ startButton.addEventListener("click", startQuiz);
 
 //On click på nästa pillen kallas på funktioner resetTheValuation, setNextQuestion och updateBar.
 nextButton.addEventListener("click", ()=>{
-    currentQuestionIndex++;
-    resetTheValuation();
-    setNextQuestion();
-    updateBar(currentQuestionIndex);
 
+    currentQuestionIndex++;
+    
+    //Vid sista frågan kallar på show funktionen och slutar quizet
+    if(currentQuestionIndex === 9){
+        resetTheValuation();
+        showResult(cities);
+    }
+    //Annars
+   else{
+    resetTheValuation();
+    updateBar(currentQuestionIndex);
+    setNextQuestion();
+   }
 });
 
-//On click på sluta knappen skapas en div (visar antal städer som rekommenderas) med en visa knapp.
-finishButton.addEventListener("click", () =>{
+ //On click på sluta knappen anropas funktionen showResult med argumentet finished array
+ finishButton.addEventListener("click", ()=>{
+       showResult(cities);
+ });
+
+//Skapar en div (visar antal städer som rekommenderas) med en visa knapp.
+function showResult(cities){
 
     //Tömmer quiz containern 
     quizContainer.innerHTML = "";
     quizContainer.classList.add("questionsContainer");
 
     quizContainer.innerHTML= `<div class="resultatText">${cities.length} Städer hittades</div>`;
-    
+
     //Skapar en visa knapp
     let showButton = document.createElement("button");
     showButton.classList.add("showButton");
@@ -677,7 +691,7 @@ finishButton.addEventListener("click", () =>{
         document.querySelector("main").innerHTML= "";
         document.querySelector("main").append(createResult(cities));
     });
-});
+};
 
 // Footer 
 
@@ -752,7 +766,6 @@ function showQuestion(question){
     });
     
 }
-
 
 //Skapar quiz container - Frågor och Svar fältet
 function createQuizContainer(){
@@ -834,11 +847,11 @@ function createQuizContainer(){
 
 //Skapar start-knappen och appendar den i quiz containern
 function createStartButton(){
-
     let startButton = document.createElement("button");
     startButton.setAttribute("id","startButton");
+    startButton.classList.add("startButton");
     startButton.innerText = "Starta testet";
-    document.querySelector(".questionsContainer").append(startButton);
+    return startButton;
 }
 
 //Skapar processbaren
@@ -859,7 +872,7 @@ function createProgressBar(){
 function updateBar(questionNumber){
     let lastProgress = document.querySelector(".bar");
     let level = questionNumber*10;
-    lastProgress.style.width = level + "%";
+    lastProgress.style.width =level + 10 + "%";
 }
 
 //Tar emot den uppdaterade array enligt svar och returnerar resultat diven

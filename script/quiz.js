@@ -864,9 +864,11 @@ function createResult(updatedArray){
             let cityNameAndButtonDiv = document.createElement("div");
             cityNameAndButtonDiv.classList.add("nameAndButton");
 
+            let country = COUNTRIES.find(c => c.id === city.countryID);
+
             let cityNameP = document.createElement("p");
             cityNameP.classList.add("cityName");
-            cityNameP.innerHTML = `${city.name}`;
+            cityNameP.innerHTML = `${city.name}, ${country.name}`;
 
             let expandPill = document.createElement("button");
             expandPill.classList.add("expandArrow");
@@ -884,6 +886,7 @@ function createResult(updatedArray){
                 countryCityDiv.addEventListener("click", () => {
                     countryCityDiv.classList.toggle("longer");
                     detailedCity.classList.toggle("hide");
+                    cityNameP.classList.toggle("hide");
                     expandPill.classList.toggle("shrinkArrow");
                 });
 

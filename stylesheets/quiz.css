@@ -158,12 +158,16 @@ margin-top: 5px;
 .nameAndButton {
     display: flex;
     justify-content: space-between;
+    position: relative;
+    margin-bottom: 10px;
 }
 
 .cityName {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        font-weight: bold;
 }
 
 .expandArrow {
@@ -231,6 +235,29 @@ margin-top: 5px;
     /* 1000 { transform: translateX(-300px);} */
 }
 
+.rating > h1 {
+    margin-bottom: 1rem;
+    font-family: var(--title);
+    font-size: 15px;
+}
+
+.cityInfo>div:first-child>h1,h2 {
+    display: none;
+}
+
+.cityInfo .red{
+    background-color: red;
+}
+
+.cityInfo .green{
+    background-color: green;
+}
+
+.programCardFace.back > div > div:nth-child(2) {
+    display: flex;
+    padding: var(--paddingSZ);
+}
+
 .rating {
     flex-grow:1;
 
@@ -258,3 +285,34 @@ margin-top: 5px;
     margin-bottom: 1rem;
     font-family: var(--title);
 }
+
+/* COMMETNS */
+
+.programCardFace.back > div > div:nth-child(3) {
+    padding: var(--paddingSZ);
+}
+
+.programCardFace.back > .scroll{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.comment {
+    margin-bottom: var(--marginLR);
+    background-color: var(--light);
+    padding: var(--paddingSZ);
+}
+
+.comment > div {
+    display: flex;
+    justify-content: space-between;
+    
+    font-family: var(--title);
+}
+
+.comment p {
+    font-family: var(--bodyText);
+    font-size: var(--sizeS);
+}
+
+

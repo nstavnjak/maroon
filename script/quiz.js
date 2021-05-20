@@ -260,8 +260,6 @@ let answears = [
     }
 ]
 
-
-
 console.log(mappedCities);
 let cities = [
     {
@@ -931,8 +929,6 @@ function setNextQuestion(){
     });
 }
 }
-
-
 
 //Skapar quiz container - Frågor och Svar fältet
 function createQuizContainer(){

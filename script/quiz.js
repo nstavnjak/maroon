@@ -12,105 +12,262 @@ const questions = [
         id:1,
         question: "Vilket klimat trivs du bäst i?",
         answers: [
-            {value: 11, option: "Soligt", optValue:"sol"},
-            {value: 12, option: "Kallt", optValue:"kall"},
-            {value: 13, option: "Blåsigt", optValue:"vind"},
-            {value: 14, option: "Regnigt", optValue:"regn"}
+            {value: 11, option: "Soligt"},
+            {value: 12, option: "Kallt"},
+            {value: 13, option: "Blåsigt"},
+            {value: 14, option: "Regnigt"}
         ]           
     },
     {
         id:2,
-        question: "Vad tycker du om te?",
+        question: "Hur långt vill du åka?",
         answers: [
-            {value: 21, option: "optionA", optValue:""},
-            {value: 22, option: "optionB", optValue:""},
-            {value: 23, option: "optionC", optValue:""},
-            {value: 24, option: "optionC", optValue:""}
+            {value: 21, option: "Spelar ingen som helst roll"},
+            {value: 22, option: "Jag måste åka till en annan kontinent"},
+            {value: 23, option: "Stannar gärna nära", optValue:""},
+            {value: 24, option: "Vill åka så långt bort som möjligt", optValue:""}
         ]  
     },
  
     {
         id:3,
-        question: "Är kusten ett måste?",
+        question: "Vilken stadsform attraherar dig mest?",
         answers: [
-            {value: 31, option: "optionA", optValue:""},
-            {value: 32, option: "optionB", optValue:""},
-            {value: 33, option: "optionC", optValue:""},
-            {value: 34, option: "optionC", optValue:""}
+            {value: 31, option: "Ja, såklart!"},
+            {value: 32, option: "Inte nödvändigt men otroligt mysigt"},
+            {value: 33, option: "Nej, inte alls"},
+            {value: 34, option: "Trivs bättre utan"}
         ] 
     },
     {
         id:4,
-        question: "Är kusten ett måste?",
+        question: "Är du en soldyrkare?",
         answers: [
-            {value: 41, option: "optionA", optValue:""},
-            {value: 42, option: "optionB", optValue:""},
-            {value: 43, option: "optionC", optValue:""},
-            {value: 44, option: "optionC", optValue:""}
+            {value: 41, option: "Håller verkligen med"},
+            {value: 42, option: "Håller med"},
+            {value: 43, option: "Håller inte med"},
+            {value: 44, option: "Håller verkligen inte med"}
         ]      
     },
     {
         id:5,
-        question: "Är kusten ett måste?",
+        question: "Vilken del av världen fascinerar dig mest?",
         answers: [
-            {value: 51, option: "optionA", optValue:""},
-            {value: 52, option: "optionB", optValue:""},
-            {value: 53,option: "optionC", optValue:""},
-            {value: 54, option: "optionC", optValue:""}
+            {value: 51, option: "Asien"},
+            {value: 52, option: "Europa"},
+            {value: 53, option: "Sydamerika"},
+            {value: 54, option: "Nordamerika"}
         ]       
     },
     {
         id:6,
-        question: "Är kusten ett måste?",
+        question: "Hur stor badkruka är du?",
         answers: [
-            {value: 61, option: "optionA", optValue:""},
-            {value: 62, value: 14, option: "optionB", optValue:""},
-            {value: 63, option: "optionC", optValue:""},
-            {value: 64, option: "optionC", optValue:""}
+            {value: 61, option: "Vad är en badkruka?"},
+            {value: 62, option: "Inte alls"},
+            {value: 63, option: "Litegrann"},
+            {value: 64, option: "Mycket, usch"}
         ]      
     },
     {
         id:7,
-        question: "Är kusten ett måste?",
+        question: "Gillar du att utmanas lingvistikt?",
         answers: [
-            {value: 71, option: "optionA", optValue:""},
-            {value: 72, option: "optionB", optValue:""},
-            {value: 73, option: "optionC", optValue:""},
-            {value: 74, option: "optionC", optValue:""}
+            {value: 71, option: "Nej, jag vill enkelt kunna göra mig förstådd"},
+            {value: 72, option: "nej, men kan klara mig om det skulle behövas"},
+            {value: 73, option: "En utmaningär aldrig fel så länge det inte är konstant"},
+            {value: 74, option: "Ja det gör jag verkligen!"}
         ]        
     },
     {
         id:8,
-        question: "Är kusten ett måste?",
+        question: "Hur högt värderar du fotboll?",
         answers: [
-            {value: 81, option: "optionA", optValue:""},
-            {value: 82, option: "optionB", optValue:""},
-            {value: 83, option: "optionC", optValue:""},
-            {value: 84, option: "optionC", optValue:""}
+            {value: 81, option: "Det betyder allt"},
+            {value: 82, option: "Följer några ligor"},
+            {value: 83, option: "Inte så intresserad förutom när VM och EM är hålls"},
+            {value: 84, option: "Bryr mig inte alls"}
         ]         
     },
     {
         id:9,
-        question: "Är kusten ett måste?",
+        question: "Vad skulle vara det första du skulle ta med dig om du strandades på en ö? ",
         answers: [
-            {value: 91, option: "optionA", optValue:""},
-            {value: 92, option: "optionB", optValue:""},
-            {value: 93, option: "optionC", optValue:""},
-            {value: 94, option: "optionC", optValue:""}
+            {value: 91, option: "Te"},
+            {value: 92, option: "Paraply"},
+            {value: 93, option: "Solkräm"},
+            {value: 94, option: "optionC"
         ]       
     },
     {
         id:10,
-        question: "10?",
+        question: "Välj en av följande matkombinationer?",
         answers: [
-            {value: 101, option: "optionA", optValue:""},
-            {value: 102, option: "optionB", optValue:""},
-            {value: 103, option: "optionC", optValue:""},
-            {value: 104, option: "optionC", optValue:""}
+            {value: 101, option: "Tofu, Sushi, Baklava"},
+            {value: 102, option: "Ajiaco colombiano, Arepas, Burrito"},
+            {value: 103, option: "Cevapi, Lax ,Waffle"},
+            {value: 104, option: "Hamburgare, Milkshake, Limepaj"}
         ] 
     },
  ];
 
+let mappedCities = CITIES.map(city => {
+    return {
+        "answers": [],
+        "points": 0,
+        "valuePoints": 0,
+        "id": city.id,
+        "name": city.name,
+        "countryID": city.countryID,
+        "sun": city.sun,
+        "text": city.text,
+        "imagesNormal": city.imagesNormal,
+        "imagesBig": city.imagesBig
+    }
+});
+
+let answers = [
+    {
+        "cityID": 0,
+        "value": []
+    },
+    {
+        "cityID": 1,
+        "value": []
+    },
+    {
+        "cityID": 2,
+        "value": []
+    },
+    {
+        "cityID": 3,
+        "value": []
+    },
+    {
+        "cityID": 4,
+        "value": []
+    },
+    {
+        "cityID": 5,
+        "value": []
+    },
+    {
+        "cityID": 6,
+        "value": []
+    },
+    {
+        "cityID": 7,
+        "value": []
+    },
+    {
+        "cityID": 8,
+        "value": []
+    },
+    {
+        "cityID": 9,
+        "value": []
+    },
+    {
+        "cityID": 10,
+        "value": []
+    },
+    {
+        "cityID": 11,
+        "value": []
+    },
+    {
+        "cityID": 12,
+        "value": []
+    },
+    {
+        "cityID": 13,
+        "value": []
+    },
+    {
+        "cityID": 14,
+        "value": []
+    },
+    {
+        "cityID": 15,
+        "value": []
+    },
+    {
+        "cityID": 16,
+        "value": []
+    },
+    {
+        "cityID": 17,
+        "value": []
+    },
+    {
+        "cityID": 18,
+        "value": []
+    },
+    {
+        "cityID": 19,
+        "value": []
+    },
+    {
+        "cityID": 20,
+        "value": []
+    },
+    {
+        "cityID": 21,
+        "value": []
+    },
+    {
+        "cityID": 22,
+        "value": []
+    },
+    {
+        "cityID": 23,
+        "value": []
+    },
+    {
+        "cityID": 24,
+        "value": []
+    },
+    {
+        "cityID": 25,
+        "value": []
+    },
+    {
+        "cityID": 26,
+        "value": []
+    },
+    {
+        "cityID": 27,
+        "value": []
+    },
+    {
+        "cityID": 28,
+        "value": []
+    },
+    {
+        "cityID": 29,
+        "value": []
+    },
+    {
+        "cityID": 30,
+        "value": []
+    },
+    {
+        "cityID": 31,
+        "value": []
+    },
+    {
+        "cityID": 32,
+        "value": []
+    },
+    {
+        "cityID": 33,
+        "value": []
+    }
+]
+
+
+
+console.log(mappedCities);
 let cities = [
     {
         "key":["varmt", "Spain"],

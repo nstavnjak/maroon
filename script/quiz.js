@@ -273,7 +273,7 @@ let nextButton = document.getElementById("right");
 let finishButton = document.getElementById("finish");
 
 let selectedOpt = document.querySelector(".selectedOpt");
-let inputValue = document.getElementsByClassName(".valuationInput");
+
 
 // Global array och variabel
 let shuffliedQuestions, currentQuestionIndex=1;
@@ -303,9 +303,12 @@ function startQuiz() {
 
 //On click på nästa pillen kallas på funktioner resetTheValuation, setNextQuestion och updateBar.
 nextButton.addEventListener("click", ()=>{
-
     currentQuestionIndex++;
-    
+
+    //Kallar på funktionen med den gamla city.points för att kunna jämföra 
+    //och hitta de städer som fått poäng
+    updateCityValuePoints(oldCityPoint);
+  
     //Vid sista frågan kallar på show funktionen och slutar quizet
     if(currentQuestionIndex === 10){
         resetTheValuation();
@@ -355,8 +358,7 @@ function showResult(cities){
 
 // Återställer input värdet 
 function resetTheValuation(){
-    let inputValue = document.querySelector(".valuationInput")
-    inputValue.value = 5;
+    let inputValue = document.querySelector(".valuationInput");
     document.querySelector(".numberOfInput").innerText = inputValue.value;
 }
 
@@ -399,21 +401,21 @@ function setNextQuestion(){
 
             let valueOfChosenButton = parseInt(el.target.value);
             updateMappedCity(valueOfChosenButton,el.target.parentElement.previousSibling.id);
-    
+          
             el.target.classList.add("selectedOpt");
 
             document.querySelector(".navigateButtons").classList.remove("hide");
         });
-       
+        
         answersField.append(button);
     });   
 }
 }
 
 let key=0;
+let oldCityPoint=0;
 function updateMappedCity(buttonSelectedvalue, questionID){
-
-        
+   
         answears.forEach(o => {
 
             o.value.forEach(value => {
@@ -421,10 +423,12 @@ function updateMappedCity(buttonSelectedvalue, questionID){
 
                     mappedCities.forEach(city => {
                         if(city.id === o.cityID){
-                                city.points +=1;
-                        
+                            city.points +=1;   
+                            oldCityPoint == city.points;
                         }     
+                        
                     })
+                    
                 }       
             });
 
@@ -439,9 +443,9 @@ function updateMappedCity(buttonSelectedvalue, questionID){
                     
                         mappedCities.forEach(city => {
                             if(city.id === o.cityID){
-                                    city.points -=1;
-                            
-                            }  
+                                city.points -=1; 
+
+                            } 
                             
                         })
                     }       
@@ -452,8 +456,20 @@ function updateMappedCity(buttonSelectedvalue, questionID){
         }
 
     key = buttonSelectedvalue;
+    
     console.log(mappedCities);
 };
+
+//Tar emot en siffra och går genom mappedCities. 
+//Om den nya city.points är större än den gamla 
+//dvs om den är uppdaterat då lägger inputValuen till city.valuePoints
+function updateCityValuePoints (point){
+    mappedCities.forEach(city =>{
+        if(city.points > point){
+            city.valuePoints += parseInt(document.querySelector(".valuationInput").value);
+        }
+    })
+}
 
 
 //Skapar quiz container - Frågor och Svar fältet
@@ -493,7 +509,7 @@ function createQuizContainer(){
     valuationInput.setAttribute("type","range");
     valuationInput.setAttribute("min","0");
     valuationInput.setAttribute("max","10");
-    valuationInput.setAttribute("value","5");
+  
 
     //Skapar diven som visar värden på input elementen
     let numberOfInput = document.createElement("div");

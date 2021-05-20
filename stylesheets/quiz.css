@@ -28,6 +28,10 @@ main {
     position: relative;
 }
 
+.questionsContainer>div:first-child{
+    font-size: 20px;
+}
+
 /* start */
 #startButton {
     appearance: none;

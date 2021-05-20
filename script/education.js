@@ -4,12 +4,12 @@
 // let card = document.querySelectorAll(".programCard");
 // let expandButton = document.querySelectorAll(".expand");
 
-
-let once = 0;
 let load = 0;
 let loaded = 5;
+let checked;
 let sortAlternatives = ["Program, A-Ö", "Program, Ö-A", "Antagningspoäng, stigande", "Antagningpoäng, fallande"];
 let finishArray = PROGRAMMES;
+let finishArrayFiltered = []
 
 // Head
 appendLink("../stylesheets/education.css");
@@ -38,7 +38,7 @@ searchButton.addEventListener("click", e => {
 
 document.getElementById("search").addEventListener("click", LoadMoreReset);
 document.getElementById("sortera").addEventListener("click", LoadMoreReset);
-
+document.getElementById("filter").addEventListener("click", createFilter);
 
 
 // EVENT
@@ -74,9 +74,14 @@ function LoadMoreFunction() {
         console.log("hej")
         document.querySelector("main").append(loadMore);
     }
-    
+    console.log(finishArrayFiltered);
     for(load; load < loaded ; load++){
+        if (finishArrayFiltered.length == 0 && checked == null){
             document.querySelector(".programList").append(createCard(finishArray[load])); 
+        }
+        if (!finishArrayFiltered.length == 0){
+            document.querySelector(".programList").append(createCard(finishArrayFiltered[load]));
+        }
     }
     load = loaded;
     loaded = loaded + 5;
@@ -218,10 +223,6 @@ function sortAndFilterParent(){
         filterButton.textContent = "filtrera +"
         
         filterButton.addEventListener("click", e => {
-            if (once == 0){
-            createFilter();
-            }
-            once = once + 1;
             document.querySelector("body").classList.add("no-scroll");
         });
         return filterButton;
@@ -337,82 +338,135 @@ function searchProgram(textValue, country, city){
 function filter(array){
     //Skapa en tom array som kommer fyllas med saker
     let finishedArray2 = [];
-    let checked = document.querySelectorAll("input[type=checkbox]:checked");
+
+    let visumArray = [];
+    let sprakArray = [];
+    let utbildningsNivaArray = [];
+    let studieInriktningArray = [];
+    let bigArray = [visumArray, sprakArray, utbildningsNivaArray, studieInriktningArray];
+    checked = document.querySelectorAll("input[type=checkbox]:checked");
     if (checked != null){
         //Kolla först vad som ska filtreras
         checked.forEach(e => {
             // Visum ------------------------------------------------------------------
             if (e.parentElement.parentElement.className === "visum"){
                 let array = [];
-                if (e.value === "Yes"){
-                    array = PROGRAMMES.filter(element => {
-                        let cityFilterID = UNIVERSITIES.find(e => e.id === element.universityID).cityID;
-                        let countryFilterID = CITIES.find(e => e.id === cityFilterID).countryID;
-                        let visum = COUNTRIES.find(e => e.id === countryFilterID).visa;
-                        return visum;
-                    });
-                    array.forEach(e => finishedArray2.push(e));
+                
+                    if (e.value === "Yes"){
+                        array = finishArray.filter(element => {
+                            let cityFilterID = UNIVERSITIES.find(e => e.id === element.universityID).cityID;
+                            let countryFilterID = CITIES.find(e => e.id === cityFilterID).countryID;
+                            let visum = COUNTRIES.find(e => e.id === countryFilterID).visa;
+                            return visum;
+                        });
+                        array.forEach(e => {visumArray.push(e)});
+                    }
+                    if(e.value === "No") {
+                        array = finishArray.filter(element => {
+                            let cityFilterID = UNIVERSITIES.find(e => e.id === element.universityID).cityID;
+                            let countryFilterID = CITIES.find(e => e.id === cityFilterID).countryID;
+                            let visum = COUNTRIES.find(e => e.id === countryFilterID).visa;
+                            return !visum;
+                        });
+                        array.forEach(e => {visumArray.push(e)});
+                    }
                 }
-                if(e.value === "No") {
-                    array = PROGRAMMES.filter(element => {
-                        let cityFilterID = UNIVERSITIES.find(e => e.id === element.universityID).cityID;
-                        let countryFilterID = CITIES.find(e => e.id === cityFilterID).countryID;
-                        let visum = COUNTRIES.find(e => e.id === countryFilterID).visa;
-                        return !visum;
-                    });
-                    array.forEach(e => finishedArray2.push(e));
-                }
-                console.log(finishedArray2);
-            }
             // Språk ----------------------------------------------------------------------------
             else if (e.parentElement.parentElement.className === "sprak"){
                 let array = [];
                 if (e.value === "Swedish"){
-                    array = PROGRAMMES.filter(element => element.language === 3);
-                    array.forEach(e => finishedArray2.push(e));
+                    array = finishArray.filter(element => element.language === 3);
+                    array.forEach(e => sprakArray.push(e));
                 }
                 if (e.value === "English"){
-                    array = PROGRAMMES.filter(element => element.language == 1);
-                    array.forEach(e => finishedArray2.push(e));
+                    array = finishArray.filter(element => element.language == 1);
+                    array.forEach(e => sprakArray.push(e));
                 }
                 if (e.value === "French"){
-                    array = PROGRAMMES.filter(element => element.language == 2);
-                    array.forEach(e => finishedArray2.push(e));
+                    array = finishArray.filter(element => element.language == 2);
+                    array.forEach(e => sprakArray.push(e));
                 }
                 if (e.value === "Spanish"){
-                    array = PROGRAMMES.filter(element => element.language == 0); 
-                    array.forEach(e => finishedArray2.push(e));   
+                    array = finishArray.filter(element => element.language == 0); 
+                    array.forEach(e => sprakArray.push(e));   
                 }
             }
             // Utbildningsnivå ----------------------------------------------------------------------------
             else if (e.parentElement.parentElement.className === "utbildningsniva"){
                 let array = [];
                 if (e.value === "Bachelor"){
-                    array = PROGRAMMES.filter(element => element.level == 0);
-                    array.forEach(e => finishedArray2.push(e));
+                    array = finishArray.filter(element => element.level == 0);
+                    array.forEach(e => utbildningsNivaArray.push(e));
                 }
                 if (e.value === "Master"){
-                    array = PROGRAMMES.filter(element => element.level == 1);
-                    array.forEach(e => finishedArray2.push(e));
+                    array = finishArray.filter(element => element.level == 1);
+                    array.forEach(e => utbildningsNivaArray.push(e));
                 }
                 if (e.value === "Doctorate"){
-                    array = PROGRAMMES.filter(element => element.level == 2);
-                    array.forEach(e => finishedArray2.push(e));
-                }
+                    array = finishArray.filter(element => element.level == 2);
+                    array.forEach(e => utbildningsNivaArray.push(e));
+                } 
             }
             // Studie Inriktning -------------------------------------------------------------------------------------
             else if (e.parentElement.parentElement.className === "studieinriktning"){
                 let array = [];
                 for (let i = 0; i < FIELDS.length; i++){
                     if (e.value === FIELDS[i].name) {
-                        array = PROGRAMMES.filter(element => FIELDS[i].id === element.subjectID);
-                        array.forEach(e => finishedArray2.push(e));
+                        array = finishArray.filter(element => FIELDS[i].id === element.subjectID);
+                        array.forEach(e => studieInriktningArray.push(e));
                     }
                 }
                 
             }
         });
+
+        bigArray.forEach(e => {
+            if(e.length === 0 && !bigArray.includes(finishArray)){
+                bigArray.splice(bigArray.indexOf(e), 1, finishArray);
+            }
+        });
+        bigArray.sort((a,b) => a.length > b.length ? 1 : -1);
+        
+        let compareArray = [];
+        
+        bigArray.forEach(array => {
+            if(array.length != 0){
+                compareArray.push(array);
+            }
+        });
+
+        let filterArray = [];
+        finishArrayFiltered = [];
+        filterArray = compareArray[0];
+
+        filterArray.forEach(item => {
+            item.score = 0;
+            compareArray.forEach(array => {
+                array.forEach(item2 => {
+                    if(item.id === item2.id){
+                        item.score += 1;
+                        if(item.score >= compareArray.length){
+                            finishArrayFiltered.push(item);
+                        }
+                    }
+                })
+            })
+        })
+        console.log(filterArray, finishArrayFiltered);
     }
+
+    if(finishArrayFiltered == 0 && checked == null){
+        document.getElementById("sokKnapp").innerText = `Sök (${finishArray.length} av 496)`
+    }
+    else{
+        document.getElementById("sokKnapp").innerHTML = `Sök (${finishArrayFiltered.length} av 496)`
+    }
+    
+    sokKnapp.addEventListener("click", () => {
+        LoadMoreReset();
+        document.getElementById("expandFilter").remove();
+    });
+
 }
 
 function createFilter(){
@@ -426,7 +480,6 @@ function createFilter(){
     let filterExit = document.createElement("button");
     filterExit.innerHTML = "&#x2716;";
     filterExit.addEventListener("click", e => {
-        once = 0;
         //funderar på om vi ska skriva filterDiv.remove(); istället så den raderas?
         // filterDiv.innerHTML = "";
         filterDiv.remove();
@@ -550,8 +603,6 @@ function createFilter(){
     
     let visumYes = document.createElement("div");
     visumYes.textContent = "Ja";
-
-    
     visumWrapperYes.append(visumYesCheck, spanYes, visumYes);
     
     
@@ -575,8 +626,16 @@ function createFilter(){
     // append båda visum yes och no
     visumDiv.append(visumWrapperYes, visumWrapperNo)
     filterDiv.append(visumDiv);
+
+    //SÖK KNAPP ----------------------------------------------------
     
-    
+    let sokKnapp = document.createElement("button");
+    sokKnapp.setAttribute("id", "sokKnapp");
+    sokKnapp.style.position = "relative";
+    sokKnapp.innerHTML = `Sök (${finishArray.length} av 496)`;
+
+    filterDiv.append(sokKnapp);
+
     document.querySelector("body").prepend(filterDiv);
     
 }

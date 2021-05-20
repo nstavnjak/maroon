@@ -797,6 +797,24 @@ let shuffliedQuestions, currentQuestionIndex;
 //On click på start-knappen kallas på funktionen startQuiz
 startButton.addEventListener("click", startQuiz);
 
+// Startar quizet
+function startQuiz() {
+
+    //Gömmer start-knappen
+    startButton.classList.add("hide");
+
+    document.querySelector(".questionsContainer").classList.toggle("bigger");
+    
+    //Sorterar questions arrayen slumpmässig
+    shuffliedQuestions = questions.sort(() => Math.random() - .5);
+    currentQuestionIndex = 0;
+   
+    //Appendar processbaren
+    quizContainer.prepend(createProgressBar());
+
+    setNextQuestion();
+}
+
 //On click på nästa pillen kallas på funktioner resetTheValuation, setNextQuestion och updateBar.
 nextButton.addEventListener("click", ()=>{
 
@@ -805,7 +823,7 @@ nextButton.addEventListener("click", ()=>{
     //Vid sista frågan kallar på show funktionen och slutar quizet
     if(currentQuestionIndex === 9){
         resetTheValuation();
-        showResult(cities);
+        showResult(mappedCities);
     }
     //Annars
    else{
@@ -817,7 +835,7 @@ nextButton.addEventListener("click", ()=>{
 
  //On click på sluta knappen anropas funktionen showResult med argumentet finished array
  finishButton.addEventListener("click", ()=>{
-       showResult(cities);
+       showResult(mappedCities);
  });
 
 //Skapar en div (visar antal städer som rekommenderas) med en visa knapp.
@@ -848,6 +866,7 @@ function showResult(cities){
 
 // Functions
 
+/*
 //Updaterar mappat city arrayen 
 function updatedCitiesByAnswers (id, value){
     let Id = questions.find(question => question.answers.value === id)
@@ -859,6 +878,7 @@ function updatedCitiesByAnswers (id, value){
    the
 
 }
+*/
 
 // Återställer input värdet 
 function resetTheValuation(){
@@ -867,39 +887,25 @@ function resetTheValuation(){
     document.querySelector(".numberOfInput").innerText = inputValue.value;
 }
 
-// Startar quizet
-function startQuiz() {
 
-    //Gömmer start-knappen
-    startButton.classList.add("hide");
-
-    document.querySelector(".questionsContainer").classList.toggle("bigger");
-    
-    //Sorterar questions arrayen slumpmässig
-    shuffliedQuestions = questions.sort(() => Math.random() - .5);
-    currentQuestionIndex = 0;
-   
-    //Appendar processbaren
-    quizContainer.prepend(createProgressBar());
-
-    setNextQuestion();
-}
 
 //Tömmer questions containern och hämtar en fråga från den slumpmässig sorterat arrayen
 function setNextQuestion(){
-    clearTheQuestionAndAnswerfield();
+    clearTheAnswerfield();
+    
+    //Tömmer (tar bort) elementen som ligger i answer fältet 
+    function clearTheAnswerfield(){
+    document.querySelector(".navigateButtons").classList.add("hide");
+ 
+    //Tömmer fältet tills den är tom.
+     while(answersField.firstChild){
+         answersField.removeChild(answersField.firstChild);
+     }
+ }
     showQuestion(shuffliedQuestions[currentQuestionIndex]);
 }
 
-//Tömmer (tar bort) elementen som ligger i answer fältet 
-function clearTheQuestionAndAnswerfield(){
-   document.querySelector(".navigateButtons").classList.add("hide");
 
-   //Tömmer fältet tills den är tom.
-    while(answersField.firstChild){
-        answersField.removeChild(answersField.firstChild);
-    }
-}
 
 //Tar emot questions arrayen och sätter frågor och svar 
 function showQuestion(question){

@@ -4,10 +4,9 @@
 // let card = document.querySelectorAll(".programCard");
 // let expandButton = document.querySelectorAll(".expand");
 
-
-let once = 0;
 let load = 0;
 let loaded = 5;
+let checked;
 let sortAlternatives = ["Program, A-Ö", "Program, Ö-A", "Antagningspoäng, stigande", "Antagningpoäng, fallande"];
 let finishArray = PROGRAMMES;
 let finishArrayFiltered = []
@@ -39,7 +38,7 @@ searchButton.addEventListener("click", e => {
 
 document.getElementById("search").addEventListener("click", LoadMoreReset);
 document.getElementById("sortera").addEventListener("click", LoadMoreReset);
-
+document.getElementById("filter").addEventListener("click", createFilter);
 
 
 // EVENT
@@ -77,7 +76,7 @@ function LoadMoreFunction() {
     }
     console.log(finishArrayFiltered);
     for(load; load < loaded ; load++){
-        if (finishArrayFiltered.length == 0){
+        if (finishArrayFiltered.length == 0 && checked == null){
             document.querySelector(".programList").append(createCard(finishArray[load])); 
         }
         if (!finishArrayFiltered.length == 0){
@@ -224,10 +223,6 @@ function sortAndFilterParent(){
         filterButton.textContent = "filtrera +"
         
         filterButton.addEventListener("click", e => {
-            if (once == 0){
-            createFilter();
-            }
-            once = once + 1;
             document.querySelector("body").classList.add("no-scroll");
         });
         return filterButton;
@@ -348,8 +343,8 @@ function filter(array){
     let sprakArray = [];
     let utbildningsNivaArray = [];
     let studieInriktningArray = [];
-    let compareArray = [visumArray, sprakArray, utbildningsNivaArray, studieInriktningArray];
-    let checked = document.querySelectorAll("input[type=checkbox]:checked");
+    let bigArray = [visumArray, sprakArray, utbildningsNivaArray, studieInriktningArray];
+    checked = document.querySelectorAll("input[type=checkbox]:checked");
     if (checked != null){
         //Kolla först vad som ska filtreras
         checked.forEach(e => {
@@ -424,37 +419,53 @@ function filter(array){
                 
             }
         });
-        
-        finishedArray2 = [];
-        compareArray.forEach(e => {
-            if(e.length === 0 && !compareArray.includes(finishArray)){
-                compareArray.splice(compareArray.indexOf(e), 1, finishArray);
+
+        bigArray.forEach(e => {
+            if(e.length === 0 && !bigArray.includes(finishArray)){
+                bigArray.splice(bigArray.indexOf(e), 1, finishArray);
             }
         });
-        compareArray.sort((a,b) => a.length > b.length ? 1 : -1);
-        compareArray.forEach(element => {
-            if (element.length === 0){
-                compareArray.splice(compareArray.indexOf(element), 1);
+        bigArray.sort((a,b) => a.length > b.length ? 1 : -1);
+        
+        let compareArray = [];
+        
+        bigArray.forEach(array => {
+            if(array.length != 0){
+                compareArray.push(array);
             }
         });
-        console.log(compareArray);
-        
+
+        let filterArray = [];
+        finishArrayFiltered = [];
+        filterArray = compareArray[0];
+
+        filterArray.forEach(item => {
+            item.score = 0;
+            compareArray.forEach(array => {
+                array.forEach(item2 => {
+                    if(item.id === item2.id){
+                        item.score += 1;
+                        if(item.score >= compareArray.length){
+                            finishArrayFiltered.push(item);
+                        }
+                    }
+                })
+            })
+        })
+        console.log(filterArray, finishArrayFiltered);
     }
 
-    finishArrayFiltered = [];
-    finishedArray2.forEach(e => {
-        if(!finishArrayFiltered.includes(e)){
-            finishArrayFiltered.push(e);
-        }
-    });
-    if(finishArrayFiltered == 0){
+    if(finishArrayFiltered == 0 && checked == null){
         document.getElementById("sokKnapp").innerText = `Sök (${finishArray.length} av 496)`
     }
     else{
-        document.getElementById("sokKnapp").innerText = `Sök (${finishArrayFiltered.length} av 496)`
+        document.getElementById("sokKnapp").innerHTML = `Sök (${finishArrayFiltered.length} av 496)`
     }
     
-    sokKnapp.addEventListener("click", LoadMoreReset);
+    sokKnapp.addEventListener("click", () => {
+        LoadMoreReset();
+        document.getElementById("expandFilter").remove();
+    });
 
 }
 
@@ -469,7 +480,6 @@ function createFilter(){
     let filterExit = document.createElement("button");
     filterExit.innerHTML = "&#x2716;";
     filterExit.addEventListener("click", e => {
-        once = 0;
         //funderar på om vi ska skriva filterDiv.remove(); istället så den raderas?
         // filterDiv.innerHTML = "";
         filterDiv.remove();

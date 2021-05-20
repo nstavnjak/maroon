@@ -271,9 +271,7 @@ let questionField = document.getElementById("question");
 let answersField = document.getElementById("answersButtons");
 let nextButton = document.getElementById("right");
 let finishButton = document.getElementById("finish");
-
 let selectedOpt = document.querySelector(".selectedOpt");
-
 
 // Global array och variabel
 let shuffliedQuestions, currentQuestionIndex=1;
@@ -305,14 +303,16 @@ function startQuiz() {
 nextButton.addEventListener("click", ()=>{
     currentQuestionIndex++;
 
-    //Kallar på funktionen med den gamla city.points för att kunna jämföra 
-    //och hitta de städer som fått poäng
+    //Anropar på funktionen med den gamla city.points som argument 
+    //för att kunna jämföra och hitta de städer som fått poäng
     updateCityValuePoints(oldCityPoint);
   
     //Vid sista frågan kallar på show funktionen och slutar quizet
     if(currentQuestionIndex === 10){
         resetTheValuation();
-        showResult(mappedCities);
+        //showResult(mappedCities);
+        document.querySelector("main").innerHTML= "";
+        document.querySelector("main").append(createResult(mappedCities));
     }
     //Annars
    else{
@@ -325,9 +325,12 @@ nextButton.addEventListener("click", ()=>{
  //On click på sluta knappen anropas funktionen showResult med argumentet finished array
  finishButton.addEventListener("click", ()=>{
 
-       showResult(mappedCities);
+    //showResult(mappedCities);
+    document.querySelector("main").innerHTML= "";
+    document.querySelector("main").append(createResult(mappedCities));
  });
 
+/*
 //Skapar en div (visar antal städer som rekommenderas) med en visa knapp.
 function showResult(cities){
 
@@ -350,7 +353,8 @@ function showResult(cities){
         document.querySelector("main").innerHTML= "";
         document.querySelector("main").append(createResult(cities));
     });
-};
+}; 
+*/
 
 // Footer 
 
@@ -577,7 +581,7 @@ function createProgressBar(){
 function updateBar(questionNumber){
     let lastProgress = document.querySelector(".bar");
     let level = questionNumber*10;
-    lastProgress.style.width =level + 10 + "%";
+    lastProgress.style.width =level + "%";
 }
 
 //Tar emot den uppdaterade array enligt svar och returnerar resultat diven

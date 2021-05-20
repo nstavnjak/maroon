@@ -887,8 +887,6 @@ function resetTheValuation(){
     document.querySelector(".numberOfInput").innerText = inputValue.value;
 }
 
-
-
 //Tömmer questions containern och hämtar en fråga från den slumpmässig sorterat arrayen
 function setNextQuestion(){
     clearTheAnswerfield();
@@ -903,12 +901,9 @@ function setNextQuestion(){
      }
  }
     showQuestion(shuffliedQuestions[currentQuestionIndex]);
-}
 
-
-
-//Tar emot questions arrayen och sätter frågor och svar 
-function showQuestion(question){
+    //Tar emot questions arrayen och sätter frågor och svar 
+    function showQuestion(question){
 
     document.querySelector(".valuationDiv").classList.remove("hide");
 
@@ -919,6 +914,7 @@ function showQuestion(question){
         let button = document.createElement("button");
         button.classList.add("answer");
         button.innerText = answers.option;
+        button.setAttribute("value", `${answers.value}`);
 
         button.addEventListener("click", () =>{
            
@@ -929,14 +925,14 @@ function showQuestion(question){
             
             button.classList.add("selectedOpt");
             document.querySelector(".navigateButtons").classList.remove("hide");
-            
-         
         });
 
         answersField.append(button);
     });
-    
 }
+}
+
+
 
 //Skapar quiz container - Frågor och Svar fältet
 function createQuizContainer(){

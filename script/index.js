@@ -92,6 +92,7 @@ function guideLine(head, text, image, programCom){
     let img = document.createElement("img");
     img.classList.add("img");
     img.setAttribute("src", `../Images/${image}`);
+document.querySelector("main").append(topPlace());
 
     let comment = document.createElement("p");
     comment.classList.add("comment");
@@ -100,4 +101,26 @@ function guideLine(head, text, image, programCom){
     imgWrapper.append(img, comment);
     wrapper.append(textWrapper, imgWrapper);
     return wrapper;
+// Functions
+
+function topPlace(){
+    let wrapper = document.createElement("div");
+    wrapper.classList.add("firstPageWrapper");
+    
+    let callForAction = document.createElement("div");
+    callForAction.classList.add("callForAction");
+
+    let circleAction = document.createElement("div"); 
+    circleAction.classList.add("circleAction");
+
+
+}
+
+function createGuideParts(title, text, img){
+    let wrapper = document.createElement("div");
+    wrapper.classList.add("guidePart");
+
+    let textBox = document.createElement("div");
+
+    let pictureBox = document.createElement("img");
 }

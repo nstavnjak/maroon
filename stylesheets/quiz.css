@@ -1,40 +1,106 @@
-
-#quiz {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 60vh;
-    background-color: #0091FF;
-    overflow: scroll;
-}
-
-.questionsContainer {   
-    text-align: center;
-    width: 300px;
-    background-color: #ffffff;
-    border-radius: 5px;
-    padding: 20px;
-    box-shadow: 0 0 10px 2px;
-    margin-top: 30px;
-}
-
-#question{
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: #26282C;
-}
-
-#option-buttons{
+main {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    height: calc(100vh - 8rem);
 }
 
-.option{
-    width: 150px;
-    height: 30px;
+.container {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* QUESTIONPARENT  */
+.questionsContainer {   
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+}
+
+/* start */
+#startButton {
+    appearance: none;
+    border:none;
+
+    position: absolute;
+    top:0;
+    top: calc(50% - 10vh);
+
+    background-color: #ff9900;
+    font-size: var(--sizeM);
+    font-family: var(--title);
+
+    
+    width: 80%;
+    height: 20vh;
+}
+
+/* ProgressBar */
+.progress {
+    width: 80%;
+    background-color: var(--dark);
+    margin-bottom: var(--marginLR);
+
+    border-radius: 20rem;
+    overflow:hidden
+
+}
+
+.bar {
+    width: 0%;
+    height: 1rem;
+    background-color: var(--secondary);
+    transition: 1s;
+}
+/* ----------------- */
+
+.bigger {
+    height: 80%;
+}
+
+/* question  */
+
+#question{
+    flex-basis: 15%;
+    width: 100%; 
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    font-family: var(--title);
+    font-size: var(--sizeL);
+}
+
+/* answearoption */
+
+#answersButtons{
+    flex-basis: 50%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.answer{
+    width: 80%;
+    min-height: 4rem;
     margin-bottom: 5px;
+
+    appearance: none;
+    border: none;
     background-color: #26282C;
     color: #ffffff;
 }
@@ -45,49 +111,289 @@
     color: #26282C;
 }
 
-#navigateButtons{
+/* valuebar */
+.valuationDiv{
+    flex-basis: 15%;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+    flex-direction: column;
+    align-items: center;
 }
 
-#navigateButtons div {
+.valuationTextDiv {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--marginLR);
+    
+}
+
+.valuationText{
+    font-family: var(--bodyText);
+    font-style: normal;
+    font-size: var(--sizeS);
+}
+
+.valuationInputDiv {
+    width:80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.valuationInput {
+    width:100%;
+}
+
+.numberOfInput{
+    text-align: center;
+    margin-top: 1rem;
+    
+    font-family: var(--bodyText);
+    font-size: var(--sizeS);
+}
+
+
+
+/* next question button */
+.navigateButtons{
+    flex-basis: 20%;
+    flex-grow:1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navigateButtons button {
     display: flex;
     justify-content: center;
     align-items: center;
 
-    height: 25px;
-    width: 25px;
-    background-color: #26282C;
+    height: 35px;
+    width: 45px;
+    background-color: #0091FF;
     color: #ffffff;
-    font-size: 20px;
 }
 
-.progress {
-    width: 80%;
-    background-color: #26282C;
-    margin-top: 10px;
-    margin-bottom: 40px;
-}
-
-.bar {
-    width: 10%;
-    height: 10px;
-    background-color: #ff9900;
-    text-align: center;
-    line-height: 30px;
-    color: #26282C;
-}
 
 .hide {
     display: none;
 }
 
-#startButton {
+.showButton{
     background-color: #ff9900;
-    font-size: 15px;
+    font-size: 10px;
     margin: auto;
-    height: 60px;
-    width: 100px;
+    height: 40px;
+    width: 70px;
     border-radius: 90%;
 }
+
+.resultatText{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#resultContainer{
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    position: relative;
+}
+
+.country-city {
+	background-color: var(--light);
+	margin-bottom: 15px;
+	padding: 10px;
+	width: 300px;
+    max-height: 40px;
+	font-size: 15px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px 2px;
+
+    transition: 1s;
+    overflow: hidden;
+}
+
+.nameAndButton {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.cityName {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        font-weight: bold;
+}
+
+.expandArrow {
+    border:none;
+    background-color: var(--light);
+    font-size: var(--sizeM);
+
+    transform: rotate(180deg);
+    transition: 1s;
+}
+
+.shrinkArrow {
+    border:none;
+    background-color: var(--light);
+    font-size: var(--sizeM);
+
+    transform: rotate(0deg);
+}
+
+.longer {
+    max-height: 400px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+.matched {
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom: 10px;
+    color: var(--light);
+}
+
+.resultatButtonField {
+display: flex;
+}
+
+.restartButton {
+	background-color: #ff9900;
+	font-size: 10px;
+	margin: auto;
+	height: 40px;
+	width: 70px;
+	border-radius: 90%;
+}
+
+.detailedCity{
+    width: 100%;
+    height: 100%;
+  
+    display: flex;
+    flex-direction: column;
+}
+
+.cityPictureWrapper {
+    width: 400vw;
+    position: relative;
+
+    animation-name: slider;
+    animation-timing-function: ease;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+}
+
+.cityPictureWrapper img {
+    height:75vw;
+    width:25%;
+}
+
+@keyframes slider {
+    0%   { transform: translateX(0vw);   }
+    16%  { transform: translateX(-100vw);}
+    32%  { transform: translateX(-200vw);}
+    48%  { transform: translateX(-300vw);}
+    63%  { transform: translateX(-200vw);}
+    82%  { transform: translateX(-100vw);}
+    100% { transform: translateX(0vw);}
+    /* 1000 { transform: translateX(-300px);} */
+}
+
+.rating > h1 {
+    margin-bottom: 1rem;
+    font-family: var(--title);
+    font-size: 15px;
+}
+
+.cityInfo {
+    display: none;
+}
+
+
+.cityInfo .red{
+    background-color: red;
+}
+
+.cityInfo .green{
+    background-color: green;
+}
+
+.programCardFace.back > div > div:nth-child(2) {
+    display: flex;
+    padding: var(--paddingSZ);
+}
+
+.rating {
+    flex-grow:1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.circleRating {
+    height: 8rem;
+    width: 8rem;
+    border-radius: 200px;
+    background-color: var(--light);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: var(--title);
+    font-size: var(--sizeS);
+    font-size: var(--sizeM);
+}
+
+.rating > h1 {
+    margin-bottom: 1rem;
+    font-family: var(--title);
+}
+
+/* COMMETNS */
+
+.programCardFace.back > div > div:nth-child(3) {
+    padding: var(--paddingSZ);
+}
+
+.programCardFace.back > .scroll{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.comment {
+    margin-bottom: var(--marginLR);
+    background-color: var(--light);
+    padding: var(--paddingSZ);
+}
+
+.comment > div {
+    display: flex;
+    justify-content: space-between;
+    
+    font-family: var(--title);
+}
+
+.comment p {
+    font-family: var(--bodyText);
+    font-size: var(--sizeS);
+}
+
+.comment h1 {
+    font-size: 18px;
+}
+
+.comment h2{
+    font-size: 12px;
+}
+

@@ -624,7 +624,6 @@ let cities = [
     }
 ];
 
-let updatedCitiesByAnswers = [];
 
 // Main
 
@@ -696,6 +695,18 @@ function showResult(cities){
 // Footer 
 
 // Functions
+
+//Updaterar mappat city arrayen 
+function updatedCitiesByAnswers (id, value){
+    let Id = questions.find(question => question.answers.value === id)
+    let value = document.querySelector(".valuationInput").value;
+
+   let theCity = mappedCities.find(city => city.answers.contains(value));
+   theCity.points++;
+
+   the
+
+}
 
 // Återställer input värdet 
 function resetTheValuation(){

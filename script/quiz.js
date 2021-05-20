@@ -24,8 +24,8 @@ const questions = [
         answers: [
             {value: 21, option: "Spelar ingen som helst roll"},
             {value: 22, option: "Jag måste åka till en annan kontinent"},
-            {value: 23, option: "Stannar gärna nära", optValue:""},
-            {value: 24, option: "Vill åka så långt bort som möjligt", optValue:""}
+            {value: 23, option: "Stannar gärna nära"},
+            {value: 24, option: "Vill åka så långt bort som möjligt"}
         ]  
     },
  
@@ -96,7 +96,7 @@ const questions = [
             {value: 91, option: "Te"},
             {value: 92, option: "Paraply"},
             {value: 93, option: "Solkräm"},
-            {value: 94, option: "optionC"
+            {value: 94, option: "optionC"}
         ]       
     },
     {
@@ -113,7 +113,6 @@ const questions = [
 
 let mappedCities = CITIES.map(city => {
     return {
-        "answers": [],
         "points": 0,
         "valuePoints": 0,
         "id": city.id,
@@ -126,142 +125,138 @@ let mappedCities = CITIES.map(city => {
     }
 });
 
-let answers = [
+let answears = [
     {
         "cityID": 0,
-        "value": []
+        "value": [103, 102, 31, 64, 52, 41, 11, 12, 81, 21, 23, 11, 12, 93]
     },
     {
         "cityID": 1,
-        "value": []
+        "value": [103, 102, 33, 63, 52, 41, 82, 21, 23, 11, 93]
     },
     {
         "cityID": 2,
-        "value": []
+        "value": [103, 102, 34, 63, 52, 41, 82, 21, 23, 11, 93]
     },
     {
         "cityID": 3,
-        "value": []
+        "value": [103, 31, 63, 52, 42, 81, 21, 23, 93, 11, 14]
     },
     {
         "cityID": 4,
-        "value": []
+        "value": [103, 33, 62, 52, 42, 82, 21, 23, 93, 11, 14]
     },
     {
         "cityID": 5,
-        "value": []
+        "value": [103, 33, 63, 52, 41, 82, 21, 23, 93, 14]
     },
     {
         "cityID": 6,
-        "value": []
+        "value": [103, 34, 61, 52, 41, 82, 21, 23, 11, 93, 11]
     },
     {
         "cityID": 7,
-        "value": []
+        "value": [31, 61, 51, 42, 83, 21, 22, 92, 11]
     },
     {
         "cityID": 8,
-        "value": []
+        "value": [32, 61, 51, 41, 83, 21, 22, 92, 11]
     },
     {
         "cityID": 9,
-        "value": []
+        "value": [33, 62, 51, 41, 83, 21, 22, 92, 11]
     },
     {
         "cityID": 10,
-        "value": []
+        "value": [103, 31, 64, 52, 43, 81, 21, 91, 12, 14]
     },
     {
         "cityID": 11,
-        "value": []
+        "value": [103, 33, 63, 52, 44, 81, 21, 91, 14, 13]
     },
     {
         "cityID": 12,
-        "value": []
+        "value": [103, 34, 64, 52, 43, 82, 21, 91, 14, 13]
     },
     {
         "cityID": 13,
-        "value": []
+        "value": [103, 33, 64, 52, 43, 84, 21, 91, 14, 13]
     },
     {
         "cityID": 14,
-        "value": []
+        "value": [103, 34, 64, 52, 44, 84, 21, 91, 23, 14, 13]
     },
     {
         "cityID": 15,
-        "value": []
+        "value": [103, 31, 62, 52, 44, 84, 21, 91, 23, 14, 13]
     },
     {
         "cityID": 16,
-        "value": []
+        "value": [103, 33, 62, 52, 43, 82, 21, 92, 23, 13, 14]
     },
     {
         "cityID": 17,
-        "value": []
+        "value": [103, 31, 62, 52, 43, 82, 21, 92, 23, 12, 14]
     },
     {
         "cityID": 18,
-        "value": []
+        "value": [103, 33, 62, 52, 44, 83, 21, 92, 23, 12, 14]
     },
     {
         "cityID": 19,
-        "value": []
+        "value": [103, 34, 63, 52, 43, 83, 21, 92, 23, 13, 14]
     },
     {
         "cityID": 20,
-        "value": []
+        "value": [102, 31, 64, 53, 41, 21, 22, 93, 11]
     },
     {
         "cityID": 21,
-        "value": []
+        "value": [102, 34, 61, 53, 41, 21, 22, 93, 11]
     },
     {
         "cityID": 22,
-        "value": []
+        "value": [102, 104, 63, 54, 42, 84, 21, 22, 93, 14]
     },
     {
         "cityID": 23,
-        "value": []
+        "value": [102, 104, 62, 54, 41, 84, 21, 22, 93, 11]
     },
     {
         "cityID": 24,
-        "value": []
+        "value": [102, 104, 64, 54, 41, 84, 21, 22, 93, 14]
     },
     {
         "cityID": 25,
-        "value": []
+        "value": [104, 33, 62, 54, 43, 83, 21, 22, 94, 14]
     },
     {
         "cityID": 26,
-        "value": []
+        "value": [104, 32, 61, 54, 43, 83, 21, 22, 94, 14]
     },
     {
         "cityID": 27,
-        "value": []
+        "value": [104, 31, 63, 54, 42, 83, 21, 22, 94, 13, 14]
     },
     {
         "cityID": 28,
-        "value": []
+        "value": [104, 32, 64, 54, 43, 83, 21, 22, 94, 14, 11]
     },
     {
         "cityID": 29,
-        "value": []
+        "value": [104, 34, 62, 54, 42, 83, 21, 22, 94, 11]
     },
     {
         "cityID": 30,
-        "value": []
+        "value": [104, 33, 64, 54, 43, 83, 21, 22, 94, 13]
     },
     {
         "cityID": 31,
-        "value": []
+        "value": [102, 31, 61, 53, 42, 81, 21, 22, 94, 11]
     },
     {
         "cityID": 32,
-        "value": []
-    },
-    {
-        "cityID": 33,
-        "value": []
+        "value": [102, 32,  64, 53, 41, 81, 21, 22, 94, 11]
     }
 ]
 

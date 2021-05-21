@@ -351,16 +351,16 @@ function setNextQuestion(){
     while(answersField.firstChild){
         answersField.removeChild(answersField.firstChild);
     }
+    }
 
- }
     document.querySelector(".valuationInput").addEventListener("change",()=>{
         document.querySelector(".valuationDiv").classList.add("hide");
         answersField.classList.remove("hide");
         document.querySelector(".navigateButtons").classList.remove("hide");
 
     })
-    showQuestion(shuffliedQuestions[currentQuestionIndex]);
 
+    showQuestion(shuffliedQuestions[currentQuestionIndex]);
 
     //Tar emot questions arrayen och sätter frågor och svar 
     function showQuestion(question){

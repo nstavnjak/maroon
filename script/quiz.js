@@ -589,19 +589,21 @@ function createResult(updatedArray){
         let storstMatch = document.createElement("h1");
         storstMatch.classList.add("matched");
         storstMatch.innerText = "Störst Match";
-       
+    
         /*
-
+        let storstMatchCityBox = document.createElement("div");
+        storstMatchCityBox.classList.add("cityBoxes");
+    
         for (let i=0; i<3; i++){
 
-        //Sorterar arrayen efter valuePoints, den som har högst poäng hamnar längst upp
-        updatedArray.sort((a, b) => a.valuePoints < b.valuePoints);
+            //Sorterar arrayen efter valuePoints, den som har högst poäng hamnar längst upp
+            updatedArray.sort((a, b) => a.valuePoints < b.valuePoints);
 
-            let stad = sortedArrayByValuePoints[i];
-            storstMatch.append(createCityFront(stad));
+            let stad = updatedArray[i];
         }
-      */
-     
+        storstMatch.append(storstMatchCityBox);
+        */
+
         let andraRek = document.createElement("h1");
         andraRek.classList.add("matched");
         andraRek.innerText = "Andra Rekommendationer";

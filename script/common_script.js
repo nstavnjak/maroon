@@ -168,10 +168,8 @@ function createBack(cityObj){
         
         let counter = 0;
         array.forEach(element => {
-            console.log(element.stars["out"])
             counter = counter + element.stars[`${theme}`];
         }); 
-        console.log(counter)
         
         let rating = document.createElement("div");
         rating.classList.add("rating");

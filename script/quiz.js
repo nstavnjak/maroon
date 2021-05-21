@@ -268,7 +268,7 @@ document.querySelector(".questionsContainer").append(createStartButton());
 let startButton = document.querySelector("#startButton");
 let quizContainer = document.querySelector(".container");
 let questionField = document.getElementById("question");
-let answersField = document.getElementById("answersButtons");
+let answersField = document.querySelector(".answersButtons");
 let nextButton = document.getElementById("right");
 let finishButton = document.getElementById("finish");
 let selectedOpt = document.querySelector(".selectedOpt");
@@ -287,29 +287,23 @@ function startQuiz() {
     //Gömmer start-knappen
     startButton.classList.add("hide");
 
-    document.querySelector(".questionsContainer").classList.toggle("bigger");
-    
     //Sorterar questions arrayen slumpmässig
     shuffliedQuestions = questions.sort(() => Math.random() - .5);
     currentQuestionIndex = 0;
    
     //Appendar processbaren
     quizContainer.prepend(createProgressBar());
-
+    answersField.classList.add("hide");
     setNextQuestion();
 }
 
+/*
 //On click på nästa pillen kallas på funktioner resetTheValuation, setNextQuestion och updateBar.
 nextButton.addEventListener("click", () =>{
     currentQuestionIndex++;
-  
-    //let buttonSelectedvalue = e.target.
-    //Anropar på funktionen med den gamla city.points som argument 
-    //för att kunna jämföra och hitta de städer som fått poäng
-    //updateCityValuePoints(parseInt(document.querySelector(".numberOfInput").innerText),buttonSelectedvalue);
-  
 
-   
+    answersField.classList.add("hide");
+
     //Vid sista frågan kallar på show funktionen och slutar quizet
     if(currentQuestionIndex === 10){
         resetTheValuation();
@@ -317,12 +311,13 @@ nextButton.addEventListener("click", () =>{
         document.querySelector("main").append(createResult(mappedCities));
     }
     //Annars
-   else{
-    resetTheValuation();
-    updateBar(currentQuestionIndex);
-    setNextQuestion();
+    else{
+        resetTheValuation();
+        updateBar(currentQuestionIndex);
+        setNextQuestion();
    }
 });
+*/
 
  //On click på sluta knappen anropas funktionen showResult med argumentet finished array
  finishButton.addEventListener("click", ()=>{
@@ -339,10 +334,12 @@ nextButton.addEventListener("click", () =>{
 // Återställer input värdet 
 function resetTheValuation(){
     let inputValue = document.querySelector(".valuationInput");
+    inputValue.value = 5;
     document.querySelector(".numberOfInput").innerText = inputValue.value;
 }
 
 //Tömmer questions containern och hämtar en fråga från den slumpmässig sorterat arrayen
+//On click på button kallas på funktioner resetTheValuation, setNextQuestion och updateBar.
 function setNextQuestion(){
     clearTheAnswerfield();
     
@@ -350,13 +347,22 @@ function setNextQuestion(){
     function clearTheAnswerfield(){
     document.querySelector(".navigateButtons").classList.add("hide");
    
- 
     //Tömmer fältet tills den är tom.
-     while(answersField.firstChild){
-         answersField.removeChild(answersField.firstChild);
-     }
+    while(answersField.firstChild){
+        answersField.removeChild(answersField.firstChild);
+    }
+
  }
+    document.querySelector(".valuationInput").addEventListener("change",()=>{
+        document.querySelector(".valuationDiv").classList.add("hide");
+        answersField.classList.remove("hide");
+        document.querySelector(".navigateButtons").classList.remove("hide");
+
+    })
     showQuestion(shuffliedQuestions[currentQuestionIndex]);
+
+
+   
 
     //Tar emot questions arrayen och sätter frågor och svar 
     function showQuestion(question){
@@ -384,17 +390,34 @@ function setNextQuestion(){
             updateMappedCity(valueOfChosenButton,el.target.parentElement.previousSibling.id);
           
             el.target.classList.add("selectedOpt");
+           
 
-            document.querySelector(".navigateButtons").classList.remove("hide");
-        });
-        
-        answersField.append(button);
-    });   
+            ////On click på button kallar på funktioner resetTheValuation, setNextQuestion och updateBar.
+            currentQuestionIndex++;
+
+            answersField.classList.add("hide");
+
+            //Vid sista frågan kallar på show funktionen och slutar quizet
+            if(currentQuestionIndex === 10){
+                resetTheValuation();
+                document.querySelector("main").innerHTML= "";
+                document.querySelector("main").append(createResult(mappedCities));
+            }
+            //Annars
+            else{
+                resetTheValuation();
+                updateBar(currentQuestionIndex);
+                setNextQuestion();
+            }        
+
+                });
+
+                answersField.append(button);
+            });   
 }
 }
 
 let key=0;
-let oldCityPoint=0;
 function updateMappedCity(buttonSelectedvalue, questionID){
    
         answears.forEach(o => {
@@ -442,19 +465,6 @@ function updateMappedCity(buttonSelectedvalue, questionID){
     console.log(mappedCities);
 };
 
- /*
-//Tar emot en siffra och går genom mappedCities. 
-//Om den nya city.points är större än den gamla 
-//dvs om den är uppdaterat då lägger inputValuen till city.valuePoints
-function updateCityValuePoints(point){
-   
-       
-        if(city.points > point){
-            city.valuePoints += parseInt(document.querySelector(".valuationInput").value);
-        }
-        
-}
-*/
 
 //Skapar quiz container - Frågor och Svar fältet
 function createQuizContainer(){
@@ -512,25 +522,28 @@ function createQuizContainer(){
 
     //Skapar svar fältet 
     let answersButtons = document.createElement("div");
-    answersButtons.setAttribute("id","answersButtons");
+    answersButtons.setAttribute("class","answersButtons");
+  
    
     //Skapar navigation fältet 
     let navigateButtons = document.createElement("div");
     navigateButtons.classList.add("navigateButtons","hide");
 
+    /*
     //Skapar nästa pillen
     let rightArrow = document.createElement("button");
     rightArrow.setAttribute("id", "right");
     rightArrow.innerHTML = `&#8680;`;
+    */
 
     //Skapar sluta-knappen
     let finish = document.createElement("button");
     finish.setAttribute("id", "finish");
-    finish.innerHTML = `Sluta`;
+    finish.innerHTML = `Sluta testet`;
 
-    navigateButtons.append(finish,rightArrow);
+    navigateButtons.append(finish);
 
-    questionsContainer.append(question,answersButtons,valuationDiv,navigateButtons)
+    questionsContainer.append(question,valuationDiv,answersButtons,navigateButtons)
 
     quizcontainer.append(questionsContainer);
     document.querySelector("main").append(quizcontainer);

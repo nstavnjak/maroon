@@ -577,8 +577,6 @@ function updateBar(questionNumber){
     lastProgress.style.width =level + "%";
 }
 
-
-
 //Tar emot den uppdaterade array enligt svar och returnerar resultat diven
 function createResult(updatedArray){
 
@@ -586,9 +584,11 @@ function createResult(updatedArray){
         let resultContainer = document.createElement("div");
         resultContainer.setAttribute("id","resultContainer");
 
-        let storstMatch = document.createElement("h1");
+        let storstMatch = document.createElement("div");
         storstMatch.classList.add("matched");
-        storstMatch.innerText = "Störst Match";
+        storstMatch.innerHTML = `
+            <h1 class ="storstMatchTitle">Störst Match</h1>
+        `;
     
         /*
         let storstMatchCityBox = document.createElement("div");
@@ -604,19 +604,17 @@ function createResult(updatedArray){
         storstMatch.append(storstMatchCityBox);
         */
 
-        let andraRek = document.createElement("h1");
+        let andraRek = document.createElement("div");
         andraRek.classList.add("matched");
-        andraRek.innerText = "Andra Rekommendationer";
+        andraRek.innerHTML = `
+            <h1 class ="andraRekTitle">Andra Rekommendationer</h1>
+        `;
         andraRek.append(createCityFront(updatedArray))
 
         resultContainer.append(storstMatch,andraRek);
-
-    //Returnerar resultat container för att senare appendas on click på visa knappen
-    return resultContainer;
-}
-
-  //Tar emot en array och returnerar en div element som innehåller all information för varje stad i arrayen
-  function createCityFront(updatedArray){
+        
+        //Tar emot en array och returnerar en div element som innehåller all information för varje stad i arrayen
+        function createCityFront(updatedArray){
     //Skapar stad fältet
     let cityBoxes = document.createElement("div");
     cityBoxes.classList.add("cityBoxes");
@@ -668,4 +666,10 @@ function createResult(updatedArray){
 
     // Returnerar stad fältet för att senare appendas i resultat container
     return cityBoxes;
+        }
+
+
+    //Returnerar resultat container för att senare appendas on click på visa knappen
+    return resultContainer;
 }
+

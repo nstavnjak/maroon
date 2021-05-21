@@ -307,10 +307,10 @@ nextButton.addEventListener("click", ()=>{
     //för att kunna jämföra och hitta de städer som fått poäng
     updateCityValuePoints(oldCityPoint);
   
+
     //Vid sista frågan kallar på show funktionen och slutar quizet
     if(currentQuestionIndex === 10){
         resetTheValuation();
-        //showResult(mappedCities);
         document.querySelector("main").innerHTML= "";
         document.querySelector("main").append(createResult(mappedCities));
     }
@@ -329,32 +329,6 @@ nextButton.addEventListener("click", ()=>{
     document.querySelector("main").innerHTML= "";
     document.querySelector("main").append(createResult(mappedCities));
  });
-
-/*
-//Skapar en div (visar antal städer som rekommenderas) med en visa knapp.
-function showResult(cities){
-
-    //Tömmer quiz containern 
-    quizContainer.innerHTML = "";
-    quizContainer.classList.add("questionsContainer");
-
-    quizContainer.innerHTML= `<div class="resultatText">${cities.length} Städer hittades</div>`;
-
-    //Skapar en visa knapp
-    let showButton = document.createElement("button");
-    showButton.classList.add("showButton");
-    showButton.innerText = "Visa";
-
-    //Knappen appendas i quiz containern
-    quizContainer.append(showButton);
-
-    //On click på visa knappen skapas resultat fältet()
-    showButton.addEventListener("click",()=>{
-        document.querySelector("main").innerHTML= "";
-        document.querySelector("main").append(createResult(cities));
-    });
-}; 
-*/
 
 // Footer 
 
@@ -427,8 +401,8 @@ function updateMappedCity(buttonSelectedvalue, questionID){
 
                     mappedCities.forEach(city => {
                         if(city.id === o.cityID){
-                            city.points +=1;   
                             oldCityPoint == city.points;
+                            city.points +=1;   
                         }     
                         
                     })
@@ -463,6 +437,7 @@ function updateMappedCity(buttonSelectedvalue, questionID){
     
     console.log(mappedCities);
 };
+
 
 //Tar emot en siffra och går genom mappedCities. 
 //Om den nya city.points är större än den gamla 

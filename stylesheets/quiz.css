@@ -162,7 +162,6 @@ main {
 /* next question button */
 .navigateButtons{
     flex-basis: 20%;
-    flex-grow:1;
     display: flex;
     justify-content: space-between;
     width: 80%;

@@ -78,7 +78,7 @@ function createMeny(){
     // The visible
     let logo = document.createElement("div");
     logo.setAttribute("id", "logo");
-    logo.textContent = `Exchanger`;
+    logo.textContent = `xchanger`;
     let menyButton = document.createElement("button");
     menyButton.setAttribute("id", "menyButton");
     menyButton.textContent = `meny`;
@@ -96,15 +96,6 @@ function createMeny(){
     
     nav.append(logo, menyButton, menyLinks);
     return nav;
-}
-
-function filter(array){
-    let finishedArray2 = array.slice();
-    //Språk
-}
-
-function loadMore(){
-
 }
 
 function createBack(cityObj){
@@ -149,11 +140,14 @@ function createBack(cityObj){
         
         cityObj.imagesNormal.forEach( image => {
             let img = document.createElement("img");
-            // img.style.backgroundImage = `url(../image/${image})`;
             img.setAttribute("src", `../Images/${image}`);
             cityPictureWrapper.append(img);
         })
-        div.append(cityInfo, cityPictureWrapper);
+
+        let cityText = document.createElement("p");
+        cityText.classList.add("cityText");
+        cityText.textContent = `${cityObj.text}`;
+        div.append(cityInfo, cityPictureWrapper, cityText);
         
         return div;
     }
@@ -163,7 +157,7 @@ function createBack(cityObj){
         let ratings = document.createElement("div");
 
         let comments = COMMENTS_CITY.filter(comment => comment.cityID === cityObj.id);
-
+    
         ratings.append(circleRating(comments, "out", "Nattliv"), circleRating(comments, "food", "Matkultur"), circleRating(comments, "accomodation", "Boende"));
         
         return ratings;
@@ -174,8 +168,10 @@ function createBack(cityObj){
         
         let counter = 0;
         array.forEach(element => {
-            element.stars[`${theme}`] += counter;
-        });   
+            console.log(element.stars["out"])
+            counter = counter + element.stars[`${theme}`];
+        }); 
+        console.log(counter)
         
         let rating = document.createElement("div");
         rating.classList.add("rating");
@@ -183,7 +179,7 @@ function createBack(cityObj){
         titleElement.textContent = title;
         let circleRating = document.createElement("div");
         circleRating.classList.add("circleRating");
-        circleRating.textContent = `${counter/array.length} / 5`;
+        circleRating.textContent = `${(counter/array.length).toFixed()} / 5`;
 
         rating.append(titleElement, circleRating);
         return rating;
@@ -195,14 +191,15 @@ function createBack(cityObj){
         let commentParent = document.createElement("div");
         
         comments.sort((a, b) => b.date.year - a.date.year);
-        console.log(comments)
+        
         comments.forEach(comment => {
             let commentDiv = document.createElement("div");
             commentDiv.classList.add("comment");
 
-            console.log(comment.stars.out)
-            let sum = comment.stars.out + comment.stars.food + comment.stars.housing;
-            console.log(parseInt(sum));
+    
+            let sum = comment.stars.out + comment.stars.food + comment.stars.accomodation;
+           
+           
             commentDiv.innerHTML = `
                 <div>
                     <div>
@@ -210,7 +207,7 @@ function createBack(cityObj){
                         <h2>${comment.date.year}.${comment.date.month}.${comment.date.day}</h2>
                     </div>
                     <div>
-                        <h2>${sum/comment.stars.length}/5</2>
+                        <h2>${(sum/3).toFixed()}/5</2>
                         <div class="bar">
                             <div class="visible bar"></div>
                         </div>

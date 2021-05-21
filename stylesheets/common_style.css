@@ -20,6 +20,8 @@
     --sizeS: 1.5rem;
     --sizeXs: 1.2rem;
 
+    scroll-behavior: smooth;
+
 }
 
 *{

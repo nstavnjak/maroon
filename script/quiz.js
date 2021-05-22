@@ -353,7 +353,7 @@ function setNextQuestion(){
     }
     }
 
-    document.querySelector(".valuationInput").addEventListener("change",()=>{
+    document.querySelector(".valuationInput").addEventListener("click",()=>{
         document.querySelector(".valuationDiv").classList.add("hide");
         answersField.classList.remove("hide");
         document.querySelector(".navigateButtons").classList.remove("hide");

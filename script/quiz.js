@@ -96,7 +96,7 @@ const questions = [
             {value: 91, option: "Te"},
             {value: 92, option: "Paraply"},
             {value: 93, option: "Solkräm"},
-            {value: 94, option: "optionC"}
+            {value: 94, option: "Inget"}
         ]       
     },
     {
@@ -353,11 +353,16 @@ function setNextQuestion(){
     }
     }
 
+    //On click på input fältet göms fältet och 
+    //"hide" classes tas bort från svar fältet och sluta knappen
     document.querySelector(".valuationInput").addEventListener("click",()=>{
-        document.querySelector(".valuationDiv").classList.add("hide");
-        answersField.classList.remove("hide");
-        document.querySelector(".navigateButtons").classList.remove("hide");
 
+        setTimeout(()=>{
+            document.querySelector(".valuationDiv").classList.add("hide");
+            answersField.classList.remove("hide");
+            document.querySelector(".navigateButtons").classList.remove("hide");
+        },500); 
+            
     })
 
     showQuestion(shuffliedQuestions[currentQuestionIndex]);
@@ -414,6 +419,7 @@ function setNextQuestion(){
             });   
 }
 }
+
 
 let key=0;
 function updateMappedCity(buttonSelectedvalue, questionID){

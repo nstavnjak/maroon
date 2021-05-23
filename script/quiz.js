@@ -509,7 +509,7 @@ function createQuizContainer(){
     valuationInput.classList.add("valuationInput");
     valuationInput.setAttribute("type","range");
     valuationInput.setAttribute("min","0");
-    valuationInput.setAttribute("max","5");
+    valuationInput.setAttribute("max","3");
   
 
     //Skapar diven som visar värden på input elementen

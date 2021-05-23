@@ -48,7 +48,9 @@ LoadMoreReset();
 
 function sort(){
     let sorteraButton = document.querySelector("#sortera");
-    console.log(sorteraButton.value);
+    if(finishArray.length == 496 && finishArrayFiltered.length == 0){
+        finishArrayFiltered = finishArray;
+    }
         if(sorteraButton.value == "Program, A-Ö"){
             finishArrayFiltered.sort((a,b) => a.name > b.name ? 1 : -1); 
         } else if (sorteraButton.value == "Program, Ö-A"){
@@ -71,12 +73,7 @@ function LoadMoreFunction() {
     }
 
     for(load; load < loaded ; load++){
-        if(finishArrayFiltered.length == 0){
-            document.querySelector(".programList").append(createCard(finishArray[load]));
-        }
-        else{
             document.querySelector(".programList").append(createCard(finishArrayFiltered[load]));
-        }
     }
     load = loaded;
     loaded += 5;
@@ -88,6 +85,7 @@ function LoadMoreFunction() {
 }
 
 function LoadMoreReset() {
+    console.log("hej")
     load = 0; 
     loaded = 5;
     sort();
@@ -222,7 +220,7 @@ function sortAndFilterParent(){
     return sortAndFilterParent;
 }
 
-document.addEventListener("click", filter);
+
 
 function searchProgram(textValue, country, city){
     programlist.innerHTML = "";
@@ -323,8 +321,8 @@ function searchProgram(textValue, country, city){
     }
 }
 
-
 function filter(){
+    console.log("nu gör vi");
     //Skapa en tom array som kommer fyllas med saker
     let visumArray = [];
     let sprakArray = [];
@@ -435,12 +433,9 @@ function filter(){
             });
         });
     });
+
     document.getElementById("sokKnapp").innerHTML = `Sök (${finishArrayFiltered.length} av 496)`
     
-    sokKnapp.addEventListener("click", () => {
-        document.getElementById("expandFilter").remove();
-        LoadMoreReset();
-    });
 
 }
 
@@ -482,6 +477,7 @@ function createFilter(){
         span.classList.add("checkmark");
         
         let fieldCheck = document.createElement("input");
+        fieldCheck.setAttribute("id", "filterBox");
         fieldCheck.setAttribute("type", "checkbox");
         fieldCheck.setAttribute("value", `${e.name}`);
         fieldCheck.setAttribute("class", `FIELDS`);
@@ -512,6 +508,7 @@ function createFilter(){
         span.classList.add("checkmark");
         
         let languageCheck = document.createElement("input");
+        languageCheck.setAttribute("id", "filterBox");
         languageCheck.setAttribute("type", "checkbox");
         languageCheck.setAttribute("value", `${e.name}`);
         languageCheck.setAttribute("class", `LANGUAGES`);
@@ -544,6 +541,7 @@ function createFilter(){
         span.classList.add("checkmark");
         
         let levelsCheck = document.createElement("input");
+        levelsCheck.setAttribute("id", "filterBox");
         levelsCheck.setAttribute("type", "checkbox");
         levelsCheck.setAttribute("value", `${e}`);
         levelsCheck.setAttribute("class", `LEVELS`);
@@ -569,6 +567,7 @@ function createFilter(){
     visumWrapperYes.classList.add("visumWrapper");
     
     let visumYesCheck = document.createElement("input");
+    visumYesCheck.setAttribute("id", "filterBox");
     visumYesCheck.setAttribute("type", "checkbox");
     visumYesCheck.setAttribute("value", "Yes");
     visumYesCheck.setAttribute("class", `COUNTRIES`);
@@ -592,6 +591,7 @@ function createFilter(){
     spanNo.classList.add("checkmark");
     
     let visumNoCheck = document.createElement("input");
+    visumNoCheck.setAttribute("id", "filterBox");
     visumNoCheck.setAttribute("type", "checkbox");
     visumNoCheck.setAttribute("value", "No");
     visumNoCheck.setAttribute("class", `COUNTRIES`);
@@ -609,9 +609,20 @@ function createFilter(){
     sokKnapp.style.position = "relative";
     sokKnapp.innerHTML = `Sök (${finishArray.length} av 496)`;
 
+    sokKnapp.addEventListener("click", () => {
+        document.getElementById("expandFilter").remove();
+        document.querySelector("body").classList.remove("no-scroll");
+        LoadMoreReset();
+    });
+
     filterDiv.append(sokKnapp);
 
     document.querySelector("body").prepend(filterDiv);
+
+    document.querySelector("#filter").addEventListener("click", filter);
+    document.querySelectorAll("#filterBox").forEach(button => {
+        button.addEventListener("click", filter);
+    });
     
 }
 

@@ -246,15 +246,19 @@ function searchProgram(textValue, country, city){
         if(textValue.length > 0){
             let programs = [];
             universities.forEach(uni => {
-                programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id))
+                programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id));
                 finishArrayFiltered = programs.flat(1).filter(prog => prog.name.toLowerCase().includes(textValue));
                 appendCards(finishArrayFiltered);
             });
         }
         else{
+            let programs = [];
+            console.log(universities);
             universities.forEach(uni => {
-                finishArrayFiltered.push(PROGRAMMES.filter(prog => prog.universityID === uni.id))
+                programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id))
+                finishArrayFiltered = programs.flat(1);
             });
+            appendCards(finishArrayFiltered);
         }  
     }
     // Om land och input är ifyllt - done 
@@ -275,9 +279,12 @@ function searchProgram(textValue, country, city){
             appendCards(finishArrayFiltered);
         }
         else {
+            let programs = [];
             universities.flat(1).forEach(uni => {
-                finishArrayFiltered.push(PROGRAMMES.filter(prog => prog.universityID === uni.id));
+                programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id));
             });
+            finishArrayFiltered = programs.flat(1)
+            appendCards(finishArrayFiltered);
         }
     }
     // Om alla är ifyllda - Klar

@@ -312,10 +312,14 @@ nextButton.addEventListener("click", ()=>{
         resetTheValuation();
         //showResult(mappedCities);
         document.querySelector("main").innerHTML= "";
-        document.querySelector("main").append(createResult(mappedCities));
+        mappedCities.forEach(e => {
+            console.log(e.points);
+        });
+        let valueCities = mappedCities.sort((a,b) => a.points > b.points ? -1 : 1);
+        document.querySelector("main").append(createResult(valueCities));
     }
     //Annars
-   else{
+   else{    
     resetTheValuation();
     updateBar(currentQuestionIndex);
     setNextQuestion();
@@ -323,12 +327,7 @@ nextButton.addEventListener("click", ()=>{
 });
 
  //On click på sluta knappen anropas funktionen showResult med argumentet finished array
- finishButton.addEventListener("click", ()=>{
 
-    //showResult(mappedCities);
-    document.querySelector("main").innerHTML= "";
-    document.querySelector("main").append(createResult(mappedCities));
- });
 
 /*
 //Skapar en div (visar antal städer som rekommenderas) med en visa knapp.
@@ -460,8 +459,6 @@ function updateMappedCity(buttonSelectedvalue, questionID){
         }
 
     key = buttonSelectedvalue;
-    
-    console.log(mappedCities);
 };
 
 //Tar emot en siffra och går genom mappedCities. 
@@ -472,7 +469,7 @@ function updateCityValuePoints (point){
         if(city.points > point){
             city.valuePoints += parseInt(document.querySelector(".valuationInput").value);
         }
-    })
+    });
 }
 
 
@@ -512,7 +509,7 @@ function createQuizContainer(){
     valuationInput.classList.add("valuationInput");
     valuationInput.setAttribute("type","range");
     valuationInput.setAttribute("min","0");
-    valuationInput.setAttribute("max","10");
+    valuationInput.setAttribute("max","5");
   
 
     //Skapar diven som visar värden på input elementen
@@ -599,7 +596,7 @@ function createResult(updatedArray){
         andraRek.classList.add("matched");
         andraRek.innerText = "Andra Rekommendationer";
 
-        resultContainer.append(storstMatch,createCityFront(updatedArray),andraRek);
+        resultContainer.append(storstMatch,createCityFront(updatedArray),andraRek,createCityFront(updatedArray));
 
     //Tar emot en array och returnerar en div element som innehåller all information för varje stad i arrayen
     function createCityFront(updatedArray){

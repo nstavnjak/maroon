@@ -227,104 +227,60 @@ function searchProgram(textValue, country, city){
     finishArrayFiltered = [];
 
     // Om allt är tomt så ska vi visa alla program i bokstavsordning från A-Ö - done
-    if (textValue.length === 0 && country.length === 0 && city.length === 0){
-        finishArrayFiltered = PROGRAMMES;
-        finishArrayFiltered.sort((a, b) => a.name > b.name) ? -1 : 1;
-        appendCards(finishArrayFiltered);
+    if (country.length === 0 && city.length === 0){
+        if(textValue.length === 0){
+            finishArrayFiltered = PROGRAMMES;
+            finishArrayFiltered.sort((a, b) => a.name > b.name) ? -1 : 1;
+            appendCards(finishArrayFiltered);
+        }
+        else{
+            finishArrayFiltered = PROGRAMMES.filter(prog => prog.name.toLowerCase().includes(textValue));
+            appendCards(finishArrayFiltered);
+        }
     }
-    // Om bara land är valt - done
-    else if (textValue.length === 0 && country.length > 0 && city.length === 0){
-        let countryObj = COUNTRIES.find(c => c.name.includes(country));
-        let citys = CITIES.filter(ci => ci.countryID === countryObj.id);
-    
-        let universities = [];
-        citys.forEach(city => {
-            universities.push(UNIVERSITIES.filter(uni => uni.cityID === city.id));
-        })
-
-        universities.flat(1).forEach(uni => {
-            finishArrayFiltered.push(PROGRAMMES.filter(prog => prog.universityID === uni.id));
-        })
-
-        // mergar ihop nestlade arrayer
-        finishArrayFiltered = finishArrayFiltered.flat(1);
-        appendCards(finishArrayFiltered);
-    } 
-    // Om bara stad är valt - done
-    else if (textValue.length === 0 && country.length === 0 && city.length > 0){
+    // Om stad eller stad och land och/eller input är ifyllt - done
+    else if (city.length > 0){
         let cityObj = CITIES.find(c => c.name.includes(city));
         let universities = UNIVERSITIES.filter(uni => uni.cityID === cityObj.id);
 
-        universities.forEach(uni => {
-            finishArrayFiltered.push(PROGRAMMES.filter(prog => prog.universityID === uni.id))
-        })
-        
-        finishArrayFiltered = finishArrayFiltered.flat(1);
-        appendCards(finishArrayFiltered);
-    } 
-    // Om bara sökfältet är är ifyllt - done
-    else if (textValue.length > 0 && country.length === 0 && city.length === 0){
-        finishArrayFiltered = PROGRAMMES.filter(prog => prog.name.toLowerCase().includes(textValue));
-        appendCards(finishArrayFiltered);
-    }
-    // Om stad och land är ifyllt - done
-    else if (textValue.length === 0 && country.length > 0 && city.length > 0){
-        let cityObj = CITIES.find(c => c.name.includes(city));
-        let universities = UNIVERSITIES.filter(uni => uni.cityID === cityObj.id);
-
-        universities.forEach(uni => {
-            finishArrayFiltered.push(PROGRAMMES.filter(prog => prog.universityID === uni.id))
-        })
-
-        finishArrayFiltered = finishArrayFiltered.flat(1);
-        appendCards(finishArrayFiltered);
-    }
-    // Om stad och input är ifyllt - done
-    else if (textValue.length > 0 && country.length === 0 && city.length > 0){
-        let cityObj = CITIES.find(c => c.name.includes(city));
-        let universities = UNIVERSITIES.filter(uni => uni.cityID === cityObj.id);
-
-        let programs = [];
-        universities.forEach(uni => {
-            programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id))
-        })
-        
-        finishArrayFiltered = programs.flat(1).filter(prog => prog.name.toLowerCase().includes(textValue));
-        appendCards(finishArrayFiltered);
+        if(textValue.length > 0){
+            let programs = [];
+            universities.forEach(uni => {
+                programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id))
+                finishArrayFiltered = programs.flat(1).filter(prog => prog.name.toLowerCase().includes(textValue));
+                appendCards(finishArrayFiltered);
+            });
+        }
+        else{
+            universities.forEach(uni => {
+                finishArrayFiltered.push(PROGRAMMES.filter(prog => prog.universityID === uni.id))
+            });
+        }  
     }
     // Om land och input är ifyllt - done 
-    else if (textValue.length > 0 && country.length > 0 && city.length === 0){
+    else if (country.length > 0){
         let countryObj = COUNTRIES.find(c => c.name.includes(country));
         let citys = CITIES.filter(ci => ci.countryID === countryObj.id);
     
         let universities = [];
         citys.forEach(city => {
             universities.push(UNIVERSITIES.filter(uni => uni.cityID === city.id));
-        })
-
-        let programs = [];
-        universities.flat(1).forEach(uni => {
-            programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id));
-        })
-
-        finishArrayFiltered = programs.flat(1).filter(prog => prog.name.toLowerCase().includes(textValue));
-        appendCards(finishArrayFiltered);
+        });
+        if(textValue.length > 0){
+            let programs = [];
+            universities.flat(1).forEach(uni => {
+                programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id));
+            });
+            finishArrayFiltered = programs.flat(1).filter(prog => prog.name.toLowerCase().includes(textValue));
+            appendCards(finishArrayFiltered);
+        }
+        else {
+            universities.flat(1).forEach(uni => {
+                finishArrayFiltered.push(PROGRAMMES.filter(prog => prog.universityID === uni.id));
+            });
+        }
     }
     // Om alla är ifyllda - Klar
-    else if (textValue.length > 0 && country.length > 0 && city.length > 0){
-        let cityObj = CITIES.find(c => c.name.includes(city));
-        let universities = UNIVERSITIES.filter(uni => uni.cityID === cityObj.id);
-
-        let programs = [];
-        universities.forEach(uni => {
-            programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id))
-        })
-        
-        finishArrayFiltered = programs.flat(1).filter(prog => prog.name.toLowerCase().includes(textValue));
-        appendCards(finishArrayFiltered);
-
-    }
-
     function appendCards(array){
         array.forEach(program => {
             document.querySelector(".programList").append(createCard(program));

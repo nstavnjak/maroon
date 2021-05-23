@@ -310,8 +310,19 @@ function searchProgram(textValue, country, city){
         finishArrayFiltered = programs.flat(1).filter(prog => prog.name.toLowerCase().includes(textValue));
         appendCards(finishArrayFiltered);
     }
-    // Om alla är ifyllda - NOT done
+    // Om alla är ifyllda - Klar
     else if (textValue.length > 0 && country.length > 0 && city.length > 0){
+        let cityObj = CITIES.find(c => c.name.includes(city));
+        let universities = UNIVERSITIES.filter(uni => uni.cityID === cityObj.id);
+
+        let programs = [];
+        universities.forEach(uni => {
+            programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id))
+        })
+        
+        finishArrayFiltered = programs.flat(1).filter(prog => prog.name.toLowerCase().includes(textValue));
+        appendCards(finishArrayFiltered);
+
     }
 
     function appendCards(array){

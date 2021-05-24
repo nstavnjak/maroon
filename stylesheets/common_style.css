@@ -70,6 +70,15 @@ body{
     font-size: var(--sizeM);
     color: var(--light);
 }
+
+#logo a {
+    text-decoration: none;
+    color: var(--light);
+}
+
+#logo a:active {
+    color: var(--secondary);
+}
   
 #menyButton{
     z-index: 20;

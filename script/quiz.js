@@ -564,9 +564,9 @@ function updateBar(questionNumber){
 //Tar emot den uppdaterade array enligt svar och returnerar resultat diven
 function createResult(updatedArray){
 
-        //Skapar resultat containern
-        let resultContainer = document.createElement("div");
-        resultContainer.setAttribute("id","resultContainer");
+    //Skapar resultat containern
+    let resultContainer = document.createElement("div");
+    resultContainer.setAttribute("id","resultContainer");
 
         let storstMatch = document.createElement("div");
         storstMatch.classList.add("matched");
@@ -617,17 +617,17 @@ function createResult(updatedArray){
             cityNameAndButtonDiv.append(cityNameP,expandPill);
             countryCityDiv.append(cityNameAndButtonDiv,detailedCity);
             
-                //On click, togglas longer, hide och shrinkArrow classes
-                countryCityDiv.addEventListener("click", () => {
-                    countryCityDiv.classList.toggle("longer");
-                    detailedCity.classList.toggle("hide");
-                    cityNameP.classList.toggle("hide");
-                    expandPill.classList.toggle("shrinkArrow");
-                });
+            //On click, togglas longer, hide och shrinkArrow classes
+            countryCityDiv.addEventListener("click", () => {
+                countryCityDiv.classList.toggle("longer");
+                detailedCity.classList.toggle("hide");
+                cityNameP.classList.toggle("hide");
+                expandPill.classList.toggle("shrinkArrow");
+            });
 
                 //Alla städer appendas i stad fältet
-                cityBoxes.append(countryCityDiv);
-            });  
+            cityBoxes.append(countryCityDiv);
+        });  
 
         // Returnerar stad fältet för att senare appendas i resultat container
         return cityBoxes;

@@ -568,7 +568,6 @@ function createResult(updatedArray){
     let resultContainer = document.createElement("div");
     resultContainer.setAttribute("id","resultContainer");
 
-
     //Sorterar arrayen efter Value points, den som har högst poäng hamnar längst upp
     let sortedArrayByValuePoints = updatedArray.sort((a, b) => a.valuePoints < b.valuePoints);
 

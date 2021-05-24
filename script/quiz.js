@@ -96,7 +96,7 @@ const questions = [
             {value: 91, option: "Te"},
             {value: 92, option: "Paraply"},
             {value: 93, option: "Solkräm"},
-            {value: 94, option: "optionC"}
+            {value: 94, option: "Ingen av dem"}
         ]       
     },
     {
@@ -326,34 +326,15 @@ nextButton.addEventListener("click", ()=>{
    }
 });
 
- //On click på sluta knappen anropas funktionen showResult med argumentet finished array
+//On click på sluta knappen appendas funktionen createResult med argumentet mappedCities
+finishButton.addEventListener("click",()=>{
 
+    //Tömmer main
+    document.querySelector("main").innerHTML = "";
+    //appendas resultatet
+    document.querySelector("main").append(createResult(mappedCities));
 
-/*
-//Skapar en div (visar antal städer som rekommenderas) med en visa knapp.
-function showResult(cities){
-
-    //Tömmer quiz containern 
-    quizContainer.innerHTML = "";
-    quizContainer.classList.add("questionsContainer");
-
-    quizContainer.innerHTML= `<div class="resultatText">${cities.length} Städer hittades</div>`;
-
-    //Skapar en visa knapp
-    let showButton = document.createElement("button");
-    showButton.classList.add("showButton");
-    showButton.innerText = "Visa";
-
-    //Knappen appendas i quiz containern
-    quizContainer.append(showButton);
-
-    //On click på visa knappen skapas resultat fältet()
-    showButton.addEventListener("click",()=>{
-        document.querySelector("main").innerHTML= "";
-        document.querySelector("main").append(createResult(cities));
-    });
-}; 
-*/
+});
 
 // Footer 
 
@@ -472,7 +453,6 @@ function updateCityValuePoints (point){
     });
 }
 
-
 //Skapar quiz container - Frågor och Svar fältet
 function createQuizContainer(){
 
@@ -551,7 +531,7 @@ function createQuizContainer(){
     document.querySelector("main").append(quizcontainer);
 };
 
-//Skapar start-knappen och appendar den i quiz containern
+//Skapar start-knappen och returnerar den
 function createStartButton(){
     let startButton = document.createElement("button");
     startButton.setAttribute("id","startButton");
@@ -588,14 +568,23 @@ function createResult(updatedArray){
     let resultContainer = document.createElement("div");
     resultContainer.setAttribute("id","resultContainer");
 
-    let storstMatch = document.createElement("h1");
+    //Sorterar arrayen efter Value points, den som har högst poäng hamnar längst upp
+    let sortedArrayByValuePoints = updatedArray.sort((a, b) => a.valuePoints < b.valuePoints);
+
+    let storstMatch = document.createElement("div");
     storstMatch.classList.add("matched");
-    storstMatch.innerText = "Störst Match";
+    storstMatch.innerHTML = `<h1 class="storstMatchTitle">Störst Match</h1>`;
+    storstMatch.append(createCityFront(sortedArrayByValuePoints));
     
-    let andraRek = document.createElement("h1");
+    //Sorterar arrayen efter points, den som har högst poäng hamnar längst upp
+    let sortedArrayByPoints = updatedArray.sort((a, b) => a.points < b.points);
+
+    let andraRek = document.createElement("div");
     andraRek.classList.add("matched");
-    andraRek.innerText = "Andra Rekommendationer";
-    resultContainer.append(storstMatch,createCityFront(updatedArray),andraRek,createCityFront(updatedArray));
+    andraRek.innerHTML = `<h1 class="andraRekTitle">Andra Rekommendationer</h1>`;
+    andraRek.append(createCityFront(sortedArrayByPoints));
+    
+    resultContainer.append(storstMatch,andraRek);
 
     //Tar emot en array och returnerar en div element som innehåller all information för varje stad i arrayen
     function createCityFront(updatedArray){

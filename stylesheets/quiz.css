@@ -248,9 +248,14 @@ main {
     overflow-y: scroll;
 }
 
+
+.matched  h1 {
+    text-decoration: underline;
+    margin-bottom: 10px;
+    color: var(--dark);
+}
 .matched {
     text-align: center;
-    text-decoration: underline;
     margin-bottom: 10px;
     color: var(--dark);
 }

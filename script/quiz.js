@@ -96,7 +96,7 @@ const questions = [
             {value: 91, option: "Te"},
             {value: 92, option: "Paraply"},
             {value: 93, option: "Solkräm"},
-            {value: 94, option: "optionC"}
+            {value: 94, option: "Ingen av dem"}
         ]       
     },
     {

@@ -96,7 +96,7 @@ const questions = [
             {value: 91, option: "Te"},
             {value: 92, option: "Paraply"},
             {value: 93, option: "Solkräm"},
-            {value: 94, option: "Ingen av dem"}
+            {value: 94, option: "Vet inte"}
         ]       
     },
     {
@@ -299,14 +299,25 @@ function startQuiz() {
     setNextQuestion();
 }
 
+
+
 //On click på nästa pillen kallas på funktioner resetTheValuation, setNextQuestion och updateBar.
 nextButton.addEventListener("click", ()=>{
+  
     currentQuestionIndex++;
 
-    //Anropar på funktionen med den gamla city.points som argument 
-    //för att kunna jämföra och hitta de städer som fått poäng
-    updateCityValuePoints(oldCityPoint);
-  
+    let radioAnswers = document.querySelectorAll(`input[type="radio"]:checked`);
+
+       answears.forEach(array=>{
+            array.value.forEach(obj=>{  
+                if(obj == parseInt(radioAnswers[0].value)){
+                    let city = mappedCities.find(c => c.id === array.cityID)
+                    city.valuePoints += city.points + parseInt(document.querySelector(".valuationInput").value);
+                }   
+            })       
+        });
+    
+    
     //Vid sista frågan kallar på show funktionen och slutar quizet
     if(currentQuestionIndex === 10){
         resetTheValuation();
@@ -371,11 +382,19 @@ function setNextQuestion(){
 
     question.answers.forEach(answers => {
      
-        let button = document.createElement("button");
+        let radio = document.createElement("input");
+        radio.setAttribute("type","radio");
+        radio.setAttribute("value",`${answers.value}`)
+        radio.setAttribute("name",`question${question.id}`);
+        radio.setAttribute("id",`${answers.value}`)
+        radio.classList.add("hide");
+
+        let button = document.createElement("label");
         button.classList.add("answer");
         button.innerText = answers.option;
         button.setAttribute("value", `${answers.value}`);
-
+        button.setAttribute("for",`${answers.value}`)
+ 
         button.addEventListener("click", (el) =>{
            
             let allOptions = document.querySelectorAll(".answer");
@@ -383,21 +402,19 @@ function setNextQuestion(){
                 e.classList.remove("selectedOpt");
             });
 
-            let valueOfChosenButton = parseInt(el.target.value);
+            let valueOfChosenButton = parseInt(el.target.htmlFor);
             updateMappedCity(valueOfChosenButton,el.target.parentElement.previousSibling.id);
-          
+       
             el.target.classList.add("selectedOpt");
 
             document.querySelector(".navigateButtons").classList.remove("hide");
         });
-        
-        answersField.append(button);
+        answersField.append(radio,button);
     });   
 }
 }
 
 let key=0;
-let oldCityPoint=0;
 function updateMappedCity(buttonSelectedvalue, questionID){
    
         answears.forEach(o => {
@@ -408,7 +425,7 @@ function updateMappedCity(buttonSelectedvalue, questionID){
                     mappedCities.forEach(city => {
                         if(city.id === o.cityID){
                             city.points +=1;   
-                            oldCityPoint == city.points;
+                            
                         }     
                         
                     })
@@ -442,16 +459,6 @@ function updateMappedCity(buttonSelectedvalue, questionID){
     key = buttonSelectedvalue;
 };
 
-//Tar emot en siffra och går genom mappedCities. 
-//Om den nya city.points är större än den gamla 
-//dvs om den är uppdaterat då lägger inputValuen till city.valuePoints
-function updateCityValuePoints (point){
-    mappedCities.forEach(city =>{
-        if(city.points > point){
-            city.valuePoints += parseInt(document.querySelector(".valuationInput").value);
-        }
-    });
-}
 
 //Skapar quiz container - Frågor och Svar fältet
 function createQuizContainer(){
@@ -488,8 +495,8 @@ function createQuizContainer(){
     let valuationInput = document.createElement("input");
     valuationInput.classList.add("valuationInput");
     valuationInput.setAttribute("type","range");
-    valuationInput.setAttribute("min","0");
-    valuationInput.setAttribute("max","3");
+    valuationInput.setAttribute("min","1");
+    valuationInput.setAttribute("max","10");
   
 
     //Skapar diven som visar värden på input elementen
@@ -570,19 +577,24 @@ function createResult(updatedArray){
 
     //Sorterar arrayen efter Value points, den som har högst poäng hamnar längst upp
     let sortedArrayByValuePoints = updatedArray.sort((a, b) => a.valuePoints < b.valuePoints);
+    let sortedArrayByPoints = sortedArrayByValuePoints.slice(0,7);
+
 
     let storstMatch = document.createElement("div");
     storstMatch.classList.add("matched");
     storstMatch.innerHTML = `<h1 class="storstMatchTitle">Störst Match</h1>`;
+
+    sortedArrayByValuePoints.splice(3);
+
     storstMatch.append(createCityFront(sortedArrayByValuePoints));
     //Istället för createCityFront funtionen ska funktionen Loadmore anropas
     //med argumentet "sortedArrayByValuePoints"
 
-
     
     //Sorterar arrayen efter points, den som har högst poäng hamnar längst upp
-    let sortedArrayByPoints = updatedArray.sort((a, b) => a.points < b.points);
-
+    sortedArrayByPoints = sortedArrayByPoints.sort((a, b) => a.points < b.points);
+    
+    console.log(sortedArrayByPoints);
     let andraRek = document.createElement("div");
     andraRek.classList.add("matched");
     andraRek.innerHTML = `<h1 class="andraRekTitle">Andra Rekommendationer</h1>`;

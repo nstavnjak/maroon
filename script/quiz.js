@@ -568,18 +568,24 @@ function createResult(updatedArray){
     let resultContainer = document.createElement("div");
     resultContainer.setAttribute("id","resultContainer");
 
-        let storstMatch = document.createElement("div");
-        storstMatch.classList.add("matched");
-        storstMatch.innerHTML = `<h1 class="storstMatch">Störst Match</h1>`;
-        
-        
 
-        let andraRek = document.createElement("div");
-        andraRek.classList.add("matched");
-        andraRek.innerHTML = `<h1 class="andraRek">Andra Rekommendationer</h1>`;
+    //Sorterar arrayen efter Value points, den som har högst poäng hamnar längst upp
+    let sortedArrayByValuePoints = updatedArray.sort((a, b) => a.valuePoints < b.valuePoints);
 
+    let storstMatch = document.createElement("div");
+    storstMatch.classList.add("matched");
+    storstMatch.innerHTML = `<h1 class="storstMatchTitle">Störst Match</h1>`;
+    storstMatch.append(createCityFront(sortedArrayByValuePoints));
+    
+    //Sorterar arrayen efter points, den som har högst poäng hamnar längst upp
+    let sortedArrayByPoints = updatedArray.sort((a, b) => a.points < b.points);
 
-        resultContainer.append(storstMatch,createCityFront(updatedArray),andraRek,createCityFront(updatedArray));
+    let andraRek = document.createElement("div");
+    andraRek.classList.add("matched");
+    andraRek.innerHTML = `<h1 class="andraRekTitle">Andra Rekommendationer</h1>`;
+    andraRek.append(createCityFront(sortedArrayByPoints));
+    
+    resultContainer.append(storstMatch,andraRek);
 
     //Tar emot en array och returnerar en div element som innehåller all information för varje stad i arrayen
     function createCityFront(updatedArray){

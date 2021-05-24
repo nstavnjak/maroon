@@ -36,7 +36,22 @@ function callForAction(){
     let wrapper = document.createElement("div");
     wrapper.classList.add("first");
 
+    let circle = document.createElement("button");
+    circle.setAttribute("id", "callForAction");
+    circle.innerHTML = `<a href="../html/quiz.html">push</a>`;
 
+    let textDiv = document.createElement("div");
+    textDiv.setAttribute("id", "firstText");
+    textDiv.innerHTML = `
+        <h1>Vilken stad är du?</h1>
+        <h2>Testa vårt quiz idag,</h2>
+        <p>kanske är det Barcelona!</p>`;
+
+    let scroll = document.createElement("h2");
+    scroll.setAttribute("id", "scrollForMore");
+    scroll.innerHTML = `<p>Scroll för vidare</p><p>information!</p>`;
+
+    wrapper.append(circle, textDiv, scroll);
     return wrapper;
 }
 

@@ -3,7 +3,58 @@
     height:calc(100vh - 8rem);
     background-image: url(../Images/stockholm_big_2.jpg);
     background-position: center;
-    background-color: rgba(255, 153, 0, 0.3);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+#callForAction {
+    height: 20vw;
+    width: 20vw;
+    background-color: rgba(255, 255, 255, 0.9);
+    appearance: none;
+    border:none;
+    border-radius: 200rem;
+
+    position: absolute;
+    bottom: 20%;
+    right: 12%;
+
+    text-transform: uppercase;
+    font-family: var(--bodyText);
+    font-size: var(--sizeS);
+}
+
+#callForAction a {
+    text-decoration: none;
+}
+
+#firstText {
+    margin-left: var(--marginLR);
+    margin-bottom: 25vh;
+    color: var(--light);
+    font-family: var(--title);
+    font-size: var(--sizeS);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#scrollForMore {
+    color: var(--light);
+    font-family: var(--title);
+    font-size: var(--sizeM);
+    padding: var(--paddingSZ);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /* fact  */
@@ -19,8 +70,8 @@
 }
 
 .circle {
-    height: calc(100vw/4);
-    width: calc(100vw/4);
+    height: 10rem;
+    width: 10rem;
     background-color: var(--secondary);
     border-radius: 200rem;
 

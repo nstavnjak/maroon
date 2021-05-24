@@ -121,6 +121,7 @@
     text-transform: uppercase;
     padding: 0rem var(--paddingSZ);
     color: var(--light);
+    overflow-x: scroll;
 }
 
 #expandFilter > h1 {

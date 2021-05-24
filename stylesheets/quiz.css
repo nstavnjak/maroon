@@ -99,15 +99,19 @@ main {
     align-items: center;
 }
 
-.answer{
-    width: 80%;
-    min-height: 4rem;
-    margin-bottom: 5px;
-
-    appearance: none;
-    border: none;
-    background-color: #26282C;
-    color: #ffffff;
+.answer {
+	width: 80%;
+	min-height: 4rem;
+	margin-bottom: 5px;
+	appearance: none;
+	border: none;
+	background-color: #26282C;
+	color: #ffffff;
+	font-size: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    text-align: center;
 }
 
 .selectedOpt {

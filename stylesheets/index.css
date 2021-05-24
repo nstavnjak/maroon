@@ -1,67 +1,39 @@
 /* first */
 .first {
     height:calc(100vh - 8rem);
+    background-image: url(../Images/stockholm_big_2.jpg);
+    background-position: center;
+    background-color: rgba(255, 153, 0, 0.3);
 }
 
 /* fact  */
 .factParent {
-    height:auto;
+    height: 15rem;
     width:100%;
     position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--dark);
+    margin-bottom: var(--marginLR);
 }
 
-.rhomb {
-    position: relative;
-    width: 100%;
-    height: 5rem;
-    transform: skewX(45deg);
+.circle {
+    height: calc(100vw/4);
+    width: calc(100vw/4);
+    background-color: var(--secondary);
+    border-radius: 200rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: var(--bodyText);
+    font-size: var(--sizeXs);
+    text-transform: uppercase;
 }
 
-.rhomb h3, .rhomb p {
-    display: inline-block;
-    height: 100%;
-    transform: skewX(-45deg);
-
-    font-family: var(--title);
-    
-    font-size: var(--sizeM);
-    padding: 1rem;
-    color: var(--dark);
-}
-
-.rhomb p {
-    padding-left: 0rem;
-}
-
-.rhomb h3{
-    padding-left: 2rem;
-}
-
-.rhomb.num0 {
-    left: -12.5rem;
-    background-color: rgba(255, 200, 117, 0.5);
-}
-.num0 h3{
-    margin-left: 12.5rem;
-}
-
-.rhomb.num1{
-    left: -7.6rem;
-    top:-0.06rem;
-    background-color: rgba(255, 185, 79,0.6);
-}
-.num1 h3{
-    margin-left: 9.5rem;
-}
-
-.rhomb.num2{
-    left: -2.7rem;
-    top:-0.2rem;
-    background-color: rgba(255, 153, 0, 0.7);
-}
-.num2 h3{
-    margin-left: 6.5rem;
-}
 
 /* guide  */
 .guidePart {

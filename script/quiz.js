@@ -300,7 +300,6 @@ function startQuiz() {
 }
 
 
-
 //On click på nästa pillen kallas på funktioner resetTheValuation, setNextQuestion och updateBar.
 nextButton.addEventListener("click", ()=>{
   

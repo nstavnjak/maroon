@@ -584,19 +584,18 @@ function updateBar(questionNumber){
 //Tar emot den uppdaterade array enligt svar och returnerar resultat diven
 function createResult(updatedArray){
 
-        //Skapar resultat containern
-        let resultContainer = document.createElement("div");
-        resultContainer.setAttribute("id","resultContainer");
+    //Skapar resultat containern
+    let resultContainer = document.createElement("div");
+    resultContainer.setAttribute("id","resultContainer");
 
-        let storstMatch = document.createElement("h1");
-        storstMatch.classList.add("matched");
-        storstMatch.innerText = "Störst Match";
-        
-        let andraRek = document.createElement("h1");
-        andraRek.classList.add("matched");
-        andraRek.innerText = "Andra Rekommendationer";
-
-        resultContainer.append(storstMatch,createCityFront(updatedArray),andraRek,createCityFront(updatedArray));
+    let storstMatch = document.createElement("h1");
+    storstMatch.classList.add("matched");
+    storstMatch.innerText = "Störst Match";
+    
+    let andraRek = document.createElement("h1");
+    andraRek.classList.add("matched");
+    andraRek.innerText = "Andra Rekommendationer";
+    resultContainer.append(storstMatch,createCityFront(updatedArray),andraRek,createCityFront(updatedArray));
 
     //Tar emot en array och returnerar en div element som innehåller all information för varje stad i arrayen
     function createCityFront(updatedArray){
@@ -634,17 +633,17 @@ function createResult(updatedArray){
             cityNameAndButtonDiv.append(cityNameP,expandPill);
             countryCityDiv.append(cityNameAndButtonDiv,detailedCity);
             
-                //On click, togglas longer, hide och shrinkArrow classes
-                countryCityDiv.addEventListener("click", () => {
-                    countryCityDiv.classList.toggle("longer");
-                    detailedCity.classList.toggle("hide");
-                    cityNameP.classList.toggle("hide");
-                    expandPill.classList.toggle("shrinkArrow");
-                });
+            //On click, togglas longer, hide och shrinkArrow classes
+            countryCityDiv.addEventListener("click", () => {
+                countryCityDiv.classList.toggle("longer");
+                detailedCity.classList.toggle("hide");
+                cityNameP.classList.toggle("hide");
+                expandPill.classList.toggle("shrinkArrow");
+            });
 
                 //Alla städer appendas i stad fältet
-                cityBoxes.append(countryCityDiv);
-            });  
+            cityBoxes.append(countryCityDiv);
+        });  
 
         // Returnerar stad fältet för att senare appendas i resultat container
         return cityBoxes;

@@ -130,7 +130,7 @@
     justify-content: center;
 }
 
-#expandFilter > button {
+#expandFilter > button:nth-child(2) {
     position: absolute;
     top:2rem;
     right: var(--paddingSZ);
@@ -556,5 +556,21 @@
 }
 
 #sokKnapp {
-    
+    height: 5rem;
+    width: calc(100% - 4rem);
+    margin: var(--marginLR);
+
+    font-family: var(--title);
+    font-size: var(--sizeS);
+
+    appearance: none;
+    border:0.1 solid var(--light);
+    background-color: var(--light);
+
+}
+
+#sokKnapp::active {
+    height: 4rem;
+    width: calc(90% - 4rem);
+    margin: auto;
 }

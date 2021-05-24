@@ -79,8 +79,8 @@ function LoadMoreFunction() {
     loaded += 5;
     
     //Lägger till event listeners på alla kort
-
     loadMore.addEventListener("click", LoadMoreFunction);
+
     // loadMore.addEventListener("click", applyExpand);
 }
 
@@ -580,7 +580,7 @@ function createFilter(){
     
     let sokKnapp = document.createElement("button");
     sokKnapp.setAttribute("id", "sokKnapp");
-    sokKnapp.style.position = "relative";
+    // sokKnapp.style.position = "relative";
     sokKnapp.innerHTML = `Sök (${finishArray.length} av 496)`;
 
     sokKnapp.addEventListener("click", () => {
@@ -655,7 +655,6 @@ function createCard(program){
             mainInformation.addEventListener("click", e => {
               e.stopPropagation();
               card.classList.toggle("longer");
-              document.querySelector("inner").classList.toggle("widthTran");
               button.classList.toggle("rotated");
             });
 
@@ -667,9 +666,9 @@ function createCard(program){
             
             let seats = program.exchangeStudents + program.localStudents
             let exchangeStudents = (program.exchangeStudents / seats) * 100;
-            let text = `<b>${program.exchangeStudents}</b> utbytesplatser tillgänliga för detta program`;
+            let text = `<b>${exchangeStudents.toFixed()}%</b> av det toala antalet platser finns tillgängliga för utbytesstudenter`;
             
-            return createMiddleParts("Antal Platser:", "programSeats", exchangeStudents, text, seats);
+            return createMiddleParts("Antal Platser:", "programSeats", program.exchangeStudents, text, seats);
         }
         
         // done
@@ -723,6 +722,11 @@ function createCard(program){
             progressBarInner.classList.add("progressBar", "inner");
             progressBarInner.textContent = `${progressWidth.toFixed()}%`;
             progressBarInner.style.width = `${progressWidth}%`
+            
+            if (progressWidth === program.exchangeStudents){
+                progressBarInner.textContent = `${progressWidth} pla.`;
+                progressBarInner.style.width = `${((progressWidth/value)*100).toFixed()}%`
+            }
 
             let text = document.createElement("p");
             text.innerHTML = pText;

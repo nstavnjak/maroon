@@ -6,17 +6,17 @@ appendLink("../stylesheets/index.css")
 let guide = [
     {
         name: "utbildning",
-        text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        text: "Att välja utbildning kan vara svårt, vi hjälper dig på vägen. Under menyn hittar du till alla våra program och kurser som erbjuds runt om i 33 städer. Där kan du få reda på allt ifrån antagninspoäng till huruvida studenter upplevde värdstaden. Låt dig inte skrämmas utan sök på. I många fall har studenter som aldrig trott de skulle komma in faktiskt fått åka iväg, även om det inte var deras första val! Lycka till!",
         img: "spain_big_1.jpg"
     },
     {
         name: "stipendium",
-        text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        text: "Att ansöka om stipendium för utlandsstudier kan vara ett bra sätt att finansiera studier utomlands. Ett stipendium för utlandsstudier kan bekosta en del av terminsavgiften eller vara ett tillskott till din privata kassa för uppehälle, boende och andra utgifter. Det finns ett flertal olika former av stipendier när du skall studera utomlands och GLÖM INTE att söka dem. Du kommer inte ångra dig.",
         img: "france_big_2.jpg"
     },
     {
         name: "visum",
-        text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        text: "Att studera utomlands innebär en del förberedelser. Förutom att bli antagen och ha ett giltigt pass behöver du ibland också söka ett särskilt visum för att få stanna en längre period. När det väl är dags att söka visum finns vi här för att guida dig, men redan nu kan du läsa om vad som gäller för våra destinationer utanför EU på FAQ sidan.",
         img: "australia_big_1.jpg"
     }
 ];
@@ -45,29 +45,29 @@ function circleFacts(){
     wrapper.classList.add("factParent");
 
     // Total programs
-    let rhombPR = document.createElement("div");
-    rhombPR.classList.add("rhomb", `num0`);
-    rhombPR.innerHTML = `
+    let circleOne = document.createElement("div");
+    circleOne.classList.add("circle", `numOne`);
+    circleOne.innerHTML = `
         <h3><b>${PROGRAMMES.length}</b></h3>
-        <p>program erbjuds</p>`;
+        <p>program</p>`;
 
     // Total citys
-    let rhombCI = document.createElement("div");
-    rhombCI.classList.add("rhomb", `num1`);
-    rhombCI.innerHTML = `
-        <h3><b>${CITIES.length}</b></h3> 
-        <p>olika städer runt om i</p> `;
-
-    // Total Countrys
-    let rhombCO = document.createElement("div");
-    rhombCO.classList.add("rhomb", `num2`);
-    rhombCO.innerHTML = `
-        <h3><strong>${COUNTRIES.length}</strong></h3> 
+    let circleTwo = document.createElement("div");
+    circleTwo.classList.add("circle", `numTwo`);
+    circleTwo.innerHTML = `
+        <h3><b>${COUNTRIES.length}</b></h3> 
         <p>länder</p> `;
 
+    // Total Countrys
+    let circleThree = document.createElement("div");
+    circleThree.classList.add("circle", `numThree`);
+    circleThree.innerHTML = `
+        <h3><strong>${CITIES.length}</strong></h3> 
+        <p>städer</p> `;
 
 
-    wrapper.append(rhombPR, rhombCI, rhombCO);
+
+    wrapper.append(circleOne, circleTwo, circleThree);
     return wrapper;
 }
 

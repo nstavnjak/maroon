@@ -208,51 +208,51 @@ let answears = [
     },
     {
         "cityID": 20,
-        "value": [102, 31, 64, 53, 41, 21, 22, 93, 11]
+        "value": [102, 31, 64, 53, 41, 21, 22, 93, 11,24]
     },
     {
         "cityID": 21,
-        "value": [102, 34, 61, 53, 41, 21, 22, 93, 11]
+        "value": [102, 34, 61, 53, 41, 21, 22, 93, 11,24]
     },
     {
         "cityID": 22,
-        "value": [102, 104, 63, 54, 42, 84, 21, 22, 93, 14]
+        "value": [102, 104, 63, 54, 42, 84, 21, 22, 93, 14,24]
     },
     {
         "cityID": 23,
-        "value": [102, 104, 62, 54, 41, 84, 21, 22, 93, 11]
+        "value": [102, 104, 62, 54, 41, 84, 21, 22, 93, 11,24]
     },
     {
         "cityID": 24,
-        "value": [102, 104, 64, 54, 41, 84, 21, 22, 93, 14]
+        "value": [102, 104, 64, 54, 41, 84, 21, 22, 93, 14,24]
     },
     {
         "cityID": 25,
-        "value": [104, 33, 62, 54, 43, 83, 21, 22, 94, 14]
+        "value": [104, 33, 62, 54, 43, 83, 21, 22, 94, 14,24]
     },
     {
         "cityID": 26,
-        "value": [104, 32, 61, 54, 43, 83, 21, 22, 94, 14]
+        "value": [104, 32, 61, 54, 43, 83, 21, 22, 94, 14,24]
     },
     {
         "cityID": 27,
-        "value": [104, 31, 63, 54, 42, 83, 21, 22, 94, 13, 14]
+        "value": [104, 31, 63, 54, 42, 83, 21, 22, 94, 13, 14,24]
     },
     {
         "cityID": 28,
-        "value": [104, 32, 64, 54, 43, 83, 21, 22, 94, 14, 11]
+        "value": [104, 32, 64, 54, 43, 83, 21, 22, 94, 14, 11,24]
     },
     {
         "cityID": 29,
-        "value": [104, 34, 62, 54, 42, 83, 21, 22, 94, 11]
+        "value": [104, 34, 62, 54, 42, 83, 21, 22, 94, 11,24]
     },
     {
         "cityID": 30,
-        "value": [104, 33, 64, 54, 43, 83, 21, 22, 94, 13]
+        "value": [104, 33, 64, 54, 43, 83, 21, 22, 94, 13,24]
     },
     {
         "cityID": 31,
-        "value": [102, 31, 61, 53, 42, 81, 21, 22, 94, 11]
+        "value": [102, 31, 61, 53, 42, 81, 21, 22, 94, 11,24]
     },
     {
         "cityID": 32,
@@ -575,6 +575,10 @@ function createResult(updatedArray){
     storstMatch.classList.add("matched");
     storstMatch.innerHTML = `<h1 class="storstMatchTitle">Störst Match</h1>`;
     storstMatch.append(createCityFront(sortedArrayByValuePoints));
+    //Istället för createCityFront funtionen ska funktionen Loadmore anropas
+    //med argumentet "sortedArrayByValuePoints"
+
+
     
     //Sorterar arrayen efter points, den som har högst poäng hamnar längst upp
     let sortedArrayByPoints = updatedArray.sort((a, b) => a.points < b.points);
@@ -583,7 +587,11 @@ function createResult(updatedArray){
     andraRek.classList.add("matched");
     andraRek.innerHTML = `<h1 class="andraRekTitle">Andra Rekommendationer</h1>`;
     andraRek.append(createCityFront(sortedArrayByPoints));
-    
+    //Istället för createCityFront funtionen ska funktionen Loadmore anropas
+    //med argumentet "sortedArrayByPoints"
+
+
+    //storst match och andra rekommendationer divar appendas i resultat containern.
     resultContainer.append(storstMatch,andraRek);
 
     //Tar emot en array och returnerar en div element som innehåller all information för varje stad i arrayen

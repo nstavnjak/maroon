@@ -85,10 +85,6 @@
     text-transform: uppercase;
 }
 
-.bigger {
-    font-size: var(--sizeL);
-}
-
 
 /* guide  */
 .guidePart {

@@ -585,16 +585,7 @@ function createResult(updatedArray){
 
     sortedArrayByValuePoints.splice(3);
 
-    sortedArrayByValuePoints.forEach(city => {
-        let programCard = document.createElement("div");
-        programCard.classList.add("programCard");
-        programCard.addEventListener("click", e => {
-            programCard.classList.toggle("longer");
-        })
-
-       programCard.append(createBack(city))
-        storstMatch.append(programCard);
-    })
+    storstMatch.append(createCityFront(sortedArrayByValuePoints));
     //Istället för createCityFront funtionen ska funktionen Loadmore anropas
     //med argumentet "sortedArrayByValuePoints"
 
@@ -606,18 +597,66 @@ function createResult(updatedArray){
     let andraRek = document.createElement("div");
     andraRek.classList.add("matched");
     andraRek.innerHTML = `<h1 class="andraRekTitle">Andra Rekommendationer</h1>`;
-    sortedArrayByPoints.forEach(city => {
-        let programCard = document.createElement("div");
-        programCard.classList.add("programCard");
-        programCard.addEventListener("click", e => {
-            programCard.classList.toggle("longer");
-        })
-        programCard.append(createBack(city));
-        andraRek.append(programCard);
-    })
-    
+    andraRek.append(createCityFront(sortedArrayByPoints));
+    //Istället för createCityFront funtionen ska funktionen Loadmore anropas
+    //med argumentet "sortedArrayByPoints"
+
+
     //storst match och andra rekommendationer divar appendas i resultat containern.
     resultContainer.append(storstMatch,andraRek);
 
+    //Tar emot en array och returnerar en div element som innehåller all information för varje stad i arrayen
+    function createCityFront(updatedArray){
+        //Skapar stad fältet
+        let cityBoxes = document.createElement("div");
+        cityBoxes.classList.add("cityBoxes");
+
+        updatedArray.forEach(city => {
+            //skapar en div för varje stad som finns i den uppdaterade array
+            let countryCityDiv = document.createElement("div");
+            countryCityDiv.classList.add("country-city");
+
+            //Skapar namn och knapp fältet
+            let cityNameAndButtonDiv = document.createElement("div");
+            cityNameAndButtonDiv.classList.add("nameAndButton");
+
+            let country = COUNTRIES.find(c => c.id === city.countryID);
+
+            //Skapar ett p element som innehåller namn på stad och land för varje city objekt i arrayen
+            let cityNameP = document.createElement("p");
+            cityNameP.classList.add("cityName");
+            cityNameP.innerHTML = `${city.name}, ${country.name}`;
+
+            //Skapar ner pillen 
+            let expandPill = document.createElement("button");
+            expandPill.classList.add("expandArrow");
+            expandPill.innerHTML = `&#8679;`;
+
+            //Skapar diven som kommer innehålla infon om staden
+            let detailedCity = document.createElement("div");
+            detailedCity.classList.add("detailedCity");
+            detailedCity.classList.add("hide");
+            detailedCity.append(createBack(city));
+
+            cityNameAndButtonDiv.append(cityNameP,expandPill);
+            countryCityDiv.append(cityNameAndButtonDiv,detailedCity);
+            
+            //On click, togglas longer, hide och shrinkArrow classes
+            countryCityDiv.addEventListener("click", () => {
+                countryCityDiv.classList.toggle("longer");
+                detailedCity.classList.toggle("hide");
+                cityNameP.classList.toggle("hide");
+                expandPill.classList.toggle("shrinkArrow");
+            });
+
+                //Alla städer appendas i stad fältet
+            cityBoxes.append(countryCityDiv);
+        });  
+
+        // Returnerar stad fältet för att senare appendas i resultat container
+        return cityBoxes;
+    }
+
+    //Returnerar resultat container för att senare appendas on click på visa knappen
     return resultContainer;
 }

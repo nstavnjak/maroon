@@ -4,7 +4,7 @@ main {
     align-items: center;
     min-height: 100vh;
     overflow: scroll;
-    background-image: url(../images/sweden_big_2.jpg);
+    background-image: url(../Images/sweden_big_2.jpg);
     background-size: cover;
     background-position: left;
 }

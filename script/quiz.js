@@ -12,10 +12,10 @@ const questions = [
         id:1,
         question: "Vilket klimat trivs du bäst i?",
         answers: [
-            {value: 11, option: "Soligt"},
-            {value: 12, option: "Kallt"},
-            {value: 13, option: "Blåsigt"},
-            {value: 14, option: "Regnigt"}
+            {value: 11, option: "Där det är varmt"},
+            {value: 12, option: "Där det är svalt"},
+            {value: 13, option: "Där det är blött"},
+            {value: 14, option: "Där man har lite av allt"}
         ]           
     },
     {
@@ -33,27 +33,27 @@ const questions = [
         id:3,
         question: "Vilken stadsform attraherar dig mest?",
         answers: [
-            {value: 31, option: "Ja, såklart!"},
-            {value: 32, option: "Inte nödvändigt men otroligt mysigt"},
-            {value: 33, option: "Nej, inte alls"},
-            {value: 34, option: "Trivs bättre utan"}
+            {value: 31, option: "Metropol"},
+            {value: 32, option: "Storstad"},
+            {value: 33, option: "Stad"},
+            {value: 34, option: "Mindre stad"}
         ] 
     },
     {
         id:4,
         question: "Är du en soldyrkare?",
         answers: [
-            {value: 41, option: "Håller verkligen med"},
-            {value: 42, option: "Håller med"},
-            {value: 43, option: "Håller inte med"},
-            {value: 44, option: "Håller verkligen inte med"}
+            {value: 41, option: "Jag avgudar solen"},
+            {value: 42, option: "Vem gillar inte soliga dagar"},
+            {value: 43, option: "Bara det inte blir för varmt"},
+            {value: 44, option: "Jag trivs bäst i svala trakter"}
         ]      
     },
     {
         id:5,
         question: "Vilken del av världen fascinerar dig mest?",
         answers: [
-            {value: 51, option: "Asien"},
+            {value: 51, option: "Australien"},
             {value: 52, option: "Europa"},
             {value: 53, option: "Sydamerika"},
             {value: 54, option: "Nordamerika"}
@@ -103,7 +103,7 @@ const questions = [
         id:10,
         question: "Välj en av följande matkombinationer?",
         answers: [
-            {value: 101, option: "Tofu, Sushi, Baklava"},
+            {value: 101, option: "Fried dim sim, Chiko Roll, Vegemite"},
             {value: 102, option: "Ajiaco colombiano, Arepas, Burrito"},
             {value: 103, option: "Cevapi, Lax ,Waffle"},
             {value: 104, option: "Hamburgare, Milkshake, Limepaj"}
@@ -128,55 +128,55 @@ let mappedCities = CITIES.map(city => {
 let answears = [
     {
         "cityID": 0,
-        "value": [103, 102, 31, 64, 52, 41, 11, 12, 81, 21, 23, 11, 12, 93]
+        "value": [103, 72, 102, 31, 64, 52, 41, 11, 81, 21, 23, 93]
     },
     {
         "cityID": 1,
-        "value": [103, 102, 33, 63, 52, 41, 82, 21, 23, 11, 93]
+        "value": [103, 102, 73, 33, 63, 52, 41, 82, 21, 23, 11, 93]
     },
     {
         "cityID": 2,
-        "value": [103, 102, 34, 63, 52, 41, 82, 21, 23, 11, 93]
+        "value": [103, 102, 34, 73, 63, 52, 41, 82, 21, 23, 11, 93]
     },
     {
         "cityID": 3,
-        "value": [103, 31, 63, 52, 42, 81, 21, 23, 93, 11, 14]
+        "value": [103, 31, 63, 71, 52, 42, 81, 21, 23, 93, 11, 14]
     },
     {
         "cityID": 4,
-        "value": [103, 33, 62, 52, 42, 82, 21, 23, 93, 11, 14]
+        "value": [103, 33, 62, 52, 72, 42, 82, 21, 23, 93, 11, 14]
     },
     {
         "cityID": 5,
-        "value": [103, 33, 63, 52, 41, 82, 21, 23, 93, 14]
+        "value": [103, 33, 63, 73, 52, 41, 82, 21, 23, 93, 14]
     },
     {
         "cityID": 6,
-        "value": [103, 34, 61, 52, 41, 82, 21, 23, 11, 93, 11]
+        "value": [103, 34, 61, 52, 72, 41, 82, 21, 23, 11, 93, 11]
     },
     {
         "cityID": 7,
-        "value": [31, 61, 51, 42, 83, 21, 22, 92, 11]
+        "value": [101, 31, 61, 51, 42, 83, 71, 21, 22, 92, 11]
     },
     {
         "cityID": 8,
-        "value": [32, 61, 51, 41, 83, 21, 22, 92, 11]
+        "value": [101, 32, 61, 51, 41, 83, 21, 71, 22, 92, 11]
     },
     {
         "cityID": 9,
-        "value": [33, 62, 51, 41, 83, 21, 22, 92, 11]
+        "value": [101, 33, 62, 51, 41, 83, 21, 71, 22, 92, 11]
     },
     {
         "cityID": 10,
-        "value": [103, 31, 64, 52, 43, 81, 21, 91, 12, 14]
+        "value": [103, 31, 64, 52, 43, 81, 21, 71, 91, 12, 13]
     },
     {
         "cityID": 11,
-        "value": [103, 33, 63, 52, 44, 81, 21, 91, 14, 13]
+        "value": [103, 33, 63, 52, 44, 81, 21, 71, 91, 14, 13]
     },
     {
         "cityID": 12,
-        "value": [103, 34, 64, 52, 43, 82, 21, 91, 14, 13]
+        "value": [103, 34, 64, 52, 43, 82, 71, 21, 91, 14, 13]
     },
     {
         "cityID": 13,
@@ -184,79 +184,79 @@ let answears = [
     },
     {
         "cityID": 14,
-        "value": [103, 34, 64, 52, 44, 84, 21, 91, 23, 14, 13]
+        "value": [103, 34, 64, 52, 44, 84, 21, 71, 91, 23, 14, 13]
     },
     {
         "cityID": 15,
-        "value": [103, 31, 62, 52, 44, 84, 21, 91, 23, 14, 13]
+        "value": [103, 31, 62, 52, 44, 84, 21, 91, 71, 23, 14, 13]
     },
     {
         "cityID": 16,
-        "value": [103, 33, 62, 52, 43, 82, 21, 92, 23, 13, 14]
+        "value": [103, 33, 62, 52, 43, 82, 21, 92, 72, 23, 13, 14]
     },
     {
         "cityID": 17,
-        "value": [103, 31, 62, 52, 43, 82, 21, 92, 23, 12, 14]
+        "value": [103, 31, 62, 52, 43, 82, 21, 92, 23, 72, 12, 14]
     },
     {
         "cityID": 18,
-        "value": [103, 33, 62, 52, 44, 83, 21, 92, 23, 12, 14]
+        "value": [103, 33, 62, 52, 44, 83, 21, 92, 23, 72, 12, 14]
     },
     {
         "cityID": 19,
-        "value": [103, 34, 63, 52, 43, 83, 21, 92, 23, 13, 14]
+        "value": [103, 34, 63, 52, 43, 83, 21, 92, 23, 72, 13, 14]
     },
     {
         "cityID": 20,
-        "value": [102, 31, 64, 53, 41, 21, 22, 93, 11,24]
+        "value": [102, 31, 64, 53, 41, 21, 22, 93, 74, 11, 24]
     },
     {
         "cityID": 21,
-        "value": [102, 34, 61, 53, 41, 21, 22, 93, 11,24]
+        "value": [102, 34, 61, 53, 41, 21, 22, 93, 74, 11, 24]
     },
     {
         "cityID": 22,
-        "value": [102, 104, 63, 54, 42, 84, 21, 22, 93, 14,24]
+        "value": [102, 104, 63, 54, 42, 84, 21, 22, 74, 93, 14, 24]
     },
     {
         "cityID": 23,
-        "value": [102, 104, 62, 54, 41, 84, 21, 22, 93, 11,24]
+        "value": [102, 104, 62, 54, 41, 84, 21, 22, 73, 93, 11, 24]
     },
     {
         "cityID": 24,
-        "value": [102, 104, 64, 54, 41, 84, 21, 22, 93, 14,24]
+        "value": [102, 104, 64, 54, 41, 84, 21, 22, 73, 93, 14, 24]
     },
     {
         "cityID": 25,
-        "value": [104, 33, 62, 54, 43, 83, 21, 22, 94, 14,24]
+        "value": [104, 33, 62, 54, 43, 83, 21, 22, 71, 94, 14, 24]
     },
     {
         "cityID": 26,
-        "value": [104, 32, 61, 54, 43, 83, 21, 22, 94, 14,24]
+        "value": [104, 32, 61, 54, 43, 83, 21, 22, 94, 71, 14, 24]
     },
     {
         "cityID": 27,
-        "value": [104, 31, 63, 54, 42, 83, 21, 22, 94, 13, 14,24]
+        "value": [104, 31, 63, 54, 42, 83, 21, 22, 94, 71, 13, 14, 24]
     },
     {
         "cityID": 28,
-        "value": [104, 32, 64, 54, 43, 83, 21, 22, 94, 14, 11,24]
+        "value": [104, 32, 64, 54, 43, 83, 21, 22, 94, 71, 14, 11, 24]
     },
     {
         "cityID": 29,
-        "value": [104, 34, 62, 54, 42, 83, 21, 22, 94, 11,24]
+        "value": [104, 34, 62, 54, 42, 83, 21, 22, 94, 71, 11, 24]
     },
     {
         "cityID": 30,
-        "value": [104, 33, 64, 54, 43, 83, 21, 22, 94, 13,24]
+        "value": [104, 33, 64, 54, 43, 83, 21, 22, 94, 71, 13, 24]
     },
     {
         "cityID": 31,
-        "value": [102, 31, 61, 53, 42, 81, 21, 22, 94, 11,24]
+        "value": [102, 31, 61, 53, 42, 81, 21, 22, 94, 74, 11, 24]
     },
     {
         "cityID": 32,
-        "value": [102, 32,  64, 53, 41, 81, 21, 22, 94, 11]
+        "value": [102, 32,  64, 53, 41, 81, 21, 22, 94, 74, 11]
     }
 ]
 

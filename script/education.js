@@ -131,7 +131,12 @@ function createSearchForm(){
 function createOPT(){
     for(let i = 1; i < 3; i++){
         let emptyOPT = document.createElement("option");
-        emptyOPT.textContent = "";
+        if(i === 1){
+            emptyOPT.innerHTML = "--- Land ---"
+        }
+        else {
+            emptyOPT.innerHTML = "--- Stad ---";
+        }
         document.querySelector(`#select${i}`).append(emptyOPT);
     }
     
@@ -154,14 +159,14 @@ function createOPT(){
         document.getElementById("select2").innerHTML = "";
     
         //SKapar alla städer beroende på vilket land som är valt
-        if(document.querySelector("#select1").value != false){
+        if(document.querySelector("#select1").value != "--- Land ---"){
             let country = COUNTRIES.find(e => e.name == document.querySelector("#select1").value);
             let cities = CITIES.filter(e => e.countryID === country.id);
 
             
             //Skapar ett tomt alternativ i toppen
             let option = document.createElement("option");
-            option.textContent = "";
+            option.textContent = "--- Stad ---";
             document.querySelector("#select2").append(option);
             
             cities.forEach(e =>{
@@ -173,7 +178,7 @@ function createOPT(){
         else {
             //Skapar ett tomt alternativ i toppen
             let option = document.createElement("option");
-            option.textContent = "";
+            option.textContent = "--- Stad ---";
             document.querySelector("#select2").append(option);
 
             //Skapar alla städer om inget är valt i select1
@@ -227,7 +232,7 @@ function searchProgram(textValue, country, city){
     finishArrayFiltered = [];
 
     // Om allt är tomt så ska vi visa alla program i bokstavsordning från A-Ö - done
-    if (country.length === 0 && city.length === 0){
+    if (country === "--- Land ---" && city === "--- Stad ---"){
         if(textValue.length === 0){
             finishArrayFiltered = PROGRAMMES;
             finishArrayFiltered.sort((a, b) => a.name > b.name) ? -1 : 1;

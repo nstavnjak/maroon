@@ -48,7 +48,7 @@ LoadMoreReset();
 
 function sort(){
     let sorteraButton = document.querySelector("#sortera");
-    if(finishArray.length == 496 && finishArrayFiltered.length == 0){
+    if(finishArrayFiltered.length == 0){
         finishArrayFiltered = finishArray;
     }
         if(sorteraButton.value == "Program, A-Ö"){
@@ -73,7 +73,12 @@ function LoadMoreFunction() {
     }
 
     for(load; load < loaded ; load++){
+        if(finishArrayFiltered.length == 0){
+            document.querySelector(".programList").append(createCard(finishArray[load]));
+        }
+        else {
             document.querySelector(".programList").append(createCard(finishArrayFiltered[load]));
+        }    
     }
     load = loaded;
     loaded += 5;
@@ -224,6 +229,7 @@ function sortAndFilterParent(){
 
 function searchProgram(textValue, country, city){
     programlist.innerHTML = "";
+    finishArrayFiltered = [];
     finishArray = [];
 
     // Om allt är tomt så ska vi visa alla program i bokstavsordning från A-Ö - done

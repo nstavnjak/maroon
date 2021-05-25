@@ -73,7 +73,7 @@ function sort(){
 function LoadMoreFunction() {
     let loadMore = document.createElement("button");
     if(document.querySelector("#loadMore") == null){
-        loadMore.innerHTML = `Ladda Mer (${loaded} av ${finishArray.length})`;
+        loadMore.innerHTML = `Load More`;
         loadMore.setAttribute("id", "loadMore");
         document.querySelector("main").append(loadMore);
     }
@@ -396,14 +396,15 @@ function filter(){
                 
             }
     });
-    
-    bigArray.forEach(e => {
-        if(e.length === 0 && !bigArray.includes(finishArray)){
-            bigArray.splice(bigArray.indexOf(e), 1, finishArray);
-        }
-    });
+    if(checked.length === 0){
+        bigArray.forEach(e => {
+            if(e.length === 0 && !bigArray.includes(finishArray)){
+                bigArray.splice(bigArray.indexOf(e), 1, finishArray);
+            }
+        });
+    }
+
     bigArray.sort((a,b) => a.length > b.length ? 1 : -1);
-    
     let compareArray = [];
     
     bigArray.forEach(array => {
@@ -413,20 +414,25 @@ function filter(){
     });
     let filterArray = [];
     filterArray = compareArray[0];
-    filterArray.forEach(item => {
-        item.score = 0;
-        compareArray.forEach(array => {
-            array.forEach(item2 => {
-                if(item.id === item2.id){
-                    item.score += 1;
-                    if(item.score >= compareArray.length){
-                        finishArrayFiltered.push(item);
+    if(filterArray != undefined){
+        filterArray.forEach(item => {
+            item.score = 0;
+            compareArray.forEach(array => {
+                array.forEach(item2 => {
+                    if(item.id === item2.id){
+                        item.score += 1;
+                        if(item.score >= compareArray.length){
+                            finishArrayFiltered.push(item);
+                        }
                     }
-                }
+                });
             });
         });
-    });
-    
+    }
+    else {
+        finishArrayFiltered = [];
+    }
+
     document.getElementById("sokKnapp").innerHTML = `Sök (${finishArrayFiltered.length} av 496)`
     
 

@@ -82,16 +82,16 @@ function LoadMoreFunction() {
 
     for(load; load < loaded ; load++){
         if(load < finishArray.length && finishArrayFiltered.length == 0){ 
-            document.querySelector("#loadMore").style.visibility = "visible";
-            console.log(finishArray.length)
+            console.log(load)
                 document.querySelector(".programList").append(createCard(finishArray[load]));
         }
-        else if(loaded < finishArrayFiltered.length){
-            document.querySelector("#loadMore").style.visibility = "visible";
+        else if(load < finishArrayFiltered.length){
+            console.log(load)
+            document.querySelector("#loadMore").removeAttribute("disabled");
             document.querySelector(".programList").append(createCard(finishArrayFiltered[load]));  
         }
         else {
-            document.querySelector("#loadMore").style.visibility = "hidden";
+            document.querySelector("#loadMore").setAttribute("disabled", "true");
         }
     }
     load = loaded;
@@ -258,7 +258,7 @@ function searchProgram(textValue, country, city){
             appendCards(finishArray);
         }
         else{
-            finishArray = PROGRAMMES.filter(prog => prog.name.toLowerCase().includes(textValue));
+            finishArray = PROGRAMMES.filter(prog => prog.name.toLowerCase().includes(textValue.toLowerCase()));
             appendCards(finishArray);
         }
     }
@@ -326,10 +326,10 @@ function filter(){
     let sprakArray = [];
     let utbildningsNivaArray = [];
     let studieInriktningArray = [];
-    let bigArray = [visumArray, sprakArray, utbildningsNivaArray, studieInriktningArray];
+    let bigArray = [studieInriktningArray, sprakArray, utbildningsNivaArray, visumArray];
     checked = document.querySelectorAll("input[type=checkbox]:checked");
-    console.log(checked);
       //Kolla först vad som ska filtreras
+    console.log(finishArray);
     checked.forEach(e => {
             // Visum ------------------------------------------------------------------
             if (e.parentElement.parentElement.className === "visum"){
@@ -352,13 +352,14 @@ function filter(){
                             return !visum;
                         });
                         array.forEach(e => {visumArray.push(e)});
+                        console.log(visumArray)
                     }
                 }
             // Språk ----------------------------------------------------------------------------
             else if (e.parentElement.parentElement.className === "sprak"){
                 let array = [];
-                if (e.value === "Swedish"){
-                    array = finishArray.filter(element => element.language === 3);
+                if (e.value === "Spanish"){
+                    array = finishArray.filter(element => element.language == 0);
                     console.log(array);
                     array.forEach(e => sprakArray.push(e));
                 }
@@ -368,10 +369,11 @@ function filter(){
                 }
                 if (e.value === "French"){
                     array = finishArray.filter(element => element.language == 2);
+                    
                     array.forEach(e => sprakArray.push(e));
                 }
-                if (e.value === "Spanish"){
-                    array = finishArray.filter(element => element.language == 0); 
+                if (e.value === "Swedish"){
+                    array = finishArray.filter(element => element.language == 3);
                     array.forEach(e => sprakArray.push(e));   
                 }
             }
@@ -403,29 +405,33 @@ function filter(){
                 
             }
     });
-    if(checked.length === 0){
-        bigArray.forEach(e => {
-            if(e.length === 0 && !bigArray.includes(finishArray)){
-                bigArray.splice(bigArray.indexOf(e), 1, finishArray);
+    // if(checked.length === 0){
+    //     bigArray.forEach(e => {
+    //         if(e.length === 0 && !bigArray.includes(finishArray)){
+    //             bigArray.splice(bigArray.indexOf(e), 1, finishArray);
+    //         }
+    //     });
+    // }
+
+    let compareArray = [];
+    //     bigArray.forEach(array => {
+    //     if(array.length != 0){
+    //         compareArray.push(array);
+    //     }
+    // });
+    
+    console.log(bigArray);
+
+    for(let i = 0; i < bigArray.length; i++){
+        document.querySelectorAll(`.group${i}:checked`).forEach(check => {
+            console.log()
+            if(check.classList.value == `group${i}`){
+                compareArray.push(bigArray[i]);            
             }
         });
     }
 
-   
-    let compareArray = [];
-    
-    bigArray.forEach(array => {
-        if(array.length != 0){
-            compareArray.push(array);
-        }
-    });
-
-    for(let i = 0; i < bigArray.length; i++){
-        if(document.querySelectorAll(`.group${i}´:checked`).length > 0){
-            compareArray.push(bigArray[i]);            
-        }
-    }
-    console.log(compareArray)
+    console.log(compareArray);
     compareArray.sort((a,b) => a.length > b.length ? 1 : -1);
 
     let filterArray = [];
@@ -446,7 +452,7 @@ function filter(){
         });
     }
     else {
-        finishArrayFiltered = [];
+        finishArrayFiltered = finishArray;
     }
 
     document.getElementById("sokKnapp").innerHTML = `Sök (${finishArrayFiltered.length} av 496)`
@@ -493,7 +499,7 @@ function createFilter(){
         fieldCheck.setAttribute("id", "filterBox");
         fieldCheck.setAttribute("type", "checkbox");
         fieldCheck.setAttribute("value", `${e.name}`);
-        fieldCheck.setAttribute("class", `group1`);
+        fieldCheck.setAttribute("class", `group0`);
         fieldWrapper.append(fieldCheck, span, field);
         
         studieInriktningDiv.append(fieldWrapper);
@@ -524,7 +530,7 @@ function createFilter(){
         languageCheck.setAttribute("id", "filterBox");
         languageCheck.setAttribute("type", "checkbox");
         languageCheck.setAttribute("value", `${e.name}`);
-        languageCheck.setAttribute("class", `group2`);
+        languageCheck.setAttribute("class", `group1`);
         languageWrapper.append(languageCheck, span, language);
         
         sprakDiv.append(languageWrapper);
@@ -557,7 +563,7 @@ function createFilter(){
         levelsCheck.setAttribute("id", "filterBox");
         levelsCheck.setAttribute("type", "checkbox");
         levelsCheck.setAttribute("value", `${e}`);
-        levelsCheck.setAttribute("class", `group3`);
+        levelsCheck.setAttribute("class", `group2`);
         levelsWrapper.append(levelsCheck, span, levels);
         
         utbildningsnivaDiv.append(levelsWrapper);
@@ -583,7 +589,7 @@ function createFilter(){
     visumYesCheck.setAttribute("id", "filterBox");
     visumYesCheck.setAttribute("type", "checkbox");
     visumYesCheck.setAttribute("value", "Yes");
-    visumYesCheck.setAttribute("class", `group4`);
+    visumYesCheck.setAttribute("class", `group3`);
 
     let spanYes = document.createElement("span");
     spanYes.classList.add("checkmark");
@@ -607,7 +613,7 @@ function createFilter(){
     visumNoCheck.setAttribute("id", "filterBox");
     visumNoCheck.setAttribute("type", "checkbox");
     visumNoCheck.setAttribute("value", "No");
-    visumNoCheck.setAttribute("class", `group4`);
+    visumNoCheck.setAttribute("class", `group3`);
 
     visumWrapperNo.append(visumNoCheck, spanNo, visumNo);
     
@@ -623,8 +629,13 @@ function createFilter(){
     sokKnapp.innerHTML = `Sök (${finishArray.length} av 496)`;
 
     sokKnapp.addEventListener("click", () => {
-        console.log("hej")
-        LoadMoreReset();
+        if(finishArrayFiltered.length === 0){
+            let empty = document.querySelector(".programList");
+            empty.innerHTML = "Wow such empty 0_0";
+        }
+        else {
+            LoadMoreReset();
+        }
         document.getElementById("expandFilter").remove();
         document.querySelector("body").classList.remove("no-scroll");
         
@@ -661,7 +672,7 @@ function createCard(program){
     // get country 
     let country = COUNTRIES.find(e => e.id === city.countryID);
     // get language 
-    let language = LANGUAGES.find(e => e.id === country.languageID);
+    let language = LANGUAGES.find(e => e.id === program.language);
     
     card.append(createFront(program), createBack(city));
     

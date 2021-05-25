@@ -12,32 +12,44 @@
 }
 
 #callForAction {
-    height: 20vw;
-    width: 20vw;
-    background-color: rgba(255, 255, 255, 0.9);
+    height: 10vw;
+    width: auto;
+    padding: var(--paddingSZ);
+    padding-right: 5rem;
+    background-color: rgb(255, 153, 0);
     appearance: none;
-    border:none;
-    border-radius: 200rem;
+    border: none;
 
     position: absolute;
     bottom: 20%;
-    right: 12%;
+    right: 0;
 
     text-transform: uppercase;
     font-family: var(--bodyText);
     font-size: var(--sizeS);
+    
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #callForAction a {
     text-decoration: none;
+    color: var(--dark);
+}
+
+#callForAction a:visited {
+    color: var(--dark);
 }
 
 #firstText {
-    margin-left: var(--marginLR);
+    padding: var(--marginLR);
     margin-bottom: 25vh;
     color: var(--light);
     font-family: var(--title);
     font-size: var(--sizeS);
+    background-color: rgba(0, 0, 0, 0.4);
 
     display: flex;
     flex-direction: column;
@@ -49,12 +61,22 @@
     color: var(--light);
     font-family: var(--title);
     font-size: var(--sizeM);
-    padding: var(--paddingSZ);
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+#scrollForMore > p:last-child {
+    font-size: 4rem;
+    padding-bottom: 1rem;
+
+    animation-name: bounceUpAndDown;
+    animation-timing-function: ease;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    transform: rotate(-90deg);
 }
 
 /* fact  */

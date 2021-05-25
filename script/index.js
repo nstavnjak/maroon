@@ -38,7 +38,7 @@ function callForAction(){
 
     let circle = document.createElement("button");
     circle.setAttribute("id", "callForAction");
-    circle.innerHTML = `<a href="../html/quiz.html">push</a>`;
+    circle.innerHTML = `<a href="../html/quiz.html">Gör testet nu</a>`;
 
     let textDiv = document.createElement("div");
     textDiv.setAttribute("id", "firstText");
@@ -49,7 +49,8 @@ function callForAction(){
 
     let scroll = document.createElement("h2");
     scroll.setAttribute("id", "scrollForMore");
-    scroll.innerHTML = `<p>Scroll för vidare</p><p>information!</p>`;
+    scroll.innerHTML = `<p>Scroll för vidare</p><p>information!</p><p> 	
+    &#748;</p>`;
 
     wrapper.append(circle, textDiv, scroll);
     return wrapper;

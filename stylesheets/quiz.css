@@ -176,6 +176,7 @@ main {
     flex-basis: 10%;
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     width: 80%;
 }
 
@@ -184,13 +185,13 @@ main {
     justify-content: center;
     align-items: center;
 
-    height: 5rem;
-    width: 5rem;
+    height: 4rem;
+    width: 8rem;
     appearance: none;
     border:none;
     background-color:rgba(255, 153, 0, 0.7);
     color: var(--light);
-    border-radius: 20rem;
+ 
 }
 
 /* hide */
@@ -233,14 +234,15 @@ main {
     transition: 1s ease;
 }
 
-.programCardFace {
+/* .programCardFace {
     height: 60rem;
     
-}
+} */
 
 .longer {
-    height: auto;
+    height: 60rem;
     overflow: scroll;
+    transition: 1s ease;
     transition: 1s ease;
 }
 

@@ -63,21 +63,21 @@ function circleFacts(){
     let circleOne = document.createElement("div");
     circleOne.classList.add("circle", `numOne`);
     circleOne.innerHTML = `
-        <h3><b>${PROGRAMMES.length}</b></h3>
+        <h3 class="bigger"><b>${PROGRAMMES.length}</b></h3>
         <p>program</p>`;
 
     // Total citys
     let circleTwo = document.createElement("div");
     circleTwo.classList.add("circle", `numTwo`);
     circleTwo.innerHTML = `
-        <h3><b>${COUNTRIES.length}</b></h3> 
+        <h3 class="bigger"><b>${COUNTRIES.length}</b></h3> 
         <p>länder</p> `;
 
     // Total Countrys
     let circleThree = document.createElement("div");
     circleThree.classList.add("circle", `numThree`);
     circleThree.innerHTML = `
-        <h3><strong>${CITIES.length}</strong></h3> 
+        <h3 class="bigger"><strong>${CITIES.length}</strong></h3> 
         <p>städer</p> `;
 
 

@@ -2,7 +2,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 8rem);
+    height: auto;
     overflow: scroll;
 }
 
@@ -23,14 +23,10 @@ main {
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
     position: relative;
-}
-
-.questionsContainer>div:first-child{
-    font-size: 18px;
 }
 
 /* start */
@@ -43,12 +39,12 @@ main {
     top: calc(50% - 10vh);
 
     background-color: #ff9900;
-    font-size: var(--sizeM);
+    font-size: var(--sizeL);
     font-family: var(--title);
-
+    color: var(--light);
     
-    width: 80%;
-    height: 20vh;
+    width: 100%;
+    height: 10vh;
 }
 
 /* ProgressBar */
@@ -76,7 +72,7 @@ main {
 
 /* question  */
 
-#question{
+.questionsContainer>div:first-child{
     flex-basis: 15%;
     width: 100%; 
 
@@ -85,6 +81,8 @@ main {
     justify-content: center;
     font-family: var(--title);
     font-size: var(--sizeL);
+
+    text-align: center;
 }
 
 /* answearoption */
@@ -100,7 +98,7 @@ main {
 }
 
 .answer {
-	width: 80%;
+	width: 100%;
 	min-height: 4rem;
 	margin-bottom: 5px;
 	appearance: none;
@@ -112,6 +110,9 @@ main {
 	justify-content: center;
 	align-items: center;
     text-align: center;
+
+    font-family: var(--bodyText);
+
 }
 
 .selectedOpt {
@@ -122,7 +123,7 @@ main {
 
 /* valuebar */
 .valuationDiv{
-    flex-basis: 15%;
+    flex-basis: 10%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -165,7 +166,7 @@ main {
 
 /* next question button */
 .navigateButtons{
-    flex-basis: 20%;
+    flex-basis: 10%;
     display: flex;
     justify-content: space-between;
     width: 80%;
@@ -182,221 +183,72 @@ main {
     color: #ffffff;
 }
 
+/* hide */
 
 .hide {
     display: none;
 }
 
-.resultatText{
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
 #resultContainer{
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    height: 400px;
     position: relative;
 }
 
-.country-city {
-	background-color: var(--light);
-	margin-bottom: 15px;
-	padding: 10px;
-	width: 300px;
-    max-height: 40px;
-	font-size: 15px;
-	border-radius: 5px;
-	box-shadow: 0 0 10px 2px;
+/* title */
+.matched {
+    height:auto;
+} 
 
-    transition: 1s;
+.matched > h1 {
+    font-family: var(--title);
+    font-weight: lighter;
+    font-size: var(--sizeL);
+    margin: var(--marginLR) 0rem;
+
+    text-align: center;
+
+    color: var(--dark);
+}
+
+/* CARD */
+.programCard {
+    height: 8.2rem;
+    border-bottom: 0.1rem solid var(--dark);
+    border-top: 0.1rem solid var(--dark);
     overflow: hidden;
+    margin-bottom: var(--marginLR);
+    transition: 1s ease;
 }
 
-.nameAndButton {
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    margin-bottom: 10px;
-}
-
-.cityName {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 18px;
-        font-weight: bold;
-}
-
-.expandArrow {
-    border:none;
-    background-color: var(--light);
-    font-size: var(--sizeM);
-
-    transform: rotate(180deg);
-    transition: 1s;
-}
-
-.shrinkArrow {
-    border:none;
-    background-color: var(--light);
-    font-size: var(--sizeM);
-
-    transform: rotate(0deg);
+.programCardFace {
+    height: 60rem;
+    
 }
 
 .longer {
-    max-height: 400px;
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
+    height: auto;
+    overflow: scroll;
+    transition: 1s ease;
 }
 
+.scroll > div:first-child {
+    color: var(--light);
+    background-color: var(--dark);
+}
 
-.matched  h1 {
-    text-decoration: underline;
-    margin-bottom: 10px;
+.scroll > div:nth-child(2) {
+    color: var(--light);
+    background-color: var(--dark);
+}
+
+.scroll > div:nth-child(2) .circleating {
+    /* background-color: var(--light); */
     color: var(--dark);
 }
-.matched {
-    text-align: center;
-    margin-bottom: 10px;
-    color: var(--dark);
+
+.scroll > div:nth-child(3) {
+    background-color: var(--dark);
 }
-
-.resultatButtonField {
-display: flex;
-}
-
-.restartButton {
-	background-color: #ff9900;
-	font-size: 10px;
-	margin: auto;
-	height: 40px;
-	width: 70px;
-	border-radius: 90%;
-}
-
-.detailedCity{
-    width: 100%;
-    height: 100%;
-  
-    display: flex;
-    flex-direction: column;
-}
-
-.cityPictureWrapper {
-    width: 400vw;
-    position: relative;
-
-    animation-name: slider;
-    animation-timing-function: ease;
-    animation-duration: 20s;
-    animation-iteration-count: infinite;
-}
-
-.cityPictureWrapper img {
-    height:75vw;
-    width:25%;
-}
-
-@keyframes slider {
-    0%   { transform: translateX(0vw);   }
-    16%  { transform: translateX(-100vw);}
-    32%  { transform: translateX(-200vw);}
-    48%  { transform: translateX(-300vw);}
-    63%  { transform: translateX(-200vw);}
-    82%  { transform: translateX(-100vw);}
-    100% { transform: translateX(0vw);}
-    /* 1000 { transform: translateX(-300px);} */
-}
-
-.rating > h1 {
-    margin-bottom: 1rem;
-    font-family: var(--title);
-    font-size: 15px;
-}
-
-.cityInfo {
-    display: none;
-}
-
-
-.cityInfo .red{
-    background-color: red;
-}
-
-.cityInfo .green{
-    background-color: green;
-}
-
-.programCardFace.back > div > div:nth-child(2) {
-    display: flex;
-    padding: var(--paddingSZ);
-}
-
-.rating {
-    flex-grow:1;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.circleRating {
-    height: 8rem;
-    width: 8rem;
-    border-radius: 200px;
-    background-color: var(--light);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-family: var(--title);
-    font-size: var(--sizeS);
-    font-size: var(--sizeM);
-}
-
-.rating > h1 {
-    margin-bottom: 1rem;
-    font-family: var(--title);
-}
-
-/* COMMETNS */
-
-.programCardFace.back > div > div:nth-child(3) {
-    padding: var(--paddingSZ);
-}
-
-.programCardFace.back > .scroll{
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
-.comment {
-    margin-bottom: var(--marginLR);
-    background-color: var(--light);
-    padding: var(--paddingSZ);
-}
-
-.comment > div {
-    display: flex;
-    justify-content: space-between;
-    
-    font-family: var(--title);
-}
-
-.comment p {
-    font-family: var(--bodyText);
-    font-size: var(--sizeS);
-}
-
-.comment h1 {
-    font-size: 18px;
-}
-
-.comment h2{
-    font-size: 12px;
-}
-

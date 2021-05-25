@@ -2,18 +2,20 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: auto;
+    min-height: calc(100vh - 8rem);
     overflow: scroll;
 }
 
 .container {
-    height: 100%;
+    height: calc(100vh - 8rem);
     width: 100%;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    background-image: url(../images/sweden_big_2.jpg);
 }
 
 /* QUESTIONPARENT  */
@@ -38,7 +40,7 @@ main {
     top:0;
     top: calc(50% - 10vh);
 
-    background-color: #ff9900;
+    background-color: transparent;
     font-size: var(--sizeL);
     font-family: var(--title);
     color: var(--light);
@@ -244,8 +246,8 @@ main {
     background-color: var(--dark);
 }
 
-.scroll > div:nth-child(2) .circleating {
-    /* background-color: var(--light); */
+.circleRating {
+    background-color: var(--light);
     color: var(--dark);
 }
 

@@ -302,7 +302,6 @@ function startQuiz() {
 
 //On click på nästa pillen kallas på funktioner resetTheValuation, setNextQuestion och updateBar.
 nextButton.addEventListener("click", ()=>{
-  
     currentQuestionIndex++;
 
     let radioAnswers = document.querySelectorAll(`input[type="radio"]:checked`);
@@ -311,7 +310,7 @@ nextButton.addEventListener("click", ()=>{
             array.value.forEach(obj=>{  
                 if(obj == parseInt(radioAnswers[0].value)){
                     let city = mappedCities.find(c => c.id === array.cityID)
-                    city.valuePoints += city.points + parseInt(document.querySelector(".valuationInput").value);
+                    city.valuePoints += 1 + parseInt(document.querySelector(".valuationInput").value);
                 }   
             })       
         });
@@ -322,11 +321,7 @@ nextButton.addEventListener("click", ()=>{
         resetTheValuation();
         //showResult(mappedCities);
         document.querySelector("main").innerHTML= "";
-        mappedCities.forEach(e => {
-            console.log(e.points);
-        });
-        let valueCities = mappedCities.sort((a,b) => a.points > b.points ? -1 : 1);
-        document.querySelector("main").append(createResult(valueCities));
+        document.querySelector("main").append(createResult(mappedCities));
     }
     //Annars
    else{    
@@ -573,11 +568,10 @@ function createResult(updatedArray){
     //Skapar resultat containern
     let resultContainer = document.createElement("div");
     resultContainer.setAttribute("id","resultContainer");
-
+    let sortedArrayByValuePoints = updatedArray.slice(0);
     //Sorterar arrayen efter Value points, den som har högst poäng hamnar längst upp
-    let sortedArrayByValuePoints = updatedArray.sort((a, b) => a.valuePoints < b.valuePoints);
+    sortedArrayByValuePoints.sort((a, b) => a.valuePoints > b.valuePoints ? -1 : 1);
     let sortedArrayByPoints = sortedArrayByValuePoints.slice(0,7);
-
 
     let storstMatch = document.createElement("div");
     storstMatch.classList.add("matched");
@@ -589,6 +583,8 @@ function createResult(updatedArray){
         let programCard = document.createElement("div");
         programCard.classList.add("programCard");
         programCard.addEventListener("click", e => {
+            programCard.style.scrollBehavior = "smooth";
+            programCard.scrollTop = 0;
             programCard.classList.toggle("longer");
         })
 
@@ -600,7 +596,7 @@ function createResult(updatedArray){
 
     
     //Sorterar arrayen efter points, den som har högst poäng hamnar längst upp
-    sortedArrayByPoints = sortedArrayByPoints.sort((a, b) => a.points < b.points);
+    sortedArrayByPoints.sort((a, b) => a.points > b.points ? -1 : 1);
     
     console.log(sortedArrayByPoints);
     let andraRek = document.createElement("div");
@@ -610,6 +606,8 @@ function createResult(updatedArray){
         let programCard = document.createElement("div");
         programCard.classList.add("programCard");
         programCard.addEventListener("click", e => {
+            programCard.style.scrollBehavior = "smooth";
+            programCard.scrollTop = 0;
             programCard.classList.toggle("longer");
         })
         programCard.append(createBack(city));

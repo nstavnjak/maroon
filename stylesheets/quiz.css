@@ -2,7 +2,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
     overflow: scroll;
     background-image: url(../Images/sweden_big_2.jpg);
     background-size: cover;

@@ -577,6 +577,7 @@ function updateBar(questionNumber){
 function createResult(updatedArray){
     document.querySelector(".menyWrapper").style.display = "flex";
     document.querySelector("footer").style.display = "flex";
+    document.querySelector("main").style.height = "calc(100vh - 8rem)";
 
     //Skapar resultat containern
     let resultContainer = document.createElement("div");

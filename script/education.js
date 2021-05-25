@@ -6,9 +6,9 @@
 
 let load = 0;
 let loaded = 5;
+let finishArray = PROGRAMMES;
 let checked = 0;
 let sortAlternatives = ["Program, A-Ö", "Program, Ö-A", "Antagningspoäng, stigande", "Antagningpoäng, fallande"];
-let finishArray = PROGRAMMES;
 let finishArrayFiltered = []
 
 // Head
@@ -43,7 +43,9 @@ document.getElementById("search").addEventListener("click", () => {
 document.getElementById("sortera").addEventListener("change", () => {
     LoadMoreReset();
 });
-document.getElementById("filter").addEventListener("click", createFilter);
+document.getElementById("filter").addEventListener("click", () => {
+    createFilter();
+});
 
 
 // EVENT
@@ -79,14 +81,18 @@ function LoadMoreFunction() {
     }
 
     for(load; load < loaded ; load++){
-      
-        if(finishArrayFiltered.length == 0){
-            document.querySelector(".programList").append(createCard(finishArray[load]));
+        if(load < finishArray.length && finishArrayFiltered.length == 0){ 
+            document.querySelector("#loadMore").style.visibility = "visible";
+            console.log(finishArray.length)
+                document.querySelector(".programList").append(createCard(finishArray[load]));
+        }
+        else if(loaded < finishArrayFiltered.length){
+            document.querySelector("#loadMore").style.visibility = "visible";
+            document.querySelector(".programList").append(createCard(finishArrayFiltered[load]));  
         }
         else {
-            document.querySelector(".programList").append(createCard(finishArrayFiltered[load]));
-        }    
-
+            document.querySelector("#loadMore").style.visibility = "hidden";
+        }
     }
     load = loaded;
     loaded += 5;
@@ -322,6 +328,7 @@ function filter(){
     let studieInriktningArray = [];
     let bigArray = [visumArray, sprakArray, utbildningsNivaArray, studieInriktningArray];
     checked = document.querySelectorAll("input[type=checkbox]:checked");
+    console.log(checked);
       //Kolla först vad som ska filtreras
     checked.forEach(e => {
             // Visum ------------------------------------------------------------------
@@ -404,7 +411,7 @@ function filter(){
         });
     }
 
-    bigArray.sort((a,b) => a.length > b.length ? 1 : -1);
+   
     let compareArray = [];
     
     bigArray.forEach(array => {
@@ -412,6 +419,15 @@ function filter(){
             compareArray.push(array);
         }
     });
+
+    for(let i = 0; i < bigArray.length; i++){
+        if(document.querySelectorAll(`.group${i}´:checked`).length > 0){
+            compareArray.push(bigArray[i]);            
+        }
+    }
+    console.log(compareArray)
+    compareArray.sort((a,b) => a.length > b.length ? 1 : -1);
+
     let filterArray = [];
     filterArray = compareArray[0];
     if(filterArray != undefined){
@@ -434,8 +450,6 @@ function filter(){
     }
 
     document.getElementById("sokKnapp").innerHTML = `Sök (${finishArrayFiltered.length} av 496)`
-    
-
 }
 
 function createFilter(){
@@ -479,7 +493,7 @@ function createFilter(){
         fieldCheck.setAttribute("id", "filterBox");
         fieldCheck.setAttribute("type", "checkbox");
         fieldCheck.setAttribute("value", `${e.name}`);
-        fieldCheck.setAttribute("class", `FIELDS`);
+        fieldCheck.setAttribute("class", `group1`);
         fieldWrapper.append(fieldCheck, span, field);
         
         studieInriktningDiv.append(fieldWrapper);
@@ -510,7 +524,7 @@ function createFilter(){
         languageCheck.setAttribute("id", "filterBox");
         languageCheck.setAttribute("type", "checkbox");
         languageCheck.setAttribute("value", `${e.name}`);
-        languageCheck.setAttribute("class", `LANGUAGES`);
+        languageCheck.setAttribute("class", `group2`);
         languageWrapper.append(languageCheck, span, language);
         
         sprakDiv.append(languageWrapper);
@@ -543,7 +557,7 @@ function createFilter(){
         levelsCheck.setAttribute("id", "filterBox");
         levelsCheck.setAttribute("type", "checkbox");
         levelsCheck.setAttribute("value", `${e}`);
-        levelsCheck.setAttribute("class", `LEVELS`);
+        levelsCheck.setAttribute("class", `group3`);
         levelsWrapper.append(levelsCheck, span, levels);
         
         utbildningsnivaDiv.append(levelsWrapper);
@@ -569,7 +583,7 @@ function createFilter(){
     visumYesCheck.setAttribute("id", "filterBox");
     visumYesCheck.setAttribute("type", "checkbox");
     visumYesCheck.setAttribute("value", "Yes");
-    visumYesCheck.setAttribute("class", `COUNTRIES`);
+    visumYesCheck.setAttribute("class", `group4`);
 
     let spanYes = document.createElement("span");
     spanYes.classList.add("checkmark");
@@ -593,7 +607,7 @@ function createFilter(){
     visumNoCheck.setAttribute("id", "filterBox");
     visumNoCheck.setAttribute("type", "checkbox");
     visumNoCheck.setAttribute("value", "No");
-    visumNoCheck.setAttribute("class", `COUNTRIES`);
+    visumNoCheck.setAttribute("class", `group4`);
 
     visumWrapperNo.append(visumNoCheck, spanNo, visumNo);
     
@@ -609,9 +623,11 @@ function createFilter(){
     sokKnapp.innerHTML = `Sök (${finishArray.length} av 496)`;
 
     sokKnapp.addEventListener("click", () => {
+        console.log("hej")
+        LoadMoreReset();
         document.getElementById("expandFilter").remove();
         document.querySelector("body").classList.remove("no-scroll");
-        LoadMoreReset();
+        
     });
 
     filterDiv.append(sokKnapp);

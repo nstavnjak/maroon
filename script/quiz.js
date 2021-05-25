@@ -96,7 +96,7 @@ const questions = [
             {value: 91, option: "Te"},
             {value: 92, option: "Paraply"},
             {value: 93, option: "Solkräm"},
-            {value: 94, option: "optionC"}
+            {value: 94, option: "Vet inte"}
         ]       
     },
     {
@@ -208,51 +208,51 @@ let answears = [
     },
     {
         "cityID": 20,
-        "value": [102, 31, 64, 53, 41, 21, 22, 93, 11]
+        "value": [102, 31, 64, 53, 41, 21, 22, 93, 11,24]
     },
     {
         "cityID": 21,
-        "value": [102, 34, 61, 53, 41, 21, 22, 93, 11]
+        "value": [102, 34, 61, 53, 41, 21, 22, 93, 11,24]
     },
     {
         "cityID": 22,
-        "value": [102, 104, 63, 54, 42, 84, 21, 22, 93, 14]
+        "value": [102, 104, 63, 54, 42, 84, 21, 22, 93, 14,24]
     },
     {
         "cityID": 23,
-        "value": [102, 104, 62, 54, 41, 84, 21, 22, 93, 11]
+        "value": [102, 104, 62, 54, 41, 84, 21, 22, 93, 11,24]
     },
     {
         "cityID": 24,
-        "value": [102, 104, 64, 54, 41, 84, 21, 22, 93, 14]
+        "value": [102, 104, 64, 54, 41, 84, 21, 22, 93, 14,24]
     },
     {
         "cityID": 25,
-        "value": [104, 33, 62, 54, 43, 83, 21, 22, 94, 14]
+        "value": [104, 33, 62, 54, 43, 83, 21, 22, 94, 14,24]
     },
     {
         "cityID": 26,
-        "value": [104, 32, 61, 54, 43, 83, 21, 22, 94, 14]
+        "value": [104, 32, 61, 54, 43, 83, 21, 22, 94, 14,24]
     },
     {
         "cityID": 27,
-        "value": [104, 31, 63, 54, 42, 83, 21, 22, 94, 13, 14]
+        "value": [104, 31, 63, 54, 42, 83, 21, 22, 94, 13, 14,24]
     },
     {
         "cityID": 28,
-        "value": [104, 32, 64, 54, 43, 83, 21, 22, 94, 14, 11]
+        "value": [104, 32, 64, 54, 43, 83, 21, 22, 94, 14, 11,24]
     },
     {
         "cityID": 29,
-        "value": [104, 34, 62, 54, 42, 83, 21, 22, 94, 11]
+        "value": [104, 34, 62, 54, 42, 83, 21, 22, 94, 11,24]
     },
     {
         "cityID": 30,
-        "value": [104, 33, 64, 54, 43, 83, 21, 22, 94, 13]
+        "value": [104, 33, 64, 54, 43, 83, 21, 22, 94, 13,24]
     },
     {
         "cityID": 31,
-        "value": [102, 31, 61, 53, 42, 81, 21, 22, 94, 11]
+        "value": [102, 31, 61, 53, 42, 81, 21, 22, 94, 11,24]
     },
     {
         "cityID": 32,
@@ -299,62 +299,52 @@ function startQuiz() {
     setNextQuestion();
 }
 
+
 //On click på nästa pillen kallas på funktioner resetTheValuation, setNextQuestion och updateBar.
 nextButton.addEventListener("click", ()=>{
+  
     currentQuestionIndex++;
 
-    //Anropar på funktionen med den gamla city.points som argument 
-    //för att kunna jämföra och hitta de städer som fått poäng
-    updateCityValuePoints(oldCityPoint);
-  
+    let radioAnswers = document.querySelectorAll(`input[type="radio"]:checked`);
+
+       answears.forEach(array=>{
+            array.value.forEach(obj=>{  
+                if(obj == parseInt(radioAnswers[0].value)){
+                    let city = mappedCities.find(c => c.id === array.cityID)
+                    city.valuePoints += city.points + parseInt(document.querySelector(".valuationInput").value);
+                }   
+            })       
+        });
+    
+    
     //Vid sista frågan kallar på show funktionen och slutar quizet
     if(currentQuestionIndex === 10){
         resetTheValuation();
         //showResult(mappedCities);
         document.querySelector("main").innerHTML= "";
-        document.querySelector("main").append(createResult(mappedCities));
+        mappedCities.forEach(e => {
+            console.log(e.points);
+        });
+        let valueCities = mappedCities.sort((a,b) => a.points > b.points ? -1 : 1);
+        document.querySelector("main").append(createResult(valueCities));
     }
     //Annars
-   else{
+   else{    
     resetTheValuation();
     updateBar(currentQuestionIndex);
     setNextQuestion();
    }
 });
 
- //On click på sluta knappen anropas funktionen showResult med argumentet finished array
- finishButton.addEventListener("click", ()=>{
+//On click på sluta knappen appendas funktionen createResult med argumentet mappedCities
+finishButton.addEventListener("click",()=>{
 
-    //showResult(mappedCities);
-    document.querySelector("main").innerHTML= "";
+    //Tömmer main
+    document.querySelector("main").innerHTML = "";
+    //appendas resultatet
     document.querySelector("main").append(createResult(mappedCities));
- });
 
-/*
-//Skapar en div (visar antal städer som rekommenderas) med en visa knapp.
-function showResult(cities){
-
-    //Tömmer quiz containern 
-    quizContainer.innerHTML = "";
-    quizContainer.classList.add("questionsContainer");
-
-    quizContainer.innerHTML= `<div class="resultatText">${cities.length} Städer hittades</div>`;
-
-    //Skapar en visa knapp
-    let showButton = document.createElement("button");
-    showButton.classList.add("showButton");
-    showButton.innerText = "Visa";
-
-    //Knappen appendas i quiz containern
-    quizContainer.append(showButton);
-
-    //On click på visa knappen skapas resultat fältet()
-    showButton.addEventListener("click",()=>{
-        document.querySelector("main").innerHTML= "";
-        document.querySelector("main").append(createResult(cities));
-    });
-}; 
-*/
+});
 
 // Footer 
 
@@ -391,11 +381,19 @@ function setNextQuestion(){
 
     question.answers.forEach(answers => {
      
-        let button = document.createElement("button");
+        let radio = document.createElement("input");
+        radio.setAttribute("type","radio");
+        radio.setAttribute("value",`${answers.value}`)
+        radio.setAttribute("name",`question${question.id}`);
+        radio.setAttribute("id",`${answers.value}`)
+        radio.classList.add("hide");
+
+        let button = document.createElement("label");
         button.classList.add("answer");
         button.innerText = answers.option;
         button.setAttribute("value", `${answers.value}`);
-
+        button.setAttribute("for",`${answers.value}`)
+ 
         button.addEventListener("click", (el) =>{
            
             let allOptions = document.querySelectorAll(".answer");
@@ -403,21 +401,19 @@ function setNextQuestion(){
                 e.classList.remove("selectedOpt");
             });
 
-            let valueOfChosenButton = parseInt(el.target.value);
+            let valueOfChosenButton = parseInt(el.target.htmlFor);
             updateMappedCity(valueOfChosenButton,el.target.parentElement.previousSibling.id);
-          
+       
             el.target.classList.add("selectedOpt");
 
             document.querySelector(".navigateButtons").classList.remove("hide");
         });
-        
-        answersField.append(button);
+        answersField.append(radio,button);
     });   
 }
 }
 
 let key=0;
-let oldCityPoint=0;
 function updateMappedCity(buttonSelectedvalue, questionID){
    
         answears.forEach(o => {
@@ -428,7 +424,7 @@ function updateMappedCity(buttonSelectedvalue, questionID){
                     mappedCities.forEach(city => {
                         if(city.id === o.cityID){
                             city.points +=1;   
-                            oldCityPoint == city.points;
+                            
                         }     
                         
                     })
@@ -460,20 +456,7 @@ function updateMappedCity(buttonSelectedvalue, questionID){
         }
 
     key = buttonSelectedvalue;
-    
-    console.log(mappedCities);
 };
-
-//Tar emot en siffra och går genom mappedCities. 
-//Om den nya city.points är större än den gamla 
-//dvs om den är uppdaterat då lägger inputValuen till city.valuePoints
-function updateCityValuePoints (point){
-    mappedCities.forEach(city =>{
-        if(city.points > point){
-            city.valuePoints += parseInt(document.querySelector(".valuationInput").value);
-        }
-    })
-}
 
 
 //Skapar quiz container - Frågor och Svar fältet
@@ -511,7 +494,7 @@ function createQuizContainer(){
     let valuationInput = document.createElement("input");
     valuationInput.classList.add("valuationInput");
     valuationInput.setAttribute("type","range");
-    valuationInput.setAttribute("min","0");
+    valuationInput.setAttribute("min","1");
     valuationInput.setAttribute("max","10");
   
 
@@ -554,7 +537,7 @@ function createQuizContainer(){
     document.querySelector("main").append(quizcontainer);
 };
 
-//Skapar start-knappen och appendar den i quiz containern
+//Skapar start-knappen och returnerar den
 function createStartButton(){
     let startButton = document.createElement("button");
     startButton.setAttribute("id","startButton");
@@ -587,72 +570,54 @@ function updateBar(questionNumber){
 //Tar emot den uppdaterade array enligt svar och returnerar resultat diven
 function createResult(updatedArray){
 
-        //Skapar resultat containern
-        let resultContainer = document.createElement("div");
-        resultContainer.setAttribute("id","resultContainer");
+    //Skapar resultat containern
+    let resultContainer = document.createElement("div");
+    resultContainer.setAttribute("id","resultContainer");
 
-        let storstMatch = document.createElement("h1");
-        storstMatch.classList.add("matched");
-        storstMatch.innerText = "Störst Match";
-        
-        let andraRek = document.createElement("h1");
-        andraRek.classList.add("matched");
-        andraRek.innerText = "Andra Rekommendationer";
+    //Sorterar arrayen efter Value points, den som har högst poäng hamnar längst upp
+    let sortedArrayByValuePoints = updatedArray.sort((a, b) => a.valuePoints < b.valuePoints);
+    let sortedArrayByPoints = sortedArrayByValuePoints.slice(0,7);
 
-        resultContainer.append(storstMatch,createCityFront(updatedArray),andraRek);
 
-    //Tar emot en array och returnerar en div element som innehåller all information för varje stad i arrayen
-    function createCityFront(updatedArray){
-        //Skapar stad fältet
-        let cityBoxes = document.createElement("div");
-        cityBoxes.classList.add("cityBoxes");
+    let storstMatch = document.createElement("div");
+    storstMatch.classList.add("matched");
+    storstMatch.innerHTML = `<h1 class="storstMatchTitle">Störst Match</h1>`;
 
-        updatedArray.forEach(city => {
-            //skapar en div för varje stad som finns i den uppdaterade array
-            let countryCityDiv = document.createElement("div");
-            countryCityDiv.classList.add("country-city");
+    sortedArrayByValuePoints.splice(3);
 
-            //Skapar namn och knapp fältet
-            let cityNameAndButtonDiv = document.createElement("div");
-            cityNameAndButtonDiv.classList.add("nameAndButton");
+    sortedArrayByValuePoints.forEach(city => {
+        let programCard = document.createElement("div");
+        programCard.classList.add("programCard");
+        programCard.addEventListener("click", e => {
+            programCard.classList.toggle("longer");
+        })
 
-            let country = COUNTRIES.find(c => c.id === city.countryID);
+       programCard.append(createBack(city))
+        storstMatch.append(programCard);
+    })
+    //Istället för createCityFront funtionen ska funktionen Loadmore anropas
+    //med argumentet "sortedArrayByValuePoints"
 
-            //Skapar ett p element som innehåller namn på stad och land för varje city objekt i arrayen
-            let cityNameP = document.createElement("p");
-            cityNameP.classList.add("cityName");
-            cityNameP.innerHTML = `${city.name}, ${country.name}`;
+    
+    //Sorterar arrayen efter points, den som har högst poäng hamnar längst upp
+    sortedArrayByPoints = sortedArrayByPoints.sort((a, b) => a.points < b.points);
+    
+    console.log(sortedArrayByPoints);
+    let andraRek = document.createElement("div");
+    andraRek.classList.add("matched");
+    andraRek.innerHTML = `<h1 class="andraRekTitle">Andra Rekommendationer</h1>`;
+    sortedArrayByPoints.forEach(city => {
+        let programCard = document.createElement("div");
+        programCard.classList.add("programCard");
+        programCard.addEventListener("click", e => {
+            programCard.classList.toggle("longer");
+        })
+        programCard.append(createBack(city));
+        andraRek.append(programCard);
+    })
+    
+    //storst match och andra rekommendationer divar appendas i resultat containern.
+    resultContainer.append(storstMatch,andraRek);
 
-            //Skapar ner pillen 
-            let expandPill = document.createElement("button");
-            expandPill.classList.add("expandArrow");
-            expandPill.innerHTML = `&#8679;`;
-
-            //Skapar diven som kommer innehålla infon om staden
-            let detailedCity = document.createElement("div");
-            detailedCity.classList.add("detailedCity");
-            detailedCity.classList.add("hide");
-            detailedCity.append(createBack(city));
-
-            cityNameAndButtonDiv.append(cityNameP,expandPill);
-            countryCityDiv.append(cityNameAndButtonDiv,detailedCity);
-            
-                //On click, togglas longer, hide och shrinkArrow classes
-                countryCityDiv.addEventListener("click", () => {
-                    countryCityDiv.classList.toggle("longer");
-                    detailedCity.classList.toggle("hide");
-                    cityNameP.classList.toggle("hide");
-                    expandPill.classList.toggle("shrinkArrow");
-                });
-
-                //Alla städer appendas i stad fältet
-                cityBoxes.append(countryCityDiv);
-            });  
-
-        // Returnerar stad fältet för att senare appendas i resultat container
-        return cityBoxes;
-    }
-
-    //Returnerar resultat container för att senare appendas on click på visa knappen
     return resultContainer;
 }

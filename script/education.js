@@ -41,6 +41,7 @@ document.getElementById("search").addEventListener("click", () => {
     LoadMoreReset();
 });
 document.getElementById("sortera").addEventListener("change", () => {
+    console.log("kör")
     LoadMoreReset();
 });
 document.getElementById("filter").addEventListener("click", () => {
@@ -56,7 +57,7 @@ LoadMoreReset();
 
 function sort(){
     let sorteraButton = document.querySelector("#sortera");
-    if(finishArrayFiltered.length == 0 && finishArray.length == 496){
+    if(finishArrayFiltered.length == 0 && finishArray.length > 0){
         finishArrayFiltered = finishArray;
     }
         if(sorteraButton.value == "Program, A-Ö"){
@@ -106,8 +107,8 @@ function LoadMoreFunction() {
 function LoadMoreReset() {
     load = 0; 
     loaded = 5;
-    sort();
     document.querySelector(".programList").innerHTML = "";
+    sort();
     LoadMoreFunction();
 }
 

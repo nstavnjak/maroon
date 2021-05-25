@@ -4,6 +4,9 @@ main {
     align-items: center;
     min-height: calc(100vh - 8rem);
     overflow: scroll;
+    background-image: url(../images/sweden_big_2.jpg);
+    background-size: cover;
+    background-position: left;
 }
 
 .container {
@@ -12,12 +15,11 @@ main {
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 
-    background-image: url(../images/sweden_big_2.jpg);
-    background-size: cover;
-    background-position: left;
+    background-color: rgba(0, 0, 0, 0.3);
+    
 }
 
 /* QUESTIONPARENT  */
@@ -31,6 +33,7 @@ main {
     align-items: center;
 
     position: relative;
+    border-radius: 2rem;
 }
 
 /* start */
@@ -42,24 +45,21 @@ main {
     top:0;
     top: calc(50% - 10vh);
 
-    background-color: transparent;
-    font-size: var(--sizeL);
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: var(--sizeM);
     font-family: var(--title);
     color: var(--light);
-    
-    width: 100%;
-    height: 10vh;
+    border-radius: 20rem;
+    padding: var(--paddingSZ);
 }
 
 /* ProgressBar */
 .progress {
     width: 80%;
     background-color: var(--dark);
-    margin-bottom: var(--marginLR);
 
     border-radius: 20rem;
-    overflow:hidden
-
+    overflow:hidden;
 }
 
 .bar {
@@ -85,6 +85,8 @@ main {
     justify-content: center;
     font-family: var(--title);
     font-size: var(--sizeL);
+    color: var(--light);
+    padding: var(--paddingSZ);
 
     text-align: center;
 }
@@ -92,13 +94,13 @@ main {
 /* answearoption */
 
 #answersButtons{
-    flex-basis: 50%;
+    flex-basis: 45%;
     width: 100%;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items:center;
 }
 
 .answer {
@@ -107,8 +109,8 @@ main {
 	margin-bottom: 5px;
 	appearance: none;
 	border: none;
-	background-color: #26282C;
-	color: #ffffff;
+	background-color:rgba(0, 0, 0, 0.5);
+	color: var(--light);
 	font-size: 15px;
 	display: flex;
 	justify-content: center;
@@ -120,9 +122,8 @@ main {
 }
 
 .selectedOpt {
-    background-color: #ff9900;
+    background-color: rgba(255, 153, 0, 0.7);
     font-weight: bold;
-    color: #26282C;
 }
 
 /* valuebar */
@@ -146,6 +147,7 @@ main {
     font-family: var(--bodyText);
     font-style: normal;
     font-size: var(--sizeS);
+    color: var(--light);
 }
 
 .valuationInputDiv {
@@ -166,6 +168,7 @@ main {
     
     font-family: var(--bodyText);
     font-size: var(--sizeS);
+    color: var(--light);
 }
 
 /* next question button */
@@ -181,10 +184,13 @@ main {
     justify-content: center;
     align-items: center;
 
-    height: 35px;
-    width: 45px;
-    background-color: #0091FF;
-    color: #ffffff;
+    height: 5rem;
+    width: 5rem;
+    appearance: none;
+    border:none;
+    background-color:rgba(255, 153, 0, 0.7);
+    color: var(--light);
+    border-radius: 20rem;
 }
 
 /* hide */

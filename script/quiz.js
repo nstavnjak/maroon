@@ -522,7 +522,7 @@ function createQuizContainer(){
     //Skapar nästa pillen
     let rightArrow = document.createElement("button");
     rightArrow.setAttribute("id", "right");
-    rightArrow.innerHTML = `&#8680;`;
+    rightArrow.innerHTML = `&#x2192;`;
 
     //Skapar sluta-knappen
     let finish = document.createElement("button");

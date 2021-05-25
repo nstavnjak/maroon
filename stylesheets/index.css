@@ -15,10 +15,10 @@
     height: 10vw;
     width: auto;
     padding: var(--paddingSZ);
-    padding-right: 5rem;
-    background-color: rgb(255, 153, 0);
+    margin-right: var(--marginLR);
+    background-color: rgba(255, 153, 0, 0.9);
     appearance: none;
-    border: none;
+    border: 0.2rem solid var(--dark);
 
     position: absolute;
     bottom: 20%;
@@ -27,6 +27,7 @@
     text-transform: uppercase;
     font-family: var(--bodyText);
     font-size: var(--sizeS);
+    font-weight: bold;
     
 
     display: flex;

@@ -1,67 +1,117 @@
 /* first */
 .first {
     height:calc(100vh - 8rem);
+    background-image: url(../Images/stockholm_big_2.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+#callForAction {
+    height: 10vw;
+    width: auto;
+    padding: var(--paddingSZ);
+    margin-right: var(--marginLR);
+    background-color: rgba(255, 153, 0, 0.9);
+    appearance: none;
+    border: 0.2rem solid var(--dark);
+
+    position: absolute;
+    bottom: 20%;
+    right: 0;
+
+    text-transform: uppercase;
+    font-family: var(--bodyText);
+    font-size: var(--sizeS);
+    font-weight: bold;
+    
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#callForAction a {
+    text-decoration: none;
+    color: var(--dark);
+}
+
+#callForAction a:visited {
+    color: var(--dark);
+}
+
+#firstText {
+    padding: var(--marginLR);
+    margin-bottom: 25vh;
+    color: var(--light);
+    font-family: var(--title);
+    font-size: var(--sizeS);
+    background-color: rgba(0, 0, 0, 0.4);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#scrollForMore {
+    color: var(--light);
+    font-family: var(--title);
+    font-size: var(--sizeM);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#scrollForMore > p:last-child {
+    font-size: 4rem;
+    padding-bottom: 1rem;
+
+    animation-name: bounceUpAndDown;
+    animation-timing-function: ease;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    transform: rotate(-90deg);
 }
 
 /* fact  */
 .factParent {
-    height:auto;
+    height: 15rem;
     width:100%;
     position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--dark);
+    margin-bottom: var(--marginLR);
 }
 
-.rhomb {
-    position: relative;
-    width: 100%;
-    height: 5rem;
-    transform: skewX(45deg);
+.circle {
+    height: 10rem;
+    width: 10rem;
+    background-color: var(--secondary);
+    border-radius: 200rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: var(--bodyText);
+    font-size: var(--sizeXs);
+    text-transform: uppercase;
 }
 
-.rhomb h3, .rhomb p {
-    display: inline-block;
-    height: 100%;
-    transform: skewX(-45deg);
-
-    font-family: var(--title);
-    
-    font-size: var(--sizeM);
-    padding: 1rem;
-    color: var(--dark);
+.bigger {
+    font-size: var(--sizeL);
 }
 
-.rhomb p {
-    padding-left: 0rem;
-}
-
-.rhomb h3{
-    padding-left: 2rem;
-}
-
-.rhomb.num0 {
-    left: -12.5rem;
-    background-color: rgba(255, 200, 117, 0.5);
-}
-.num0 h3{
-    margin-left: 12.5rem;
-}
-
-.rhomb.num1{
-    left: -7.6rem;
-    top:-0.06rem;
-    background-color: rgba(255, 185, 79,0.6);
-}
-.num1 h3{
-    margin-left: 9.5rem;
-}
-
-.rhomb.num2{
-    left: -2.7rem;
-    top:-0.2rem;
-    background-color: rgba(255, 153, 0, 0.7);
-}
-.num2 h3{
-    margin-left: 6.5rem;
-}
 
 /* guide  */
 .guidePart {

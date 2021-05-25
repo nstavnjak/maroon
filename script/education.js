@@ -27,23 +27,31 @@ programlist.classList.add("programList");
 document.querySelector("main").append(programlist);
 
 
-let searchButton = document.querySelector("#search");
-searchButton.addEventListener("click", e => {
+document.querySelector("#search").addEventListener("click", presort);
+function presort(){
     let inputValue = document.querySelector("#inputField").value;
     let countryValue = document.querySelector("#select1").value;
     let cityValue = document.querySelector("#select2").value;
     
     searchProgram(inputValue, countryValue, cityValue);
-});
+}
 
-document.getElementById("search").addEventListener("click", LoadMoreReset);
-document.getElementById("sortera").addEventListener("change", LoadMoreReset);
+
+document.getElementById("search").addEventListener("click", () => {
+    LoadMoreReset();
+    LoadMoreFunction(finishArray);
+});
+document.getElementById("sortera").addEventListener("change", () => {
+    LoadMoreReset();
+    LoadMoreFunction(finishArrayFiltered);
+});
 document.getElementById("filter").addEventListener("click", createFilter);
 
 
 // EVENT
 
 LoadMoreReset();
+LoadMoreFunction(finishArray);
 
 
 function sort(){
@@ -64,7 +72,7 @@ function sort(){
 }
 //Load More
 //Klar
-function LoadMoreFunction() {
+function LoadMoreFunction(array) {
     let loadMore = document.createElement("button");
     if(document.querySelector("#loadMore") == null){
         loadMore.innerHTML = "Load More";
@@ -73,29 +81,29 @@ function LoadMoreFunction() {
     }
 
     for(load; load < loaded ; load++){
+      
         if(finishArrayFiltered.length == 0){
             document.querySelector(".programList").append(createCard(finishArray[load]));
         }
         else {
             document.querySelector(".programList").append(createCard(finishArrayFiltered[load]));
         }    
+
     }
     load = loaded;
     loaded += 5;
     
     //Lägger till event listeners på alla kort
-
     loadMore.addEventListener("click", LoadMoreFunction);
+
     // loadMore.addEventListener("click", applyExpand);
 }
 
 function LoadMoreReset() {
-    console.log("hej")
     load = 0; 
     loaded = 5;
     sort();
     document.querySelector(".programList").innerHTML = "";
-    LoadMoreFunction();
 }
 
 function createSearchForm(){
@@ -136,7 +144,12 @@ function createSearchForm(){
 function createOPT(){
     for(let i = 1; i < 3; i++){
         let emptyOPT = document.createElement("option");
-        emptyOPT.textContent = "";
+        if(i === 1){
+            emptyOPT.innerHTML = "--- Land ---"
+        }
+        else {
+            emptyOPT.innerHTML = "--- Stad ---";
+        }
         document.querySelector(`#select${i}`).append(emptyOPT);
     }
     
@@ -159,14 +172,14 @@ function createOPT(){
         document.getElementById("select2").innerHTML = "";
     
         //SKapar alla städer beroende på vilket land som är valt
-        if(document.querySelector("#select1").value != false){
+        if(document.querySelector("#select1").value != "--- Land ---"){
             let country = COUNTRIES.find(e => e.name == document.querySelector("#select1").value);
             let cities = CITIES.filter(e => e.countryID === country.id);
 
             
             //Skapar ett tomt alternativ i toppen
             let option = document.createElement("option");
-            option.textContent = "";
+            option.textContent = "--- Stad ---";
             document.querySelector("#select2").append(option);
             
             cities.forEach(e =>{
@@ -178,7 +191,7 @@ function createOPT(){
         else {
             //Skapar ett tomt alternativ i toppen
             let option = document.createElement("option");
-            option.textContent = "";
+            option.textContent = "--- Stad ---";
             document.querySelector("#select2").append(option);
 
             //Skapar alla städer om inget är valt i select1
@@ -233,101 +246,76 @@ function searchProgram(textValue, country, city){
     finishArray = [];
 
     // Om allt är tomt så ska vi visa alla program i bokstavsordning från A-Ö - done
-    if (textValue.length === 0 && country.length === 0 && city.length === 0){
-        finishArray = PROGRAMMES;
-        finishArray.sort((a, b) => a.name > b.name) ? -1 : 1;
-        appendCards(finishArray);
+    if (country === "--- Land ---" && city === "--- Stad ---"){
+        if(textValue.length === 0){
+            finishArray = PROGRAMMES;
+            finishArray.sort((a, b) => a.name > b.name) ? -1 : 1;
+            appendCards(finishArray);
+        }
+        else{
+            finishArray = PROGRAMMES.filter(prog => prog.name.toLowerCase().includes(textValue));
+            appendCards(finishArray);
+        }
     }
-    // Om bara land är valt - done
-    else if (textValue.length === 0 && country.length > 0 && city.length === 0){
-        let countryObj = COUNTRIES.find(c => c.name.includes(country));
-        let citys = CITIES.filter(ci => ci.countryID === countryObj.id);
-    
-        let universities = [];
-        citys.forEach(city => {
-            universities.push(UNIVERSITIES.filter(uni => uni.cityID === city.id));
-        })
-
-        universities.flat(1).forEach(uni => {
-            finishArray.push(PROGRAMMES.filter(prog => prog.universityID === uni.id));
-        })
-
-        // mergar ihop nestlade arrayer
-        finishArray = finishArray.flat(1);
-        appendCards(finishArray);
-    } 
-    // Om bara stad är valt - done
-    else if (textValue.length === 0 && country.length === 0 && city.length > 0){
+    // Om stad eller stad och land och/eller input är ifyllt - done
+    else if (city != "--- Stad ---"){
         let cityObj = CITIES.find(c => c.name.includes(city));
         let universities = UNIVERSITIES.filter(uni => uni.cityID === cityObj.id);
 
-        universities.forEach(uni => {
-            finishArray.push(PROGRAMMES.filter(prog => prog.universityID === uni.id))
-        })
-        
-        finishArray = finishArray.flat(1);
-        appendCards(finishArray);
-    } 
-    // Om bara sökfältet är är ifyllt - done
-    else if (textValue.length > 0 && country.length === 0 && city.length === 0){
-        finishArray = PROGRAMMES.filter(prog => prog.name.toLowerCase().includes(textValue));
-        appendCards(finishArray);
-    }
-    // Om stad och land är ifyllt - done
-    else if (textValue.length === 0 && country.length > 0 && city.length > 0){
-        let cityObj = CITIES.find(c => c.name.includes(city));
-        let universities = UNIVERSITIES.filter(uni => uni.cityID === cityObj.id);
-
-        universities.forEach(uni => {
-            finishArray.push(PROGRAMMES.filter(prog => prog.universityID === uni.id))
-        })
-
-        finishArray = finishArray.flat(1);
-        appendCards(finishArray);
-    }
-    // Om stad och input är ifyllt - done
-    else if (textValue.length > 0 && country.length === 0 && city.length > 0){
-        let cityObj = CITIES.find(c => c.name.includes(city));
-        let universities = UNIVERSITIES.filter(uni => uni.cityID === cityObj.id);
-
-        let programs = [];
-        universities.forEach(uni => {
-            programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id))
-        })
-        
-        finishArray = programs.flat(1).filter(prog => prog.name.toLowerCase().includes(textValue));
-        appendCards(finishArray);
+        if(textValue.length > 0){
+            let programs = [];
+            universities.forEach(uni => {
+                programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id));
+                finishArray = programs.flat(1).filter(prog => prog.name.toLowerCase().includes(textValue));
+                appendCards(finishArray);
+            });
+        }
+        else{
+            let programs = [];
+            console.log(universities);
+            universities.forEach(uni => {
+                programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id))
+                finishArray = programs.flat(1);
+            });
+            appendCards(finishArray);
+        }  
     }
     // Om land och input är ifyllt - done 
-    else if (textValue.length > 0 && country.length > 0 && city.length === 0){
+    else if (country.length != "--- Land ---"){
         let countryObj = COUNTRIES.find(c => c.name.includes(country));
         let citys = CITIES.filter(ci => ci.countryID === countryObj.id);
     
         let universities = [];
         citys.forEach(city => {
             universities.push(UNIVERSITIES.filter(uni => uni.cityID === city.id));
-        })
-
-        let programs = [];
-        universities.flat(1).forEach(uni => {
-            programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id));
-        })
-
-        finishArray = programs.flat(1).filter(prog => prog.name.toLowerCase().includes(textValue));
-        appendCards(finishArray);
+        });
+        if(textValue.length > 0){
+            let programs = [];
+            universities.flat(1).forEach(uni => {
+                programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id));
+            });
+            finishArray = programs.flat(1).filter(prog => prog.name.toLowerCase().includes(textValue));
+            appendCards(finishArray);
+        }
+        else {
+            let programs = [];
+            universities.flat(1).forEach(uni => {
+                programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id));
+            });
+            finishArray = programs.flat(1)
+            appendCards(finishArray);
+        }
     }
-    // Om alla är ifyllda - NOT done
-    else if (textValue.length > 0 && country.length > 0 && city.length > 0){
-    }
-
+    // Om alla är ifyllda - Klar
     function appendCards(array){
         array.forEach(program => {
             document.querySelector(".programList").append(createCard(program));
-        })
+        });
     }
 }
 
 function filter(){
+    finishArrayFiltered = [];
     console.log("nu gör vi");
     //Skapa en tom array som kommer fyllas med saker
     let visumArray = [];
@@ -335,7 +323,6 @@ function filter(){
     let utbildningsNivaArray = [];
     let studieInriktningArray = [];
     let bigArray = [visumArray, sprakArray, utbildningsNivaArray, studieInriktningArray];
-    finishArrayFiltered = [];
     checked = document.querySelectorAll("input[type=checkbox]:checked");
         //Kolla först vad som ska filtreras
     checked.forEach(e => {
@@ -612,13 +599,14 @@ function createFilter(){
     
     let sokKnapp = document.createElement("button");
     sokKnapp.setAttribute("id", "sokKnapp");
-    sokKnapp.style.position = "relative";
+    // sokKnapp.style.position = "relative";
     sokKnapp.innerHTML = `Sök (${finishArray.length} av 496)`;
 
     sokKnapp.addEventListener("click", () => {
         document.getElementById("expandFilter").remove();
         document.querySelector("body").classList.remove("no-scroll");
         LoadMoreReset();
+        LoadMoreFunction(finishArrayFiltered);
     });
 
     filterDiv.append(sokKnapp);
@@ -687,7 +675,6 @@ function createCard(program){
             mainInformation.addEventListener("click", e => {
               e.stopPropagation();
               card.classList.toggle("longer");
-              document.querySelector("inner").classList.toggle("widthTran");
               button.classList.toggle("rotated");
             });
 
@@ -699,9 +686,9 @@ function createCard(program){
             
             let seats = program.exchangeStudents + program.localStudents
             let exchangeStudents = (program.exchangeStudents / seats) * 100;
-            let text = `<b>${program.exchangeStudents}</b> utbytesplatser tillgänliga för detta program`;
+            let text = `<b>${exchangeStudents.toFixed()}%</b> av det toala antalet platser finns tillgängliga för utbytesstudenter`;
             
-            return createMiddleParts("Antal Platser:", "programSeats", exchangeStudents, text, seats);
+            return createMiddleParts("Antal Platser:", "programSeats", program.exchangeStudents, text, seats);
         }
         
         // done
@@ -755,6 +742,11 @@ function createCard(program){
             progressBarInner.classList.add("progressBar", "inner");
             progressBarInner.textContent = `${progressWidth.toFixed()}%`;
             progressBarInner.style.width = `${progressWidth}%`
+            
+            if (progressWidth === program.exchangeStudents){
+                progressBarInner.textContent = `${progressWidth} pla.`;
+                progressBarInner.style.width = `${((progressWidth/value)*100).toFixed()}%`
+            }
 
             let text = document.createElement("p");
             text.innerHTML = pText;
@@ -785,3 +777,4 @@ function createCirlePoints(grade, year){
     
     return gradeBox;
 }
+

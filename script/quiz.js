@@ -318,16 +318,14 @@ nextButton.addEventListener("click", ()=>{
     
     //Vid sista frågan kallar på show funktionen och slutar quizet
     if(currentQuestionIndex === 10){
-        resetTheValuation();
-        //showResult(mappedCities);
+        
         document.querySelector("main").innerHTML= "";
         document.querySelector("main").append(createResult(mappedCities));
     }
     //Annars
    else{    
-    resetTheValuation();
-    updateBar(currentQuestionIndex);
-    setNextQuestion();
+        updateBar(currentQuestionIndex);
+        setNextQuestion();
    }
 });
 
@@ -355,12 +353,6 @@ finishButton.addEventListener("click",()=>{
 // Footer 
 
 // Functions
-
-// Återställer input värdet 
-function resetTheValuation(){
-    let inputValue = document.querySelector(".valuationInput");
-    document.querySelector(".numberOfInput").innerText = inputValue.value;
-}
 
 //Tömmer questions containern och hämtar en fråga från den slumpmässig sorterat arrayen
 function setNextQuestion(){

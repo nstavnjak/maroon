@@ -321,11 +321,7 @@ nextButton.addEventListener("click", ()=>{
         resetTheValuation();
         //showResult(mappedCities);
         document.querySelector("main").innerHTML= "";
-        mappedCities.forEach(e => {
-            console.log(e.points);
-        });
-        let valueCities = mappedCities.sort((a,b) => a.points > b.points ? -1 : 1);
-        document.querySelector("main").append(createResult(valueCities));
+        document.querySelector("main").append(createResult(mappedCities));
     }
     //Annars
    else{    
@@ -575,7 +571,7 @@ function createResult(updatedArray){
     resultContainer.setAttribute("id","resultContainer");
 
     //Sorterar arrayen efter Value points, den som har högst poäng hamnar längst upp
-    let sortedArrayByValuePoints = updatedArray.sort((a, b) => a.valuePoints > b.valuePoints);
+    let sortedArrayByValuePoints = updatedArray.sort((a, b) => a.valuePoints > b.valuePoints ? 1 : -1);
     let sortedArrayByPoints = sortedArrayByValuePoints.slice(0,7);
 
 
@@ -600,7 +596,7 @@ function createResult(updatedArray){
 
     
     //Sorterar arrayen efter points, den som har högst poäng hamnar längst upp
-    sortedArrayByPoints = sortedArrayByPoints.sort((a, b) => a.points > b.points);
+    sortedArrayByPoints = sortedArrayByPoints.sort((a, b) => a.points > b.points ? 1 : -1);
     
     console.log(sortedArrayByPoints);
     let andraRek = document.createElement("div");

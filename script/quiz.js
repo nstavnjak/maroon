@@ -575,7 +575,7 @@ function createResult(updatedArray){
     resultContainer.setAttribute("id","resultContainer");
 
     //Sorterar arrayen efter Value points, den som har högst poäng hamnar längst upp
-    let sortedArrayByValuePoints = updatedArray.sort((a, b) => a.valuePoints < b.valuePoints);
+    let sortedArrayByValuePoints = updatedArray.sort((a, b) => a.valuePoints > b.valuePoints);
     let sortedArrayByPoints = sortedArrayByValuePoints.slice(0,7);
 
 
@@ -600,7 +600,7 @@ function createResult(updatedArray){
 
     
     //Sorterar arrayen efter points, den som har högst poäng hamnar längst upp
-    sortedArrayByPoints = sortedArrayByPoints.sort((a, b) => a.points < b.points);
+    sortedArrayByPoints = sortedArrayByPoints.sort((a, b) => a.points > b.points);
     
     console.log(sortedArrayByPoints);
     let andraRek = document.createElement("div");

@@ -73,7 +73,7 @@ function sort(){
 function LoadMoreFunction() {
     let loadMore = document.createElement("button");
     if(document.querySelector("#loadMore") == null){
-        loadMore.innerHTML = "Load More";
+        loadMore.innerHTML = `Ladda Mer (${loaded} av ${finishArray.length})`;
         loadMore.setAttribute("id", "loadMore");
         document.querySelector("main").append(loadMore);
     }
@@ -316,7 +316,6 @@ function searchProgram(textValue, country, city){
 function filter(){
     //Skapa en tom array som kommer fyllas med saker
     finishArrayFiltered = [];
-    let array = finishArray.slice(0);
     let visumArray = [];
     let sprakArray = [];
     let utbildningsNivaArray = [];
@@ -327,10 +326,10 @@ function filter(){
     checked.forEach(e => {
             // Visum ------------------------------------------------------------------
             if (e.parentElement.parentElement.className === "visum"){
-                let tempArray = [];
+                let array = [];
                 
                     if (e.value === "Yes"){
-                        tempArray = array.filter(element => {
+                        array = finishArray.filter(element => {
                             let cityFilterID = UNIVERSITIES.find(e => e.id === element.universityID).cityID;
                             let countryFilterID = CITIES.find(e => e.id === cityFilterID).countryID;
                             let visum = COUNTRIES.find(e => e.id === countryFilterID).visa;
@@ -339,7 +338,7 @@ function filter(){
                         array.forEach(e => {visumArray.push(e)});
                     }
                     if(e.value === "No") {
-                        tempArray = array.filter(element => {
+                        array = finishArray.filter(element => {
                             let cityFilterID = UNIVERSITIES.find(e => e.id === element.universityID).cityID;
                             let countryFilterID = CITIES.find(e => e.id === cityFilterID).countryID;
                             let visum = COUNTRIES.find(e => e.id === countryFilterID).visa;
@@ -350,47 +349,47 @@ function filter(){
                 }
             // Språk ----------------------------------------------------------------------------
             else if (e.parentElement.parentElement.className === "sprak"){
-                let tempArray = [];
+                let array = [];
                 if (e.value === "Swedish"){
-                    tempArray = array.filter(element => element.language === 3);
+                    array = finishArray.filter(element => element.language === 3);
                     console.log(array);
                     array.forEach(e => sprakArray.push(e));
                 }
                 if (e.value === "English"){
-                    tempArray = array.filter(element => element.language == 1);
+                    array = finishArray.filter(element => element.language == 1);
                     array.forEach(e => sprakArray.push(e));
                 }
                 if (e.value === "French"){
-                    tempArray = array.filter(element => element.language == 2);
+                    array = finishArray.filter(element => element.language == 2);
                     array.forEach(e => sprakArray.push(e));
                 }
                 if (e.value === "Spanish"){
-                    tempArray = array.filter(element => element.language == 0); 
+                    array = finishArray.filter(element => element.language == 0); 
                     array.forEach(e => sprakArray.push(e));   
                 }
             }
             // Utbildningsnivå ----------------------------------------------------------------------------
             else if (e.parentElement.parentElement.className === "utbildningsniva"){
-                let tempArray = [];
+                let array = [];
                 if (e.value === "Bachelor"){
-                    tempArray = array.filter(element => element.level == 0);
+                    array = finishArray.filter(element => element.level == 0);
                     array.forEach(e => utbildningsNivaArray.push(e));
                 }
                 if (e.value === "Master"){
-                    tempArray = array.filter(element => element.level == 1);
+                    array = finishArray.filter(element => element.level == 1);
                     array.forEach(e => utbildningsNivaArray.push(e));
                 }
                 if (e.value === "Doctorate"){
-                    tempArray = array.filter(element => element.level == 2);
+                    array = finishArray.filter(element => element.level == 2);
                     array.forEach(e => utbildningsNivaArray.push(e));
                 } 
             }
             // Studie Inriktning -------------------------------------------------------------------------------------
             else if (e.parentElement.parentElement.className === "studieinriktning"){
-                let tempArray = [];
+                let array = [];
                 for (let i = 0; i < FIELDS.length; i++){
                     if (e.value === FIELDS[i].name) {
-                        tempArray = array.filter(element => FIELDS[i].id === element.subjectID);
+                        array = finishArray.filter(element => FIELDS[i].id === element.subjectID);
                         array.forEach(e => studieInriktningArray.push(e));
                     }
                 }
@@ -420,10 +419,7 @@ function filter(){
             array.forEach(item2 => {
                 if(item.id === item2.id){
                     item.score += 1;
-                    if(item.score >= compareArray.length && checked.length == 0){
-                        finishArrayFiltered.push(item);
-                    }
-                    if(item.score >= 1 + compareArray.length && checked.length > 0){
+                    if(item.score >= compareArray.length){
                         finishArrayFiltered.push(item);
                     }
                 }

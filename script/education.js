@@ -139,13 +139,12 @@ function createSearchForm(){
 function createOPT(){
     for(let i = 1; i < 3; i++){
         let emptyOPT = document.createElement("option");
-        if(i == 1){
-            emptyOPT.innerHTML = "--- Land ---";
+        if(i = 1){
+            emptyOPT.innerHTML = "Land";
         }
         else {
-            emptyOPT.innerHTML = "--- Stad ---";
+            emptyOPT.innerHTML = "Stad";
         }
-            
         
         document.querySelector(`#select${i}`).append(emptyOPT);
     }
@@ -170,15 +169,15 @@ function createOPT(){
         
         console.log(document.querySelector("#select1").value);
         
-        //Skapar alla städer beroende på vilket land som är valt
-        if(document.querySelector("#select1").value != "--- Land ---"){
+        //SKapar alla städer beroende på vilket land som är valt
+        if(document.querySelector("#select1").value != false){
             let country = COUNTRIES.find(e => e.name == document.querySelector("#select1").value);
             let cities = CITIES.filter(e => e.countryID === country.id);
             console.log(cities);
             
             //Skapar ett tomt alternativ i toppen
             let option = document.createElement("option");
-            option.textContent = "--- Stad ---";
+            option.textContent = "";
             document.querySelector("#select2").append(option);
             
             cities.forEach(e =>{
@@ -190,7 +189,7 @@ function createOPT(){
         else {
             //Skapar ett tomt alternativ i toppen
             let option = document.createElement("option");
-            option.textContent = "--- Stad ---";
+            option.textContent = "";
             document.querySelector("#select2").append(option);
 
             //Skapar alla städer om inget är valt i select1

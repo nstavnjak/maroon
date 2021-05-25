@@ -81,7 +81,14 @@ function LoadMoreFunction(array) {
     }
 
     for(load; load < loaded ; load++){
-            document.querySelector(".programList").append(createCard(array[load]));
+      
+        if(finishArrayFiltered.length == 0){
+            document.querySelector(".programList").append(createCard(finishArray[load]));
+        }
+        else {
+            document.querySelector(".programList").append(createCard(finishArrayFiltered[load]));
+        }    
+
     }
     load = loaded;
     loaded += 5;

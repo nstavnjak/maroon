@@ -329,7 +329,6 @@ nextButton.addEventListener("click", ()=>{
     updateBar(currentQuestionIndex);
     setNextQuestion();
    }
-   console.log(mappedCities)
 });
 
 //On click på sluta knappen appendas funktionen createResult med argumentet mappedCities
@@ -569,11 +568,10 @@ function createResult(updatedArray){
     //Skapar resultat containern
     let resultContainer = document.createElement("div");
     resultContainer.setAttribute("id","resultContainer");
-
+    let sortedArrayByValuePoints = updatedArray.slice(0);
     //Sorterar arrayen efter Value points, den som har högst poäng hamnar längst upp
-    let sortedArrayByValuePoints = updatedArray.sort((a, b) => a.valuePoints > b.valuePoints ? 1 : -1);
+    sortedArrayByValuePoints.sort((a, b) => a.valuePoints > b.valuePoints ? -1 : 1);
     let sortedArrayByPoints = sortedArrayByValuePoints.slice(0,7);
-
 
     let storstMatch = document.createElement("div");
     storstMatch.classList.add("matched");
@@ -585,6 +583,8 @@ function createResult(updatedArray){
         let programCard = document.createElement("div");
         programCard.classList.add("programCard");
         programCard.addEventListener("click", e => {
+            programCard.style.scrollBehavior = "smooth";
+            programCard.scrollTop = 0;
             programCard.classList.toggle("longer");
         })
 
@@ -596,7 +596,7 @@ function createResult(updatedArray){
 
     
     //Sorterar arrayen efter points, den som har högst poäng hamnar längst upp
-    sortedArrayByPoints = sortedArrayByPoints.sort((a, b) => a.points > b.points ? 1 : -1);
+    sortedArrayByPoints.sort((a, b) => a.points > b.points ? -1 : 1);
     
     console.log(sortedArrayByPoints);
     let andraRek = document.createElement("div");
@@ -606,6 +606,8 @@ function createResult(updatedArray){
         let programCard = document.createElement("div");
         programCard.classList.add("programCard");
         programCard.addEventListener("click", e => {
+            programCard.style.scrollBehavior = "smooth";
+            programCard.scrollTop = 0;
             programCard.classList.toggle("longer");
         })
         programCard.append(createBack(city));

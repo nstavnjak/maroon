@@ -36,10 +36,10 @@ function createFooter() {
 
     footerElement.innerHTML = `
          <div id="footerLinks">
-            <a href="html/index.html" id="footerHem" class="footerText">Hem</a>
-            <a href="html/education.html" id="footerUtbildining" class="footerText">Utbildning</a>
-            <a href="html/quiz.html" id="footerTest" class="footerText">Test</a>
-            <a href="html/faq.html" id="footerFaq" class="footerText">faq</a>
+            <a href="/index.html" id="footerHem" class="footerText">Hem</a>
+            <a href="/education.html" id="footerUtbildining" class="footerText">Utbildning</a>
+            <a href="/quiz.html" id="footerTest" class="footerText">Test</a>
+            <a href="/faq.html" id="footerFaq" class="footerText">faq</a>
         </div>
         <div id="copyright">
             <p>Copyright © 2021 exchanger</p> 
@@ -78,7 +78,7 @@ function createMeny(){
     // The visible
     let logo = document.createElement("div");
     logo.setAttribute("id", "logo");
-    logo.innerHTML = `<a href="html/index.html">xchanger</a>`;
+    logo.innerHTML = `<a href="/index.html">xchanger</a>`;
     let menyButton = document.createElement("button");
     menyButton.setAttribute("id", "menyButton");
     menyButton.textContent = `meny`;
@@ -87,10 +87,10 @@ function createMeny(){
     let menyLinks = document.createElement("div");
     menyLinks.setAttribute("id", "menyLinks")
     menyLinks.innerHTML = `
-        <a href="html/index.html">HEM</a>
-        <a href="html/education.html">UTBILDNINGAR</a>
-        <a href="html/quiz.html">TEST</a>
-        <a href="html/faq.html">FAQ</a>
+        <a href="/index.html">HEM</a>
+        <a href="/education.html">UTBILDNINGAR</a>
+        <a href="/quiz.html">TEST</a>
+        <a href="/faq.html">FAQ</a>
         <div id="navcopyright">Copyright © 2021 exchanger | all rights reserved</div>`;
 
     

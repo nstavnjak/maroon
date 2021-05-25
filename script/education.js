@@ -244,7 +244,7 @@ function searchProgram(textValue, country, city){
         }
     }
     // Om stad eller stad och land och/eller input är ifyllt - done
-    else if (city.length > 0){
+    else if (city != "--- Stad ---"){
         let cityObj = CITIES.find(c => c.name.includes(city));
         let universities = UNIVERSITIES.filter(uni => uni.cityID === cityObj.id);
 
@@ -267,7 +267,7 @@ function searchProgram(textValue, country, city){
         }  
     }
     // Om land och input är ifyllt - done 
-    else if (country.length > 0){
+    else if (country.length != "--- Land ---"){
         let countryObj = COUNTRIES.find(c => c.name.includes(country));
         let citys = CITIES.filter(ci => ci.countryID === countryObj.id);
     

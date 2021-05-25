@@ -302,7 +302,6 @@ function startQuiz() {
 
 //On click på nästa pillen kallas på funktioner resetTheValuation, setNextQuestion och updateBar.
 nextButton.addEventListener("click", ()=>{
-  
     currentQuestionIndex++;
 
     let radioAnswers = document.querySelectorAll(`input[type="radio"]:checked`);
@@ -311,7 +310,7 @@ nextButton.addEventListener("click", ()=>{
             array.value.forEach(obj=>{  
                 if(obj == parseInt(radioAnswers[0].value)){
                     let city = mappedCities.find(c => c.id === array.cityID)
-                    city.valuePoints += city.points + parseInt(document.querySelector(".valuationInput").value);
+                    city.valuePoints += 1 + parseInt(document.querySelector(".valuationInput").value);
                 }   
             })       
         });
@@ -334,6 +333,7 @@ nextButton.addEventListener("click", ()=>{
     updateBar(currentQuestionIndex);
     setNextQuestion();
    }
+   console.log(mappedCities)
 });
 
 //On click på sluta knappen appendas funktionen createResult med argumentet mappedCities

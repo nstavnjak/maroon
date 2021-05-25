@@ -45,7 +45,7 @@ main {
     top:0;
     top: calc(50% - 10vh);
 
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: transparent;
     font-size: var(--sizeM);
     font-family: var(--title);
     color: var(--light);

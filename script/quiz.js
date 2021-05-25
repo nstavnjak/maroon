@@ -334,6 +334,17 @@ nextButton.addEventListener("click", ()=>{
 //On click på sluta knappen appendas funktionen createResult med argumentet mappedCities
 finishButton.addEventListener("click",()=>{
 
+    let radioAnswers = document.querySelectorAll(`input[type="radio"]:checked`);
+
+       answears.forEach(array=>{
+            array.value.forEach(obj=>{  
+                if(obj == parseInt(radioAnswers[0].value)){
+                    let city = mappedCities.find(c => c.id === array.cityID)
+                    city.valuePoints += 1 + parseInt(document.querySelector(".valuationInput").value);
+                }   
+            })       
+        });
+
     //Tömmer main
     document.querySelector("main").innerHTML = "";
     //appendas resultatet

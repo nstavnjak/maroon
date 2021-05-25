@@ -27,28 +27,36 @@ programlist.classList.add("programList");
 document.querySelector("main").append(programlist);
 
 
-let searchButton = document.querySelector("#search");
-searchButton.addEventListener("click", e => {
+document.querySelector("#search").addEventListener("click", presort);
+function presort(){
     let inputValue = document.querySelector("#inputField").value;
     let countryValue = document.querySelector("#select1").value;
     let cityValue = document.querySelector("#select2").value;
     
     searchProgram(inputValue, countryValue, cityValue);
-});
+}
 
-document.getElementById("search").addEventListener("click", LoadMoreReset);
-document.getElementById("sortera").addEventListener("change", LoadMoreReset);
+
+document.getElementById("search").addEventListener("click", () => {
+    LoadMoreReset();
+    LoadMoreFunction(finishArray);
+});
+document.getElementById("sortera").addEventListener("change", () => {
+    LoadMoreReset();
+    LoadMoreFunction(finishArrayFiltered);
+});
 document.getElementById("filter").addEventListener("click", createFilter);
 
 
 // EVENT
 
 LoadMoreReset();
+LoadMoreFunction(finishArray);
 
 
 function sort(){
     let sorteraButton = document.querySelector("#sortera");
-    if(finishArray.length == 496 && finishArrayFiltered.length == 0){
+    if(finishArrayFiltered.length == 0){
         finishArrayFiltered = finishArray;
     }
         if(sorteraButton.value == "Program, A-Ö"){
@@ -64,7 +72,7 @@ function sort(){
 }
 //Load More
 //Klar
-function LoadMoreFunction() {
+function LoadMoreFunction(array) {
     let loadMore = document.createElement("button");
     if(document.querySelector("#loadMore") == null){
         loadMore.innerHTML = "Load More";
@@ -73,7 +81,7 @@ function LoadMoreFunction() {
     }
 
     for(load; load < loaded ; load++){
-            document.querySelector(".programList").append(createCard(finishArrayFiltered[load]));
+            document.querySelector(".programList").append(createCard(array[load]));
     }
     load = loaded;
     loaded += 5;
@@ -85,12 +93,10 @@ function LoadMoreFunction() {
 }
 
 function LoadMoreReset() {
-    console.log("hej")
     load = 0; 
     loaded = 5;
     sort();
     document.querySelector(".programList").innerHTML = "";
-    LoadMoreFunction();
 }
 
 function createSearchForm(){
@@ -230,17 +236,18 @@ function sortAndFilterParent(){
 function searchProgram(textValue, country, city){
     programlist.innerHTML = "";
     finishArrayFiltered = [];
+    finishArray = [];
 
     // Om allt är tomt så ska vi visa alla program i bokstavsordning från A-Ö - done
     if (country === "--- Land ---" && city === "--- Stad ---"){
         if(textValue.length === 0){
-            finishArrayFiltered = PROGRAMMES;
-            finishArrayFiltered.sort((a, b) => a.name > b.name) ? -1 : 1;
-            appendCards(finishArrayFiltered);
+            finishArray = PROGRAMMES;
+            finishArray.sort((a, b) => a.name > b.name) ? -1 : 1;
+            appendCards(finishArray);
         }
         else{
-            finishArrayFiltered = PROGRAMMES.filter(prog => prog.name.toLowerCase().includes(textValue));
-            appendCards(finishArrayFiltered);
+            finishArray = PROGRAMMES.filter(prog => prog.name.toLowerCase().includes(textValue));
+            appendCards(finishArray);
         }
     }
     // Om stad eller stad och land och/eller input är ifyllt - done
@@ -252,8 +259,8 @@ function searchProgram(textValue, country, city){
             let programs = [];
             universities.forEach(uni => {
                 programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id));
-                finishArrayFiltered = programs.flat(1).filter(prog => prog.name.toLowerCase().includes(textValue));
-                appendCards(finishArrayFiltered);
+                finishArray = programs.flat(1).filter(prog => prog.name.toLowerCase().includes(textValue));
+                appendCards(finishArray);
             });
         }
         else{
@@ -261,9 +268,9 @@ function searchProgram(textValue, country, city){
             console.log(universities);
             universities.forEach(uni => {
                 programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id))
-                finishArrayFiltered = programs.flat(1);
+                finishArray = programs.flat(1);
             });
-            appendCards(finishArrayFiltered);
+            appendCards(finishArray);
         }  
     }
     // Om land och input är ifyllt - done 
@@ -280,27 +287,28 @@ function searchProgram(textValue, country, city){
             universities.flat(1).forEach(uni => {
                 programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id));
             });
-            finishArrayFiltered = programs.flat(1).filter(prog => prog.name.toLowerCase().includes(textValue));
-            appendCards(finishArrayFiltered);
+            finishArray = programs.flat(1).filter(prog => prog.name.toLowerCase().includes(textValue));
+            appendCards(finishArray);
         }
         else {
             let programs = [];
             universities.flat(1).forEach(uni => {
                 programs.push(PROGRAMMES.filter(prog => prog.universityID === uni.id));
             });
-            finishArrayFiltered = programs.flat(1)
-            appendCards(finishArrayFiltered);
+            finishArray = programs.flat(1)
+            appendCards(finishArray);
         }
     }
     // Om alla är ifyllda - Klar
     function appendCards(array){
         array.forEach(program => {
             document.querySelector(".programList").append(createCard(program));
-        })
+        });
     }
 }
 
 function filter(){
+    finishArrayFiltered = [];
     console.log("nu gör vi");
     //Skapa en tom array som kommer fyllas med saker
     let visumArray = [];
@@ -308,7 +316,6 @@ function filter(){
     let utbildningsNivaArray = [];
     let studieInriktningArray = [];
     let bigArray = [visumArray, sprakArray, utbildningsNivaArray, studieInriktningArray];
-    finishArrayFiltered = [];
     checked = document.querySelectorAll("input[type=checkbox]:checked");
         //Kolla först vad som ska filtreras
     checked.forEach(e => {
@@ -592,6 +599,7 @@ function createFilter(){
         document.getElementById("expandFilter").remove();
         document.querySelector("body").classList.remove("no-scroll");
         LoadMoreReset();
+        LoadMoreFunction(finishArrayFiltered);
     });
 
     filterDiv.append(sokKnapp);

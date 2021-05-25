@@ -597,10 +597,7 @@ function createResult(updatedArray){
        programCard.append(createBack(city))
         storstMatch.append(programCard);
     })
-    //Istället för createCityFront funtionen ska funktionen Loadmore anropas
-    //med argumentet "sortedArrayByValuePoints"
 
-    
     //Sorterar arrayen efter points, den som har högst poäng hamnar längst upp
     sortedArrayByPoints.sort((a, b) => a.points > b.points ? -1 : 1);
     

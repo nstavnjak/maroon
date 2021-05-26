@@ -48,6 +48,11 @@ body{
     width: 100%;
 }
 
+.add > p {
+    font-family: var(--bodyText);
+    padding: 0.5rem 1rem;
+}
+
 /* MENY */
 .menyWrapper{
     background-color: var(--dark);

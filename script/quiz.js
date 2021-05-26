@@ -568,7 +568,7 @@ function updateBar(questionNumber){
 //Tar emot den uppdaterade array enligt svar och returnerar resultat diven
 function createResult(updatedArray){
     document.querySelector(".menyWrapper").style.display = "flex";
-    document.querySelector("footer").style.display = "flex";
+    document.querySelector("footer").style.display = "block";
     document.querySelector("main").style.height = "calc(100vh - 8rem)";
 
     //Skapar resultat containern

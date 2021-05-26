@@ -634,7 +634,11 @@ function createFilter(){
     sokKnapp.addEventListener("click", () => {
         if(finishArrayFiltered.length === 0){
             let empty = document.querySelector(".programList");
-            empty.innerHTML = "Wow such empty 0_0";
+            empty.innerHTML = "";
+            let div = document.createElement("div");
+            div.classList.add("empty");
+            div.innerHTML = "Wow such empty 0_0";
+            empty.append(div);
         }
         else {
             LoadMoreReset();

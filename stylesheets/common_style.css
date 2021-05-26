@@ -42,6 +42,12 @@ body{
     width:100vw;
 }
 
+/* add */
+
+.add > img {
+    width: 100%;
+}
+
 /* MENY */
 .menyWrapper{
     background-color: var(--dark);

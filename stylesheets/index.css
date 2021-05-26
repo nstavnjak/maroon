@@ -1,3 +1,13 @@
+/* ad */
+main > .add:last-child () {
+    margin: var(--marginLR);
+}
+
+main > .add > img {
+    max-height: 40rem;
+}
+
+
 /* first */
 .first {
     height:calc(100vh - 8rem);

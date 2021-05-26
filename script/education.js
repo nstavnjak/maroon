@@ -21,6 +21,7 @@ appendLink("../stylesheets/education.css");
 document.querySelector("main").append(createSearchForm());
 createOPT();
 document.querySelector("main").append(sortAndFilterParent());
+document.querySelector("main").append(advertisment("../Images/annons_horizontell.jpg"))
 
 let programlist = document.createElement("div");
 programlist.classList.add("programList");
@@ -84,7 +85,8 @@ function LoadMoreFunction() {
     for(load; load < loaded ; load++){
         if(load < finishArray.length && finishArrayFiltered.length == 0){ 
             console.log(load)
-                document.querySelector(".programList").append(createCard(finishArray[load]));
+                document.querySelector(".programList").append(createCard(finishArray[load], advertisment("../Images/annons_kvadratisk")));
+                
         }
         else if(load < finishArrayFiltered.length){
             console.log(load)

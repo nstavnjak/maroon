@@ -74,7 +74,7 @@ const questions = [
         question: "Gillar du att utmanas lingvistikt?",
         answers: [
             {value: 71, option: "Nej, jag vill enkelt kunna göra mig förstådd"},
-            {value: 72, option: "nej, men kan klara mig om det skulle behövas"},
+            {value: 72, option: "Nej, men kan klara mig om det skulle behövas"},
             {value: 73, option: "En utmaningär aldrig fel så länge det inte är konstant"},
             {value: 74, option: "Ja det gör jag verkligen!"}
         ]        

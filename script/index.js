@@ -25,9 +25,15 @@ let guide = [
 
 // Main
 document.querySelector("main").append(callForAction(), circleFacts());
-guide.forEach(element => {
-    document.querySelector("main").append(guideLine(element.name, element.text, element.img, element.buttonText));
-})
+document.querySelector("main").append(advertisment("../Images/annons_horizontell.jpg"));
+
+document.querySelector("main").append(guideLine(guide[0].name, guide[0].text, guide[0].img));
+
+document.querySelector("main").append(guideLine(guide[1].name, guide[1].text, guide[1].img));
+
+document.querySelector("main").append(advertisment("../Images/annons_kvadratisk.jpg"));
+
+document.querySelector("main").append(guideLine(guide[2].name, guide[2].text, guide[2].img));
 
 
 // Functions
@@ -87,7 +93,7 @@ function circleFacts(){
     return wrapper;
 }
 
-function guideLine(head, text, image, programCom){
+function guideLine(head, text, image){
     let wrapper = document.createElement("div");
     wrapper.classList.add("guidePart");
 

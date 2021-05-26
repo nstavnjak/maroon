@@ -23,13 +23,26 @@ menyButton.addEventListener("click", e => {
 
 
 // Main
-
-
 // Footer 
-document.querySelector("footer").append(createFooter());
+document.querySelector("footer").append(advertisment("../Images/annons_horizontell.jpg"), createFooter());
 document.querySelector(".footer").append(createArrowUp());
 
 // Functions
+
+function advertisment(imgsrc) {
+    let wrapper = document.createElement("div");
+    wrapper.classList.add("add");
+
+    let img = document.createElement("img");
+    img.setAttribute("src", `${imgsrc}`);
+
+    let text = document.createElement("p");
+    text.textContent = "Annons";
+    
+    wrapper.append(img, text)
+    return wrapper;
+}
+
 function createFooter() {
     let footerElement = document.createElement("div");
     footerElement.classList.add("footer");
